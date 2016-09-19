@@ -1,0 +1,86 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="techgol_provider">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>br.com.providerone.modelo.Funcionario</class>
+		<class>br.com.providerone.modelo.Cliente</class>
+		<class>br.com.providerone.modelo.Solicitacao</class>
+		<class>br.com.providerone.modelo.Usuario</class>
+		<class>br.com.providerone.modelo.Fornecedor</class>
+		<class>br.com.providerone.modelo.Computador</class>
+		<class>br.com.providerone.modelo.Perifericos</class>
+		<class>br.com.providerone.modelo.Email</class>
+		<class>br.com.providerone.modelo.Projeto</class>
+		<class>br.com.providerone.modelo.Tarefa</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/techgol_provider" />
+			<property name="javax.persistence.jdbc.user" value="techgol_root" />
+			<property name="javax.persistence.jdbc.password" value="Senha1234fut.t.j.f" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<!-- Número máximo de conexões -->
+			<property name="hibernate.c3p0.max_size" value="100" />
+
+			<!-- Número minimo de conexões -->
+			<property name="hibernate.c3p0.min_size" value="1" />
+
+			<!-- Número de conexões adicionais que serão criadas a cada requisição 
+				de conexão -->
+			<property name="hibernate.c3p0.acquire_increment" value="1" />
+			<property name="hibernate.c3p0.idle_test_period" value="15" />
+
+			<!-- Número máximo de instruções SQl que serão executadas em uma conexão -->
+			<property name="hibernate.c3p0.max_statements" value="0" />
+
+			<!-- O número em milisegundos que um cliente chamando getConnection() 
+				irá esperar por uma Conexão, via check-in ou uma nova conexão adquirida quando 
+				o pool estiver esgotado. Zero siginifica esperar indefinidademento. Setar 
+				qualquer valor positivo causará um time-out com uma SQLException depois de 
+				passada a quantidade especificada de milisegundos. -->
+			<property name="hibernate.c3p0.checkoutTimeout" value="5000" />
+
+			<!-- tempo de vida da conexao estando inativa -->
+			<!-- <property name="hibernate.c3p0.checkoutTimeout" value="10"/> -->
+
+			<!-- Segundos que uma Conexão será mantida no pool sem ser usada, antes 
+				de ser descartada. Zero significa que a conexão nunca expira -->
+			<property name="hibernate.c3p0.maxIdleTime" value="20" /> <!-- 200 -->
+
+			<!-- Tempo em segundos em que uma conexão permanecerá ociosa antes de 
+				ser descartada -->
+			<property name="hibernate.c3p0.timeout" value="20" /> <!-- 200 -->
+
+			<!-- Tempo em milisegundos que o c3p0 irá esperar entre tentivas de aquisição. -->
+			<property name="hibernate.c3p0.acquireRetryDelay" value="1000" />
+
+			<!-- Define quantas vezes o c3p0 tentará adquirir uma nova Conexão da 
+				base de dados antes de desistir. Se esse valor é menor ou igual a zero, c3p0 
+				tentará adquirir uma nova conexão indefinidamente. -->
+			<property name="hibernate.c3p0.acquireRetryAttempts" value="3" />
+
+			<!-- Número mínimo de conexões que o pool irá manter. -->
+			<!-- <property name="hibernate.c3p0.minPoolSize" value="3" />  -->
+
+			<!-- Número máximo de conexões que o pool irá manter. -->
+			<!-- <property name="hibernate.c3p0.maxPoolSize" value="200" />  -->
+
+			<!-- Número de segundos que conexões acima do limite minPoolSize deverão 
+				permanecer inativas no pool antes de serem fechadas. Destinado para aplicações 
+				que desejam reduzir agressivamente o número de conexões abertas, diminuindo 
+				o pool novamente para minPoolSize, se, seguindo um pico, o nível de load 
+				diminui e Conexões não são mais requeridas. Se maxIdleTime está definido, 
+				maxIdleTimeExcessConnections deverá ser um valor menor para que o parâmetro 
+				tenho efeito. Zero significa que não existirá nenhuma imposição, Conexões 
+				em excesso não serão mais fechadas. -->
+			<!-- <property name="hibernate.c3p0.maxIdleTimeExcessConnections"
+				value="240" />  -->				
+		</properties>
+	</persistence-unit>
+</persistence>
