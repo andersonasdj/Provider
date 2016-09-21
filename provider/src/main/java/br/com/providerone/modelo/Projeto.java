@@ -1,13 +1,11 @@
 package br.com.providerone.modelo;
 
 import java.util.Calendar;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -27,17 +25,6 @@ public class Projeto {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar dataConclusao;
-
-	@OneToMany
-	private List<Tarefa> tarefas;
-
-	public List<Tarefa> getTarefas() {
-		return tarefas;
-	}
-
-	public void setTarefas(List<Tarefa> tarefas) {
-		this.tarefas = tarefas;
-	}
 
 	public Long getId() {
 		return id;

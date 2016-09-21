@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Tarefa {
@@ -15,9 +16,18 @@ public class Tarefa {
 	private String obs;
 	private String statusTarefa;
 	private String responsavelTarefa;
-	
-	
-	
+
+	@OneToOne
+	private Projeto projeto;
+
+	public Projeto getProjeto() {
+		return projeto;
+	}
+
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
+
 	public Long getId() {
 		return id;
 	}

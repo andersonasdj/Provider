@@ -15,8 +15,8 @@ public class ProjetoDao {
 		new EntityFactory();
 		manager = EntityFactory.getEntityManager();
 	}
-	
-	public void salvaProjeto(Projeto projeto, Funcionario funcionario) {
+
+	public void salvar(Projeto projeto, Funcionario funcionario) {
 		projeto.setDataCriacao(Calendar.getInstance());
 		projeto.setNomeResponsavel(funcionario.getNome());
 		manager.getTransaction().begin();
@@ -24,5 +24,13 @@ public class ProjetoDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
-	
+
+	public Projeto buscaPorId(Long id) {
+		manager.getTransaction().begin();
+		Projeto projeto = manager.find(Projeto.class, id);
+		manager.getTransaction().commit();
+		manager.close();
+		return projeto;
+	}
+
 }
