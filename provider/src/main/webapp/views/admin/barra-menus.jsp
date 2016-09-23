@@ -59,6 +59,15 @@
 			                    <li><a href="perifericosForm">Cadastro de Modelos</a></li>
 			                  </ul>
 						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Projetos <span class="caret"></span></a>
+			                  <ul class="dropdown-menu">
+			                  	<li class="dropdown-header">Cadastro</li>
+			                    <li><a href="projetoForm">Novo Projeto</a></li>
+			                    <li class="dropdown-header">Listar</li>
+			                    <li><a href="listarProjetos">Listar Projetos</a></li>
+			                  </ul>
+						</li>
 					</ul>
 					<ul class="nav nav-pills pull-right">
 						<li class="dropdown">

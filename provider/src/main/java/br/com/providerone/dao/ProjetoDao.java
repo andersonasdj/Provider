@@ -1,11 +1,13 @@
 package br.com.providerone.dao;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import br.com.providerone.entitymanager.EntityFactory;
-import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.Projeto;
 
 public class ProjetoDao {
@@ -16,9 +18,9 @@ public class ProjetoDao {
 		manager = EntityFactory.getEntityManager();
 	}
 
-	public void salvar(Projeto projeto, Funcionario funcionario) {
+	public void salvar(Projeto projeto) {
 		projeto.setDataCriacao(Calendar.getInstance());
-		projeto.setNomeResponsavel(funcionario.getNome());
+		projeto.setStatus("Não iniciado");
 		manager.getTransaction().begin();
 		manager.persist(projeto);
 		manager.getTransaction().commit();
@@ -31,6 +33,27 @@ public class ProjetoDao {
 		manager.getTransaction().commit();
 		manager.close();
 		return projeto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Projeto> listaProjetos() {
+		List<Projeto> projetos = new ArrayList<Projeto>();
+
+		try {
+			Query query = manager.createQuery("select p from Projeto p order by p.id");
+
+			projetos = (List<Projeto>) query.getResultList();
+
+			if (projetos != null) {
+				return projetos;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
 	}
 
 }

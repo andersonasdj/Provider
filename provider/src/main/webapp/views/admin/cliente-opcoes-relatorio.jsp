@@ -51,6 +51,19 @@
 			</div>
 			<legend></legend>
 			
+			<div>
+				<h4 align="center">Lista de Projetos</h4>
+				<h4>Total de projetos: </h4>		
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<a class="btn btn-success" href="computadorListCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar <i class="fa fa-spinner fa-spin fa-lg"></i></a>
+				</div>
+			</div>
+			<legend></legend>
+			
 			<a class="btn btn-primary" href="relatorioSelect" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 		</fieldset>
 	</form>
