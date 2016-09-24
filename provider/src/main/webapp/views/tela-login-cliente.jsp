@@ -4,8 +4,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/js/jquery.js"></script>
 </head>
 <body>
 	<br/><br/><br/><br/><br/>
@@ -41,4 +39,6 @@
 	  </div>
 	</div>
 </body>
+	<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
 </html>

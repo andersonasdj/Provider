@@ -3,14 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Home Page</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-<title>ProviderOne | Home Page</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -51,7 +49,6 @@
 		<c:if test="${qtdEmAndamento > '1'}">
 			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdEmAndamento} solicitações <a href="solicitacoesAndamentoTecnico">Em andamento! <i class="fa fa-share"></i></a></h4>
 		</c:if><br/>
-		
 		<c:if test="${qtdAguardando == '0'}"></c:if>
 		<c:if test="${qtdAguardando == '1'}">
 			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAguardando} solicitação <a href="solicitacoesAguardandoTecnico">Aguardando! <i class="fa fa-thumbs-o-up"></i></a></h4>
@@ -59,7 +56,6 @@
 		<c:if test="${qtdAguardando > '1'}">
 			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAguardando} solicitações <a href="solicitacoesAguardandoTecnico">Aguardando! <i class="fa fa-thumbs-o-up"></i></a></h4>
 		</c:if>
-		
 	</div>
 	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 	<div class="container">
@@ -67,4 +63,6 @@
 	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 </html>

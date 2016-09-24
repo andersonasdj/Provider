@@ -1,9 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>ProviderOne | Lista de Clientes</title>
+	<title>ProviderOne | Tarefas</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
@@ -15,7 +14,9 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
 	<div class="container">
-		<legend>Lista de Clientes</legend>
+		<legend>Lista de Tarefas</legend>
+		<a href="addTarefa?id=${idProjeto}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		
 		<table id="table"
 				data-toggle="table"
                data-show-columns="true"
@@ -28,35 +29,22 @@
             <thead>   
 				<tr>
 					<th>Id</th>
-					<th>Nome</th>
-					<th>Usuario</th>
-					<th>E-mail</th>
-					<th>Endereco</th>
-					<th>Data de Atualização</th>
+					<th>Descrição da Tarefa</th>
+					<th>Observações</th>
+					<th>Status da Tarefa</th>
+					<th>Responsável da Tarefa</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
-			<c:forEach var="cliente" items="${clientes}">
+			<c:forEach var="tarefa" items="${tarefas}">
 				<tr>
-					<td>${cliente.id}</td>
-					<td><a href="relatorioPorCliente?nomeDoCliente=${cliente.nome}">${cliente.nome}</a></td>
-					<td>${cliente.usuario}</td>
-					<c:if test="${not empty cliente.email}">
-						<td>${cliente.email}</td>
-					</c:if>
-					<c:if test="${empty cliente.email}">
-						<td>Não cadastrado</td>
-					</c:if>
-					<td>
-						<a class="dcontexto"> ${cliente.endereco}
-							<span>Tel.: ${cliente.telefone1} <br>
-								Tel.: ${cliente.telefone2}
-							</span></a>
-					</td>
-					<td><f:formatDate value="${cliente.dataAtualizacao.time}"
-							pattern="dd/MM/yyyy" /></td>
-					<td><a href="clienteEdit?id=${cliente.id}">Editar</a> <!--  <a
-						href="removeCliente?id=${cliente.id}">Excluir</a>--></td>
+					<td>${tarefa.idTarefa}</td>
+					<td>${tarefa.descricaoTarefa}</td>
+					<td>${tarefa.obs}</td>
+					<td>${tarefa.statusTarefa}</td>
+					<td>${tarefa.responsavelTarefa}</td>
+					<td><a href="tarefaEdit?id=${tarefa.idTarefa}">Editar</a> | <a
+						href="#">Excluir</a></td>
 				</tr>
 			</c:forEach>
 		</table>

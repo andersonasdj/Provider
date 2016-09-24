@@ -3,27 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Relatórios</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-export.js"></script>
-	<script src="assets/js/tableExport.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<!-- <script src="assets/js/ga.js"></script> -->
-	<script type="text/javascript">
-        // Este evendo é acionado após o carregamento da página
-        jQuery(window).load(function() {
-            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
-            jQuery("#loader").delay(10).fadeOut("slow");
-        });
-    </script>
-	<title>ProviderOne | Relatórios</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -52,12 +38,12 @@
 			<tr class="" align="center">
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
+				<th data-field="dataAbertura">Data / Hora Abertura</th>
 				<th data-field="onsiteOffsite" data-sortable="true">Site</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
-				<th data-field="descricaoProblema" data-sortable="true">Problema Relatado</th>
-				<th data-field="dataEncerramento" data-sortable="true">Data / Hora Encerramento</th>
+				<th data-field="descricaoProblema">Problema Relatado</th>
+				<th data-field="dataEncerramento">Data / Hora Encerramento</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
 				<th>Ações</th>
@@ -243,11 +229,24 @@
 				</c:if>
 			</c:forEach>
 		</table>
-	<!--  </div> -->
 	<br /><br />
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
-	<script>
+</body>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script type="text/javascript">
+        // Este evendo é acionado após o carregamento da página
+        jQuery(window).load(function() {
+            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+            jQuery("#loader").delay(10).fadeOut("slow");
+        });
+    </script>
+    <script>
 	    var $table = $('#table');
 	    $(function () {
 	        $('#toolbar').find('select').change(function () {
@@ -257,5 +256,4 @@
 	        });
 	    })
 	</script>
-</body>
 </html>

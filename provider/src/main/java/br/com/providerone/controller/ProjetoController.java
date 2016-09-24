@@ -55,5 +55,29 @@ public class ProjetoController {
 			return "redirect:login";
 		}
 	}
-
+	
+	@RequestMapping("/projetoEdit")
+	public String clienteEdit(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			ProjetoDao dao = new ProjetoDao();
+			Projeto projetoEditado = new Projeto();
+			projetoEditado = dao.buscaPorId(id);
+			model.addAttribute("projeto", projetoEditado);
+			return "admin/projeto-edit";
+		} else {
+			return "redirect:loginFuncionario";
+		}
+	}
+	
+	@RequestMapping("/atualizarProjeto")
+	public String atualizar(Projeto projeto, HttpSession session) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			ProjetoDao dao = new ProjetoDao();
+			dao.atualizar(projeto);
+			return "redirect:listarProjetos";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
 }

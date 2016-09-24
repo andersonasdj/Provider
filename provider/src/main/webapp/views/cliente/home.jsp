@@ -3,19 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Home Page</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-export.js"></script>
-	<script src="assets/js/tableExport.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<title>ProviderOne | Home Page</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -34,7 +28,6 @@
 			<th>Usuário Afetado</th>
 			<th>Status da Solicitação</th>
 		</tr>
-
 		<c:forEach var="solicitacao" items="${solicitacoes}">
 			<tr>
 				<td><f:formatDate value="${solicitacao.dataAbertura.time}"
@@ -44,9 +37,13 @@
 			</tr>
 		</c:forEach>
 	</table>
-
 	<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
 </html>

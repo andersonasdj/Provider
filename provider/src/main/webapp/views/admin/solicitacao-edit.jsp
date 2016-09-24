@@ -3,6 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+   	<title>ProviderOne | Funcionario</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/style.css">
@@ -10,115 +11,6 @@
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
 	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">	
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery-ui.js"></script>
-	<script src="assets/js/jquery.ui.timepiker.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script>
-        $(function(){
-
-            jQuery('#timepicker').timepicker();
-            jQuery('#datepicker').datepicker();
-
-            /* Brazilian initialisation for the jQuery UI date picker plugin. */
-            /* Written by Leonildo Costa Silva (leocsilva@gmail.com). */
-            (function( factory ) {
-                if ( typeof define === "function" && define.amd ) {
-
-                    // AMD. Register as an anonymous module.
-                    define([ "../datepicker" ], factory );
-                } else {
-
-                    // Browser globals
-                    factory( jQuery.datepicker );
-                }
-            }(function( datepicker ) {
-
-            datepicker.regional['pt-BR'] = {
-                changeMonth: true,
-                changeYear: true,
-                closeText: 'Fechar',
-                prevText: '&#x3C;Anterior',
-                nextText: 'Próximo&#x3E;',
-                currentText: 'Hoje',
-                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
-                'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
-                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
-                'Jul','Ago','Set','Out','Nov','Dez'],
-                dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
-                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-                dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-                weekHeader: 'Sm',
-                dateFormat: 'dd-mm-yy',
-                firstDay: 0,
-                isRTL: false,
-                showMonthAfterYear: false,
-                yearSuffix: ''};
-            datepicker.setDefaults(datepicker.regional['pt-BR']);
-
-            return datepicker.regional['pt-BR'];
-
-            }));
-            /* Brazilian Portuguese translation for the jQuery Timepicker Addon */
-            /* Written by Diogo Damiani (diogodamiani@gmail.com) */
-            (function ($) {
-                $.timepicker.regional['pt-BR'] = {
-                    timeOnlyTitle: 'Escolha o horÃ¡rio',
-                    timeText: 'HorÃ¡rio',
-                    hourText: 'Hora',
-                    minuteText: 'Minutos',
-                    secondText: 'Segundos',
-                    millisecText: 'Milissegundos',
-                    microsecText: 'Microssegundos',
-                    timezoneText: 'Fuso horÃ¡rio',
-                    currentText: 'Agora',
-                    closeText: 'Fechar',
-                    timeFormat: 'HH:mm',
-                    amNames: ['a.m.', 'AM', 'A'],
-                    pmNames: ['p.m.', 'PM', 'P'],
-                    isRTL: false
-                };
-                $.timepicker.setDefaults($.timepicker.regional['pt-BR']);
-            })(jQuery);
-        });
-    </script>
- 	     <script type="text/javascript">
-	    function limite_textarea_prob(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contProb').innerHTML = resto;
-	        } else {
-	            document.getElementById('descricaoProblema').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
-    <script type="text/javascript">
-	    function limite_textarea_obs(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contObs').innerHTML = resto;
-	        } else {
-	            document.getElementById('obs').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
-     <script type="text/javascript">
-	    function limite_textarea_resolu(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contResolu').innerHTML = resto;
-	        } else {
-	            document.getElementById('resolucao').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
-   	<title>ProviderOne | Funcionario</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -186,7 +78,6 @@
 						<span id="contResolu">255</span> Restantes <br>
 				</div>
 			</div>
-			
 			<c:if test="${not empty solicitacao.obs}">
 				<div class="control-group">
 					<label class="control-label">Observações</label>
@@ -196,7 +87,6 @@
 							<span id="contObs">255</span> Restantes <br>
 					</div>
 				</div>
-				
 				<div class="control-group">
 					<label class="control-label">Observações 2</label>
 					<div class="controls">
@@ -205,7 +95,6 @@
 					</div>
 				</div>
 			</c:if>
-			
 			<c:if test="${empty solicitacao.obs}">
 				<div class="control-group">
 					<label class="control-label">Observações</label>
@@ -215,7 +104,6 @@
 					</div>
 				</div>
 			</c:if>
-				
 			<input type="hidden" id="abriuChamado" name="abriuChamado" value="${solicitacao.abriuChamado}"> 
 				
 			<div class="control-group">
@@ -332,11 +220,9 @@
 						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
 							<option>Aguardando usuario</option>
 						</c:if>
-							
 					</select>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -349,4 +235,45 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/js/jquery.ui.timepiker.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/calendario.js"></script>
+ 	<script type="text/javascript">
+	    function limite_textarea_prob(valor) {
+	        quant = 255;
+	        total = valor.length;
+	        if(total <= quant) {
+	            resto = quant - total;
+	            document.getElementById('contProb').innerHTML = resto;
+	        } else {
+	            document.getElementById('descricaoProblema').value = valor.substr(0,quant);
+	        }
+	    }
+    </script>
+    <script type="text/javascript">
+	    function limite_textarea_obs(valor) {
+	        quant = 255;
+	        total = valor.length;
+	        if(total <= quant) {
+	            resto = quant - total;
+	            document.getElementById('contObs').innerHTML = resto;
+	        } else {
+	            document.getElementById('obs').value = valor.substr(0,quant);
+	        }
+	    }
+    </script>
+     <script type="text/javascript">
+	    function limite_textarea_resolu(valor) {
+	        quant = 255;
+	        total = valor.length;
+	        if(total <= quant) {
+	            resto = quant - total;
+	            document.getElementById('contResolu').innerHTML = resto;
+	        } else {
+	            document.getElementById('resolucao').value = valor.substr(0,quant);
+	        }
+	    }
+    </script>
 </html>

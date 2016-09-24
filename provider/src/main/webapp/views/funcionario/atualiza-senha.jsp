@@ -2,23 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Dados</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<title>ProviderOne | Dados</title>
-	<script type="text/javascript">
-	$(document).ready(function() {
-	    $('#container').prepend('Click aqui para imprimir');
-	    $('a#print').click(function() {
-	        window.print();
-	        return false;
-	    });
-	});
-	</script>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -27,7 +16,6 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Atualizar Senha</legend>
-			
 			<div class="control-group">
 				<label class="control-label">Senha</label>
 				<div class="controls">
@@ -44,7 +32,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<input type="hidden" id="id" name="id" value="${tecnicoLogado.id}">
 			<input type="hidden" id="nome" name="nome" value="${tecnicoLogado.nome}">
 			<input type="hidden" id="usuario" name="usuario" value="${tecnicoLogado.usuario}">
@@ -52,7 +39,6 @@
 			<input type="hidden" id="funcao" name="funcao" value="${tecnicoLogado.funcao}">
 			<input type="hidden" id="email" name="email" value="${tecnicoLogado.email}">
 			<input type="hidden" id="status" name="status" value="${tecnicoLogado.status}">
-			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -64,4 +50,6 @@
 	</form>	
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 </html>

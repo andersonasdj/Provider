@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,7 +8,6 @@
 <br/>
 <br/><br/>
 <h2>Ação inválida, contatar o desenvolvedor.</h2> 
-
 
 <a href="javascript:history.back()">Voltar</a>
 

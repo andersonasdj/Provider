@@ -2,8 +2,6 @@
 <head>
 	<!-- Custom Fonts -->
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <!-- <link href="http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">  -->
-    <!-- <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">  -->
 </head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -29,7 +27,6 @@
 			                  </ul>
 						</li>	
 					</ul>
-					
 					<ul class="nav nav-pills pull-right">
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg"> </i> ${clienteLogado.nome}<span class="caret"></span></a>
@@ -44,6 +41,5 @@
 			</div>
 		</div>
 	</nav>
-	<!-- BARRA DE NAVEGAÇÃO RESPONSIVA -->
 </body>
 </html>

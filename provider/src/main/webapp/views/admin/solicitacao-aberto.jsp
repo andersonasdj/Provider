@@ -3,38 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Solicitações Abertas</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-export.js"></script>
-	<script src="assets/js/tableExport.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<!-- <script src="assets/js/ga.js"></script> -->
-	<script language="Javascript">
-		function confirmacao(id) {
-		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");
-		 
-		     if (resposta == true) {
-		          window.location.href = "removeSolicitacao?id="+id;
-		     }
-		}
-	</script>
-	<script language="Javascript">
-		function confirmacaoEmail(id, cliente) {
-		     var resposta = confirm("Deseja enviar um email para: " + cliente);
-		 
-		     if (resposta == true) {
-		          window.location.href = "enviaEmail?id="+id;
-		     }
-		}
-	</script>
-	<title>ProviderOne | Solicitações Abertas</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -71,7 +46,7 @@
 			<tr>
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
+				<th data-field="dataAbertura">Data / Hora Abertura</th>
 				<th>Site</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th>Usuário</th>
@@ -114,32 +89,26 @@
 									<td>Não enviado na abertura</td>
 								</c:if>
 							</c:if>
-							
 							<c:if test="${solicitacao.status == 'Em andamento'}">
 								<td>Não enviado na abertura</td>
 							</c:if>
-							
 							<c:if test="${solicitacao.status == 'Aberto'}">
 								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">E-mail não cadastrado</a></td>
 							</c:if>
 						</c:if>
-						
 						<c:if test="${not empty solicitacao.cliente.email }">
 							<c:if test="${solicitacao.status == 'Agendado'}">
 								<td>Não enviado na abertura</td>
 							</c:if>
-							
 							<c:if test="${solicitacao.status == 'Em andamento'}">
 								<td>Não enviado na abertura</td>
 							</c:if>
-							
 							<c:if test="${solicitacao.status == 'Aberto'}">
 								<td>
 									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
 										<span>${solicitacao.cliente.email}</span></a>
 								</td>
 							</c:if>
-							
 							<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 								<td>
 									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
@@ -148,17 +117,14 @@
 							</c:if>						
 						</c:if>	
 					</c:if>
-					
 					<c:if test="${not empty solicitacao.statusEmail}">
 						<td>E-mail enviado</td>
 					</c:if>
-					
 					<td>
 						<a class="dcontexto"> ${solicitacao.status}
 							<span>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
 								- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
 					</td>
-			
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não classificado</a></td>
 					</c:if>
@@ -172,6 +138,31 @@
 		</table>
 	<br/><br/>
 	<c:import url="rodape.jsp"></c:import>
+</body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script language="Javascript">
+		function confirmacao(id) {
+		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");
+		 
+		     if (resposta == true) {
+		          window.location.href = "removeSolicitacao?id="+id;
+		     }
+		}
+	</script>
+	<script language="Javascript">
+		function confirmacaoEmail(id, cliente) {
+		     var resposta = confirm("Deseja enviar um email para: " + cliente);
+		 
+		     if (resposta == true) {
+		          window.location.href = "enviaEmail?id="+id;
+		     }
+		}
+	</script>
 	<script>
 	    var $table = $('#table');
 	    $(function () {
@@ -182,5 +173,4 @@
 	        });
 	    })
 	</script>
-</body>
 </html>

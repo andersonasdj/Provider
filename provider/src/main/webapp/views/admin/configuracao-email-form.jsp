@@ -1,9 +1,8 @@
-<%@page import="java.util.Calendar"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Configuração de Envio de E-mail</title>	
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -11,13 +10,6 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
-	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/jquery-ui.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-
-    
-	<title>ProviderOne | Configuração de Envio de E-mail</title>	
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
@@ -25,8 +17,6 @@
 	<form action="salvarConfigEmail" method="get" class="form-horizontal container">
 		<fieldset>
 			<legend>Configuração de envio de E-mail</legend>
-			
-			
 			<div class="control-group">
 				<label class="control-label">E-mail</label>
 				<div class="controls">
@@ -34,7 +24,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Senha</label>
 				<div class="controls">
@@ -42,7 +31,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Servidor SMTP</label>
 				<div class="controls">
@@ -50,7 +38,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Porta SMTP</label>
 				<div class="controls">
@@ -58,7 +45,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Requer Autenticação</label>
 				<div class="controls">
@@ -70,7 +56,6 @@
 					</select>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">SSL</label>
 				<div class="controls">
@@ -82,7 +67,6 @@
 					</select>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Assunto</label>
 				<div class="controls">
@@ -90,7 +74,6 @@
 						class="input-xlarge"></textarea>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Mensagem</label>
 				<div class="controls">
@@ -98,8 +81,6 @@
 						class="input-xlarge"></textarea>
 				</div>
 			</div>
-					
-			
 			<div class="control-group">
 				<label class="control-label">Função do E-mail</label>
 				<div class="controls">
@@ -111,7 +92,6 @@
 					</select>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -124,4 +104,6 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 </html>

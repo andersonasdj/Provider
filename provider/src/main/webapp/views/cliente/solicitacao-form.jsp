@@ -3,26 +3,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Solicitação de Suporte</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<title>ProviderOne | Solicitação de Suporte</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>	
 	<br /><br /><br />
-	
 	<form action="salvarSolicitacao" method="post" class="form-horizontal container">
 		<fieldset>
-
-			<!-- TITULO -->
 			<legend>Solicitação de Suporte</legend>
-
-			<!-- CLIENTE-->
 			<div class="control-group">
 				<label class="control-label">Cliente</label>
 				<div class="controls">
@@ -30,24 +23,16 @@
 					
 				</div>
 			</div>
-			
-			<!-- DATA ABERTURA -->
 			<div class="control-group">
-				
 				<div class="controls">
 					<input id="dataAbertura" name="dataAbertura" type="hidden" value="<%= Calendar.getInstance()%>" class="input-xlarge" disabled="disabled">
-					
 				</div>
 			</div>
-			
-			<!-- ID CLIENTE -->
 			<div class="control-group">
 				<div class="controls">
 					<input id="cliente.id" name="cliente.id" type="hidden" value="${clienteLogado.id}" class="input-xlarge">
 				</div>
 			</div>
-			
-			<!-- USUARIO -->
 			<div class="control-group">
 				<label class="control-label">Usuario</label>
 				<div class="controls">
@@ -55,8 +40,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
-			<!-- PROBLEMA -->
 			<div class="control-group">
 				<label class="control-label">Problema</label>
 				<div class="controls">
@@ -64,8 +47,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-
-			<!-- BOTÃO SALVAR -->
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -74,8 +55,9 @@
 			</div>
 		</fieldset>
 	</form>
-	
 	<br/><br/><br/>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
 </html>

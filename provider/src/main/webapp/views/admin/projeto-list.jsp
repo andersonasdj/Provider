@@ -20,6 +20,7 @@
 	<br /><br /><br />
 	<div class="container">
 		<legend>Lista de Projetos</legend>
+		<a href="projetoForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
 		<table id="table"
 				data-toggle="table"
                data-show-columns="true"
@@ -32,8 +33,8 @@
             <thead>   
 				<tr>
 					<th>Id</th>
-					<th>Título do Projeto</th>
 					<th>Nome do Cliente</th>
+					<th>Título do Projeto</th>
 					<th>Data de Criação</th>
 					<th>Responsável do Projeto</th>
 					<th>Status</th>
@@ -43,15 +44,15 @@
 			<c:forEach var="projeto" items="${projetos}">
 				<tr>
 					<td>${projeto.id}</td>
+					<td>${projeto.nomeCliente}</td>
 					<td>${projeto.tituloProjeto}</td>
-					<td>${projeto.nomeCliente}"</td>
 					<td><f:formatDate value="${projeto.dataCriacao.time}"
 							pattern="dd/MM/yyyy" /></td>
 					<td>${projeto.nomeResponsavel}</td>
 					<td>${projeto.status}</td>
 					
-					<td><a href="clienteEdit?id=${projeto.id}">Editar</a> | <a
-						href="#">Excluir</a> <p> <a href="#">Nova tarefa</a></td>
+					<td><a href="projetoEdit?id=${projeto.id}">Editar</a> | <a
+						href="#">Excluir</a> <p> <a href="listarTarefas?id=${projeto.id}">Tarefas</a></td>
 				</tr>
 			</c:forEach>
 		</table>

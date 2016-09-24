@@ -1,29 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Computadores</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-export.js"></script>
-	<script src="assets/js/tableExport.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script src="assets/js/ga.js"></script>
-	<script type="text/javascript">
-        // Este evendo é acionado após o carregamento da página
-        jQuery(window).load(function() {
-            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
-            jQuery("#loader").delay(10).fadeOut("slow");
-        });
-    </script>
-	<title>ProviderOne | Computadores</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -98,4 +83,18 @@
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script src="assets/js/ga.js"></script>
+	<script type="text/javascript">
+        // Este evendo é acionado após o carregamento da página
+        jQuery(window).load(function() {
+            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+            jQuery("#loader").delay(10).fadeOut("slow");
+        });
+    </script>
 </html>

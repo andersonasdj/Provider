@@ -11,7 +11,7 @@ public class Tarefa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idTarefa;
 	private String descricaoTarefa;
 	private String obs;
 	private String statusTarefa;
@@ -19,6 +19,14 @@ public class Tarefa {
 
 	@OneToOne
 	private Projeto projeto;
+	
+	public void setIdTarefa(Long idTarefa) {
+		this.idTarefa = idTarefa;
+	}
+	
+	public Long getIdTarefa() {
+		return idTarefa;
+	}
 
 	public Projeto getProjeto() {
 		return projeto;
@@ -26,10 +34,6 @@ public class Tarefa {
 
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
-	}
-
-	public Long getId() {
-		return id;
 	}
 
 	public String getDescricaoTarefa() {
@@ -46,10 +50,6 @@ public class Tarefa {
 
 	public String getResponsavelTarefa() {
 		return responsavelTarefa;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public void setDescricaoTarefa(String descricaoTarefa) {

@@ -3,19 +3,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Solicitações Abertas</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-export.js"></script>
-	<script src="assets/js/tableExport.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<title>ProviderOne | Solicitações Abertas</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -51,7 +45,7 @@
 			<tr>
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
+				<th data-field="dataAbertura">Data / Hora Abertura</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th>Usuário</th>
 				<th>Problema Relatado</th>
@@ -76,13 +70,11 @@
 								Observação: ${solicitacao.obs} <br/><br/>
 									Categoria: ${solicitacao.classificacao}</span></a>
 					</td>													
-					
 					<td>
 						<a class="dcontexto"> ${solicitacao.status}
 							<span>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
 								Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
 					</td>
-			
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td><a href="#">Não classificado</a></td>
 					</c:if>
@@ -93,8 +85,13 @@
 					</tr>
 			</c:forEach>
 		</table>
-
 	<br /><br />
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
 </html>

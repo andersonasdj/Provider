@@ -3,21 +3,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+	<title>ProviderOne | Resumo</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-        // Este evendo é acionado após o carregamento da página
-        jQuery(window).load(function() {
-            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
-            jQuery("#loader").delay(10).fadeOut("slow");
-        });
-    </script>
-	<title>ProviderOne | Resumo</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -111,4 +102,13 @@
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
 </body>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+        // Este evendo é acionado após o carregamento da página
+        jQuery(window).load(function() {
+            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+            jQuery("#loader").delay(10).fadeOut("slow");
+        });
+    </script>
 </html>

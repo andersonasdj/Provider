@@ -55,5 +55,12 @@ public class ProjetoDao {
 			manager.close();
 		}
 	}
+	
+	public void atualizar(Projeto projeto) {
+		manager.getTransaction().begin();
+		manager.merge(projeto);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 
 }
