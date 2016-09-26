@@ -19,7 +19,7 @@
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/techgol_provider" />
 			<property name="javax.persistence.jdbc.user" value="techgol_root" />
-			<property name="javax.persistence.jdbc.password" value="Senha1234fut.t.j.f" />
+			<property name="javax.persistence.jdbc.password" value="Senha1234Senha1234" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />

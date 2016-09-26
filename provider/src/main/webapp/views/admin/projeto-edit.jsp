@@ -6,6 +6,7 @@
    	<title>ProviderOne | Projeto</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
@@ -15,8 +16,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/>
-	<form action="atualizarProjeto" method="post"
-		class="form-horizontal container">
+	<form action="atualizarProjeto" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Edição de Projeto</legend>
 			<div>

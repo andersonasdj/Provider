@@ -61,5 +61,37 @@ public class TarefaController {
 			return "redirect:login";
 		}
 	}
+	
+	@RequestMapping("/tarefaEdit")
+	public String tarefaEdit(Long id, HttpSession session, Model model){
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			TarefaDao tarefaDao = new TarefaDao();
+			FuncionarioDao funcionarioDao = new FuncionarioDao();
+			
+			model.addAttribute("tarefa", tarefaDao.buscaPorId(id));
+			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
 
+			return "admin/tarefa-edit";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/atualizarTarefa")
+	public String salvarProjeto(Tarefa tarefa, HttpSession session) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			Projeto projeto = new Projeto();
+			ProjetoDao projetoDao = new ProjetoDao();
+			projeto = projetoDao.buscaPorId(tarefa.getProjeto().getId());
+			
+			TarefaDao tarefaDaoAtualizar = new TarefaDao();
+			tarefaDaoAtualizar.atualizar(tarefa, projeto);
+
+			return "redirect:listarProjetos";
+		} else {
+			return "redirect:login";
+		}
+	}
 }

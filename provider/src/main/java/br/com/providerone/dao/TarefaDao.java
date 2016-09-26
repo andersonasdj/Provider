@@ -25,6 +25,22 @@ public class TarefaDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+	
+	public void atualizar(Tarefa tarefa, Projeto projeto) {
+		tarefa.setProjeto(projeto);
+		manager.getTransaction().begin();
+		manager.merge(tarefa);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	public Tarefa buscaPorId(Long id) {
+		manager.getTransaction().begin();
+		Tarefa tarefa = manager.find(Tarefa.class, id);
+		manager.getTransaction().commit();
+		manager.close();
+		return tarefa;
+	}
 
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> listaTarefas() {

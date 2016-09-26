@@ -21,6 +21,7 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+
 	<mvc:interceptors>
 		<bean class="br.com.providerone.interceptor.AutorizadorInterceptor" />
 	</mvc:interceptors>

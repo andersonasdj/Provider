@@ -13,14 +13,17 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="salvarTarefa" method="post" class="form-horizontal container">
+	<form action="atualizarTarefa" method="post" class="form-horizontal container">
 		<fieldset>
-			<legend>${projeto.nomeCliente}</legend>			
-			<h4 align="right">Nova tarefa - ${projeto.tituloProjeto}</h4>
+			<legend></legend>			
+			<h4 align="right">Nova tarefa - </h4>
+			<input type="hidden" id="projeto.id" name="projeto.id" value="${tarefa.projeto.id}">
+			<input type="hidden" id="idTarefa" name="idTarefa" value="${tarefa.idTarefa}">
 			<div class="control-group">
 				<label class="control-label">Descrição da Tarefa</label>
 				<div class="controls">
-					<input id="descricaoTarefa" name="descricaoTarefa" type="text" placeholder="Descrição da Nova Tarefa" class="input-xlarge" required>
+					<input id="descricaoTarefa" name="descricaoTarefa" type="text" 
+						value="${tarefa.descricaoTarefa}" placeholder="Descrição da Nova Tarefa" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -29,7 +32,7 @@
 				<div class="controls">
 					<select class="selectpicker" id="responsavelTarefa"
 						name="responsavelTarefa">
-						<option></option>
+						<option>${tarefa.responsavelTarefa}</option>
 						<c:forEach var="funcionario" items="${funcionarios}">
 							<option>${funcionario.nome}</option>
 						</c:forEach>
@@ -39,8 +42,8 @@
 			<div class="control-group">
 				<label class="control-label">Observações da Tarefa</label>
 				<div class="controls">
-					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
-						value="${solicitacao.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge"></textarea>
+					<input class="form-control" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
+						value="${tarefa.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge">
 						<span id="contObs">255</span> Restantes <br>
 				</div>
 			</div>
@@ -49,19 +52,13 @@
 				<div class="controls">
 					<select class="selectpicker" id="statusTarefa"
 						name="statusTarefa">
+						<option>${tarefa.statusTarefa}</option>
 						<option>Não iniciada</option>
 						<option>Iniciada</option>
 						<option>Finalizada</option>
 					</select>
 				</div>
 			</div>
-			<input type="hidden" name="id" id="id" value="${projeto.id}">
-			<input type="hidden" name="tituloProjeto" id="tituloProjeto" value="${projeto.tituloProjeto}">
-			<input type="hidden" name="nomeCliente" id="nomeCliente" value="${projeto.nomeCliente}">
-			<input type="hidden" name="nomeResponsavel" id="nomeResponsavel" value="${projeto.nomeResponsavel}">
-			<input type="hidden" name="status" id="status" value="${projeto.status}">
-			<input type="hidden" name="dataDescricao" id="dataDescricao" value="${projeto.dataCriacao}">
-			<input type="hidden" name="dataConclusao" id="dataConclusao" value="${projeto.dataConclusao}">
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -76,7 +73,6 @@
 </body>
 	<script src="assets/js/jquery.min.js"></script>
 	<script src="assets/js/jquery-ui.js"></script>
-	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 	    function limite_textarea_obs(valor) {
