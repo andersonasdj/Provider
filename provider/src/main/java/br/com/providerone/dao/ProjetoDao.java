@@ -62,5 +62,21 @@ public class ProjetoDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+	
+	public void excluirProjeto(Long id) {
+		
+		try {
+			Projeto projetoExcluir = new Projeto();
+			manager.getTransaction().begin();
+			projetoExcluir = manager.find(Projeto.class, id);
+			manager.remove(projetoExcluir);
+			manager.getTransaction().commit();
+		} catch (Exception e) {
+			System.out.println("Não foi possível excluir esse projeto: " + e.getMessage());
+		} finally {
+			manager.close();
+		}
+		
+	}
 
 }

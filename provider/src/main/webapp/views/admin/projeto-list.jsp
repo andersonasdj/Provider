@@ -26,7 +26,6 @@
                data-show-columns="true"
                data-show-toggle="true"
                data-show-pagination-switch="true"
-               data-show-refresh="true"
                data-search="true"
                data-pagination="true"
                data-key-events="true">
@@ -49,10 +48,23 @@
 					<td><f:formatDate value="${projeto.dataCriacao.time}"
 							pattern="dd/MM/yyyy" /></td>
 					<td>${projeto.nomeResponsavel}</td>
-					<td>${projeto.status}</td>
 					
-					<td><a href="projetoEdit?id=${projeto.id}">Editar</a> | <a
-						href="#">Excluir</a> <p> <a href="listarTarefas?id=${projeto.id}">Tarefas</a></td>
+					<c:if test="${projeto.status == 'Não iniciado'}">
+						<td><img class="ico_status" src="assets/img/ico_red.png"> ${projeto.status}</td>
+					</c:if>
+					
+					<c:if test="${projeto.status == 'Iniciado'}">
+						<td><img class="ico_status" src="assets/img/ico_yellow.png"> ${projeto.status}</td>
+					</c:if>
+					
+					<c:if test="${projeto.status == 'Finalizado'}">
+						<td><img class="ico_status" src="assets/img/ico_green.png"> ${projeto.status}</td>
+					</c:if>
+					
+					<td><a href="projetoEdit?id=${projeto.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
+						href="excluirProjeto?id=${projeto.id}"><i class="fa fa-trash-o"></i></a> |
+						<a href="listarTarefas?id=${projeto.id}"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

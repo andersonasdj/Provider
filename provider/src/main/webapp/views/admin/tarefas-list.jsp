@@ -5,6 +5,7 @@
 	<title>ProviderOne | Tarefas</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
@@ -22,7 +23,6 @@
                data-show-columns="true"
                data-show-toggle="true"
                data-show-pagination-switch="true"
-               data-show-refresh="true"
                data-search="true"
                data-pagination="true"
                data-key-events="true">
@@ -31,8 +31,8 @@
 					<th>Id</th>
 					<th>Descrição da Tarefa</th>
 					<th>Observações</th>
-					<th>Status da Tarefa</th>
 					<th>Responsável da Tarefa</th>
+					<th>Status da Tarefa</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
@@ -41,10 +41,22 @@
 					<td>${tarefa.idTarefa}</td>
 					<td>${tarefa.descricaoTarefa}</td>
 					<td>${tarefa.obs}</td>
-					<td>${tarefa.statusTarefa}</td>
 					<td>${tarefa.responsavelTarefa}</td>
-					<td><a href="tarefaEdit?id=${tarefa.idTarefa}">Editar</a> | <a
-						href="#">Excluir</a></td>
+					
+					<c:if test="${tarefa.statusTarefa == 'Não iniciada'}">
+						<td><img class="ico_status" src="assets/img/ico_red.png"> ${tarefa.statusTarefa}</td>
+					</c:if>
+					
+					<c:if test="${tarefa.statusTarefa == 'Iniciada'}">
+						<td><img class="ico_status" src="assets/img/ico_yellow.png"> ${tarefa.statusTarefa}</td>
+					</c:if>
+					
+					<c:if test="${tarefa.statusTarefa == 'Finalizada'}">
+						<td><img class="ico_status" src="assets/img/ico_green.png"> ${tarefa.statusTarefa}</td>
+					</c:if>
+					
+					<td><a href="tarefaEdit?id=${tarefa.idTarefa}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
+						href="excluirTarefa?id=${tarefa.idTarefa}"><i class="fa fa-trash-o"></i></a></td>
 				</tr>
 			</c:forEach>
 		</table>

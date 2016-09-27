@@ -94,4 +94,15 @@ public class TarefaController {
 			return "redirect:login";
 		}
 	}
+	
+	@RequestMapping("/excluirTarefa")
+	public String removeSolicitacao(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			TarefaDao dao = new TarefaDao();
+			dao.excluirTarefa(id);
+			return "redirect:listarProjetos";
+		} else {
+			return "redirect:login";
+		}
+	}
 }

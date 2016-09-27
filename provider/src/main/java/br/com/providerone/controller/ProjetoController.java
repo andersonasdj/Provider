@@ -80,4 +80,15 @@ public class ProjetoController {
 		}
 	}
 	
+	@RequestMapping("/excluirProjeto")
+	public String removeSolicitacao(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			ProjetoDao dao = new ProjetoDao();
+			dao.excluirProjeto(id);
+			return "redirect:listarProjetos";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
 }

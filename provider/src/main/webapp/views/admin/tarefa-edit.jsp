@@ -53,9 +53,18 @@
 					<select class="selectpicker" id="statusTarefa"
 						name="statusTarefa">
 						<option>${tarefa.statusTarefa}</option>
-						<option>Não iniciada</option>
-						<option>Iniciada</option>
-						<option>Finalizada</option>
+						<c:if test="${tarefa.statusTarefa == 'Iniciada'}">
+								<option>Finalizada</option>
+								<option>Não iniciada</option>
+						</c:if>
+						<c:if test="${tarefa.statusTarefa == 'Não iniciada'}">
+							<option>Iniciada</option>
+							<option>Finalizada</option>
+						</c:if>
+						<c:if test="${tarefa.statusTarefa == 'Finalizada'}">
+							<option>Iniciada</option>
+							<option>Não iniciada</option>
+						</c:if>
 					</select>
 				</div>
 			</div>
