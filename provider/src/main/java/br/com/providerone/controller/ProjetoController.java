@@ -22,7 +22,7 @@ public class ProjetoController {
 			FuncionarioDao funcionarioDao = new FuncionarioDao();
 			
 			model.addAttribute("clientes",clienteDao.listaCliente());
-			model.addAttribute("funcionarios",funcionarioDao.listaFuncionario());
+			model.addAttribute("funcionarios",funcionarioDao.listaFuncionarioAtivo());
 			
 			return "admin/projeto-form";
 		} else {
@@ -90,5 +90,4 @@ public class ProjetoController {
 			return "redirect:login";
 		}
 	}
-	
 }

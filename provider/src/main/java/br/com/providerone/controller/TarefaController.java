@@ -26,7 +26,7 @@ public class TarefaController {
 			projeto = projetoDao.buscaPorId(id);
 			
 			model.addAttribute("projeto", projeto);
-			model.addAttribute("funcionarios", funcionarioDao.listaFuncionario());
+			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
 			
 			return "admin/tarefa-form";
 		} else {

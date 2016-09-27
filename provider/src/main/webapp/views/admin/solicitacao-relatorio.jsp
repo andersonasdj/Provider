@@ -15,7 +15,8 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
-		<h3>Exportar Relatório</h3>
+		<h4 align="center">Resumo de solicitações</h4>
+		<h4>Exportar Relatório</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
 	                <option value="">Export Basic</option>
@@ -56,17 +57,31 @@
 						<td>${solicitacao.id}</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Alta'}">
+									<img class="ico_status" src="assets/img/alta.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Media'}">
+									<img class="ico_status" src="assets/img/media.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Baixa'}">
+									<img class="ico_status" src="assets/img/baixa.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Planejada'}">
+									<img class="ico_status" src="assets/img/planejada.png">
+								</c:if>	
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
-						<td>${solicitacao.onsiteOffsite}</td>
 						
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span>- Nível.: ${solicitacao.prioridade} </span></a>
+						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
 									- Endereço: ${solicitacao.cliente.endereco}</span></a>
 						</td>
-						
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
@@ -91,10 +106,25 @@
 						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+							<c:if test="${solicitacao.prioridade == 'Alta'}">
+								<img class="ico_status" src="assets/img/alta.png">
+							</c:if>
+							<c:if test="${solicitacao.prioridade == 'Media'}">
+								<img class="ico_status" src="assets/img/media.png">
+							</c:if>
+							<c:if test="${solicitacao.prioridade == 'Baixa'}">
+								<img class="ico_status" src="assets/img/baixa.png">
+							</c:if>
+							<c:if test="${solicitacao.prioridade == 'Planejada'}">
+								<img class="ico_status" src="assets/img/planejada.png">
+							</c:if>	
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>${solicitacao.onsiteOffsite}</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span>- Nível.: ${solicitacao.prioridade} </span></a>
+						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
@@ -127,10 +157,25 @@
 						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Alta'}">
+									<img class="ico_status" src="assets/img/alta.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Media'}">
+									<img class="ico_status" src="assets/img/media.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Baixa'}">
+									<img class="ico_status" src="assets/img/baixa.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Planejada'}">
+									<img class="ico_status" src="assets/img/planejada.png">
+								</c:if>	
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>${solicitacao.onsiteOffsite}</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span>- Nível.: ${solicitacao.prioridade} </span></a>
+						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
@@ -164,10 +209,26 @@
 						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Alta'}">
+									<img class="ico_status" src="assets/img/alta.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Media'}">
+									<img class="ico_status" src="assets/img/media.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Baixa'}">
+									<img class="ico_status" src="assets/img/baixa.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Planejada'}">
+									<img class="ico_status" src="assets/img/planejada.png">
+								</c:if>
+								
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>${solicitacao.onsiteOffsite}</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span>- Nível.: ${solicitacao.prioridade} </span></a>
+						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
@@ -199,10 +260,25 @@
 						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Alta'}">
+									<img class="ico_status" src="assets/img/alta.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Media'}">
+									<img class="ico_status" src="assets/img/media.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Baixa'}">
+									<img class="ico_status" src="assets/img/baixa.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Planejada'}">
+									<img class="ico_status" src="assets/img/planejada.png">
+								</c:if>	
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>${solicitacao.onsiteOffsite}</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span>- Nível.: ${solicitacao.prioridade} </span></a>
+						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
