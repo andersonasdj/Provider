@@ -53,6 +53,20 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Forma de Abertura</label>
+				<div class="controls">
+					<select class="selectpicker" id="formaAbertura"
+						name="formaAbertura">
+						<option>${solicitacao.formaAbertura}</option>
+						<option>Helpdesk</option>
+						<option>E-mail</option>
+						<option>Whatsapp</option>
+						<option>No local</option>
+						<option></option>
+					</select>
+				</div>
+			</div> 
+			<div class="control-group">
 				<label class="control-label">Usuario Afetado</label>
 				<div class="controls">
 					<input id="usuario" name="usuario" type="text"

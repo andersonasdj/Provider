@@ -21,7 +21,7 @@
 			<property name="javax.persistence.jdbc.user" value="techgol_root" />
 			<property name="javax.persistence.jdbc.password" value="Senha1234Senha1234" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-			<property name="hibernate.show_sql" value="true" />
+			<!--  <property name="hibernate.show_sql" value="true" /> -->
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 

@@ -32,6 +32,20 @@
 					</select>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">Forma de Abertura</label>
+				<div class="controls">
+					<select class="selectpicker" id="formaAbertura"
+						name="formaAbertura">
+						<option></option>
+						<option>Helpdesk</option>
+						<option>E-mail</option>
+						<option>Whatsapp</option>
+						<option>No local</option>
+						<option>
+					</select>
+				</div>
+			</div> 
 			<div class="control-group">	
 				<div class="controls">
 					<input id="dataAbertura" name="dataAbertura" type="hidden" value="<%= Calendar.getInstance()%>" class="input-xlarge" disabled="disabled">

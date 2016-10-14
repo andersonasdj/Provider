@@ -39,6 +39,7 @@ public class Solicitacao {
 	private Cliente cliente;
 	@OneToOne
 	private Funcionario funcionario;
+	private String formaAbertura;
 	private String usuario;
 	private String prioridade;
 	private String descricaoProblema;
@@ -57,6 +58,14 @@ public class Solicitacao {
 	@Lob
 	private String andamentoDoChamado;
 
+	public String getFormaAbertura() {
+		return formaAbertura;
+	}
+	
+	public void setFormaAbertura(String formaAbertura) {
+		this.formaAbertura = formaAbertura;
+	}
+	
 	public String getStatus() {
 		return status;
 	}
