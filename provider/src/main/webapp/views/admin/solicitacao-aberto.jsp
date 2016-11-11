@@ -60,7 +60,9 @@
 			<c:forEach var="solicitacao" items="${solicitacoes}">
 				<tr>
 					<td></td>
-					<td>${solicitacao.id}</td>
+					<td>
+						<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+					</td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 							<c:if test="${solicitacao.prioridade == 'Alta'}">

@@ -443,5 +443,39 @@ public class Solicitacao {
 			return false;
 		return true;
 	}
+	
+	public String geraLogSolicitacao(Funcionario funcionario, Cliente cliente){
+		
+		return "* Aberto por: " + this.getAbriuChamado() + "\n\n"
+				
+				+ "* Cliente: " + cliente.getNome() + "\n"
+				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observação: " + this.getObs() + "\n"
+				+ "* Categoria: " + this.getClassificacao() + "\n"
+				+ "* Classificação " + this.getPrioridade() + "\n"
+				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
+				+ "* Funcionario Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuido") + "\n"
+				+ "* Status: " + this.getStatus() + "\n"
+				+ "=========================================================================\n\n";
+	}
+	
+	public String atualizaLogSolicitacao(Funcionario funcionario){
+		
+		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
+				
+
+				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observação: " + this.getObs() + "\n"
+				+ "* Observação 2: " + this.getObs2() + "\n"
+				+ "* Resolução: " + this.getResolucao() + "\n"
+ 				+ "* Categoria: " + this.getClassificacao() + "\n"
+				+ "* Classificação " + this.getPrioridade() + "\n"
+				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
+				+ "* Funcionario Responsável: " + funcionario.getNome() + "\n"
+				+ "* Status: " + this.getStatus() + "\n"
+				+ "=========================================================================\n\n";
+	}
 
 }

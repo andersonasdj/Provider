@@ -68,7 +68,11 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setStatus("Finalizado");
 		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
-		solicitacaoFinalizada.setFuncionario(funcionario);	
+		solicitacaoFinalizada.setFuncionario(funcionario);
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
+		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		//Atualiza LOG
 		Data daoData = new Data();
 		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
@@ -84,6 +88,10 @@ public class SolicitacaoDao {
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
@@ -96,6 +104,9 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
 		solicitacao.setObs(solicitacaoEncontrada.getObs());
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario));
+		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
@@ -126,19 +137,6 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario){
-		Solicitacao solicitacaoEncontrada = new Solicitacao();
-		manager.getTransaction().begin();
-		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
-		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
-		solicitacao.setStatus("Agendado");
-		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
-		solicitacao.setFuncionario(funcionario);
-		manager.merge(solicitacao);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	
 	public void solicitacaoEmAndamento(Solicitacao solicitacao, Funcionario funcionario){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
@@ -148,6 +146,10 @@ public class SolicitacaoDao {
 		solicitacao.setStatus("Em andamento");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
@@ -162,6 +164,26 @@ public class SolicitacaoDao {
 		solicitacao.setStatus("Agendado");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
+		//Atualiza LOG	
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		manager.merge(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario){
+		Solicitacao solicitacaoEncontrada = new Solicitacao();
+		manager.getTransaction().begin();
+		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
+		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
+		solicitacao.setStatus("Agendado");
+		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
+		solicitacao.setFuncionario(funcionario);
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();

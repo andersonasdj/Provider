@@ -18,24 +18,25 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Classificação de solicitação</legend>
-			<div>
-				<div>
-					<input id="solicitacao" name="id" type="hidden"
+				<input id="solicitacao" name="id" type="hidden"
 						value="${solicitacao.id}">
-				</div>
-			</div>
-			<div>
-				<div>
-					<input id="cliente" name="cliente.id" type="hidden"
+				<input id="formaAbertura" name="formaAbertura" type="hidden"
+						value="${solicitacao.formaAbertura}">
+				<input id="classificacao" name="classificacao" type="hidden"
+						value="${solicitacao.classificacao}">
+				<input id="nivelDeIncidencia" name="nivelDeIncidencia" type="hidden"
+						value="${solicitacao.nivelDeIncidencia}">
+				<input id="prioridade" name="prioridade" type="hidden"
+						value="${solicitacao.prioridade}">
+				<input id="abriuChamado" name="abriuChamado" type="hidden"
+						value="${solicitacao.abriuChamado}">
+				<input id="onsiteOffsite" name="onsiteOffsite" type="hidden"
+						value="${solicitacao.onsiteOffsite}">
+				<input id="cliente" name="cliente.id" type="hidden"
 						value="${solicitacao.cliente.id}">
-				</div>
-			</div>
-			<div>
-				<div>
-					<input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden"
+				<input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden"
 						value="${solicitacao.funcionario.nome}">
-				</div>
-			</div>
+							
 			<div class="control-group">
 				<label class="control-label">Data Abertura</label>
 				<div class="controls">

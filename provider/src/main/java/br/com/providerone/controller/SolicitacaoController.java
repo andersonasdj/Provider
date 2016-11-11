@@ -40,6 +40,8 @@ public class SolicitacaoController {
 		if (session.getAttribute("clienteLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			solicitacao.setStatus("Aberto");
+			//String log = solicitacao.geraLogSolicitacao(solicitacao);
+			//solicitacao.setAndamentoDoChamado(log);
 			dao.salvaSolicitcao(solicitacao);
 			return "redirect:home";
 		} else {
@@ -56,6 +58,8 @@ public class SolicitacaoController {
 			Cliente clienteASalvar = daoCli.buscaNomeCliente(nomeDoCliente);
 			Funcionario funcionarioASalvar = daoFun.buscaNomeFuncionario(nomeDoFuncionario);
 			SolicitacaoDao dao = new SolicitacaoDao();
+			String log = solicitacao.geraLogSolicitacao(funcionarioASalvar, clienteASalvar);//**
+			solicitacao.setAndamentoDoChamado(log); //Em revisão
 			if(solicitacao.getStatus().equals("Abrir")){
 				//JavaMailApp mail = new JavaMailApp();
 				dao.salvaSolicitacaoAdmin(solicitacao, funcionarioASalvar, clienteASalvar);
@@ -390,7 +394,7 @@ public class SolicitacaoController {
 			Funcionario funcionarioASalvar = daoFun.buscaNomeFuncionario(nomeDoFuncionario);
 			
 			if (solicitacao.getStatus().equals("Finalizar")) {
-				dao.finalizaSolicitacao(solicitacao, funcionarioASalvar);	
+				dao.finalizaSolicitacao(solicitacao, funcionarioASalvar);
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Finalizado")) {
@@ -572,4 +576,17 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
+	
+	@RequestMapping("/logDeSolicitacao")
+	public String solicitacaoLog(HttpSession session,Long id, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			SolicitacaoDao daoSolicitacao = new SolicitacaoDao();
+			
+			model.addAttribute("solicitacao", daoSolicitacao.buscaSolicitacaoId(id));
+			return "admin/solicitacao-log";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
 }

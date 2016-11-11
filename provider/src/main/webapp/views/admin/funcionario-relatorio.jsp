@@ -52,7 +52,9 @@
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>	
+						<td>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
@@ -79,7 +81,9 @@
 				<c:if test="${solicitacao.status == 'Finalizado'}">
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -109,7 +113,9 @@
 				<c:if test="${solicitacao.status == 'Agendado'}">
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -140,7 +146,9 @@
 				<c:if test="${solicitacao.status == 'Em andamento'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -168,7 +176,9 @@
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>

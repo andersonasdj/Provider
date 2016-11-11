@@ -27,4 +27,11 @@
 	</mvc:interceptors>
 
 	<mvc:resources mapping="/assets/**" location="/assets/" />
+
+	<!-- Configure the multipart resolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- one of the properties available; the maximum file size in bytes -->
+		<property name="maxUploadSize" value="5000000" />
+	</bean>
 </beans>

@@ -16,6 +16,15 @@ import br.com.providerone.modelo.Funcionario;
 @Controller
 public class FuncionarioController {
 	
+	@RequestMapping("/upload")
+	public String upload(HttpSession session) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			return "admin/upload";
+		} else {
+			return "redirect:loginFuncionario";
+		}
+	}
+	
 	@RequestMapping("/homePage")
 	public String homePage(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {

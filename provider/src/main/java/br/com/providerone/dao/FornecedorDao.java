@@ -2,10 +2,11 @@ package br.com.providerone.dao;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import br.com.providerone.entitymanager.EntityFactory;
-import br.com.providerone.modelo.Fornecedor;
 
 public class FornecedorDao {
 	EntityManager manager;
