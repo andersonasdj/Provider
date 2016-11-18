@@ -61,7 +61,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 					</td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>

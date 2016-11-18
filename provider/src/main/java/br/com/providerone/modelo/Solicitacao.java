@@ -1,6 +1,9 @@
 package br.com.providerone.modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -445,35 +448,46 @@ public class Solicitacao {
 	}
 	
 	public String geraLogSolicitacao(Funcionario funcionario, Cliente cliente){
-		
+		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Date hora = new Date();
+		hora = this.getDataAbertura().getTime();
+			
 		return "* Aberto por: " + this.getAbriuChamado() + "\n\n"
-				
+				+ "* Data: " + df.format(this.getDataAbertura().getTime()) + "\n"
+				+ "* Hora: " + sdf.format(hora) + "\n"
 				+ "* Cliente: " + cliente.getNome() + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
 				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
-				+ "* Observação: " + this.getObs() + "\n"
-				+ "* Categoria: " + this.getClassificacao() + "\n"
-				+ "* Classificação " + this.getPrioridade() + "\n"
-				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
-				+ "* Funcionario Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuido") + "\n"
+				+ "* Observação: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
+				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "Não Classificado") + "\n"
+				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
+				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
+				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
 				+ "* Status: " + this.getStatus() + "\n"
 				+ "=========================================================================\n\n";
 	}
 	
-	public String atualizaLogSolicitacao(Funcionario funcionario){
+	public String atualizaLogSolicitacao(Funcionario funcionario, String funcionarioLogado){
+		Date data = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		data = Calendar.getInstance().getTime();
 		
 		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
 				
-
+				+ "* Alterações realizadas por: " + funcionarioLogado + "\n"
+				+ "* Data de Alteração: " + sdf.format(data) + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
 				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
 				+ "* Observação: " + this.getObs() + "\n"
-				+ "* Observação 2: " + this.getObs2() + "\n"
+				+ "* Observação 2: " + (this.getObs2()!= null ? this.getObs2() : "") + "\n"
 				+ "* Resolução: " + this.getResolucao() + "\n"
  				+ "* Categoria: " + this.getClassificacao() + "\n"
 				+ "* Classificação " + this.getPrioridade() + "\n"
 				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
-				+ "* Funcionario Responsável: " + funcionario.getNome() + "\n"
+				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
 				+ "* Status: " + this.getStatus() + "\n"
 				+ "=========================================================================\n\n";
 	}

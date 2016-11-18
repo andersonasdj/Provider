@@ -18,25 +18,6 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Classificação de solicitação</legend>
-				<input id="solicitacao" name="id" type="hidden"
-						value="${solicitacao.id}">
-				<input id="formaAbertura" name="formaAbertura" type="hidden"
-						value="${solicitacao.formaAbertura}">
-				<input id="classificacao" name="classificacao" type="hidden"
-						value="${solicitacao.classificacao}">
-				<input id="nivelDeIncidencia" name="nivelDeIncidencia" type="hidden"
-						value="${solicitacao.nivelDeIncidencia}">
-				<input id="prioridade" name="prioridade" type="hidden"
-						value="${solicitacao.prioridade}">
-				<input id="abriuChamado" name="abriuChamado" type="hidden"
-						value="${solicitacao.abriuChamado}">
-				<input id="onsiteOffsite" name="onsiteOffsite" type="hidden"
-						value="${solicitacao.onsiteOffsite}">
-				<input id="cliente" name="cliente.id" type="hidden"
-						value="${solicitacao.cliente.id}">
-				<input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden"
-						value="${solicitacao.funcionario.nome}">
-							
 			<div class="control-group">
 				<label class="control-label">Data Abertura</label>
 				<div class="controls">
@@ -150,6 +131,16 @@
 					</select>
 				</div>
 			</div>
+				<input type="hidden" id="funcionarioLogado" name="funcionarioLogado" value="${tecnicoLogado.nome}">
+				<input id="solicitacao" name="id" type="hidden" value="${solicitacao.id}">
+				<input id="formaAbertura" name="formaAbertura" type="hidden" value="${solicitacao.formaAbertura}">
+				<input id="classificacao" name="classificacao" type="hidden" value="${solicitacao.classificacao}">
+				<input id="nivelDeIncidencia" name="nivelDeIncidencia" type="hidden" value="${solicitacao.nivelDeIncidencia}">
+				<input id="prioridade" name="prioridade" type="hidden" value="${solicitacao.prioridade}">
+				<input id="abriuChamado" name="abriuChamado" type="hidden" value="${solicitacao.abriuChamado}">
+				<input id="onsiteOffsite" name="onsiteOffsite" type="hidden" value="${solicitacao.onsiteOffsite}">
+				<input id="cliente" name="cliente.id" type="hidden" value="${solicitacao.cliente.id}">
+				<input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden" value="${solicitacao.funcionario.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

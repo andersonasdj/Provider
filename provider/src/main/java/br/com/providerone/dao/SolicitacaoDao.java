@@ -41,8 +41,8 @@ public class SolicitacaoDao {
 	}
 	
 	public void salvaSolicitacaoAdmin(Solicitacao solicitacao, Funcionario funcionario, Cliente cliente) {
-		solicitacao.setDataAbertura(Calendar.getInstance());
-		solicitacao.setStatus("Aberto");
+//		solicitacao.setDataAbertura(Calendar.getInstance());
+//		solicitacao.setStatus("Aberto");
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setCliente(cliente);	
 		manager.getTransaction().begin();
@@ -51,8 +51,8 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	public void salvaSolicitacaoAdminAgendado(Solicitacao solicitacao, Funcionario funcionario, Cliente cliente) {
-		solicitacao.setDataAbertura(Calendar.getInstance());
-		solicitacao.setStatus("Agendado");
+//		solicitacao.setDataAbertura(Calendar.getInstance());
+//		solicitacao.setStatus("Agendado");
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setCliente(cliente);
 		manager.getTransaction().begin();
@@ -61,7 +61,7 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void finalizaSolicitacao(Solicitacao solicitacao, Funcionario funcionario) {	
+	public void finalizaSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado) {	
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoFinalizada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacaoFinalizada.setDataFechamento(Calendar.getInstance());
@@ -71,7 +71,7 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setFuncionario(funcionario);
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
-		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
 		Data daoData = new Data();
 		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
@@ -82,7 +82,7 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario){
+	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
@@ -90,14 +90,14 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
-		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-	public void atualizarSolicitacaoFinalizada(Solicitacao solicitacao, Funcionario funcionario){
+	public void atualizarSolicitacaoFinalizada(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
@@ -105,7 +105,7 @@ public class SolicitacaoDao {
 		solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
 		solicitacao.setObs(solicitacaoEncontrada.getObs());
 		//Atualiza LOG
-		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario));
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
@@ -137,7 +137,7 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void solicitacaoEmAndamento(Solicitacao solicitacao, Funcionario funcionario){
+	public void solicitacaoEmAndamento(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
@@ -148,14 +148,14 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
-		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-	public void solicitacaoAgendado(Solicitacao solicitacao, Funcionario funcionario){
+	public void solicitacaoAgendado(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
@@ -166,13 +166,13 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		//Atualiza LOG	
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
-		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario){
+	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
@@ -182,7 +182,7 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
-		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario));
+		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();

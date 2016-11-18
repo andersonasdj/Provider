@@ -57,7 +57,7 @@
 			<c:forEach var="solicitacao" items="${solicitacoes}">
 				<tr>
 					<td></td>
-					<td>${solicitacao.id}</td>
+					<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 							<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -81,7 +81,7 @@
 					<c:if test="${not empty solicitacao.funcionario.nome}">
 						<td>${solicitacao.funcionario.nome}</td>
 					</c:if>
-					<td><a href="solicitacaoEditCliente?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="javascript:func()" onclick="ver('${solicitacao.id}')">Ver</a></td>
 					</tr>
 			</c:forEach>
 		</table>
@@ -94,4 +94,9 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script language="Javascript">
+		function ver(id) {
+			window.location.href = "solicitacaoEditCliente?id="+id;
+		}
+	</script>
 </html>

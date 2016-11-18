@@ -237,6 +237,7 @@
 					</select>
 				</div>
 			</div>
+			<input type="hidden" id="funcionarioLogado" name="funcionarioLogado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

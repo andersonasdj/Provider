@@ -55,7 +55,7 @@
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -106,7 +106,7 @@
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -159,7 +159,7 @@
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -213,7 +213,7 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -266,7 +266,7 @@
 					<tr class="active" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
