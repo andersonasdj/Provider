@@ -58,6 +58,16 @@ a.dcontexto:hover span {
 }
 
 @media (max-width: 550px) {
+  #grafico{display: none;}
+  .btn-toggle{display: block;}
+}
+
+@media (max-width: 990px) {
+  #botoesRelatorio{display: none;}
+  .btn-toggle{display: block;}
+}
+
+@media (max-width: 550px) {
   #perfil{height: 50px; 
   width: 550px; 
   margin-left: -200px; 

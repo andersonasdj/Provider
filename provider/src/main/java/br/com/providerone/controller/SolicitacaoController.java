@@ -239,6 +239,26 @@ public class SolicitacaoController {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes());
+			
+			Long ab, and, age, agua;
+			
+			SolicitacaoDao daoAbertas = new SolicitacaoDao();
+			ab = daoAbertas.listaQtdSolicitacoesAbertas();
+			model.addAttribute("qtdAberto",ab );
+			
+			SolicitacaoDao daoAgendadas = new SolicitacaoDao();
+			age = daoAgendadas.listaQtdSolicitacoesAgendadas();
+			model.addAttribute("qtdAgendado",age );
+			
+			SolicitacaoDao daoAndamento = new SolicitacaoDao();
+			and = daoAndamento.listaQtdSolicitacoesEmAndamento();
+			model.addAttribute("qtdAndamento", and);
+			
+			SolicitacaoDao daoAguardando = new SolicitacaoDao();
+			agua = daoAguardando.listaQtdSolicitacoesAguardando();
+			model.addAttribute("qtdAguardando", agua);
+			model.addAttribute("qtdTotal", ab + age + and + agua);	
+			
 			return "admin/solicitacao-relatorio";
 		} else {
 			return "redirect:login";

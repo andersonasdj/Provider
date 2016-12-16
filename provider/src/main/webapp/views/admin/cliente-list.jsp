@@ -14,6 +14,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
+
 	<div class="container">
 		<legend>Lista de Clientes</legend>
 		<table id="table"
@@ -60,12 +61,17 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<br /><br /><br /><br /><br /><br /><br /><br />
+		<br /><br />
+		<div id="div_mapa"></div>
+		<br /><br /><br /><br /><br /><br />
 		<legend></legend>
 	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIk8yXYLFzQySXoZoPYVhyNtRwfaJ5a8o"></script>
+	<script type="text/javascript" src="assets/js/loader.js"></script>
+	<script src="assets/js/mapas.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>

@@ -106,6 +106,9 @@
 									<td>Não enviado na abertura</td>
 								</c:if>
 							</c:if>
+							<c:if test="${solicitacao.status == 'Aguardando usuario'}">
+								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">E-mail não cadastrado</a></td>
+							</c:if>
 							<c:if test="${solicitacao.status == 'Em andamento'}">
 								<td>Não enviado na abertura</td>
 							</c:if>

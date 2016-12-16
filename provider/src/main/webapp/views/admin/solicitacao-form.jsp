@@ -171,20 +171,24 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Data de Agendamento</label>
-				<div class="controls">
-					<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
-						value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
+			
+			<div id="agendamentos">
+				<div class="control-group" id="opAgendamentoData">
+					<label class="control-label">Data de Agendamento</label>
+					<div class="controls">
+						<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
+							value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
+					</div>
+				</div>
+				<div class="control-group" id="opAgendamentoHora">
+					<label class="control-label">Hora de Agendamento</label>
+					<div class="controls">
+						<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
+							value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
+					</div>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Hora de Agendamento</label>
-				<div class="controls">
-					<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
-						value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
-				</div>
-			</div>
+			
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
@@ -193,6 +197,7 @@
 					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
+
 			<legend></legend>
 		</fieldset>
 	</form>
@@ -203,6 +208,20 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
+	<script>
+		document.getElementById('agendamentos').style.display = 'none';
+		var divStatus = $("#status");
+		var status = $("#status").val();
+		divStatus.on("change", function(){
+			var status = $("#status").val();
+			if(status === 'Abrir'){
+				document.getElementById('agendamentos').style.display = 'none';
+			} else {
+				document.getElementById('agendamentos').style.display = 'block';
+			}
+		} );
+	</script>
+	
     <script type="text/javascript">
 	    function limite_textarea_prob(valor) {
 	        quant = 255;

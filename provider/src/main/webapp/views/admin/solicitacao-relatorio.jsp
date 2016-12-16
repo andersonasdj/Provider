@@ -6,6 +6,7 @@
 	<title>ProviderOne | Relatórios</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
@@ -15,7 +16,25 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
-		<h4 align="center">Resumo de solicitações</h4>
+	
+		<div class="container">
+			<legend align="center">Resumo de solicitações</legend>
+			<div class="row">
+				<div class="col-md-7"><div id="grafico"></div></div>
+				<div class="col-md-5">
+					<div id="botoesRelatorio">
+						<br/><br/>
+						<p><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a></p>
+						<p><a class="btn btn-info" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
+						<p><a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a></p>
+						<p><a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a></p>
+						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações</a></p>
+					</div>
+				</div>
+			</div>
+			<legend id="grafico"></legend>
+		</div>
+		
 		<h4>Exportar Relatório</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
@@ -315,6 +334,12 @@
 				</c:if>
 			</c:forEach>
 		</table>
+		
+		<input type="hidden" name="abertas" id="aberto" value="${qtdAberto}">
+		<input type="hidden" name="agendadas" id="agendado" value="${qtdAgendado}"> 
+		<input type="hidden" name="abertas" id="andamento" value="${qtdAndamento}"> 
+		<input type="hidden" name="aguardando" id="aguardando" value="${qtdAguardando}"> 
+		
 	<br /><br />
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
@@ -325,6 +350,9 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script type="text/javascript" src="https://google.com/jsapi"></script>
+	<script src="assets/js/grafico.js"></script>
+	
 	<script type="text/javascript">
         // Este evendo é acionado após o carregamento da página
         jQuery(window).load(function() {
