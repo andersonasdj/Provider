@@ -1,6 +1,7 @@
 <html>
 <head>
     <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 	<nav class="navbar navbar-fixed-top navbar-inverse">
@@ -25,7 +26,6 @@
 			                    <li class="dropdown-header">Relatórios</li>
 			             		<li><a href="relatorioSelect"><i class="fa fa-area-chart"> </i> Relatório por Cliente</a></li>
 			             		<li><a href="relatorioSelectTec"><i class="fa fa-area-chart"> </i> Relatório por Tecnico</a></li>
-			                 	<li><a href="relatorioFinalizadas"><i class="fa fa-check"> </i> Solicitações Finalizadas</a></li> 
 			                  </ul>
 						</li>
 						<li class="dropdown">
@@ -67,7 +67,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"> </i> ${funcionarioLogado.nome}<span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
-			                  	<li><a href="https://terminal.providerone.com.br/svn"><i class="fa fa-cloud-download"></i> SVN</a></li>
+			                  	<li><a href="#"><i class="fa fa-cloud-download"></i> SVN</a></li>
 			                  	<li><a href="configEmail"><i class="fa fa-wrench"></i> Configurações</a></li>
 			                  	<li><a href="assets/apk/ProviderOne.apk"><i class="fa fa-android"></i> APK</a></li>
 			                  	<li role="separator" class="divider"></li>

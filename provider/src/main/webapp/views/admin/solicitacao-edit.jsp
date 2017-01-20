@@ -6,7 +6,6 @@
    	<title>ProviderOne | Funcionario</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
@@ -188,18 +187,21 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Data de Agendamento</label>
-				<div class="controls">
-					<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
-						value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
-				</div>
-			</div>	
-			<div class="control-group">
-				<label class="control-label">Hora de Agendamento</label>
-				<div class="controls">
-					<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
-						value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
+			
+			<div id="agendamentos">
+				<div class="control-group">
+					<label class="control-label">Data de Agendamento</label>
+					<div class="controls">
+						<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
+							value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
+					</div>
+				</div>	
+				<div class="control-group">
+					<label class="control-label">Hora de Agendamento</label>
+					<div class="controls">
+						<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
+							value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
+					</div>
 				</div>
 			</div>
 			<div class="control-group">
@@ -221,7 +223,7 @@
 					<select class="selectpicker" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
-						<option>Finalizar</option>
+						
 						<c:if test="${solicitacao.status != 'Agendado'}">
 							<option>Agendado</option>
 						</c:if>
@@ -233,6 +235,9 @@
 						</c:if>
 						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
 							<option>Aguardando usuario</option>
+						</c:if>
+						<c:if test="${solicitacao.status != 'Aberto'}">
+							<option>Finalizar</option>
 						</c:if>
 					</select>
 				</div>
@@ -255,40 +260,6 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
- 	<script type="text/javascript">
-	    function limite_textarea_prob(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contProb').innerHTML = resto;
-	        } else {
-	            document.getElementById('descricaoProblema').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
-    <script type="text/javascript">
-	    function limite_textarea_obs(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contObs').innerHTML = resto;
-	        } else {
-	            document.getElementById('obs').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
-     <script type="text/javascript">
-	    function limite_textarea_resolu(valor) {
-	        quant = 255;
-	        total = valor.length;
-	        if(total <= quant) {
-	            resto = quant - total;
-	            document.getElementById('contResolu').innerHTML = resto;
-	        } else {
-	            document.getElementById('resolucao').value = valor.substr(0,quant);
-	        }
-	    }
-    </script>
+	<script src="assets/js/controla-calendario-agendamento.js"></script>
+	<script src="assets/js/controla-campos-texto.js"></script>
 </html>

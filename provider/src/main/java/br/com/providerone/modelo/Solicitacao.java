@@ -58,6 +58,7 @@ public class Solicitacao {
 	private Long horasDur;
 	private Long minutosDur;
 	private String abriuChamado;
+	private String tempoDeAndamento;
 	@Lob
 	private String andamentoDoChamado;
 
@@ -261,6 +262,14 @@ public class Solicitacao {
 		this.andamentoDoChamado = andamentoDoChamado;
 	}
 
+	public String getTempoDeAndamento() {
+		return tempoDeAndamento;
+	}
+
+	public void setTempoDeAndamento(String tempoDeAndamento) {
+		this.tempoDeAndamento = tempoDeAndamento;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -290,6 +299,8 @@ public class Solicitacao {
 						.hashCode());
 		result = prime * result + ((diasDur == null) ? 0 : diasDur.hashCode());
 		result = prime * result
+				+ ((formaAbertura == null) ? 0 : formaAbertura.hashCode());
+		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result
 				+ ((horasDur == null) ? 0 : horasDur.hashCode());
@@ -311,6 +322,9 @@ public class Solicitacao {
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((statusEmail == null) ? 0 : statusEmail.hashCode());
+		result = prime
+				* result
+				+ ((tempoDeAndamento == null) ? 0 : tempoDeAndamento.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		return result;
 	}
@@ -379,6 +393,11 @@ public class Solicitacao {
 				return false;
 		} else if (!diasDur.equals(other.diasDur))
 			return false;
+		if (formaAbertura == null) {
+			if (other.formaAbertura != null)
+				return false;
+		} else if (!formaAbertura.equals(other.formaAbertura))
+			return false;
 		if (funcionario == null) {
 			if (other.funcionario != null)
 				return false;
@@ -439,6 +458,11 @@ public class Solicitacao {
 				return false;
 		} else if (!statusEmail.equals(other.statusEmail))
 			return false;
+		if (tempoDeAndamento == null) {
+			if (other.tempoDeAndamento != null)
+				return false;
+		} else if (!tempoDeAndamento.equals(other.tempoDeAndamento))
+			return false;
 		if (usuario == null) {
 			if (other.usuario != null)
 				return false;
@@ -446,12 +470,16 @@ public class Solicitacao {
 			return false;
 		return true;
 	}
-	
+
 	public String geraLogSolicitacao(Funcionario funcionario, Cliente cliente){
 		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		Date hora = new Date();
 		hora = this.getDataAbertura().getTime();
+		Date horaAgendado = new Date();
+		if(this.getAgendadoHora() != null){
+			horaAgendado = this.getAgendadoHora().getTime();
+		}
 			
 		return "* Aberto por: " + this.getAbriuChamado() + "\n\n"
 				+ "* Data: " + df.format(this.getDataAbertura().getTime()) + "\n"
@@ -466,13 +494,21 @@ public class Solicitacao {
 				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
 				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
 				+ "* Status: " + this.getStatus() + "\n"
+				+ (this.getStatus().equals("Agendar") ? "* Data de agendamento: " + (this.getAgendado() != null ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
+				+ (this.getAgendadoHora() != null ? "* Hora: " + sdf.format(horaAgendado)	: "") + "\n" :"") 
 				+ "=========================================================================\n\n";
 	}
 	
 	public String atualizaLogSolicitacao(Funcionario funcionario, String funcionarioLogado){
 		Date data = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat sdfAgendado = new SimpleDateFormat("HH:mm:ss");
 		data = Calendar.getInstance().getTime();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+		Date horaAgendado = new Date();
+		if(getAgendadoHora() != null){
+			horaAgendado = this.getAgendadoHora().getTime();
+		}
 		
 		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
 				
@@ -489,6 +525,8 @@ public class Solicitacao {
 				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
 				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
 				+ "* Status: " + this.getStatus() + "\n"
+				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
+				+ (this.getAgendadoHora() != null ? "* Hora: " + sdfAgendado.format(horaAgendado)	: "") + "\n" :"") 
 				+ "=========================================================================\n\n";
 	}
 

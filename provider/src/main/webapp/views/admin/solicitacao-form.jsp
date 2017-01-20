@@ -8,7 +8,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
@@ -209,15 +208,16 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
 	<script>
-		document.getElementById('agendamentos').style.display = 'none';
 		var divStatus = $("#status");
 		var status = $("#status").val();
 		divStatus.on("change", function(){
 			var status = $("#status").val();
 			if(status === 'Abrir'){
-				document.getElementById('agendamentos').style.display = 'none';
+				//document.getElementById('agendamentos').style.display = 'none';
+				$("#agendamentos").stop().slideToggle(1000);
 			} else {
-				document.getElementById('agendamentos').style.display = 'block';
+				//document.getElementById('agendamentos').style.display = 'block';
+				$("#agendamentos").stop().slideToggle(1000);
 			}
 		} );
 	</script>

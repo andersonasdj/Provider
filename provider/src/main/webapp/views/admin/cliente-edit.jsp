@@ -6,7 +6,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 </head>
 <body>
@@ -92,8 +91,21 @@
 				<label class="control-label">Endereço</label>
 				<div class="controls">
 					<input id="nome" name="endereco" type="text"
-						value="${cliente.endereco}" class="input-xlarge" required>
-					<p class="help-block">* Campo Obrigatório</p>
+						value="${cliente.endereco}" class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Latitude</label>
+				<div class="controls">
+					<input id="latitude" name="latitude" type="text"
+						value="${cliente.latitude}" class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Longitude</label>
+				<div class="controls">
+					<input id="longitude" name="longitude" type="text"
+						value="${cliente.longitude}" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">

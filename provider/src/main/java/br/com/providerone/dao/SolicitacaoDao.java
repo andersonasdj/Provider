@@ -77,6 +77,10 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		//Refatorar para remover esse if abaixo
+		if(solicitacaoFinalizada.getDataAndamento()!=null){
+			solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempoTotal(solicitacaoFinalizada.getDataFechamento(), solicitacaoFinalizada.getDataAndamento()));
+		}
 		manager.persist(solicitacaoFinalizada);
 		manager.getTransaction().commit();
 		manager.close();

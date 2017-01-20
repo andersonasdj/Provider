@@ -7,7 +7,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
@@ -44,7 +43,7 @@
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
 				<th>Problema Relatado</th>
-				<th data-field="dataEncerramento" data-sortable="true">Data / Hora Encerramento</th>
+				<th data-field="dataEncerramento" data-sortable="true">Data Andamento / Encerramento</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
 				<th>Ações</th>
@@ -54,19 +53,22 @@
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>	
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>				
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs} <br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
@@ -82,35 +84,32 @@
 				<c:if test="${solicitacao.status == 'Finalizado'}">
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>]
+								</span>
+							</a>
 						</td>
 						<td>
-							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/><br/>
-								<c:if test="${solicitacao.diasDur > 0}">
-									Dias para conclusão: ${solicitacao.diasDur}
-								</c:if>
-								<c:if test="${solicitacao.diasDur <= 0}">
-									<c:if test="${solicitacao.horasDur > 0}">
-										Horas para conclusão: ${solicitacao.horasDur}
-									</c:if>
-								</c:if>
-								<c:if test="${solicitacao.horasDur == 0}">
-									Minutos para conclusão: ${solicitacao.minutosDur}
-								</c:if>
-								 </span></a>	
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+							 - <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>
+								<span>
+									<p>- Data de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
+									<p>- Tempo de atendimento: ${solicitacao.tempoDeAndamento}</p>
+								 </span>
+							</a>	
 						</td>
 						<td>${solicitacao.status}</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
@@ -125,25 +124,31 @@
 				<c:if test="${solicitacao.status == 'Agendado'}">
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.status}
-								<span>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
-									Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
+								<span>
+									<p>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+									<p>Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
+								</span>
+							</a>
 						</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
@@ -157,20 +162,22 @@
 				<c:if test="${solicitacao.status == 'Em andamento'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}
-								</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
@@ -186,20 +193,22 @@
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>${solicitacao.id}</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}
-								</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
@@ -215,13 +224,12 @@
 			</c:forEach>
 		</table>
 	</div>
-		<div class="control-group">
-				<label class="control-label"></label>
-				<div class="controls" align="center">
-					<button id="enviar" name="salvar" class="btn btn-success" onclick="cont();" >Imprimir <i class="fa fa-print fa-lg"></i></button>
-				</div>
-		</div>
-	<!--  </div> -->
+	<div class="control-group">
+			<label class="control-label"></label>
+			<div class="controls" align="center">
+				<button id="enviar" name="salvar" class="btn btn-success" onclick="cont();" >Imprimir <i class="fa fa-print fa-lg"></i></button>
+			</div>
+	</div>
 	<br /><br />
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>

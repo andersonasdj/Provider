@@ -7,7 +7,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
@@ -15,15 +14,18 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/><br/>
 		<div class="container">
-			<div align="center"><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
-			 - <a class="btn btn-info" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
-			 - <a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
-			 - <a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a>
-			 - <a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações</a></div>
+			<legend></legend>
+			<span id="botoes-status""></span>
+			<div align="center"><a class="btn btn-danger aberto" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
+			 - <a class="btn btn-info andamento" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
+			 - <a class="btn btn-warning agendado" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
+			 - <a class="btn btn-success aguardando" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a>
+			 - <a class="btn btn-inverse total" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações</a></div>
+			<br/>
+			<legend></legend>
 		</div>
-		<br/>
-		<legend></legend>
 		<h4>Exportar Solicitações</h4>
+		
         <div id="toolbar">
             <select class="form-control">
                 <option value="">Export Basic</option>
@@ -77,25 +79,34 @@
 							<c:if test="${solicitacao.prioridade == 'Planejada'}">
 								<img class="ico_status" src="assets/img/planejada.png">
 							</c:if>	
-							<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/> <br/>
-								- Aberto por: ${solicitacao.abriuChamado}</span></a>
+								<span>
+									<p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
+									<p>- Aberto por: ${solicitacao.abriuChamado}</p>
+								</span>
+						</a>
 					</td>
 					<td>
 						<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-							<span>- Nível.: ${solicitacao.prioridade} </span></a>
+							<span>- Nível: ${solicitacao.prioridade} </span></a>
 					</td>
 					<td>
-							<a class="dcontexto"> ${solicitacao.cliente.nome}
-								<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
-									- Endereço: ${solicitacao.cliente.endereco}</span></a>
-						</td>
+						<a class="dcontexto"> ${solicitacao.cliente.nome}
+							<span>
+								<p>- Tel.: ${solicitacao.cliente.telefone1} </p>
+								<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+							</span>
+						</a>
+					</td>
 					<td>${solicitacao.usuario}</td>
 					<td>
-						<a class="dcontexto"> ${solicitacao.descricaoProblema}
-							<span>- Resolução: ${solicitacao.resolucao} <br/><br/>
-								- Observação: ${solicitacao.obs} <br/><br/>
-									- Categoria: ${solicitacao.classificacao}</span></a>
-					</td>													
+						<a class="dcontexto" href="#janela1" onclick="mostraJanela('${solicitacao.descricaoProblema}','${solicitacao.obs}','${solicitacao.prioridade}')" rel="modal"> ${solicitacao.descricaoProblema}
+							<span>
+								<p>- Resolução: ${solicitacao.resolucao} </p>
+								<p>- Observação: ${solicitacao.obs} </p>
+								<p>- Categoria: ${solicitacao.classificacao}</p>
+							</span>
+						</a>
+					</td>
 					<c:if test="${empty solicitacao.statusEmail}">
 						<c:if test="${empty solicitacao.cliente.email }">
 							<c:if test="${solicitacao.status == 'Agendado'}">
@@ -141,9 +152,12 @@
 						<td>E-mail enviado</td>
 					</c:if>
 					<td>
-						<a class="dcontexto"> ${solicitacao.status}
-							<span>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
-								- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
+						<a class="dcontexto"><div id="status-botao"> ${solicitacao.status}</div>
+							<span>
+								<p>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+								<p>- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
+							</span>
+						</a>
 					</td>
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não classificado</a></td>
@@ -154,6 +168,18 @@
 					<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
 						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
+					<!-- mascara para cobrir o site -->  
+					<div id="mascara"></div>
+					
+					<div class="window" id="janela1">
+					    <a href="#" class="fechar">X Fechar</a>
+					    <h4 align="center">Detalhes do Chamado</h4>
+					    <legend></legend>
+					    <p><b>Descrição do chamado: </b><span id="descricao-janela">  </span></p>
+					    <p><b>Observação: </b><span id="obs-janela">  </span></p>
+					    <p><b>Prioridade: </b><span id="prioridade-janela"> </span></p>
+					</div>
+					
 			</c:forEach>
 		</table>
 	<br/><br/>
@@ -165,6 +191,47 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script src="assets/js/botoes-status.js"></script>
+	<script>
+		function mostraJanela(descricao, obs, prioridade){
+				$(document).ready(function(){
+			    $("a[rel=modal]").click( function(ev){
+			        ev.preventDefault();
+			 
+			        var id = $(this).attr("href");
+			 
+			        var alturaTela = $(document).height();
+			        var larguraTela = $(window).width();
+			     
+			        //colocando o fundo preto
+			        $('#mascara').css({'width':larguraTela,'height':alturaTela});
+			        $('#mascara').stop().fadeIn(1000); 
+			        $('#mascara').stop().fadeTo("slow",0.8);
+			 
+			        var left = ($(window).width() /2) - ( $(id).width() / 2 );
+			        var top = ($(window).height() / 2) - ( $(id).height() / 2 );
+			     
+			        $(id).css({'top':top,'left':left});
+			        $(id).show();
+			        $("#descricao-janela").text(descricao);
+			        $("#obs-janela").text(obs);
+			        $("#prioridade-janela").text(prioridade);
+			    });
+			 
+			    $("#mascara").click( function(){
+			        $(this).hide();
+			        $(".window").hide();
+			    });
+			 
+			    $('.fechar').click(function(ev){
+			        ev.preventDefault();
+			        $("#mascara").hide();
+			        $(".window").hide();
+			    });
+			});
+		}
+	</script>
+	
 	<script language="Javascript">
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");

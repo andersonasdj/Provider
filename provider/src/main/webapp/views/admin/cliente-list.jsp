@@ -7,7 +7,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
@@ -38,9 +37,10 @@
 				</tr>
 			</thead>
 			<c:forEach var="cliente" items="${clientes}">
-				<tr>
+				<tr class="clientesTr">
 					<td>${cliente.id}</td>
-					<td><a href="relatorioPorCliente?nomeDoCliente=${cliente.nome}">${cliente.nome}</a></td>
+					<td><a href="relatorioPorCliente?nomeDoCliente=${cliente.nome}"><span id="nome-cliente">${cliente.nome}</span></a></td>
+					
 					<td>${cliente.usuario}</td>
 					<c:if test="${not empty cliente.email}">
 						<td>${cliente.email}</td>
@@ -50,13 +50,17 @@
 					</c:if>
 					<td>
 						<a class="dcontexto"> ${cliente.endereco}
-							<span>Tel.: ${cliente.telefone1} <br>
-								Tel.: ${cliente.telefone2}
-							</span></a>
+							<span class="dados"><p>Tel.: ${cliente.telefone1}</p>
+								<p>Tel.: ${cliente.telefone2} </p>
+								<p id="idLatitude" class="ocultar">${cliente.latitude}</p>
+								<p id="idLongitude" class="ocultar">${cliente.longitude}</p>
+							</span>
+						</a>
 					</td>
+					
 					<td><f:formatDate value="${cliente.dataAtualizacao.time}"
 							pattern="dd/MM/yyyy" /></td>
-					<td><a href="clienteEdit?id=${cliente.id}">Editar</a> <!--  <a
+					<td><a href="clienteEdit?id=${cliente.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> <!--  <a
 						href="removeCliente?id=${cliente.id}">Excluir</a>--></td>
 				</tr>
 			</c:forEach>

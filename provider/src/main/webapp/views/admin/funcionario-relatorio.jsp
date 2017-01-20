@@ -7,7 +7,6 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
@@ -42,7 +41,7 @@
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
 				<th>Problema Relatado</th>
-				<th data-field="dataEncerramento" data-sortable="true">Data / Hora Encerramento</th>
+				<th data-field="dataEncerramento" data-sortable="true">Data Andamento / Encerramento</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
 				<th>Ações</th>
@@ -53,19 +52,22 @@
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
 						</td>					
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs} <br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
@@ -82,23 +84,32 @@
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>
-							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></span></a>	
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+							 - <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>
+								<span>
+									<p>- Data de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
+									<p>- Tempo de atendimento: ${solicitacao.tempoDeAndamento}</p>
+								 </span>
+							</a>		
 						</td>
 						<td>${solicitacao.status}</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
@@ -114,19 +125,22 @@
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>
@@ -147,20 +161,22 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}
-								</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
@@ -177,20 +193,22 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
-								<span>Resolução: ${solicitacao.resolucao} <br/><br/>
-									Observação: ${solicitacao.obs}<br/><br/>
-									Categoria: ${solicitacao.classificacao}
-								</span></a>
+								<span>
+									<p>- Resolução: ${solicitacao.resolucao}</p>
+									<p>- Observação: ${solicitacao.obs}</p>
+									<p>- Categoria: ${solicitacao.classificacao}</p>
+								</span>
+							</a>
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
