@@ -24,8 +24,7 @@
 			                    <li><a href="relatorioGeral"><i class="fa fa-pie-chart"> </i> Resumo Geral</a></li>
 			                    <li role="separator" class="divider"></li>
 			                    <li class="dropdown-header">Relatórios</li>
-			             		<li><a href="relatorioSelect"><i class="fa fa-area-chart"> </i> Relatório por Cliente</a></li>
-			             		<li><a href="relatorioSelectTec"><i class="fa fa-area-chart"> </i> Relatório por Tecnico</a></li>
+			                    <li><a href="relatorioOp"><i class="fa fa-area-chart"> </i> Relatório</a></li>
 			                  </ul>
 						</li>
 						<li class="dropdown">

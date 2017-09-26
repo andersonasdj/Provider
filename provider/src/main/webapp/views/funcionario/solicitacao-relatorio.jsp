@@ -14,21 +14,20 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
-	<h3>Exportar Relatório</h3>
-	        <div id="toolbar">
-	            <select class="form-control">
-	                <option value="">Export Basic</option>
-	                <option value="all">Export All</option>
-	                <option value="selected">Export Selected</option>
-	            </select>
-	        </div>
+	<h4>Exportar Solicitações</h4>
+        <div id="toolbar">
+            <select class="form-control">
+               	<option value="">Exportação básica</option>
+                <option value="all">Exportar todos</option>
+                <option value="selected">Exportar Selecionados</option>
+            </select>
+        </div>
 		<table class="id="table"
 	               data-toggle="table"
 	               data-show-columns="true"
 	               data-show-toggle="true"
 	               data-pagination="true"
 	               data-show-pagination-switch="true"
-	               data-show-refresh="true"
 	               data-search="true"
 	               data-key-events="true"
 	               data-show-export="true"

@@ -24,22 +24,23 @@
 					<div id="botoesRelatorio">
 						<br/><br/>
 						<p><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a></p>
-						<p><a class="btn btn-info" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
+						<p><a class="btn btn-primary" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
 						<p><a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a></p>
 						<p><a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a></p>
 						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações</a></p>
+						<p><a class="btn btn-info" href="relatorioOp" role="button">Relatórios <i class="fa fa-database"></i></a></p>
 					</div>
 				</div>
 			</div>
 			<legend id="grafico"></legend>
 		</div>
 		
-		<h4>Exportar Relatório</h4>
+		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
-	                <option value="">Export Basic</option>
-	                <option value="all">Export All</option>
-	                <option value="selected">Export Selected</option>
+	               	<option value="">Exportação básica</option>
+	                <option value="all">Exportar todos</option>
+	                <option value="selected">Exportar Selecionados</option>
 	            </select>
 	        </div>
 		<table id="table"
@@ -73,7 +74,7 @@
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -124,7 +125,7 @@
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -177,7 +178,7 @@
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -231,7 +232,7 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -284,7 +285,7 @@
 					<tr class="active" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tags" aria-hidden="true"></i> ${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>

@@ -16,6 +16,8 @@
 	<br /><br /><br />
 
 	<div class="container">
+	<legend></legend>
+		<span id="botoes-status""></span>
 		<div align="center"><a class="btn btn-danger" href="solicitacoesTecnico" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
 		 - <a class="btn btn-info" href="solicitacoesAndamentoTecnico" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
 		 - <a class="btn btn-warning" href="solicitacoesAgendadosTecnico" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
@@ -27,9 +29,9 @@
 	<h4>Exportar Solicitações</h4>
         <div id="toolbar">
             <select class="form-control">
-                <option value="">Export Basic</option>
-                <option value="all">Export All</option>
-                <option value="selected">Export Selected</option>
+               	<option value="">Exportação básica</option>
+                <option value="all">Exportar todos</option>
+                <option value="selected">Exportar Selecionados</option>
             </select>
         </div>
 	<table id="table"
@@ -45,6 +47,7 @@
 	    <thead>
 			<tr>
 				<th data-field="state" data-checkbox="true"></th>
+				<th data-field="id" data-sortable="true">ID</th>
 				<th>Data da Solicitação</th>
 				<th>Site</th>
 				<th>Cliente</th>
@@ -57,6 +60,9 @@
 		<c:forEach var="solicitacao" items="${solicitacoes}">
 			<tr>
 				<td></td>
+				<td>
+					 ${solicitacao.id}
+				</td>
 				<td>
 					<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 						<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/> <br/>
@@ -75,7 +81,7 @@
 							Observação: ${solicitacao.obs}</span></a>
 				</td>
 				<td>
-					<a class="dcontexto"> ${solicitacao.status}
+					<a class="dcontexto"> <div id="status-botao">${solicitacao.status}</div>
 						<span>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
 								Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
 				</td>
@@ -93,4 +99,5 @@
 	<script src="assets/js/bootstrap-table.js"></script>
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/botoes-status.js"></script>
 </html>

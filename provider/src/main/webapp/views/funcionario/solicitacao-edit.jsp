@@ -103,11 +103,11 @@
 					<select class="selectpicker" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
-						<option>Finalizar</option>
 						<c:if test="${solicitacao.status != 'Em andamento'}">
 							<option>Em andamento</option>
 						</c:if>
 						<c:if test="${solicitacao.status != 'Aberto'}">
+							<option>Finalizar</option>
 							<c:if test="${solicitacao.status != 'Em andamento'}">
 								<c:if test="${solicitacao.status != 'Aguardando usuario'}">
 									<c:if test="${solicitacao.status != 'Agendado'}">

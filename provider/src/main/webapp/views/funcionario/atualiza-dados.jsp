@@ -24,6 +24,7 @@
 			<div>
 				<div>
 					<input id="funcao" name="funcao" type="hidden" value="${tecnicoLogado.funcao}">
+					<input id="status" name="status" type="hidden" value="${tecnicoLogado.status}">
 				</div>
 			</div>
 			<div class="control-group">

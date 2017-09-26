@@ -25,14 +25,13 @@
 			<legend></legend>
 		</div>
 		<h4>Exportar Solicitações</h4>
-		
-        <div id="toolbar">
-            <select class="form-control">
-                <option value="">Export Basic</option>
-                <option value="all">Export All</option>
-                <option value="selected">Export Selected</option>
-            </select>
-        </div>
+	        <div id="toolbar">
+	            <select class="form-control">
+	               	<option value="">Exportação básica</option>
+	                <option value="all">Exportar todos</option>
+	                <option value="selected">Exportar Selecionados</option>
+	            </select>
+	        </div>
 		<table id="table"
 	               data-toggle="table"
 	               data-show-columns="true"

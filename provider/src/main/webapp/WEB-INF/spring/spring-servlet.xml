@@ -20,12 +20,11 @@
 		<property name="prefix" value="/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-
-
+	
 	<mvc:interceptors>
 		<bean class="br.com.providerone.interceptor.AutorizadorInterceptor" />
 	</mvc:interceptors>
 
 	<mvc:resources mapping="/assets/**" location="/assets/" />
-
+	
 </beans>

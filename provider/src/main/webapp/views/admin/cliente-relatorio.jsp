@@ -53,10 +53,11 @@
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>	
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>	
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>				
 						<td>${solicitacao.cliente.nome}</td>
@@ -84,7 +85,7 @@
 				<c:if test="${solicitacao.status == 'Finalizado'}">
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -97,7 +98,7 @@
 								<span>
 									<p>- Resolução: ${solicitacao.resolucao}</p>
 									<p>- Observação: ${solicitacao.obs}</p>
-									<p>- Categoria: ${solicitacao.classificacao}</p>]
+									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -124,10 +125,11 @@
 				<c:if test="${solicitacao.status == 'Agendado'}">
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
@@ -162,10 +164,11 @@
 				<c:if test="${solicitacao.status == 'Em andamento'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
@@ -193,10 +196,11 @@
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
 						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>

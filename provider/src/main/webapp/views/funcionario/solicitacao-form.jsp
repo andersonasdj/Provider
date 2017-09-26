@@ -53,6 +53,7 @@
 			<div class="control-group">
 				<div class="controls">
 					<!--  <input id="cliente.id" name="cliente.id" type="hidden" value="${clienteLogado.id}" class="input-xlarge"> -->
+					<!--  <input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden" value="${tecnicoLogado.nome}" class="input-xlarge"> -->
 				</div>
 			</div>
 			<div class="control-group">
@@ -148,18 +149,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
-				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
-						name="nomeDoFuncionario">
-						<option>${solicitacao.funcionario.id}</option>
-						<c:forEach var="funcionario" items="${funcionarios}">
-							<option>${funcionario.nome}</option> 
-						</c:forEach>
-					</select>
-				</div>
-			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
@@ -188,7 +178,22 @@
 				</div>
 			</div>
 			
-			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
+			
+			<div class="control-group">
+				<label class="control-label">Funcionário Responsável</label>
+				<div class="controls">
+					<select class="selectpicker" id="nomeDoFuncionario"
+						name="nomeDoFuncionario">
+						<option>${tecnicoLogado.nome}</option>
+						<option></option> 
+					</select>
+				</div>
+			</div>
+			
+			
+			
+			
+			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${tecnicoLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

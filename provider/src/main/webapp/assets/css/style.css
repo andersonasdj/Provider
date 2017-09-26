@@ -55,9 +55,7 @@ a.dcontexto:hover span {
 @media (max-width: 550px) {
   #imagem{display: none;}
   .btn-toggle{display: block;}
-}
-
-@media (max-width: 550px) {
+  #campoExportar{display: none;}
   #grafico{display: none;}
   .btn-toggle{display: block;}
 }

@@ -27,42 +27,38 @@ public class JavaMailApp
 		session = configuraEmail(this.email);
 	}
 		
-	
 	public void enviaEmail(Cliente cliente, Solicitacao solicitacao){
 		try {
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 
-		      Address[] toUser = InternetAddress //Destinat�rio(s)
+		      Address[] toUser = InternetAddress //Destinatário(s)
 		                 .parse(cliente.getEmail());
 		      Locale locBR = new Locale("pt","BR");
 		      DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locBR);
 		      message.setRecipients(Message.RecipientType.TO, toUser);
 		      message.setSubject(email.getAssunto());//Assunto
-		      message.setText(" Solicita��o de chamado cadastrada com sucesso!\n\n"
+		      message.setText(" Solicitação de chamado cadastrada com sucesso!\n\n"
 		      		  + email.getMensagem() + "\n\n"
 		      		  + "_____________________________________________________________ \n"
 		    		  + " ID: #" + solicitacao.getId()
-		    		  + "\n\n Usu�rio afetado: " + solicitacao.getUsuario()
-		    		  + "\n\n Descri��o do chamado: " + solicitacao.getDescricaoProblema()
+		    		  + "\n\n Usuário afetado: " + solicitacao.getUsuario()
+		    		  + "\n\n Descrição do chamado: " + solicitacao.getDescricaoProblema()
 		    		  + "\n\n Data de abertura: " + df.format(solicitacao.getDataAbertura().getTime())
-		    		  + "\n\n Status da solicita��o: " + solicitacao.getStatus()
+		    		  + "\n\n Status da solicitação: " + solicitacao.getStatus()
 		    		  + "\n _____________________________________________________________ \n"
 		    		  + "\n\n\n\n Suporte ProviderOne \n"
 		    		  + " Tel.: 21 2262-4275 \n"
 		    		  + " Email: suporte@providerone.com.br");
-		      /**M�todo para enviar a mensagem criada*/
+		      /**Método para enviar a mensagem criada*/
 		      Transport.send(message);
-		      //System.out.println("Feito!!!");
-
 		 } catch (MessagingException e) {
 		      throw new RuntimeException(e);
 		}	
 	}
 	private static Session configuraEmail(final Email email) {
 		Properties props = new Properties();
-		
-		/** Par�metros de conex�o com servidor Microsoft / Google */
+		/** Parâmetros de conexão com servidor Microsoft / Google */
 		props.put("mail.smtp.host", email.getSmtp());
 		props.put("mail.smtp.socketFactory.port", email.getPortaSmtp());
 		props.put("mail.smtp.starttls.enable", email.isSslStatus());
@@ -76,7 +72,7 @@ public class JavaMailApp
 		                       return new PasswordAuthentication(email.getEmail(), email.getSenha());
 		                 }
 		            });
-		/** Ativa Debug para sess�o */
+		/** Ativa Debug para sessão */
 		session.setDebug(true);
 		return session;
 	}

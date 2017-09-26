@@ -100,6 +100,12 @@ public class ClienteController {
 			clientes = dao.listaCliente();
 			model.addAttribute("clientes", clientes);
 			return "admin/cliente-list";
+		} if (session.getAttribute("tecnicoLogado") != null) {
+			List<Cliente> clientes = new ArrayList<Cliente>();
+			ClienteDao dao = new ClienteDao();
+			clientes = dao.listaCliente();
+			model.addAttribute("clientes", clientes);
+			return "funcionario/cliente-list";
 		} else {
 			return "redirect:homePage";
 		}
