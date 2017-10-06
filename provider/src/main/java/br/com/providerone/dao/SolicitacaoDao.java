@@ -892,11 +892,6 @@ public class SolicitacaoDao {
 	public List<Solicitacao> listaSolicitacoesPorPeriodoFechamento(Calendar dataInicio, Calendar dataFim) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 
-		System.out.println(dataInicio.getTime());
-		System.out.println(dataFim.getTime());
-		
-		System.out.println("DAO fora try");
-		
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim");
@@ -904,9 +899,6 @@ public class SolicitacaoDao {
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
-			System.out.println("DAO");
-			
 			
 			if (solicitacaos != null) {
 				manager.close();
@@ -916,7 +908,6 @@ public class SolicitacaoDao {
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println("catch");
 			manager.close();
 			return null;
 		}
@@ -926,11 +917,6 @@ public class SolicitacaoDao {
 	public List<Solicitacao> listaSolicitacoesPorPeriodoAbertura(Calendar dataInicio, Calendar dataFim) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 
-		System.out.println(dataInicio.getTime());
-		System.out.println(dataFim.getTime());
-		
-		System.out.println("DAO fora try");
-		
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim");
@@ -938,9 +924,6 @@ public class SolicitacaoDao {
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
-			System.out.println("DAO");
-			
 			
 			if (solicitacaos != null) {
 				manager.close();
@@ -950,7 +933,109 @@ public class SolicitacaoDao {
 				return null;
 			}
 		} catch (Exception e) {
-			System.out.println("catch");
+			manager.close();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorAgendamento(Calendar dataInicio) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		String agendado = "Agendado";
+		
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.agendado = :pDataInicio and s.status = :pStatus");
+			
+			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
+			query.setParameter("pStatus", agendado);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorIdSolicitacao(Long id) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.id=:pId order by s.id desc");
+			query.setParameter("pId", id);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		} 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorPeriodoAberturaCliente(Calendar dataInicio, Calendar dataFim, String nomeDoCliente) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim and s.cliente.nome = :pNomeDoCliente");
+			
+			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
+			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
+			query.setParameter("pNomeDoCliente", nomeDoCliente);
+			
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorPeriodoFechamentoCliente(Calendar dataInicio, Calendar dataFim, String nomeDoCliente) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim and s.cliente.nome = :pNomeDoCliente");
+			
+			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
+			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
+			query.setParameter("pNomeDoCliente", nomeDoCliente);
+			
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
 			manager.close();
 			return null;
 		}

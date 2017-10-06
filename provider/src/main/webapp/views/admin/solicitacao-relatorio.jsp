@@ -27,7 +27,7 @@
 						<p><a class="btn btn-primary" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
 						<p><a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a></p>
 						<p><a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a></p>
-						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações</a></p>
+						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações <i class="fa fa-search"></i></a></p>
 						<p><a class="btn btn-info" href="relatorioOp" role="button">Relatórios <i class="fa fa-database"></i></a></p>
 					</div>
 				</div>

@@ -14,7 +14,14 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/><br/>
 		<aside class="">
-			<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+			<a href="upload" >
+					<c:if test="${empty funcionarioLogado.caminhoFoto}">
+						<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+					</c:if>
+					<c:if test="${not empty funcionarioLogado.caminhoFoto}">
+						<img id="imagem" src='${funcionarioLogado.caminhoFoto}' class="img-polaroid">
+					</c:if>
+			</a>
 			<div id="perfil">
 				<p class="asid-linha">Usuário : ${funcionarioLogado.usuario} /
 				 Ultimo Login : <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>

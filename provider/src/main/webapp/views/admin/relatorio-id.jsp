@@ -19,16 +19,16 @@
 	<br />
 	<br />
 	<br />
-	<form action="gerarRelatorioPalavra" method="get"
+	<form action="gerarRelatorioId" method="post"
 		class="form-horizontal container">
 		<fieldset></fieldset>
-			<legend>Relatório por palavra chave</legend>
+			<legend>Relatório por ID</legend>
 				
 					<div class="control-group">
-						<label class="control-label">Palavra Chave</label>
+						<label class="control-label">ID da Solicitação</label>
 						<div class="controls">
-							<input id="assunto" name="assunto" type="text"
-								placeholder="Palavra Chave" class="input-xlarge" required>
+							<input id="id" name="id" type="text"
+								placeholder="ID" class="input-xlarge" required>
 							<p class="help-block">* Campo Obrigatório</p>
 						</div>
 					</div>

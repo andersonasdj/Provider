@@ -743,8 +743,6 @@ public class SolicitacaoController {
 			hoje.set(Calendar.MINUTE, 0);
 			hoje.set(Calendar.SECOND, 0);
 			
-			System.out.println(hoje);
-			
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorDataFinalizacao(hoje));
 			
@@ -757,9 +755,6 @@ public class SolicitacaoController {
 	@RequestMapping("gerarRelatorioPalavra")
 	public String gerarRelatorioPalavra(String assunto, HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			
-			
-			
 			
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorAssunto(assunto));
@@ -814,8 +809,6 @@ public class SolicitacaoController {
 				dataInicioConv.setTime(sdf.parse(dataInicio));
 				dataFimConv.setTime(sdf.parse(dataFim));
 				
-				
-				
 				dataInicioConv.set(Calendar.HOUR_OF_DAY, 0);
 				dataInicioConv.set(Calendar.MINUTE, 0);
 				dataInicioConv.set(Calendar.SECOND, 0);
@@ -827,9 +820,6 @@ public class SolicitacaoController {
 			} catch (Exception e) {
 				// TODO: handle exception
 			}
-			
-			System.out.println(dataInicioConv.getTime());
-			System.out.println(dataFimConv.getTime());
 			
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorPeriodoFechamento(dataInicioConv, dataFimConv));
@@ -854,7 +844,123 @@ public class SolicitacaoController {
 				dataInicioConv.setTime(sdf.parse(dataInicio));
 				dataFimConv.setTime(sdf.parse(dataFim));
 				
+				dataInicioConv.set(Calendar.HOUR_OF_DAY, 0);
+				dataInicioConv.set(Calendar.MINUTE, 0);
+				dataInicioConv.set(Calendar.SECOND, 0);
 				
+				dataFimConv.set(Calendar.HOUR_OF_DAY, 0);
+				dataFimConv.set(Calendar.MINUTE, 0);
+				dataFimConv.set(Calendar.SECOND, 0);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorPeriodoAbertura(dataInicioConv, dataFimConv));
+			
+			return "admin/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/relatorioAgendamento")
+	public String relatorioAgendamento(HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			return "admin/relatorio-agendamento";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("gerarRelatorioAgendamento")
+	public String gerarRelatorioAgendamento(String data, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			Calendar dataInicioConv;
+			dataInicioConv = Calendar.getInstance();
+			
+			try {
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				dataInicioConv.setTime(sdf.parse(data));
+				dataInicioConv.set(Calendar.HOUR_OF_DAY, 0);
+				dataInicioConv.set(Calendar.MINUTE, 0);
+				dataInicioConv.set(Calendar.SECOND, 0);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorAgendamento(dataInicioConv));
+			
+			return "admin/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/relatorioId")
+	public String relatorioId(HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			return "admin/relatorio-id";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("gerarRelatorioId")
+	public String gerarRelatorioId(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			System.out.println(id);
+			
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorIdSolicitacao(id));
+			
+			return "admin/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/relatorioPeriodoAberturaCliente")
+	public String relatorioPeriodoAberturaCliente(String nomeDoCliente, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			model.addAttribute("nomeDoCliente", nomeDoCliente);
+			return "admin/relatorio-periodo-a-cli";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/relatorioPeriodoFechamentoCliente")
+	public String relatorioPeriodoFechamentoCliente(String nomeDoCliente, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			model.addAttribute("nomeDoCliente", nomeDoCliente);
+			return "admin/relatorio-periodo-f-cli";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("gerarRelatorioPeriodoAberturaCliente")
+	public String gerarRelatorioPeriodoAberturaCliente(String dataInicio, String dataFim, String nomeDoCliente, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			Calendar dataInicioConv, dataFimConv;
+			dataInicioConv = Calendar.getInstance();
+			dataFimConv = Calendar.getInstance();
+			
+			try {
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				dataInicioConv.setTime(sdf.parse(dataInicio));
+				dataFimConv.setTime(sdf.parse(dataFim));
 				
 				dataInicioConv.set(Calendar.HOUR_OF_DAY, 0);
 				dataInicioConv.set(Calendar.MINUTE, 0);
@@ -868,11 +974,43 @@ public class SolicitacaoController {
 				// TODO: handle exception
 			}
 			
-			System.out.println(dataInicioConv.getTime());
-			System.out.println(dataFimConv.getTime());
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorPeriodoAberturaCliente(dataInicioConv, dataFimConv, nomeDoCliente));
+			
+			return "admin/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("gerarRelatorioPeriodoFechamentoCliente")
+	public String gerarRelatorioPeriodoFechamentoCliente(String dataInicio, String dataFim, String nomeDoCliente, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			Calendar dataInicioConv, dataFimConv;
+			dataInicioConv = Calendar.getInstance();
+			dataFimConv = Calendar.getInstance();
+			
+			try {
+				
+				SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+				dataInicioConv.setTime(sdf.parse(dataInicio));
+				dataFimConv.setTime(sdf.parse(dataFim));
+				
+				dataInicioConv.set(Calendar.HOUR_OF_DAY, 0);
+				dataInicioConv.set(Calendar.MINUTE, 0);
+				dataInicioConv.set(Calendar.SECOND, 0);
+				
+				dataFimConv.set(Calendar.HOUR_OF_DAY, 0);
+				dataFimConv.set(Calendar.MINUTE, 0);
+				dataFimConv.set(Calendar.SECOND, 0);
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			
 			SolicitacaoDao dao = new SolicitacaoDao();
-			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorPeriodoAbertura(dataInicioConv, dataFimConv));
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorPeriodoFechamentoCliente(dataInicioConv, dataFimConv, nomeDoCliente));
 			
 			return "admin/funcionario-relatorio";
 		} else {

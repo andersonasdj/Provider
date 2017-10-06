@@ -26,11 +26,13 @@
 						<p><a class="btn btn-info" href="relatorioHoje" role="button"> Aberto Hoje ${solicitacoes}</a>
 						<a class="btn btn-info" href="finalizadoHoje" role="button"> Finalizados Hoje ${finalizados}</a>
 						<a class="btn btn-info" href="relatorioPeriodoAbertura" role="button"> Por Período Abertura</a>
-						<a class="btn btn-info" href="relatorioPeriodoFechamento" role="button"> Por Período Fechamento</a></P><br/><br/>
+						<a class="btn btn-info" href="relatorioPeriodoFechamento" role="button"> Por Período Fechamento</a>
+						<a class="btn btn-info" href="relatorioId" role="button"> Por ID</a></P><br/><br/>
 						<P><a class="btn btn-info" href="relatorioSelect" role="button">Por Cliente </a>
 						<a class="btn btn-info" href="relatorioSelectTec" role="button">Por Tecnico </a>
 						<a class="btn btn-info" href="relatorioPalavra" role="button">Por Palavra chave </a>
-						<a class="btn btn-info" href="relatorioGeral" role="button"> Não finalizadas</a></p>
+						<a class="btn btn-info" href="relatorioGeral" role="button"> Não finalizadas</a>
+						<a class="btn btn-info" href="relatorioAgendamento" role="button"> Gerar Agendamento</a></p>
 					</div>
 					<br/>
 				</div>

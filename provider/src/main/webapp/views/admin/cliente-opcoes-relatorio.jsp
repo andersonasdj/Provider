@@ -26,9 +26,29 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<a class="btn btn-success" href="relatorioPorCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar <i class="fa fa-spinner fa-spin fa-lg"></i></a>
+					<a class="btn btn-success" href="relatorioPorCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar</a>
 				</div>
 			</div>
+			
+			<legend></legend>
+			
+			<div>
+				<h4 align="center">Filtrar Solicitações</h4>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<a class="btn btn-success" href="relatorioPeriodoAberturaCliente?nomeDoCliente=${nomeDoCliente}" role="button">Periodo abertura</a>
+				</div>
+			</div><br/>
+			
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<a class="btn btn-success" href="relatorioPeriodoFechamentoCliente?nomeDoCliente=${nomeDoCliente}" role="button">Periodo fechamento</a>
+				</div>
+			</div><br/>
 			
 			<legend></legend>
 			
@@ -40,20 +60,7 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<a class="btn btn-success" href="computadorListCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar <i class="fa fa-spinner fa-spin fa-lg"></i></a>
-				</div>
-			</div>
-			<legend></legend>
-			
-			<div>
-				<h4 align="center">Lista de Projetos</h4>
-				<h4>Total de projetos: </h4>		
-			</div>
-			
-			<div class="control-group">
-				<label class="control-label"></label>
-				<div class="controls">
-					<a class="btn btn-success" href="computadorListCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar <i class="fa fa-spinner fa-spin fa-lg"></i></a>
+					<a class="btn btn-success" href="computadorListCliente?nomeDoCliente=${nomeDoCliente}" role="button">Gerar</a>
 				</div>
 			</div>
 			<legend></legend>

@@ -24,7 +24,6 @@
 		<fieldset></fieldset>
 			<legend>Relatório Por data de Fechamento</legend>
 				
-				
 				<div class="control-group">
 					<label class="control-label">Data de Início</label>
 					<div class="controls">
@@ -38,16 +37,15 @@
 						<input id="datepickert" name="dataFim" type="text" placeholder="Data de termino" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
 				</div>
-					
 
-					<div class="control-group">
-						<label class="control-label"></label>
-						<div class="controls">
-							<button id="buscar" class="btn btn-success">
-								Buscar
-							</button>
-						</div>
+				<div class="control-group">
+					<label class="control-label"></label>
+					<div class="controls">
+						<button id="buscar" class="btn btn-success">
+							Buscar <i class="fa fa-search"></i>
+						</button>
 					</div>
+				</div>
 
 				</form>
 				<br />

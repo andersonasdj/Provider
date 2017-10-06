@@ -19,31 +19,23 @@
 	<br />
 	<br />
 	<br />
-	<form action="gerarRelatorioPeriodoAbertura" method="get"
+	<form action="gerarRelatorioAgendamento" method="post"
 		class="form-horizontal container">
 		<fieldset></fieldset>
-			<legend>Relatório Por data de Abertura</legend>
-				
-				
-				<div class="control-group">
-					<label class="control-label">Data de Início</label>
-					<div class="controls">
-						<input id="datepicker" name="dataInicio" type="text" placeholder="Data de inicio" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
-					</div>
-				</div>
+			<legend>Relatório de Agendamento</legend>
 				
 				<div class="control-group">
-					<label class="control-label">Data de Término</label>
+					<label class="control-label">Data de Agendamento</label>
 					<div class="controls">
-						<input id="datepickert" name="dataFim" type="text" placeholder="Data de termino" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
+						<input id="datepicker" name="data" type="text" placeholder="Data" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
 				</div>
-
+			
 				<div class="control-group">
 					<label class="control-label"></label>
 					<div class="controls">
 						<button id="buscar" class="btn btn-success">
-							Buscar <i class="fa fa-search"></i>
+							Gerar <i class="fa fa-search"></i>
 						</button>
 					</div>
 				</div>

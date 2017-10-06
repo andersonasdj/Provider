@@ -1,14 +1,14 @@
 package br.com.providerone.modelo;
 
-import java.io.File;
-
 import javax.persistence.Entity;
 
 @Entity
 public class Funcionario extends Usuario {
 
 	private String funcao;
-	private File foto;
+	private String caminhoFoto;
+
+	// private File foto;
 
 	public String getFuncao() {
 		return funcao;
@@ -18,19 +18,20 @@ public class Funcionario extends Usuario {
 		this.funcao = funcao;
 	}
 
-	public File getFoto() {
-		return foto;
+	public String getCaminhoFoto() {
+		return caminhoFoto;
 	}
 
-	public void setFoto(File foto) {
-		this.foto = foto;
+	public void setCaminhoFoto(String caminhoFoto) {
+		this.caminhoFoto = caminhoFoto;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((foto == null) ? 0 : foto.hashCode());
+		result = prime * result
+				+ ((caminhoFoto == null) ? 0 : caminhoFoto.hashCode());
 		result = prime * result + ((funcao == null) ? 0 : funcao.hashCode());
 		return result;
 	}
@@ -44,10 +45,10 @@ public class Funcionario extends Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Funcionario other = (Funcionario) obj;
-		if (foto == null) {
-			if (other.foto != null)
+		if (caminhoFoto == null) {
+			if (other.caminhoFoto != null)
 				return false;
-		} else if (!foto.equals(other.foto))
+		} else if (!caminhoFoto.equals(other.caminhoFoto))
 			return false;
 		if (funcao == null) {
 			if (other.funcao != null)

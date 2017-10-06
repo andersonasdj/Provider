@@ -19,10 +19,10 @@
 	<br />
 	<br />
 	<br />
-	<form action="gerarRelatorioPeriodoAbertura" method="get"
+	<form action="gerarRelatorioPeriodoAberturaCliente" method="post"
 		class="form-horizontal container">
 		<fieldset></fieldset>
-			<legend>Relatório Por data de Abertura</legend>
+			<legend>Relatório Por data de Abertura | ${nomeDoCliente}</legend>
 				
 				
 				<div class="control-group">
@@ -38,7 +38,8 @@
 						<input id="datepickert" name="dataFim" type="text" placeholder="Data de termino" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
 				</div>
-
+				
+				<input type="hidden" name="nomeDoCliente" id="nomeDoCliente" value="${nomeDoCliente}">
 				<div class="control-group">
 					<label class="control-label"></label>
 					<div class="controls">
