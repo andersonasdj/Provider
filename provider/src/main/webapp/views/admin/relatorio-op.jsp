@@ -21,7 +21,7 @@
 		<fieldset>
 			<legend>Relatório</legend>
 				<div align="center">
-					<div id="botoesRelatorio">
+					<div id="">
 						<br/><br/>
 						<p><a class="btn btn-info" href="relatorioHoje" role="button"> Aberto Hoje ${solicitacoes}</a>
 						<a class="btn btn-info" href="finalizadoHoje" role="button"> Finalizados Hoje ${finalizados}</a>
@@ -37,6 +37,45 @@
 					<br/>
 				</div>
 			<legend></legend>
+			
+				<table id="table" class="table table-striped"
+	               data-show-columns="true"
+	               data-show-toggle="true"
+	               data-search="true"
+	               data-key-events="true"
+	               data-show-export="true"
+	               data-click-to-select="true"
+	               data-toolbar="#toolbar">
+				<thead>
+				<tr class="" align="center">
+					<th data-field="nome" data-sortable="true">Nome</th>
+					<th data-field="qtdAberto" data-sortable="true">Quantidade Aberto</th>
+					<th data-field="qtdAndamento" data-sortable="true">Quantidade Andamento</th>
+					<th data-field="qtdAgendado" data-sortable="true">Quantidade Agendado</th>
+					<th data-field="qtdAguardando" data-sortable="true">Quantidade Aguardando</th>
+				</tr>
+				</thead>
+					<c:forEach var="relatorio" items="${relatorios}">
+
+						<tr class="" align="center">
+							<td>
+								${relatorio.nome}
+							</td>
+							<td>
+								<strong>${relatorio.qtdAberto}</strong>
+							</td>	
+							<td>
+								<strong>${relatorio.qtdAndamento}</strong>
+							</td>	
+							<td>
+								<strong>${relatorio.qtdAgendado}</strong>
+							</td>	
+							<td>
+								<strong>${relatorio.qtdAguardando}</strong>
+							</td>							
+						</tr>
+					</c:forEach>
+			</table>			
 		</fieldset>
 	</form>
 	<c:import url="rodape.jsp"></c:import>
@@ -45,5 +84,9 @@
 	<script src="assets/js/jquery-ui.js"></script>
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<script src="assets/js/calendario.js"></script>
 </html>

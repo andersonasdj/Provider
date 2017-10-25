@@ -4,8 +4,10 @@ package br.com.providerone.controller;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -22,6 +24,7 @@ import br.com.providerone.mail.JavaMailApp;
 import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Email;
 import br.com.providerone.modelo.Funcionario;
+import br.com.providerone.modelo.Relatorio;
 import br.com.providerone.modelo.Solicitacao;
 
 @Controller
@@ -704,10 +707,41 @@ public class SolicitacaoController {
 			hoje.set(Calendar.MINUTE, 0);
 			hoje.set(Calendar.SECOND, 0);
 			
+			//####################################################################################
+			
+			FuncionarioDao daoFun = new FuncionarioDao();
+			
+			List<Funcionario> funcionarios = daoFun.listaFuncionarioAtivo();
+			List<Relatorio> relatorios = new ArrayList<Relatorio>();
+			
+			for(int i=0; i < funcionarios.size(); i++){
+				SolicitacaoDao daoSolAberto = new SolicitacaoDao();
+				SolicitacaoDao daoSolAndamento = new SolicitacaoDao();
+				SolicitacaoDao daoSolAgendado = new SolicitacaoDao();
+				SolicitacaoDao daoSolAguardando = new SolicitacaoDao();
+				
+				if (funcionarios.get(i).getId()!= null){
+					
+					Relatorio relaTemp = new Relatorio();
+					
+					relaTemp.setId(funcionarios.get(i).getId());
+					relaTemp.setNome(funcionarios.get(i).getNome());
+					relaTemp.setQtdAberto(daoSolAberto.listaQtdSolicitacoesAbertasPorIdDoTecnico(funcionarios.get(i).getId()));
+					relaTemp.setQtdAndamento(daoSolAndamento.listaQtdSolicitacoesEmAndamentoPorIdDoTecnico(funcionarios.get(i).getId()));
+					relaTemp.setQtdAgendado(daoSolAgendado.listaQtdSolicitacoesAgendadasPorIdDoTecnico(funcionarios.get(i).getId()));
+					relaTemp.setQtdAguardando(daoSolAguardando.listaQtdSolicitacoesAguardandoPorIdDoTecnico(funcionarios.get(i).getId()));
+					relatorios.add(relaTemp);
+					
+				}
+			}
+			
+			//####################################################################################
+			
 			SolicitacaoDao daoHoje = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", daoHoje.listaSolicitacoesPorData(hoje).size());
 			SolicitacaoDao daoFinalizados = new SolicitacaoDao();
 			model.addAttribute("finalizados", daoFinalizados.listaSolicitacoesPorDataFinalizacao(hoje).size());
+			model.addAttribute("relatorios", relatorios);
 			
 			return "admin/relatorio-op";
 		} else {

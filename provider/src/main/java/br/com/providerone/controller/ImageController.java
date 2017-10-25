@@ -38,12 +38,6 @@ public class ImageController {
 		Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
 		System.out.println(funcionario.getNome());
 		
-		//context.getRealPath("alta.png");
-		/*String caminhoCompleto = context.getRealPath("/");
-		caminhoCompleto = caminhoCompleto.substring(0, caminhoCompleto.length() - 72);
-		System.out.println(caminhoCompleto);
-		String caminhoReal = caminhoCompleto+"/provider/src/main/webapp/assets/img/perfil/";
-		*/
 		String caminhoReal = "/home/techgol/appservers/apache-tomcat-8.0.23/webapps/provider/assets/img/perfil/";
 		
 		for(CommonsMultipartFile file:itemForm.getFiles()){
@@ -66,8 +60,6 @@ public class ImageController {
 					ImageIO.write(bimg, "jpeg", out);
 					
 					String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
-					//String nomeFoto =caminhoReal+file.getOriginalFilename();
-					//System.out.println(out.getAbsolutePath());
 					
 					funcionario.setCaminhoFoto(nomeFoto);
 					FuncionarioDao dao = new FuncionarioDao();

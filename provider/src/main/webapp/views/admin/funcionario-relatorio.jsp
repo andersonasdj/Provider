@@ -38,6 +38,7 @@
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
 				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
+				<th data-field="onsiteOffsite" data-sortable="true">Site</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
 				<th>Problema Relatado</th>
@@ -58,7 +59,11 @@
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
-						</td>					
+						</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
+						</td>				
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
@@ -91,6 +96,10 @@
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
+						</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
@@ -134,6 +143,10 @@
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
+						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
@@ -171,6 +184,10 @@
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
+						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
@@ -203,6 +220,10 @@
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
+						</td>
+						<td>
+							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
+								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>

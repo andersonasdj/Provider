@@ -6,6 +6,7 @@
 	<title>ProviderOne | Funcionários</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 </head>
@@ -16,6 +17,7 @@
 		<legend>Lista de Funcionários</legend>
 		<table class="table table-condensed">
 			<tr>
+				<th>Foto</th>
 				<th>Nome</th>
 				<th>Usuario</th>
 				<th>Ultimo Login</th>
@@ -29,6 +31,14 @@
 				
 				<c:if test="${funcionario.status== 'Ativo'}">
 					<tr class="success">
+						<td>
+							<c:if test="${empty funcionario.caminhoFoto}">
+								<img id="imagem" src="assets/img/perfil.png" class="img-responsive img-rounded miniatura">
+							</c:if>
+							<c:if test="${not empty funcionario.caminhoFoto}">
+								<img id="imagem" src='${funcionario.caminhoFoto}' class="img-responsive img-rounded miniatura" >
+							</c:if>
+						</td>
 						<td><a href="relatorioPorFuncionario?nomeDoFuncionario=${funcionario.nome}">${funcionario.nome}</a></td>
 						<td>${funcionario.usuario}</td>
 						<td><f:formatDate value="${funcionario.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
@@ -51,7 +61,15 @@
 				</c:if>
 				
 				<c:if test="${funcionario.status== 'Inativo'}">
-					<tr class="warning">
+						<tr class="warning">
+							<td>
+							<c:if test="${empty funcionario.caminhoFoto}">
+								<img id="imagem" src="assets/img/perfil.png" class="img-responsive img-rounded miniatura">
+							</c:if>
+							<c:if test="${not empty funcionario.caminhoFoto}">
+								<img id="imagem" src='${funcionario.caminhoFoto}' class="img-responsive img-rounded miniatura" >
+							</c:if>
+						</td>
 						<td><a href="relatorioPorFuncionario?nomeDoFuncionario=${funcionario.nome}">${funcionario.nome}</a></td>
 						<td>${funcionario.usuario}</td>
 						<td><f:formatDate value="${funcionario.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
