@@ -27,17 +27,53 @@ public class JavaMailApp
 		session = configuraEmail(this.email);
 	}
 		
-	public void enviaEmail(Cliente cliente, Solicitacao solicitacao){
+	public void enviaEmail(Cliente cliente, Solicitacao solicitacao, String destinatario){
 		try {
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
+		      
+		      //Caso usuário não digite nenhum email será enviado ao cadastrado no usuario do cliente
+		      if(destinatario == ""){
+		    	  destinatario = cliente.getEmail();
+		      }
 
 		      Address[] toUser = InternetAddress //Destinatário(s)
-		                 .parse(cliente.getEmail());
+		                 .parse(destinatario);
+		      
+		      //Address[] toCc = InternetAddress //Destinatário Com cópia
+		      //           .parse("suporte@providerone.com.br");
+		      
 		      Locale locBR = new Locale("pt","BR");
 		      DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locBR);
 		      message.setRecipients(Message.RecipientType.TO, toUser);
-		      message.setSubject(email.getAssunto());//Assunto
+		     // message.setRecipients(Message.RecipientType.CC, toCc); //Copia
+		      message.setSubject(email.getAssunto() + " - " + cliente.getNome());//Assunto
+		      
+		      String mensagemEmail =
+		    		  "<html>"
+		      			+ "<head>"
+		    		  		+ "<meta http-equiv='Content-Type' content='text/html'; charset=utf-8/>"
+		      			+ "</head>"
+		    		  	+ "<body>"
+		    		  		+ "<h2>Solicitação cadastrada com sucesso!</h2>"
+		      				+ "<br/>"
+		      				+ "<hr>"
+		      					+ "<p><b>Id da solicitação: </b>" + solicitacao.getId() + "</p>"
+		      					+ "<p><b>Usuario afetado: </b>" + solicitacao.getUsuario() + "</p>"
+		      					+ "<p><b>Descrição da solicitação: </b>" + solicitacao.getDescricaoProblema() + "</p>"
+		      					+ "<p><b>Data da abertura: </b>" + df.format(solicitacao.getDataAbertura().getTime()) + "</p>"
+		      					+ "<p><b>Site: </b>" + solicitacao.getOnsiteOffsite() + "</p>"
+		      					+ "<p><b>Prioridade: </b>" + solicitacao.getPrioridade() + "</p>"
+		      					+ "<p><b>Status: <b/>" + solicitacao.getStatus() + "</p>"
+		      				+ "<hr>"
+		      				+ "<br>"
+		      					+ "<p><b><u><font color=blue>Suporte ProviderOne </font></u></b></p>"
+		      					+ "<p><b>Tel.: (21) 2262-4275 </b></p>"
+		      					+ "<p><b>E-mail: suporte@providerone.com.br </b></p>"
+		      			+ "</body>"
+		      		+ "</html>";
+		     
+		      /*
 		      message.setText(" Solicitação de chamado cadastrada com sucesso!\n\n"
 		      		  + email.getMensagem() + "\n\n"
 		      		  + "_____________________________________________________________ \n"
@@ -50,7 +86,13 @@ public class JavaMailApp
 		    		  + "\n\n\n\n Suporte ProviderOne \n"
 		    		  + " Tel.: 21 2262-4275 \n"
 		    		  + " Email: suporte@providerone.com.br");
+		      */
+		      
+		      
 		      /**Método para enviar a mensagem criada*/
+		      
+		      message.setContent(mensagemEmail, "text/html;charset=utf-8");
+		      
 		      Transport.send(message);
 		 } catch (MessagingException e) {
 		      throw new RuntimeException(e);

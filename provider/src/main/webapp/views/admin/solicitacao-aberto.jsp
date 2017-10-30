@@ -24,6 +24,13 @@
 			<br/>
 			<legend></legend>
 		</div>
+		
+		<div id="carrega" style="display: none">
+			<h2 align="center">Enviando E-mail ....</h2>
+			<br/><br/>
+		</div>
+		
+		
 		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
@@ -178,7 +185,6 @@
 					    <p><b>Observação: </b><span id="obs-janela">  </span></p>
 					    <p><b>Prioridade: </b><span id="prioridade-janela"> </span></p>
 					</div>
-					
 			</c:forEach>
 		</table>
 	<br/><br/>
@@ -234,7 +240,6 @@
 	<script language="Javascript">
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");
-		 
 		     if (resposta == true) {
 		          window.location.href = "removeSolicitacao?id="+id;
 		     }
@@ -242,10 +247,17 @@
 	</script>
 	<script language="Javascript">
 		function confirmacaoEmail(id, cliente) {
-		     var resposta = confirm("Deseja enviar um email para: " + cliente);
-		 
-		     if (resposta == true) {
-		          window.location.href = "enviaEmail?id="+id;
+		    //var resposta = confirm("Deseja enviar um email para: " + cliente);
+		    // var resposta = confirm(prompt(cliente));
+			     
+	    	var email=prompt("Destinatário: "+ cliente + "\n\nPara alterar digite no campo abaixo:");
+		     if (email != null) {
+		         setTimeout(function(){ 
+		        	 $('#carrega').hide().fadeIn('slow');
+		        	 $("table").fadeOut(2000,function(){
+			    		 window.location.href = "enviaEmail?id="+id+"&destinatario="+email;
+		        	 })
+		         }, 1);
 		     }
 		}
 	</script>

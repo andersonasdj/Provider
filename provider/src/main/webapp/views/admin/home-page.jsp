@@ -30,7 +30,16 @@
 				<p class="asid-linha">Bem vindo, ${funcionarioLogado.nome}</p>
 			</div>
 		</aside>
-	<br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/>
+	<div class="container" id="imagem">
+		<p>
+		<font size="2" face="Verdana">
+		<a href="upload" > Alterar imagem </a>
+		</font>
+		</p>
+	</div>
+	
+	<br/><br/><br/><br/><br/><br/>
 	<div class="container">
 		<legend></legend>
 		<c:if test="${qtdAberto == '0'}"></c:if>

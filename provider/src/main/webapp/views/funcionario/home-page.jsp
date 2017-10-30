@@ -15,7 +15,15 @@
 	<br/><br/>
 	<section class="">	
 		<aside class="">
-			<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+			<a href="upload" >
+					<c:if test="${empty tecnicoLogado.caminhoFoto}">
+						<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+					</c:if>
+					<c:if test="${not empty tecnicoLogado.caminhoFoto}">
+						<img id="imagem" src='${tecnicoLogado.caminhoFoto}' class="img-polaroid">
+					</c:if>
+			</a>
+			
 			<div id="perfil">
 				<p class="asid-linha">Usuário : ${tecnicoLogado.usuario} /
 				 Ultimo Login : <f:formatDate value="${tecnicoLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
@@ -25,7 +33,15 @@
 			</div>
 		</aside>
 	</section>
-	<br/><br/><br/><br/><br/><br/>
+	<br/><br/>
+	<div class="container" id="imagem">
+		<p>
+		<font size="2" face="Verdana">
+		<a href="upload" > Alterar imagem </a>
+		</font>
+		</p>
+	</div>
+	<br/><br/><br/><br/>
 	<div class="container">
 		<legend></legend>
 		<c:if test="${qtdAberto == '0'}"></c:if>

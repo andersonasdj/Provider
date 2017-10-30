@@ -106,6 +106,11 @@ public class SolicitacaoController {
 			solicitacao.setStatus("Agendado"); //Em revisão
 			dao.salvaSolicitacaoAdminAgendado(solicitacao, funcionarioASalvar, clienteASalvar);
 		}
+		if(solicitacao.getStatus().equals("Em andamento")){
+			solicitacao.setStatus("Em andamento"); //Em revisão
+			solicitacao.setDataAndamento(Calendar.getInstance());
+			dao.salvaSolicitacaoAdmin(solicitacao, funcionarioASalvar, clienteASalvar);
+		}
 	}
 
 	@RequestMapping("finalizarSolicitacao")
@@ -543,7 +548,7 @@ public class SolicitacaoController {
 	}
 	
 	@RequestMapping("enviaEmail")
-	public String enviaEmail(Long id,
+	public String enviaEmail(Long id, String destinatario,
 			HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
@@ -551,7 +556,7 @@ public class SolicitacaoController {
 			EmailDao emailDao = new EmailDao();
 			Email emailConfig = emailDao.listaEmailConfigAbertura();
 			JavaMailApp mail = new JavaMailApp(emailConfig);
-			mail.enviaEmail(solicitacao.getCliente(), solicitacao);
+			mail.enviaEmail(solicitacao.getCliente(), solicitacao, destinatario);
 			return "redirect:solicitacoesAbertas";
 		} else {
 			return "redirect:solicitacoesAbertas";

@@ -139,3 +139,10 @@ div#loader{
     width: auto;
     height: auto;
 }
+.iconeNovo {
+    max-width:35px;
+    max-height:35px;
+    width: auto;
+    height: auto;
+    margin:0px;
+}

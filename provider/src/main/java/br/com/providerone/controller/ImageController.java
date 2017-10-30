@@ -27,49 +27,98 @@ public class ImageController {
 	@Autowired private ServletContext context;
 	
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
-	public String upload(Model model){
-		model.addAttribute(new ItemForm());
-		return "admin/upload";
+	public String upload(HttpSession session, Model model){
+		if (session.getAttribute("funcionarioLogado") != null) {
+			model.addAttribute(new ItemForm());
+			return "admin/upload";
+		}if (session.getAttribute("tecnicoLogado") != null) {
+			model.addAttribute(new ItemForm());
+			return "funcionario/upload";
+		}else {
+			return "redirect:loginFuncionario";
+		}
+		
 	}
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public String upload(HttpSession session, ItemForm itemForm){
 		
-		Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
-		System.out.println(funcionario.getNome());
-		
-		String caminhoReal = "/home/techgol/appservers/apache-tomcat-8.0.23/webapps/provider/assets/img/perfil/";
-		
-		for(CommonsMultipartFile file:itemForm.getFiles()){
-			if(file.getSize() > 0){
-				
-				try {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
+			//System.out.println(funcionario.getNome());
+			
+			String caminhoReal = "/home/techgol/appservers/apache-tomcat-8.0.23/webapps/provider/assets/img/perfil/";
+			for(CommonsMultipartFile file:itemForm.getFiles()){
+				if(file.getSize() > 0){
 					
-					BufferedImage bimg = ImageIO.read(file.getInputStream());
-					
-					Graphics g = bimg.getGraphics();
-					
-					Font fnt = new Font("Verdana", Font.PLAIN, 64);
-					
-					g.setFont(fnt);
-					g.setColor(Color.RED);
-					g.drawString("ProviderOne", 20, 70);
-					
-					File out = new File(caminhoReal+file.getOriginalFilename());
-					
-					ImageIO.write(bimg, "jpeg", out);
-					
-					String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
-					
-					funcionario.setCaminhoFoto(nomeFoto);
-					FuncionarioDao dao = new FuncionarioDao();
-					dao.atualizar(funcionario);
-					
-				} catch (Exception e) {
-					// TODO: handle exception
+					try {
+						
+						BufferedImage bimg = ImageIO.read(file.getInputStream());
+						
+						Graphics g = bimg.getGraphics();
+						
+						Font fnt = new Font("Verdana", Font.PLAIN, 64);
+						
+						g.setFont(fnt);
+						g.setColor(Color.RED);
+						g.drawString("ProviderOne", 20, 70);
+						
+						File out = new File(caminhoReal+file.getOriginalFilename());
+						
+						ImageIO.write(bimg, "jpeg", out);
+						
+						String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
+						
+						funcionario.setCaminhoFoto(nomeFoto);
+						FuncionarioDao dao = new FuncionarioDao();
+						dao.atualizar(funcionario);
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 			}
+			return "admin/success";
+			
+		}if (session.getAttribute("tecnicoLogado") != null) {
+			
+			Funcionario funcionario = (Funcionario) session.getAttribute("tecnicoLogado");
+			//System.out.println(funcionario.getNome());
+			
+			String caminhoReal = "/home/techgol/appservers/apache-tomcat-8.0.23/webapps/provider/assets/img/perfil/";
+			for(CommonsMultipartFile file:itemForm.getFiles()){
+				if(file.getSize() > 0){
+					
+					try {
+						
+						BufferedImage bimg = ImageIO.read(file.getInputStream());
+						
+						Graphics g = bimg.getGraphics();
+						
+						Font fnt = new Font("Verdana", Font.PLAIN, 64);
+						
+						g.setFont(fnt);
+						g.setColor(Color.RED);
+						g.drawString("ProviderOne", 20, 70);
+						
+						File out = new File(caminhoReal+file.getOriginalFilename());
+						
+						ImageIO.write(bimg, "jpeg", out);
+						
+						String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
+						
+						funcionario.setCaminhoFoto(nomeFoto);
+						FuncionarioDao dao = new FuncionarioDao();
+						dao.atualizar(funcionario);
+						
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+				}
+			}
+			return "admin/success";
 		}
-		return "admin/success";
+		return "redirect:loginFuncionario";
 	}
 }
