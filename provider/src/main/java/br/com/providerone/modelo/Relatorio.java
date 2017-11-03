@@ -3,7 +3,7 @@ package br.com.providerone.modelo;
 public class Relatorio {
 	long id;
 	String nome;
-	Long qtdAberto, qtdAndamento, qtdAgendado, qtdAguardando;
+	Long qtdAberto, qtdAndamento, qtdAgendado, qtdAguardando, qtdTotal;
 	
 	public long getId() {
 		return id;
@@ -61,6 +61,14 @@ public class Relatorio {
 
 	public void setQtdAguardando(Long qtdAguardando) {
 		this.qtdAguardando = qtdAguardando;
+	}
+
+	public Long getQtdTotal() {
+		return qtdTotal;
+	}
+
+	public void setQtdTotal(Long qtdTotal) {
+		this.qtdTotal = qtdTotal;
 	}
 
 }

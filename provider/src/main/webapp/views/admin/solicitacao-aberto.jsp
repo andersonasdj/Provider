@@ -26,7 +26,7 @@
 		</div>
 		
 		<div id="carrega" style="display: none">
-			<h2 align="center">Enviando E-mail ....</h2>
+			<h2 align="center">Enviando E-mail <i class="fa fa-circle-o-notch fa-spin"> </i></h2>
 			<br/><br/>
 		</div>
 		

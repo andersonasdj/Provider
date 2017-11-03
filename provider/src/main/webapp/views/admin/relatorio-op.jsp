@@ -53,6 +53,7 @@
 					<th data-field="qtdAndamento" data-sortable="true">Quantidade Andamento</th>
 					<th data-field="qtdAgendado" data-sortable="true">Quantidade Agendado</th>
 					<th data-field="qtdAguardando" data-sortable="true">Quantidade Aguardando</th>
+					<th data-field="qtdTotal" data-sortable="true">Total</th>
 				</tr>
 				</thead>
 					<c:forEach var="relatorio" items="${relatorios}">
@@ -72,6 +73,9 @@
 							</td>	
 							<td>
 								<strong>${relatorio.qtdAguardando}</strong>
+							</td>	
+							<td>
+								<strong>${relatorio.qtdTotal}</strong>
 							</td>							
 						</tr>
 					</c:forEach>

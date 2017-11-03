@@ -704,8 +704,6 @@ public class SolicitacaoController {
 	@RequestMapping("/relatorioOp") 
 	public String relatorioOp(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			/*FuncionarioDao daoFun = new FuncionarioDao();
-			model.addAttribute("funcionarios", daoFun.listaFuncionario());*/
 			
 			Calendar hoje = Calendar.getInstance();
 			hoje.set(Calendar.HOUR_OF_DAY, 0);
@@ -728,20 +726,18 @@ public class SolicitacaoController {
 				if (funcionarios.get(i).getId()!= null){
 					
 					Relatorio relaTemp = new Relatorio();
-					
 					relaTemp.setId(funcionarios.get(i).getId());
 					relaTemp.setNome(funcionarios.get(i).getNome());
 					relaTemp.setQtdAberto(daoSolAberto.listaQtdSolicitacoesAbertasPorIdDoTecnico(funcionarios.get(i).getId()));
 					relaTemp.setQtdAndamento(daoSolAndamento.listaQtdSolicitacoesEmAndamentoPorIdDoTecnico(funcionarios.get(i).getId()));
 					relaTemp.setQtdAgendado(daoSolAgendado.listaQtdSolicitacoesAgendadasPorIdDoTecnico(funcionarios.get(i).getId()));
 					relaTemp.setQtdAguardando(daoSolAguardando.listaQtdSolicitacoesAguardandoPorIdDoTecnico(funcionarios.get(i).getId()));
+					relaTemp.setQtdTotal(relaTemp.getQtdAberto() + relaTemp.getQtdAgendado() + relaTemp.getQtdAguardando() + relaTemp.getQtdAndamento());
 					relatorios.add(relaTemp);
-					
 				}
 			}
 			
 			//####################################################################################
-			
 			SolicitacaoDao daoHoje = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", daoHoje.listaSolicitacoesPorData(hoje).size());
 			SolicitacaoDao daoFinalizados = new SolicitacaoDao();

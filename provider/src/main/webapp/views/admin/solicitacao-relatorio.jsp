@@ -118,7 +118,8 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Finalizado'}">
@@ -171,7 +172,8 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Agendado'}">
@@ -225,7 +227,8 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>		
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Em andamento'}">
@@ -277,7 +280,8 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				</c:if>
 				
@@ -329,7 +333,8 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
+						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
@@ -352,7 +357,14 @@
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<script type="text/javascript" src="https://google.com/jsapi"></script>
 	<script src="assets/js/grafico.js"></script>
-	
+	<script language="Javascript">
+		function confirmacao(id) {
+		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");
+		     if (resposta == true) {
+		          window.location.href = "removeSolicitacao?id="+id;
+		     }
+		}
+	</script>
 	<script type="text/javascript">
         // Este evendo é acionado após o carregamento da página
         jQuery(window).load(function() {
