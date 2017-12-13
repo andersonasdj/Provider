@@ -1,8 +1,6 @@
 <%@page import="java.util.Calendar"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>ProviderOne | Relatório</title>
@@ -16,28 +14,22 @@
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
-	<br />
-	<br />
-	<br />
-	<form action="gerarRelatorioPeriodoFechamento" method="get"
-		class="form-horizontal container">
+	<br /><br /><br />
+	<form action="gerarRelatorioPeriodoFechamento" method="post" class="form-horizontal container">
 		<fieldset></fieldset>
 			<legend>Relatório Por data de Fechamento</legend>
-				
 				<div class="control-group">
 					<label class="control-label">Data de Início</label>
 					<div class="controls">
 						<input id="datepicker" name="dataInicio" type="text" placeholder="Data de inicio" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
 				</div>
-				
 				<div class="control-group">
 					<label class="control-label">Data de Término</label>
 					<div class="controls">
 						<input id="datepickert" name="dataFim" type="text" placeholder="Data de termino" maxlength="10" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
 				</div>
-
 				<div class="control-group">
 					<label class="control-label"></label>
 					<div class="controls">
@@ -46,7 +38,6 @@
 						</button>
 					</div>
 				</div>
-
 				</form>
 				<br />
 			</div>
@@ -55,7 +46,7 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.js"></script>
 <script src="assets/js/jquery-ui.js"></script>
 <script src="assets/js/jquery.ui.timepiker.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>

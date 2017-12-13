@@ -1,15 +1,15 @@
 <%@page import="java.util.Calendar"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Solicitação de Suporte</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
 	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
@@ -191,6 +191,18 @@
 				</div>
 			</div>
 			
+			<div class="form-check">
+			    <label class="form-check-label">
+			    	Enviar E-mail na abertura
+			      <input id="boxEmail" name="boxEmail" type="checkbox" class="form-check-input">
+			    </label>
+			    
+			    <div id="enviaEmail">
+					<input id="destinatario" name="destinatario" type="text" placeholder="E-mail do Cliente" class="input-xlarge" style="display: none">
+					<p class="help-block"></p>
+				</div>
+			</div>
+			<br/>
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
@@ -199,13 +211,12 @@
 					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
-
 			<legend></legend>
 		</fieldset>
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/jquery-ui.js"></script>
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
@@ -253,4 +264,16 @@
 	        }
 	    }
     </script>
+    
+    
+    <script>
+		var divEmail = $("#boxEmail");
+		var email = $("#destinatario").val();
+		divEmail.on("change", function(){
+			var email = $("#destinatario").val();
+				$("#destinatario").stop().slideToggle(500);
+				document.getElementById('destinatario').style.display = 'block';
+		
+		} );
+	</script>
 </html>

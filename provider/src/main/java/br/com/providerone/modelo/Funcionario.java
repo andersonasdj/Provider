@@ -8,8 +8,6 @@ public class Funcionario extends Usuario {
 	private String funcao;
 	private String caminhoFoto;
 
-	// private File foto;
-
 	public String getFuncao() {
 		return funcao;
 	}
@@ -57,5 +55,4 @@ public class Funcionario extends Usuario {
 			return false;
 		return true;
 	}
-
 }

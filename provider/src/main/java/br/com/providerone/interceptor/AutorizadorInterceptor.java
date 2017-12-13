@@ -11,7 +11,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object controller) throws Exception {
 
 		String uri = request.getRequestURI();
-		if (uri.endsWith("login") || uri.endsWith("loginMobile")
+		if (uri.endsWith("login") || uri.endsWith("loginMobile") 
+				|| uri.endsWith("create") || uri.endsWith("gravaAdmin")
 				|| uri.endsWith("logar") || uri.endsWith("logarMobile") 
 				|| uri.contains("assets")) {
 			return true;

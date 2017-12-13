@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Home Page</title>
@@ -16,14 +16,13 @@
 	<section class="">	
 		<aside class="">
 			<a href="upload" >
-					<c:if test="${empty tecnicoLogado.caminhoFoto}">
-						<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
-					</c:if>
-					<c:if test="${not empty tecnicoLogado.caminhoFoto}">
-						<img id="imagem" src='${tecnicoLogado.caminhoFoto}' class="img-polaroid">
-					</c:if>
+				<c:if test="${empty tecnicoLogado.caminhoFoto}">
+					<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+				</c:if>
+				<c:if test="${not empty tecnicoLogado.caminhoFoto}">
+					<img id="imagem" src='${tecnicoLogado.caminhoFoto}' class="img-polaroid">
+				</c:if>
 			</a>
-			
 			<div id="perfil">
 				<p class="asid-linha">Usuário : ${tecnicoLogado.usuario} /
 				 Ultimo Login : <f:formatDate value="${tecnicoLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>

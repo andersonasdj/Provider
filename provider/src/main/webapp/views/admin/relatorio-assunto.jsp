@@ -1,8 +1,6 @@
 <%@page import="java.util.Calendar"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <title>ProviderOne | Relatório</title>
@@ -23,7 +21,6 @@
 		class="form-horizontal container">
 		<fieldset></fieldset>
 			<legend>Relatório por palavra chave</legend>
-				
 					<div class="control-group">
 						<label class="control-label">Palavra Chave</label>
 						<div class="controls">
@@ -32,7 +29,6 @@
 							<p class="help-block">* Campo Obrigatório</p>
 						</div>
 					</div>
-
 					<div class="control-group">
 						<label class="control-label"></label>
 						<div class="controls">
@@ -41,7 +37,6 @@
 							</button>
 						</div>
 					</div>
-
 				</form>
 				<br />
 			</div>
@@ -50,7 +45,7 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.js"></script>
 <script src="assets/js/jquery-ui.js"></script>
 <script src="assets/js/jquery.ui.timepiker.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>

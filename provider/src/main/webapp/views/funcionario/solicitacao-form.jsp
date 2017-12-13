@@ -1,7 +1,7 @@
 <%@page import="java.util.Calendar"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Solicitação de Suporte</title>
@@ -181,7 +181,6 @@
 				</div>
 			</div>
 			
-			
 			<div class="control-group">
 				<label class="control-label">Funcionário Responsável</label>
 				<div class="controls">
@@ -193,9 +192,6 @@
 				</div>
 			</div>
 			
-			
-			
-			
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${tecnicoLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
@@ -204,13 +200,12 @@
 					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
-
 			<legend></legend>
 		</fieldset>
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/jquery-ui.js"></script>
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>

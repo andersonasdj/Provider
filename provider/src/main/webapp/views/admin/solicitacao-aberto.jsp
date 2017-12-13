@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Solicitações Abertas</title>
@@ -29,7 +29,6 @@
 			<h2 align="center">Enviando E-mail <i class="fa fa-circle-o-notch fa-spin"> </i></h2>
 			<br/><br/>
 		</div>
-		
 		
 		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
@@ -237,7 +236,7 @@
 		}
 	</script>
 	
-	<script language="Javascript">
+	<script>
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");
 		     if (resposta == true) {
@@ -245,7 +244,7 @@
 		     }
 		}
 	</script>
-	<script language="Javascript">
+	<script>
 		function confirmacaoEmail(id, cliente) {
 		    //var resposta = confirm("Deseja enviar um email para: " + cliente);
 		    // var resposta = confirm(prompt(cliente));

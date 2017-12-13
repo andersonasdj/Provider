@@ -18,7 +18,19 @@ public class LoginController {
 	public String login() {
 		return "tela-login-cliente";
 	}
-
+	
+	//para criação do primeiro usuario do sistema
+	@RequestMapping("/create")
+	public String create() {
+		FuncionarioDao dao = new FuncionarioDao();
+		if(dao.listaFuncionario().size() == 0){
+			return "create-form";
+		}
+		else{
+			return "tela-login-cliente";
+		}
+	}
+	
 	@RequestMapping("logar")
 	public String logarTodos(String usuario, String senha, HttpSession session,
 			Model model) {

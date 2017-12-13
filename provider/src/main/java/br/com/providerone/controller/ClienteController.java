@@ -66,10 +66,15 @@ public class ClienteController {
 	}
 	
 	@RequestMapping("/gravarCliente")
-	public String gravaUsuario(Cliente cliente) {
-		ClienteDao dao = new ClienteDao();
-		dao.salvar(cliente);
-		return "redirect:clienteForm";
+	public String gravaUsuario(HttpSession session, Cliente cliente) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			ClienteDao dao = new ClienteDao();
+			dao.salvar(cliente);
+			return "redirect:clienteForm";
+		} else {
+			return "redirect:login";
+		}
+		
 	}
 	
 	@RequestMapping("/atualizarCadastro")

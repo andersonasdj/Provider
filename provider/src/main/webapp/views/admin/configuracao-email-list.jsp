@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Configurações</title>
@@ -25,6 +25,7 @@
 				<th>E-Mail</th>
 				<th>Mensagem do Email</th>
 				<th>Assunto do Email</th>
+				<th>Cópia Para</th>
 				<th>Usado para</th>
 				<th>Servidor SMTP</th>
 				<th>Porta SMTP</th>
@@ -38,13 +39,13 @@
 					<td>${configuracao.email}</td>
 					<td>${configuracao.mensagem}</td>
 					<td>${configuracao.assunto}</td>
+					<td>${configuracao.cc}</td>
 					<td>${configuracao.funcaoDoEmail}</td>
 					<td>${configuracao.smtp}</td>
 					<td>${configuracao.portaSmtp}</td>
 					<td>${configuracao.autenticacao}</td>
 					<td>${configuracao.sslStatus}</td>
-					<td><a href="editConfigEmail?id=${configuracao.id}">Editar</a> <!-- <a
-						href="removeFuncionario?id=${funcionario.id}">Excluir</a> --></td>
+					<td><a href="editConfigEmail?id=${configuracao.id}">Editar</a></td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -53,7 +54,6 @@
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
 </html>

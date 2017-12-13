@@ -67,7 +67,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"> </i> ${funcionarioLogado.nome}<span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
 			                  	<li><a href="#"><i class="fa fa-cloud-download"></i> SVN</a></li>
-			                  	<li><a href="configEmail"><i class="fa fa-wrench"></i> Configurações</a></li>
+			                  	<li><a href="config"><i class="fa fa-wrench"></i> Configurações</a></li>
 			                  	<li><a href="assets/apk/ProviderOne.apk"><i class="fa fa-android"></i> APK</a></li>
 			                  	<li role="separator" class="divider"></li>
 			                    <li><a href="atualizarDados"><i class="fa fa-cog fa-spin"></i> Meus Dados</a></li>

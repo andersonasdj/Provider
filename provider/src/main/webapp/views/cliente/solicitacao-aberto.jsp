@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Solicitações Abertas</title>
@@ -29,7 +29,6 @@
                 <option value="selected">Export Selected</option>
             </select>
         </div>
-	
 			<table id="table"
 	               data-toggle="table"
 	               data-show-columns="true"
@@ -57,7 +56,7 @@
 			<c:forEach var="solicitacao" items="${solicitacoes}">
 				<tr>
 					<td></td>
-					<td><a href="logDeSolicitacao?id=${solicitacao.id}"><i class="fa fa-tag" aria-hidden="true"></i> ${solicitacao.id} </a></td>
+					<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 							<span>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -94,7 +93,7 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script language="Javascript">
+	<script>
 		function ver(id) {
 			window.location.href = "solicitacaoEditCliente?id="+id;
 		}

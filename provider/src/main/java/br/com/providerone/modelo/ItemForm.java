@@ -20,5 +20,4 @@ public class ItemForm {
 	public void setTags(String tags) {
 		this.tags = tags;
 	}
-	
 }

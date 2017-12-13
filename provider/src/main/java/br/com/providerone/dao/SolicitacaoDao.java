@@ -1040,4 +1040,31 @@ public class SolicitacaoDao {
 			return null;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorAgendamentoAtrasado(Calendar data) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		String agendado = "Agendado";
+		
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.agendado < :pData and s.status = :pStatus");
+			
+			query.setParameter("pData", data, TemporalType.DATE);
+			query.setParameter("pStatus", agendado);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
 }

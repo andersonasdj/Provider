@@ -32,21 +32,23 @@ public class JavaMailApp
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		      
-		      //Caso usu√°rio n√£o digite nenhum email ser√° enviado ao cadastrado no usuario do cliente
+		      //Caso usu·rio n„o digite nenhum email ser· enviado ao cadastrado no usuario do cliente
 		      if(destinatario == ""){
 		    	  destinatario = cliente.getEmail();
 		      }
 
-		      Address[] toUser = InternetAddress //Destinat√°rio(s)
+		      Address[] toUser = InternetAddress //Destinat·rio(s)
 		                 .parse(destinatario);
 		      
-		      Address[] toCc = InternetAddress //Destinat√°rio Com c√≥pia
-		                .parse("suporte@providerone.com.br");
+		      if(email.getCc() != null || email.getCc().equals("")){
+		    	  Address[] toCc = InternetAddress //Destinat·io Com cÛpia
+		    			  .parse(email.getCc());
+		    	  message.setRecipients(Message.RecipientType.CC, toCc); //Copia
+		      }
 		      
 		      Locale locBR = new Locale("pt","BR");
 		      DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locBR);
 		      message.setRecipients(Message.RecipientType.TO, toUser);
-		      message.setRecipients(Message.RecipientType.CC, toCc); //Copia
 		      message.setSubject(email.getAssunto() + " - " + cliente.getNome());//Assunto
 		      
 		      String mensagemEmail =
@@ -55,14 +57,14 @@ public class JavaMailApp
 		    		  		+ "<meta http-equiv='Content-Type' content='text/html'; charset=utf-8/>"
 		      			+ "</head>"
 		    		  	+ "<body>"
-		    		  		+ "<h2>Solicita√ß√£o cadastrada com sucesso!</h2>"
+		    		  		+ "<h2>SolicitaÁ„o cadastrada com sucesso!</h2>"
 		      				+ "<br/>"
 		      				+ "<hr>"
-		      					+ "<p><b>Id da solicita√ß√£o: </b>" + solicitacao.getId() + "</p>"
+		      					+ "<p><b>Id da solicitaÁ„oo: </b>" + solicitacao.getId() + "</p>"
 		      					+ "<p><b>Data da abertura: </b>" + df.format(solicitacao.getDataAbertura().getTime()) + "</p>"
 		      					+ "<p><b>Aberto por: </b>" + solicitacao.getAbriuChamado() + "</p>"
 		      					+ "<p><b>Usuario afetado: </b>" + solicitacao.getUsuario() + "</p>"
-		      					+ "<p><b>Descri√ß√£o da solicita√ß√£o: </b>" + solicitacao.getDescricaoProblema() + "</p>"
+		      					+ "<p><b>DescriÁ„oo da solicitaÁ„o: </b>" + solicitacao.getDescricaoProblema() + "</p>"
 		      					+ "<p><b>Site: </b>" + solicitacao.getOnsiteOffsite() + "</p>"
 		      					+ "<p><b>Prioridade: </b>" + solicitacao.getPrioridade() + "</p>"
 		      					+ "<p><b>Status: <b/>" + solicitacao.getStatus() + "</p>"
@@ -75,15 +77,67 @@ public class JavaMailApp
 		      		+ "</html>";
 		      
 		      message.setContent(mensagemEmail, "text/html;charset=utf-8");
-		      /**M√©todo para enviar a mensagem criada*/
+		      /**MÈtodo para enviar a mensagem criada*/
 		      Transport.send(message);
 		 } catch (MessagingException e) {
 		      throw new RuntimeException(e);
 		}	
 	}
+	
+	public void enviaEmailAbertura(String  cliente, Solicitacao solicitacao, String destinatario){
+		try {
+		      Message message = new MimeMessage(session);
+		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
+		
+		      Address[] toUser = InternetAddress //Destinat·rio(s)
+		                 .parse(destinatario);
+		      
+		      if(email.getCc() != null || email.getCc().equals("")){
+		    	  Address[] toCc = InternetAddress //Destinat·io Com cÛpia
+		    			  .parse(email.getCc());
+		    	  message.setRecipients(Message.RecipientType.CC, toCc); //Copia
+		      }
+		      	     
+		      Locale locBR = new Locale("pt","BR");
+		      DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locBR);
+		      message.setRecipients(Message.RecipientType.TO, toUser);
+		      message.setSubject(email.getAssunto() + " - " + cliente);//Assunto
+		      
+		      String mensagemEmail =
+		    		  "<html>"
+		      			+ "<head>"
+		    		  		+ "<meta http-equiv='Content-Type' content='text/html'; charset=utf-8/>"
+		      			+ "</head>"
+		    		  	+ "<body>"
+		    		  		+ "<h2>SolicitaÁ„o cadastrada com sucesso!</h2>"
+		      				+ "<br/>"
+		      				+ "<hr>"      					 
+		      					+ "<p><b>Data da abertura: </b>" + df.format(solicitacao.getDataAbertura().getTime()) + "</p>"
+		      					+ "<p><b>Aberto por: </b>" + solicitacao.getAbriuChamado() + "</p>"
+		      					+ "<p><b>Usuario afetado: </b>" + solicitacao.getUsuario() + "</p>"
+		      					+ "<p><b>DescriÁ„oo da solicitaÁ„o: </b>" + solicitacao.getDescricaoProblema() + "</p>"
+		      					+ "<p><b>Site: </b>" + solicitacao.getOnsiteOffsite() + "</p>"
+		      					+ "<p><b>Prioridade: </b>" + solicitacao.getPrioridade() + "</p>"
+		      					+ "<p><b>Status: <b/>" + solicitacao.getStatus() + "</p>"
+		      				+ "<hr>"
+		      				+ "<br>"
+		      					+ "<p><b><u><font color=blue>Suporte ProviderOne </font></u></b></p>"
+		      					+ "<p><b>ServiceDesk | (21) 2262-4275 </b></p>"
+		      					+ "<p><b>suporte@providerone.com.br </b></p>"
+		      			+ "</body>"
+		      		+ "</html>";
+		      
+		      message.setContent(mensagemEmail, "text/html;charset=utf-8");
+		      /**MÈtodo para enviar a mensagem criada*/
+		      Transport.send(message);
+		 } catch (MessagingException e) {
+		      throw new RuntimeException(e);
+		}	
+	}
+	
 	private static Session configuraEmail(final Email email) {
 		Properties props = new Properties();
-		/** Par√¢metros de conex√£o com servidor Microsoft / Google */
+		/** Par‚metros de conex„o com servidor Microsoft / Google */
 		props.put("mail.smtp.host", email.getSmtp());
 		props.put("mail.smtp.socketFactory.port", email.getPortaSmtp());
 		props.put("mail.smtp.starttls.enable", email.isSslStatus());

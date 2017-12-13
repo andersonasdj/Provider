@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Formulario de Computador</title>
@@ -59,7 +59,7 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/jquery-ui.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 </html>

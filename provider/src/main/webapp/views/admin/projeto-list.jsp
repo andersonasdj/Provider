@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
@@ -8,10 +8,6 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/bootstrap-table.js"></script>
-	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<title>ProviderOne | Projetos</title>
 </head>
 <body>
@@ -71,5 +67,9 @@
 		<legend></legend>
 	</div>
 	<c:import url="rodape.jsp"></c:import>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
 </body>
 </html>

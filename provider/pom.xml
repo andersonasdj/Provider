@@ -121,7 +121,6 @@
 			<version>4.3.3.RELEASE</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-dbcp2</artifactId>

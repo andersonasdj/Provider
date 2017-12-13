@@ -1,6 +1,7 @@
 package br.com.providerone.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,16 +17,6 @@ import br.com.providerone.modelo.Funcionario;
 @Controller
 public class FuncionarioController {
 	
-	/*
-	@RequestMapping("/upload")
-	public String upload(HttpSession session) {
-		if (session.getAttribute("funcionarioLogado") != null) {
-			return "admin/upload";
-		} else {
-			return "redirect:loginFuncionario";
-		}
-	}
-	*/
 	@RequestMapping("/homePage")
 	public String homePage(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
@@ -43,6 +34,10 @@ public class FuncionarioController {
 	}
 
 	private void homePageAdiconaModel(Model model, Funcionario funcionario) {
+		Calendar hoje = Calendar.getInstance();
+		hoje.set(Calendar.HOUR_OF_DAY, 0);
+		hoje.set(Calendar.MINUTE, 0);
+		hoje.set(Calendar.SECOND, 0);
 		SolicitacaoDao dao = new SolicitacaoDao();
 		model.addAttribute("qtdAberto", dao.listaQtdSolicitacoesAbertasPorIdDoTecnico(funcionario.getId()));
 		SolicitacaoDao daoAgendadas = new SolicitacaoDao();
@@ -51,6 +46,10 @@ public class FuncionarioController {
 		model.addAttribute("qtdEmAndamento", daoAndamento.listaQtdSolicitacoesEmAndamentoPorIdDoTecnico(funcionario.getId()));
 		SolicitacaoDao daoAguardando = new SolicitacaoDao();
 		model.addAttribute("qtdAguardando", daoAguardando.listaQtdSolicitacoesAguardandoPorIdDoTecnico(funcionario.getId()));
+		SolicitacaoDao daoAgendaAtrasados = new SolicitacaoDao();
+		model.addAttribute("qtdAgendadoAtrasado", daoAgendaAtrasados.listaSolicitacoesPorAgendamentoAtrasado(hoje).size());
+		SolicitacaoDao daoAgendamentosHoje = new SolicitacaoDao();
+		model.addAttribute("qtdAgendadoHoje", daoAgendamentosHoje.listaSolicitacoesPorAgendamento(hoje).size());
 	}
 	
 	@RequestMapping("/funcionarioForm")
@@ -67,6 +66,18 @@ public class FuncionarioController {
 		FuncionarioDao dao = new FuncionarioDao();
 		dao.salvar(funcionario);
 		return "redirect:funcionarioForm";
+	}
+	
+	//para criação do primeiro usuario do sistema
+	@RequestMapping("/gravaAdmin")
+	public String gravaAdmin(Funcionario funcionario) {
+		FuncionarioDao daoTesta = new FuncionarioDao();
+		if(daoTesta.listaFuncionario().size() == 0){
+			FuncionarioDao dao = new FuncionarioDao();
+			dao.salvar(funcionario);
+			return "redirect:login";
+		}
+		return "redirect:login";
 	}
 
 	@RequestMapping("/atualizarDados")
@@ -99,7 +110,6 @@ public class FuncionarioController {
 			FuncionarioDao dao = new FuncionarioDao();
 			Funcionario funcionarioEncontrado = dao.buscarPorId(id);
 			model.addAttribute("funcionario", funcionarioEncontrado);
-			
 			return "admin/atualiza-senha-funcionario";
 		} else {
 			return "redirect:login";

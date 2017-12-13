@@ -17,17 +17,14 @@ public class Email {
 	private String senha;
 	private String smtp;
 	private int portaSmtp;
-
 	private String assunto;
 	@Lob
 	private String mensagem;
-
 	private boolean sslStatus;
-
 	private boolean autenticacao;
-	
 	private String funcaoDoEmail;
-
+	private String cc;
+	
 	public Long getId() {
 		return id;
 	}
@@ -116,4 +113,11 @@ public class Email {
 		this.funcaoDoEmail = funcaoDoEmail;
 	}
 
+	public String getCc() {
+		return cc;
+	}
+
+	public void setCc(String cc) {
+		this.cc = cc;
+	}
 }

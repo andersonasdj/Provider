@@ -20,7 +20,7 @@ public class ProjetoDao {
 
 	public void salvar(Projeto projeto) {
 		projeto.setDataCriacao(Calendar.getInstance());
-		projeto.setStatus("NÃ£o iniciado");
+		projeto.setStatus("Não iniciado");
 		manager.getTransaction().begin();
 		manager.persist(projeto);
 		manager.getTransaction().commit();
@@ -72,7 +72,7 @@ public class ProjetoDao {
 			manager.remove(projetoExcluir);
 			manager.getTransaction().commit();
 		} catch (Exception e) {
-			System.out.println("NÃ£o foi possÃ­vel excluir esse projeto: " + e.getMessage());
+			System.out.println("Não foi possíl excluir esse projeto: " + e.getMessage());
 		} finally {
 			manager.close();
 		}

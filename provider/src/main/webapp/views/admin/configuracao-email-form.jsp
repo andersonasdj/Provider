@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>ProviderOne | Configuração de Envio de E-mail</title>	
@@ -73,6 +73,14 @@
 						class="input-xlarge"></textarea>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Cópia para</label>
+				<div class="controls">
+					<textarea class="form-control" rows="4" id="cc" name="cc" type="text" placeholder="Recebe uma cópia"
+						class="input-xlarge"></textarea>
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Mensagem</label>
 				<div class="controls">
@@ -103,6 +111,6 @@
 	</form>
 	<c:import url="rodape.jsp"></c:import>
 </body>
-	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 </html>
