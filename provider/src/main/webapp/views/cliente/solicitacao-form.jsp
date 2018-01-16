@@ -33,14 +33,14 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Usuario</label>
+				<label class="control-label">Usuario Afetado</label>
 				<div class="controls">
 					<input id="nome" name="usuario" type="text" placeholder="usuario" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Problema</label>
+				<label class="control-label">Descrição do Problema</label>
 				<div class="controls">
 					<input id="descricaoProblema" name="descricaoProblema" type="text" placeholder="problema" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
@@ -49,10 +49,11 @@
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<button id="enviar" name="salvar" class="btn btn-primary">Salvar</button>
+					<button id="enviar" name="salvar" class="btn btn-success">Salvar</button>
 				</div>
 			</div>
-		</fieldset>
+			<legend></legend>
+		 </fieldset>
 	</form>
 	<br/><br/><br/>
 	<c:import url="rodape.jsp"></c:import>

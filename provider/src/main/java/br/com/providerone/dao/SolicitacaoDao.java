@@ -252,6 +252,29 @@ public class SolicitacaoDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesAguardandoPorId(Long id) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+			query.setParameter("pClienteId", id);
+			query.setParameter("pStatus", "Aguardando usuário");
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAndamentoPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 
@@ -555,6 +578,30 @@ public class SolicitacaoDao {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Solicitacao> relatorioGeralPorIdCliente(Long id) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.cliente.id=:pClienteId and s.status!=:pStatus order by s.id desc");
+			query.setParameter("pClienteId", id);
+			query.setParameter("pStatus", "Finalizado");
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		} 
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorIdTec(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 
@@ -783,6 +830,27 @@ public class SolicitacaoDao {
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Em andamento");
+			Long qtd = (Long) query.getSingleResult();
+			if (qtd != 0) {
+				manager.close();
+				return qtd;
+			} else {
+				manager.close();
+				return 0L;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return 0L;
+		}
+	}
+	
+public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
+		
+		try {
+			Query query = manager
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+			query.setParameter("pClienteId", id);
+			query.setParameter("pStatus", "Aguardando usuário");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();

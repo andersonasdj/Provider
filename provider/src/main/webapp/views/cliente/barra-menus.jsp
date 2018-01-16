@@ -14,10 +14,13 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bar-chart fa-lg"></i> Controle de Solicitação <span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
 			                  	<li><a href="solicitacaoForm"><i class="fa fa-plus-square"> </i> Nova Solicitação</a></li>
+			                  	<li role="separator" class="divider"></li>
 			                    <li><a href="abertos"><i class="fa fa-question-circle"> </i> Abertos</a></li>
 			               		<li><a href="agendados"><i class="fa fa-clock-o"> </i> Agendadas</a></li>
 			                    <li><a href="andamento"><i class="fa fa-share"> </i> Em Andamento</a></li>
-			                    <li><a href="relatorio"><i class="fa fa-pie-chart"> </i> Relatórios</a></li>
+			                    <li><a href="relatorioGeralCliente"><i class="fa fa-pie-chart"> </i> Resumo Geral</a></li>
+			                    <li role="separator" class="divider"></li>
+			                    <li><a href="relatorio"><i class="fa fa-bar-chart"> </i> Relatórios</a></li>
 			                  </ul>
 						</li>
 						<li class="dropdown">

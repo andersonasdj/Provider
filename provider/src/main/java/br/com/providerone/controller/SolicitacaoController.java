@@ -149,7 +149,7 @@ public class SolicitacaoController {
 	}
 
 	private String qtdSolicitacoesCliente(Model model, Cliente cliente) {
-		Long ab, and, age;
+		Long ab, and, age, agua;
 		SolicitacaoDao daoAberto = new SolicitacaoDao();
 		ab = daoAberto.listaQtdSolicitacoesAbertasPorIdDoCliente(cliente.getId());
 		model.addAttribute("qtdAberto", ab);
@@ -162,7 +162,11 @@ public class SolicitacaoController {
 		and = daoAndamento.listaQtdSolicitacoesAndamentoPorIdDoCliente(cliente.getId());
 		model.addAttribute("qtdAndamento", and);
 		
-		model.addAttribute("qtdTotal", ab + age + and);	
+		SolicitacaoDao daoAguardando = new SolicitacaoDao();
+		agua = daoAguardando.listaQtdSolicitacoesAguardandoPorIdDoCliente(cliente.getId());
+		model.addAttribute("qtdAguardando", agua);
+		
+		model.addAttribute("qtdTotal", ab + age + and + agua);	
 		return "cliente/solicitacao-aberto";
 	}
 	
@@ -172,6 +176,18 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 			model.addAttribute("solicitacoes",dao.listaSolicitacoesAgendadasPorId(cliente.getId()));
+			return qtdSolicitacoesCliente(model, cliente);
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/aguardando")
+	public String aguardando(HttpSession session, Model model) {
+		if (session.getAttribute("clienteLogado") != null) {
+			SolicitacaoDao dao = new SolicitacaoDao();
+			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+			model.addAttribute("solicitacoes",dao.listaSolicitacoesAguardandoPorId(cliente.getId()));
 			return qtdSolicitacoesCliente(model, cliente);
 		} else {
 			return "redirect:login";
@@ -256,6 +272,18 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 			model.addAttribute("solicitacoes",dao.listaSolicitacoesPorId(cliente.getId()));
+			return "cliente/solicitacao-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/relatorioGeralCliente")
+	public String relatorioGeralCliente(HttpSession session, Model model) {
+		if (session.getAttribute("clienteLogado") != null) {
+			SolicitacaoDao dao = new SolicitacaoDao();
+			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
+			model.addAttribute("solicitacoes",dao.relatorioGeralPorIdCliente(cliente.getId()));
 			return "cliente/solicitacao-relatorio";
 		} else {
 			return "redirect:login";

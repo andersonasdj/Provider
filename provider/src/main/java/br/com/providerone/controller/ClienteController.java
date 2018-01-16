@@ -24,7 +24,7 @@ public class ClienteController {
 			model.addAttribute("solicitacoes",
 					dao.listaSolicitacoesAbertasPorId(cliente.getId()));
 					
-			Long ab, and, age;
+			Long ab, and, age, agua;
 			SolicitacaoDao daoAberto = new SolicitacaoDao();
 			ab = daoAberto.listaQtdSolicitacoesAbertasPorIdDoCliente(cliente.getId());
 			model.addAttribute("qtdAberto", ab);
@@ -37,7 +37,11 @@ public class ClienteController {
 			and = daoAndamento.listaQtdSolicitacoesAndamentoPorIdDoCliente(cliente.getId());
 			model.addAttribute("qtdAndamento", and);
 			
-			model.addAttribute("qtdTotal", ab + age + and);
+			SolicitacaoDao daoAguardando = new SolicitacaoDao();
+			agua = daoAguardando.listaQtdSolicitacoesAguardandoPorIdDoCliente(cliente.getId());
+			model.addAttribute("qtdAguardando", agua);
+			
+			model.addAttribute("qtdTotal", ab + age + and + agua);
 
 			return "cliente/home";
 		} else {
