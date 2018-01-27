@@ -71,6 +71,7 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setStatus("Finalizado");
 		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
+		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
@@ -110,7 +111,12 @@ public class SolicitacaoDao {
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
-		solicitacao.setObs(solicitacaoEncontrada.getObs());
+		solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
+		solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
+		solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
+		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
+		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
+		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
