@@ -70,9 +70,9 @@ public class JavaMailApp
 		      					+ "<p><b>Status: <b/>" + solicitacao.getStatus() + "</p>"
 		      				+ "<hr>"
 		      				+ "<br>"
-		      					+ "<p><b><u><font color=blue>Suporte ProviderOne </font></u></b></p>"
-		      					+ "<p><b>ServiceDesk | (21) 2262-4275 </b></p>"
-		      					+ "<p><b>suporte@providerone.com.br </b></p>"
+		      					+ "<p><b><u><font color=blue> " + email.getNomeAssinatura() + " </font></u></b></p>"
+		      					+ "<p><b>" + email.getNumeroAssinatura() + "</b></p>"
+		      					+ "<p><b>" + email.getEmailAssinatura() + "</b></p>"
 		      			+ "</body>"
 		      		+ "</html>";
 		      
@@ -121,9 +121,9 @@ public class JavaMailApp
 		      					+ "<p><b>Status: <b/>" + solicitacao.getStatus() + "</p>"
 		      				+ "<hr>"
 		      				+ "<br>"
-		      					+ "<p><b><u><font color=blue>Suporte ProviderOne </font></u></b></p>"
-		      					+ "<p><b>ServiceDesk | (21) 2262-4275 </b></p>"
-		      					+ "<p><b>suporte@providerone.com.br </b></p>"
+			      				+ "<p><b><u><font color=blue> " + email.getNomeAssinatura() + " </font></u></b></p>"
+		      					+ "<p><b>" + email.getNumeroAssinatura() + "</b></p>"
+		      					+ "<p><b>" + email.getEmailAssinatura() + "</b></p>"
 		      			+ "</body>"
 		      		+ "</html>";
 		      

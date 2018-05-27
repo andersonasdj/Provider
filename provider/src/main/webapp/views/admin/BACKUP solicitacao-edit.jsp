@@ -17,11 +17,7 @@
 	<form action="atualizarSolicitacao" method="post"
 		class="form-horizontal container">
 		<fieldset>
-			<legend>Classificação de solicitação 
-				<c:if test="${solicitacao.status == 'Finalizado'}"> 
-					<a class="btn" href="solicitacaoEditFull?id=${solicitacao.id}" role="button"> Edição Completa</a>
-				</c:if>
-			</legend>
+			<legend>Classificação de solicitação</legend>
 			<div>
 				<div>
 					<input id="solicitacao" name="id" type="hidden"
@@ -39,9 +35,6 @@
 				<div class="controls">
 					<input  type="text" placeholder="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.dataAbertura.time}"  />"
 						disabled="disabled">
-						
-					<a class="btn" href="dataEditSolicitacao?id=${solicitacao.id}" role="button"> Editar</a>
-					
 				</div>
 			</div>
 			<div class="control-group">
@@ -51,7 +44,6 @@
 						disabled="disabled" />
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Nome do Cliente</label>
 				<div class="controls">
@@ -81,18 +73,6 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
-			<div class="control-group">
-				<label class="control-label">Descrição do problema</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="descricaoProblema" name="descricaoProblema" type="text" 
-					placeholder="Descrição do Problema" onkeyup="limite_textarea_prob(this.value)"
-						class="input-xlarge">${solicitacao.descricaoProblema}</textarea>
-					<span id="contProb">255</span> Restantes <br>
-				</div>
-			</div>
-			
-			<!-- 
 			<div class="control-group">
 				<label class="control-label">Descrição do problema</label>
 				<div class="controls">
@@ -103,20 +83,6 @@
 					
 				</div>
 			</div>
-			 -->
-
-
-			<div class="control-group">
-				<label class="control-label">Resolução do problema</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="resolucao" name="resolucao" type="text" 
-					placeholder="Resolução do Problema" onkeyup="limite_textarea_resolu(this.value)"
-						class="input-xlarge">${solicitacao.resolucao}</textarea>
-					<span id="contResolu">255</span> Restantes <br>
-				</div>
-			</div>
-
-			<!-- 
 			<div class="control-group">
 				<label class="control-label">Resolução do problema</label>
 				<div class="controls">
@@ -125,19 +91,6 @@
 						<span id="contResolu">255</span> Restantes <br>
 				</div>
 			</div>
-			 -->
-			 
-			 <div class="control-group">
-				<label class="control-label">Observações</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" 
-					placeholder="Observações" onkeyup="limite_textarea_obs(this.value)"
-						class="input-xlarge">${solicitacao.obs}</textarea>
-					<span id="contObs">255</span> Restantes <br>
-				</div>
-			</div>
-			 
-			 <!-- 
 			<c:if test="${not empty solicitacao.obs}">
 				<div class="control-group">
 					<label class="control-label">Observações</label>
@@ -164,8 +117,6 @@
 					</div>
 				</div>
 			</c:if>
-			 -->
-			
 			<input type="hidden" id="abriuChamado" name="abriuChamado" value="${solicitacao.abriuChamado}"> 
 				
 			<div class="control-group">
@@ -187,7 +138,6 @@
 						<option>Cabeamento</option>
 						<option>Smartphone</option>
 						<option>Projeto</option>
-						<option>Backup</option>
 						<option>Outros</option>
 					</select>
 				</div>
@@ -204,7 +154,6 @@
 						<option>Problema</option>
 						<option>Incidente</option>
 						<option>Solicitação</option>
-						<option>Backup</option>
 					</select>
 				</div>
 			</div> 

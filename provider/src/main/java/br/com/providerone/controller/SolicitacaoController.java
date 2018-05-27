@@ -27,6 +27,7 @@ import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.Relatorio;
 import br.com.providerone.modelo.Solicitacao;
 
+
 @Controller
 public class SolicitacaoController {
 
@@ -1058,6 +1059,100 @@ public class SolicitacaoController {
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorAgendamento(hoje));
 			
 			return "admin/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/dataEditSolicitacao")
+	public String dataEditSolicitacao(Long id,HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			SolicitacaoDao dao = new SolicitacaoDao();
+			
+			model.addAttribute("solicitacao",dao.buscaSolicitacaoId(id));
+			
+			return "admin/solicitacao-edit-data";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/atualizarSolicitacaoData")
+	public String atualizarSolicitacaoData(Long id, String dataAbertura, String dataAndamento, HttpSession session) throws ParseException {
+		
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+				SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			
+				Calendar dtAb = Calendar.getInstance();
+				Date dt1 = df.parse(dataAbertura);
+				dtAb.setTime(dt1);
+				
+				if(dataAndamento != ""){
+					Calendar dtAn = Calendar.getInstance();
+					Date dt2 = df.parse(dataAndamento);
+					dtAn.setTime(dt2);
+					SolicitacaoDao dao = new SolicitacaoDao();
+					dao.atualizaDataSolicitacao(id, dtAb, dtAn);
+				} else{
+					SolicitacaoDao dao = new SolicitacaoDao();
+					dao.atualizaDataSolicitacao(id, dtAb);
+				}
+			
+				return "redirect:solicitacoesAbertas";
+			
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/solicitacaoEditFull")
+	public String solicitacaoEditFull(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			
+			SolicitacaoDao dao = new SolicitacaoDao();
+			Solicitacao solicitacao = dao.buscaSolicitacaoId(id);
+			System.out.println(solicitacao.getId());
+			
+			if(solicitacao.getStatus().equals("Finalizado")){
+				model.addAttribute("solicitacao",solicitacao);
+				return "admin/solicitacao-edit-full";
+			} else{
+				return "admin/solicitacao-list";
+			}
+			
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/atualizarSolicitacaoCompleta")
+	public String atualizarSolicitacaoCompleta(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, String dataAbertura, String dataAndamento, String dataFechamento, String nomeDoCliente, HttpSession session) throws ParseException {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			SolicitacaoDao dao = new SolicitacaoDao();
+			FuncionarioDao daoFun = new FuncionarioDao();
+			Funcionario funcionarioASalvar = daoFun.buscaNomeFuncionario(nomeDoFuncionario);
+			
+			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			
+			Calendar dtAb = Calendar.getInstance();
+			Date dt1 = df.parse(dataAbertura);
+			dtAb.setTime(dt1);
+			solicitacao.setDataAbertura(dtAb);
+			
+			Calendar dtAn = Calendar.getInstance();
+			Date dt2 = df.parse(dataAndamento);
+			dtAn.setTime(dt2);
+			solicitacao.setDataAndamento(dtAn);
+			
+			Calendar dtFe = Calendar.getInstance();
+			Date dt3 = df.parse(dataFechamento);
+			dtFe.setTime(dt3);
+			solicitacao.setDataFechamento(dtFe);
+			
+			dao.atualizarSolicitacaoCompleta(solicitacao, funcionarioASalvar, funcionarioLogado);
+			return "redirect:relatorioPorCliente"+"?nomeDoCliente="+nomeDoCliente;
 		} else {
 			return "redirect:login";
 		}

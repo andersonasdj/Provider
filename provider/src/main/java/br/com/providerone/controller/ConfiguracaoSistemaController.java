@@ -104,20 +104,17 @@ public class ConfiguracaoSistemaController {
 	@RequestMapping("/salvarConfigEmail")
 	public String salvarConfigEmail(Email email, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			EmailDao daoEmail = new EmailDao();
-			daoEmail.salvar(email);
-			return "redirect:homePage";
-		} else {
-			return "redirect:login";
-		}
-	}
-	
-	@RequestMapping("/atualizarConfigEmail")
-	public String atualizarConfigEmail(Email email, HttpSession session) {
-		if (session.getAttribute("funcionarioLogado") != null) {
-			EmailDao daoEmail = new EmailDao();
-			daoEmail.atualizar(email);
-			return "redirect:configEmail";
+			if(email.getId() != null){
+				EmailDao daoEmail = new EmailDao();
+				daoEmail.atualizar(email);
+				return "redirect:configEmail";
+			}else if(email.getId() == null){
+				EmailDao daoEmail = new EmailDao();
+				daoEmail.salvar(email);
+				return "redirect:homePage";
+			}else {
+				return "redirect:login";
+			}
 		} else {
 			return "redirect:login";
 		}

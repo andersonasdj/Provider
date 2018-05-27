@@ -61,6 +61,7 @@ public class Solicitacao {
 	private String tempoDeAndamento;
 	@Lob
 	private String andamentoDoChamado;
+	private Long estrela;
 
 	public String getFormaAbertura() {
 		return formaAbertura;
@@ -528,6 +529,14 @@ public class Solicitacao {
 				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
 				+ (this.getAgendadoHora() != null ? "* Hora: " + sdfAgendado.format(horaAgendado)	: "") + "\n" :"") 
 				+ "=========================================================================\n\n";
+	}
+
+	public Long getEstrela() {
+		return estrela;
+	}
+
+	public void setEstrela(Long estrela) {
+		this.estrela = estrela;
 	}
 
 }

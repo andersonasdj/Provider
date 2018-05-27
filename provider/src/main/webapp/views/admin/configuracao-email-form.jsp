@@ -13,7 +13,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="salvarConfigEmail" method="get" class="form-horizontal container">
+	<form action="salvarConfigEmail" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Configuração de envio de E-mail</legend>
 			<div class="control-group">
@@ -88,6 +88,31 @@
 						class="input-xlarge"></textarea>
 				</div>
 			</div>
+			
+			<!-- ASSINATURA DE EMAIL  -->
+			<div class="control-group">
+				<label class="control-label">Nome na Assinatura</label>
+				<div class="controls">
+					<textarea class="form-control" rows="4" id="nomeAssinatura" name="nomeAssinatura" type="text" placeholder="Nome na assinatura"
+						class="input-xlarge"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Telefone na Assinatura</label>
+				<div class="controls">
+					<textarea class="form-control" rows="4" id="numeroAssinatura" name="numeroAssinatura" type="text" placeholder="Numero na assinatura"
+						class="input-xlarge"></textarea>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">E-mail na Assinatura</label>
+				<div class="controls">
+					<textarea class="form-control" rows="4" id="emailAssinatura" name="emailAssinatura" type="text" placeholder="E-mail na assinatura"
+						class="input-xlarge"></textarea>
+				</div>
+			</div>
+			<!-- ASSINATURA DE EMAIL  -->
+			
 			<div class="control-group">
 				<label class="control-label">Função do E-mail</label>
 				<div class="controls">

@@ -12,7 +12,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="salvarConfigEmail" method="post" class="form-horizontal container">
+	<form action="atualizarConfigEmail" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Configuração de envio de E-mail</legend>
 			<input type="hidden" id="id" name="id" value="${emailConfig.id}">
@@ -87,43 +87,14 @@
 						class="input-xlarge"/>
 				</div>
 			</div>
-	
 			<div class="control-group">
 				<label class="control-label">Mensagem</label>
 				<div class="controls">
-					<textarea class="form-control" rows="4" id="mensagem" name="mensagem" type="text" 
-					placeholder="Mensagem do e-Mail"
-						class="input-xlarge">${emailConfig.mensagem}</textarea>
+					<input class="form-control" id="mensagem" name="mensagem" type="text"
+					value="${emailConfig.mensagem}" placeholder="Mensagem do e-Mail"
+						class="input-xlarge"/>
 				</div>
 			</div>
-			
-			<!-- ASSINATURA DE EMAIL  -->
-			<div class="control-group">
-				<label class="control-label">Nome na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="nomeAssinatura" name="nomeAssinatura" type="text" 
-					placeholder="Nome na assinatura"
-						class="input-xlarge">${emailConfig.nomeAssinatura}</textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefone na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="numeroAssinatura" name="numeroAssinatura" type="text" 
-					 placeholder="Numero na assinatura"
-						class="input-xlarge">${emailConfig.numeroAssinatura}</textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">E-mail na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="emailAssinatura" name="emailAssinatura" type="text" 
-					placeholder="E-mail na assinatura"
-						class="input-xlarge">${emailConfig.emailAssinatura}</textarea>
-				</div>
-			</div>
-			<!-- ASSINATURA DE EMAIL  -->
-			
 			<div class="control-group">
 				<label class="control-label">Função do E-mail</label>
 				<div class="controls">

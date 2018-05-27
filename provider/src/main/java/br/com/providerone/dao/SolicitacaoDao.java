@@ -16,6 +16,7 @@ import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.Solicitacao;
 
+
 public class SolicitacaoDao {
 	EntityManager manager;
 
@@ -64,31 +65,6 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void finalizaSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado) {	
-		manager.getTransaction().begin();
-		Solicitacao solicitacaoFinalizada = manager.find(Solicitacao.class, solicitacao.getId());
-		solicitacaoFinalizada.setDataFechamento(Calendar.getInstance());
-		solicitacaoFinalizada.setStatus("Finalizado");
-		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
-		solicitacaoFinalizada.setObs(solicitacao.getObs());
-		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
-		solicitacaoFinalizada.setFuncionario(funcionario);
-		//Atualiza LOG
-		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
-		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
-		//Atualiza LOG
-		Data daoData = new Data();
-		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
-		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
-		solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
-		//Refatorar para remover esse if abaixo
-		if(solicitacaoFinalizada.getDataAndamento()!=null){
-			solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempoTotal(solicitacaoFinalizada.getDataFechamento(), solicitacaoFinalizada.getDataAndamento()));
-		}
-		manager.persist(solicitacaoFinalizada);
-		manager.getTransaction().commit();
-		manager.close();
-	}
 	
 	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		manager.getTransaction().begin();
@@ -1141,4 +1117,81 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 			return null;
 		}
 	}
+	
+	public Solicitacao atualizaDataSolicitacao(Long id, Calendar dataAbertura, Calendar dataAndamento) {
+		manager.getTransaction().begin();
+		Solicitacao solicitacao = new Solicitacao(); 
+		solicitacao = manager.find(Solicitacao.class, id);
+		solicitacao.setDataAbertura(dataAbertura);
+		solicitacao.setDataAndamento(dataAndamento);
+		manager.merge(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+		return solicitacao;
+	}
+	
+	public Solicitacao atualizaDataSolicitacao(Long id, Calendar dataAbertura) {
+		manager.getTransaction().begin();
+		Solicitacao solicitacao = new Solicitacao(); 
+		solicitacao = manager.find(Solicitacao.class, id);
+		solicitacao.setDataAbertura(dataAbertura);
+		manager.merge(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+		return solicitacao;
+	}
+	
+	public void finalizaSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado) {	
+		manager.getTransaction().begin();
+		Solicitacao solicitacaoFinalizada = manager.find(Solicitacao.class, solicitacao.getId());
+		solicitacaoFinalizada.setDataFechamento(Calendar.getInstance());
+		solicitacaoFinalizada.setStatus("Finalizado");
+		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
+		solicitacaoFinalizada.setObs(solicitacao.getObs());
+		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
+		solicitacaoFinalizada.setFuncionario(funcionario);
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
+		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
+		//Atualiza LOG
+		Data daoData = new Data();
+		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		//Refatorar para remover esse if abaixo
+		if(solicitacaoFinalizada.getDataAndamento()!=null){
+			solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempoTotal(solicitacaoFinalizada.getDataFechamento(), solicitacaoFinalizada.getDataAndamento()));
+		}
+		manager.persist(solicitacaoFinalizada);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	public void atualizarSolicitacaoCompleta(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
+		manager.getTransaction().begin();
+		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
+		//solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
+		solicitacao.setFuncionario(funcionario);
+		
+		//System.out.println("Abriu chamado em DAO: " + solicitacao.getAbriuChamado());
+		//solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
+		//solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
+		solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
+		solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
+		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
+		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
+		Data daoData = new Data();
+		if(solicitacao.getDataAndamento()!=null){
+			solicitacao.setTempoDeAndamento(daoData.geraTempoTotal(solicitacao.getDataFechamento(), solicitacao.getDataAndamento()));
+		}
+		
+		//solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
+		//Atualiza LOG
+		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
+		//Atualiza LOG
+		manager.merge(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+
 }

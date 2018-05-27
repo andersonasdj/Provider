@@ -2,50 +2,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ProviderOne | Configuração de Envio de E-mail</title>
+	<title>ProviderOne | Configuração de Envio de E-mail</title>	
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.css">
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="salvarConfigEmail" method="post" class="form-horizontal container">
+	<form action="salvarConfigEmail" method="get" class="form-horizontal container">
 		<fieldset>
 			<legend>Configuração de envio de E-mail</legend>
-			<input type="hidden" id="id" name="id" value="${emailConfig.id}">
 			<div class="control-group">
 				<label class="control-label">E-mail</label>
 				<div class="controls">
-					<input id="email" name="email" type="text" placeholder="E-mail" 
-					value="${emailConfig.email}" class="input-xlarge" required>
+					<input id="email" name="email" type="text" placeholder="E-mail" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			
 			<div class="control-group">
 				<label class="control-label">Senha</label>
 				<div class="controls">
-					<input id="senha" name="senha" type="password" placeholder="Senha"
-					value="${emailConfig.senha}" class="input-xlarge" required>
+					<input id="senha" name="senha" type="password" placeholder="Senha" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Servidor SMTP</label>
 				<div class="controls">
-					<input id="smtp" name="smtp" type="text" placeholder="Servidor SMTP"
-					value="${emailConfig.smtp}" class="input-xlarge" required>
+					<input id="smtp" name="smtp" type="text" placeholder="Servidor SMTP" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Porta SMTP</label>
 				<div class="controls">
-					<input id="portaSmtp" name="portaSmtp" type="text" placeholder="Porta SMTP"
-					value="${emailConfig.portaSmtp}" class="input-xlarge" required>
+					<input id="portaSmtp" name="portaSmtp" type="text" placeholder="Porta SMTP" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -54,7 +49,7 @@
 				<div class="controls">
 					<select class="selectpicker" id="autenticacao"
 						name="autenticacao">
-						<option>${emailConfig.autenticacao}</option>
+						<option></option>
 						<option>true</option>
 						<option>false</option>
 					</select>
@@ -65,7 +60,7 @@
 				<div class="controls">
 					<select class="selectpicker" id="sslStatus"
 						name="sslStatus">
-						<option>${emailConfig.sslStatus}</option>
+						<option></option>
 						<option>true</option>
 						<option>false</option>
 					</select>
@@ -74,62 +69,30 @@
 			<div class="control-group">
 				<label class="control-label">Assunto</label>
 				<div class="controls">
-					<input class="form-control" id="assunto" name="assunto" type="text"
-					value="${emailConfig.assunto}" placeholder="Assunto do e-Mail"
-						class="input-xlarge"/>
+					<textarea class="form-control" rows="4" id="assunto" name="assunto" type="text" placeholder="Assunto do e-Mail"
+						class="input-xlarge"></textarea>
 				</div>
 			</div>
+			
 			<div class="control-group">
-				<label class="control-label">Cópia Para</label>
+				<label class="control-label">Cópia para</label>
 				<div class="controls">
-					<input class="form-control" id="cc" name="cc" type="text"
-					value="${emailConfig.cc}" placeholder="Recebe uma cópia"
-						class="input-xlarge"/>
+					<textarea class="form-control" rows="4" id="cc" name="cc" type="text" placeholder="Recebe uma cópia"
+						class="input-xlarge"></textarea>
 				</div>
 			</div>
-	
 			<div class="control-group">
 				<label class="control-label">Mensagem</label>
 				<div class="controls">
-					<textarea class="form-control" rows="4" id="mensagem" name="mensagem" type="text" 
-					placeholder="Mensagem do e-Mail"
-						class="input-xlarge">${emailConfig.mensagem}</textarea>
+					<textarea class="form-control" rows="4" id="mensagem" name="mensagem" type="text" placeholder="Mensagem do e-Mail"
+						class="input-xlarge"></textarea>
 				</div>
 			</div>
-			
-			<!-- ASSINATURA DE EMAIL  -->
-			<div class="control-group">
-				<label class="control-label">Nome na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="nomeAssinatura" name="nomeAssinatura" type="text" 
-					placeholder="Nome na assinatura"
-						class="input-xlarge">${emailConfig.nomeAssinatura}</textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefone na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="numeroAssinatura" name="numeroAssinatura" type="text" 
-					 placeholder="Numero na assinatura"
-						class="input-xlarge">${emailConfig.numeroAssinatura}</textarea>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">E-mail na Assinatura</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="emailAssinatura" name="emailAssinatura" type="text" 
-					placeholder="E-mail na assinatura"
-						class="input-xlarge">${emailConfig.emailAssinatura}</textarea>
-				</div>
-			</div>
-			<!-- ASSINATURA DE EMAIL  -->
-			
 			<div class="control-group">
 				<label class="control-label">Função do E-mail</label>
 				<div class="controls">
 					<select class="selectpicker" id="funcaoDoEmail"
 						name="funcaoDoEmail">
-						<option>${emailConfig.funcaoDoEmail}</option>
 						<option>Abertura</option>
 						<option>Encerramento</option>
 						<option>Agendamento</option>
