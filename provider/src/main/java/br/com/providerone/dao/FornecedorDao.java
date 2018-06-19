@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.providerone.entitymanager.EntityFactory;
+import br.com.providerone.modelo.Fornecedor;
 
 public class FornecedorDao {
 	EntityManager manager;

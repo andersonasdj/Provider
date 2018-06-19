@@ -27,6 +27,24 @@ public class ComputadorDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+
+	public Computador buscarPorId(Long id) {
+		Computador computador;
+		manager.getTransaction().begin();
+		computador = manager.find(Computador.class, id);
+		manager.getTransaction().commit();
+		manager.close();
+		return computador;
+	}
+	
+	public void atualizar(Computador computador, Cliente cliente) {
+		computador.setCliente(cliente);
+		computador.setDataAtualizacao(Calendar.getInstance());
+		manager.getTransaction().begin();
+		manager.merge(computador);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Computador> listaComputador() {
@@ -68,24 +86,6 @@ public class ComputadorDao {
 		} finally {
 			manager.close();
 		}
-	}
-	
-	public Computador buscarPorId(Long id) {
-		Computador computador;
-		manager.getTransaction().begin();
-		computador = manager.find(Computador.class, id);
-		manager.getTransaction().commit();
-		manager.close();
-		return computador;
-	}
-	
-	public void atualizar(Computador computador, Cliente cliente) {
-		computador.setCliente(cliente);
-		computador.setDataAtualizacao(Calendar.getInstance());
-		manager.getTransaction().begin();
-		manager.merge(computador);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 	
 	public Long listaQtdComputadoresPorIdDoCliente(Long id) {

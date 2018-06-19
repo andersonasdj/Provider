@@ -72,6 +72,7 @@ public class SolicitacaoDao {
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
+		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -93,6 +94,7 @@ public class SolicitacaoDao {
 		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
 		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
+		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
@@ -135,6 +137,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatus("Em andamento");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
+		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -169,6 +172,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatus("Agendado");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
+		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -375,8 +379,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
 			query.setParameter("pFuncionarioId", id);
+			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Aberto");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -397,8 +402,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao");
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pClassificacao", "Backup");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -417,8 +423,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
 			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pClassificacao", "Backup");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -438,8 +445,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
 			query.setParameter("pFuncionarioId", id);
+			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Agendado");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -459,8 +467,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pClassificacao", "Backup");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -479,8 +488,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
 			query.setParameter("pFuncionarioId", id);
+			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Em andamento");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -496,12 +506,14 @@ public class SolicitacaoDao {
 		}
 	}
 	
+	
 	public Long listaQtdSolicitacoesAguardandoPorIdDoTecnico(Long id) {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
 			query.setParameter("pFuncionarioId", id);
+			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Aguardando usuario");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -521,8 +533,9 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pClassificacao", "Backup");
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -605,18 +618,17 @@ public class SolicitacaoDao {
 		} 
 	}
 	
+	// FILTRANDO CHAMADOS DE BACKUP *****************
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaTodasSolicitacoes() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus1 or s.status=:pStatus2 or s.status=:pStatus3 or s.status=:pStatus4 order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus order by s.id desc");
 			
-			query.setParameter("pStatus1", "Aberto");
-			query.setParameter("pStatus2", "Agendado");
-			query.setParameter("pStatus3", "Em andamento");
-			query.setParameter("pStatus4", "Aguardando usuario");
+			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pStatus", "Finalizado");
 			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -1150,6 +1162,7 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
 		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
+		
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
 		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -1193,5 +1206,31 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listarSolicitacoesBackupNaoConcluidas() {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.classificacao=:pClassificacao and s.status!=:pStatus order by s.id desc");
+			
+			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pClassificacao", "Backup");
+			
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	//*******************************************************
 
 }

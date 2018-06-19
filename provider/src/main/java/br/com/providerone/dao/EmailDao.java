@@ -42,6 +42,13 @@ public class EmailDao {
 		manager.close();
 		return email;
 	}
+
+	public void atualizar(Email email) {
+		manager.getTransaction().begin();
+		manager.merge(email);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Email> listaEmailConfig() {
@@ -82,12 +89,5 @@ public class EmailDao {
 		} finally {
 			manager.close();
 		}
-	}
-
-	public void atualizar(Email email) {
-		manager.getTransaction().begin();
-		manager.merge(email);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

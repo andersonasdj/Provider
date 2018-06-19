@@ -122,6 +122,14 @@
 						class="input-xlarge">${emailConfig.emailAssinatura}</textarea>
 				</div>
 			</div>
+				<div class="control-group">
+				<label class="control-label">Link de Dominio</label>
+				<div class="controls">
+					<input id="linkDominio" name="linkDominio" type="text" placeholder="Link de Domínio"
+					value="${emailConfig.linkDominio}" class="input-xlarge" required>
+					<p class="help-block">* Campo Obrigatório</p>
+				</div>
+			</div>
 			<!-- ASSINATURA DE EMAIL  -->
 			
 			<div class="control-group">

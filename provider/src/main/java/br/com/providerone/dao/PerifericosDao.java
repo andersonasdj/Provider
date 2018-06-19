@@ -39,6 +39,13 @@ public class PerifericosDao {
 		manager.close();
 		return periferico;
 	}
+
+	public void atualizar(Perifericos periferico) {
+		manager.getTransaction().begin();
+		manager.merge(periferico);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Perifericos> listaPerifericos() {
@@ -59,12 +66,5 @@ public class PerifericosDao {
 		} finally {
 			manager.close();
 		}
-	}
-
-	public void atualizar(Perifericos periferico) {
-		manager.getTransaction().begin();
-		manager.merge(periferico);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

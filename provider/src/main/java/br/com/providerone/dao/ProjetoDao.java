@@ -35,6 +35,13 @@ public class ProjetoDao {
 		return projeto;
 	}
 	
+	public void atualizar(Projeto projeto) {
+		manager.getTransaction().begin();
+		manager.merge(projeto);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Projeto> listaProjetos() {
 		List<Projeto> projetos = new ArrayList<Projeto>();
@@ -54,13 +61,6 @@ public class ProjetoDao {
 		} finally {
 			manager.close();
 		}
-	}
-	
-	public void atualizar(Projeto projeto) {
-		manager.getTransaction().begin();
-		manager.merge(projeto);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 	
 	public void excluirProjeto(Long id) {

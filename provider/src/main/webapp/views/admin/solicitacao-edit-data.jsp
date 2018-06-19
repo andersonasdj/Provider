@@ -44,7 +44,7 @@
 				<div class="control-group">
 					<label class="control-label">Data Andamento</label>
 					<div class="controls">
-						<input id="dataAndamento" name="dataAndamento" type="h" onKeyPress="DataHoraAndamento(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAndamento.time}" />">
+						<input id="dataAndamento" name="dataAndamento" type="hidden" onKeyPress="DataHoraAndamento(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAndamento.time}" />">
 					</div>
 				</div>
 			</c:if>

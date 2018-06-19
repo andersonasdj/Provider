@@ -42,6 +42,15 @@ public class TarefaDao {
 		return tarefa;
 	}
 
+	public void excluirTarefa(Long id) {
+		Tarefa tarefaExcluir = new Tarefa();
+		manager.getTransaction().begin();
+		tarefaExcluir = manager.find(Tarefa.class, id);
+		manager.remove(tarefaExcluir);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> listaTarefas() {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
@@ -83,14 +92,5 @@ public class TarefaDao {
 		} finally {
 			manager.close();
 		}
-	}
-	
-	public void excluirTarefa(Long id) {
-		Tarefa tarefaExcluir = new Tarefa();
-		manager.getTransaction().begin();
-		tarefaExcluir = manager.find(Tarefa.class, id);
-		manager.remove(tarefaExcluir);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

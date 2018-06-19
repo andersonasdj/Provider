@@ -17,8 +17,7 @@
 	<br />
 	<br />
 	<br />
-	<form action="gerarRelatorioAgendamento" method="post"
-		class="form-horizontal container">
+	<form action="gerarRelatorioAgendamento" method="post" class="form-horizontal container">
 		<fieldset></fieldset>
 			<legend>Relatório de Agendamento</legend>
 				<div class="control-group">

@@ -27,8 +27,8 @@ $(function(){
         monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
         'Jul','Ago','Set','Out','Nov','Dez'],
         dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
-        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
-        dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+        dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
+        dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sab'],
         weekHeader: 'Sm',
         dateFormat: 'dd-mm-yy',
         firstDay: 0,
@@ -43,14 +43,14 @@ $(function(){
 
     (function ($) {
         $.timepicker.regional['pt-BR'] = {
-            timeOnlyTitle: 'Escolha o horÃ¡rio',
-            timeText: 'HorÃ¡rio',
+            timeOnlyTitle: 'Escolha o horario',
+            timeText: 'Horario',
             hourText: 'Hora',
             minuteText: 'Minutos',
             secondText: 'Segundos',
             millisecText: 'Milissegundos',
             microsecText: 'Microssegundos',
-            timezoneText: 'Fuso horÃ¡rio',
+            timezoneText: 'Fuso horário',
             currentText: 'Agora',
             closeText: 'Fechar',
             timeFormat: 'HH:mm',

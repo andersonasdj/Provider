@@ -42,6 +42,16 @@
 			                  </ul>
 						</li>
 						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Backup <span class="caret"></span></a>
+			                  <ul class="dropdown-menu">
+			                  	<li class="dropdown-header">Listar</li>
+			                    <li><a href="backupDiario">Todos</a></li>
+			                    <li role="separator" class="divider"></li>
+			                    <li class="dropdown-header">Cadastro</li>
+			                    <li><a href="#">Relatórios</a></li>
+			                  </ul>
+						</li>
+						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Inventários <span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
 			                  	<li class="dropdown-header">Listar</li>

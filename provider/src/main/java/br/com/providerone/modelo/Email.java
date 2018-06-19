@@ -28,6 +28,7 @@ public class Email {
 	private String nomeAssinatura;
 	private String numeroAssinatura;
 	private String emailAssinatura;
+	private String linkDominio;
 	
 	public Long getId() {
 		return id;
@@ -147,5 +148,13 @@ public class Email {
 
 	public void setEmailAssinatura(String emailAssinatura) {
 		this.emailAssinatura = emailAssinatura;
+	}
+
+	public String getLinkDominio() {
+		return linkDominio;
+	}
+
+	public void setLinkDominio(String linkDominio) {
+		this.linkDominio = linkDominio;
 	}
 }

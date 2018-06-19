@@ -16,7 +16,7 @@
 			                    <li class="dropdown-header">Solicitações</li>
 			                    <li><a href="solicitacaoForm"><i class="fa fa-plus-square"> </i> Abrir Solicitação</a></li>
 			                    <li role="separator" class="divider"></li>
-			                    <li><a href="solicitacoesTecnico"><i class="fa fa-question-circle"> </i> Abertas</a></li>
+			                    <li><a href="solicitacoesAbertas"><i class="fa fa-question-circle"> </i> Abertas</a></li>
 			                    <li><a href="solicitacoesAgendadosTecnico"><i class="fa fa-clock-o"> </i> Agendadas</a></li>
 			                    <li><a href="solicitacoesAndamentoTecnico"><i class="fa fa-share"> </i> Em Andamento</a></li>
 			                    <li><a href="solicitacoesAguardandoTecnico"><i class="fa fa-thumbs-o-up"> </i> Aguardando usuário</a></li><li role="separator" class="divider"></li>
@@ -38,6 +38,16 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Clientes <span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
 			                    <li><a href="clientesList">Listar</a></li>
+			                  </ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Backup <span class="caret"></span></a>
+			                  <ul class="dropdown-menu">
+			                  	<li class="dropdown-header">Listar</li>
+			                    <li><a href="backupDiario">Todos</a></li>
+			                    <li role="separator" class="divider"></li>
+			                    <li class="dropdown-header">Cadastro</li>
+			                    <li><a href="#">Relatórios</a></li>
 			                  </ul>
 						</li>
 					</ul>

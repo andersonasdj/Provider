@@ -43,6 +43,13 @@ public class SistemaDao {
 		manager.close();
 		return sistema;
 	}
+
+	public void atualizar(Sistema sistema) {
+		manager.getTransaction().begin();
+		manager.merge(sistema);
+		manager.getTransaction().commit();
+		manager.close();
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Sistema> listaSistemaConfig() {
@@ -63,12 +70,5 @@ public class SistemaDao {
 		} finally {
 			manager.close();
 		}
-	}
-
-	public void atualizar(Sistema sistema) {
-		manager.getTransaction().begin();
-		manager.merge(sistema);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

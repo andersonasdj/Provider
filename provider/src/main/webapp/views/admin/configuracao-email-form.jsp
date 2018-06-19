@@ -111,6 +111,15 @@
 						class="input-xlarge"></textarea>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Link de Domínio</label>
+				<div class="controls">
+					<input id="linkDominio" name="linkDominio" type="text" placeholder="Link de Domínio" class="input-xlarge" required>
+					<p class="help-block">* Campo Obrigatório</p>
+				</div>
+			</div>
+			
 			<!-- ASSINATURA DE EMAIL  -->
 			
 			<div class="control-group">

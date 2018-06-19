@@ -1,4 +1,4 @@
-package br.com.providerone.dao;
+package br.com.providerone.modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

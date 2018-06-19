@@ -45,10 +45,10 @@
 		<legend></legend>
 		<c:if test="${qtdAberto == '0'}"></c:if>
 		<c:if test="${qtdAberto == '1'}">
-			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAberto} solicitação <a href="solicitacoesTecnico">Aberta! <i class="fa fa-question-circle"></i></a></h4>
+			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAberto} solicitação <a href="solicitacoesAbertas">Aberta! <i class="fa fa-question-circle"></i></a></h4>
 		</c:if>	
 		<c:if test="${qtdAberto > '1'}">
-			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAberto} solicitações <a href="solicitacoesTecnico">Abertas! <i class="fa fa-hourglass-half"></i></a></h4>
+			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAberto} solicitações <a href="solicitacoesAbertas">Abertas! <i class="fa fa-hourglass-half"></i></a></h4>
 		</c:if><br/>
 		<c:if test="${qtdAgendado == '0'}"></c:if>
 		<c:if test="${qtdAgendado == '1'}">

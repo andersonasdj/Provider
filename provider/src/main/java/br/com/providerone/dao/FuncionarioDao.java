@@ -59,6 +59,28 @@ public class FuncionarioDao {
 		return funcionario;
 	}
 
+	public void atualizar(Funcionario funcionario) {
+		funcionario.setDataAtualizacao(Calendar.getInstance());
+		
+		manager.getTransaction().begin();
+		manager.merge(funcionario);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	public void atualizarSenha(Funcionario funcionario) {
+		
+		funcionario.setDataAtualizacao(Calendar.getInstance());
+		//CRIPTOGRAFA SENHA
+			String senhaCriptografada = Criptografia.converteSenhaParaMD5(funcionario.getSenha());
+			funcionario.setSenha(senhaCriptografada);
+		//CRIPTOGRAFA SENHA
+		manager.getTransaction().begin();
+		manager.merge(funcionario);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	public Funcionario existeFuncionario(Funcionario funcionario) {
 		Funcionario funcionarioEncontrado = new Funcionario();
 
@@ -147,6 +169,7 @@ public class FuncionarioDao {
 			manager.close();
 		}
 	}
+
 	@SuppressWarnings("unchecked")
 	public List<Funcionario> listaFuncionarioAtivo() {
 		List<Funcionario> funcionarios = new ArrayList<Funcionario>();
@@ -166,27 +189,5 @@ public class FuncionarioDao {
 		} finally {
 			manager.close();
 		}
-	}
-
-	public void atualizar(Funcionario funcionario) {
-		funcionario.setDataAtualizacao(Calendar.getInstance());
-		
-		manager.getTransaction().begin();
-		manager.merge(funcionario);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	
-	public void atualizarSenha(Funcionario funcionario) {
-		
-		funcionario.setDataAtualizacao(Calendar.getInstance());
-		//CRIPTOGRAFA SENHA
-			String senhaCriptografada = Criptografia.converteSenhaParaMD5(funcionario.getSenha());
-			funcionario.setSenha(senhaCriptografada);
-		//CRIPTOGRAFA SENHA
-		manager.getTransaction().begin();
-		manager.merge(funcionario);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

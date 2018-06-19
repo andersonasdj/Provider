@@ -17,7 +17,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="salvarSolicitacaoAdmin" method="post" class="form-horizontal container">
+	<form action="salvarSolicitacao" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Solicitação de Atendimento</legend>
 			<div class="control-group">
@@ -101,6 +101,7 @@
 						<option>Cabeamento</option>
 						<option>Smartphone</option>
 						<option>Projeto</option>
+						<option>Backup</option>
 						<option>Outros</option>
 					</select>
 				</div>
@@ -117,6 +118,7 @@
 						<option>Problema</option>
 						<option>Incidente</option>
 						<option>Solicitação</option>
+						<option>Backup</option>
 					</select>
 				</div>
 			</div> 
@@ -160,7 +162,6 @@
 						<option>Em andamento</option>
 						<option>Agendar</option>
 					</select>
-					<img src="assets/img/novo.png" class="img-circle iconeNovo">
 				</div>
 			</div>
 			

@@ -17,7 +17,7 @@
 	<div class="container">
 	<legend></legend>
 		<span id="botoes-status""></span>
-		<div align="center"><a class="btn btn-danger" href="solicitacoesTecnico" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
+		<div align="center"><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
 		 - <a class="btn btn-info" href="solicitacoesAndamentoTecnico" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
 		 - <a class="btn btn-warning" href="solicitacoesAgendadosTecnico" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
 		 - <a class="btn btn-success" href="solicitacoesAguardandoTecnico" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a>

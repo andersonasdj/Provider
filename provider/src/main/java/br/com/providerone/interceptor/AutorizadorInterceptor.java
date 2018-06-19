@@ -7,14 +7,14 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
-	public boolean preHandle(HttpServletRequest request,
-			HttpServletResponse response, Object controller) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object controller) throws Exception {
 
 		String uri = request.getRequestURI();
 		if (uri.endsWith("login") || uri.endsWith("loginMobile") 
 				|| uri.endsWith("create") || uri.endsWith("gravaAdmin")
 				|| uri.endsWith("logar") || uri.endsWith("logarMobile") 
-				|| uri.contains("assets")) {
+				|| uri.contains("assets") || uri.endsWith("protocolo")
+				|| uri.endsWith("exibirProtocolo")) {
 			return true;
 		}
 		if (request.getSession().getAttribute("clienteLogado") != null) {

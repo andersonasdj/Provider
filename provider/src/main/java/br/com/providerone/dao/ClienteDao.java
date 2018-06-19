@@ -49,6 +49,18 @@ public class ClienteDao {
 		return cliente;
 	}
 
+	public void atualizar(Cliente cliente) {
+		cliente.setDataAtualizacao(Calendar.getInstance());
+		//CRIPTOGRAFA SENHA
+			String senhaCriptografada = Criptografia.converteSenhaParaMD5(cliente.getSenha());
+			cliente.setSenha(senhaCriptografada);
+		//CRIPTOGRAFA SENHA
+		manager.getTransaction().begin();
+		manager.merge(cliente);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	public Cliente buscaClienteUsuarioESenha(String usuario, String senha) {
 		Cliente clienteEncontrado = new Cliente();
 		//CRIPTOGRAFA SENHA 
@@ -138,17 +150,5 @@ public class ClienteDao {
 		} finally {
 			manager.close();
 		}
-	}
-
-	public void atualizar(Cliente cliente) {
-		cliente.setDataAtualizacao(Calendar.getInstance());
-		//CRIPTOGRAFA SENHA
-			String senhaCriptografada = Criptografia.converteSenhaParaMD5(cliente.getSenha());
-			cliente.setSenha(senhaCriptografada);
-		//CRIPTOGRAFA SENHA
-		manager.getTransaction().begin();
-		manager.merge(cliente);
-		manager.getTransaction().commit();
-		manager.close();
 	}
 }

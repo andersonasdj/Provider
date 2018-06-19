@@ -89,24 +89,13 @@
 				</div>
 			</div>
 			
-			<c:if test="${not empty solicitacao.dataAndamento.time}">
-				<div class="control-group">
-					<label class="control-label">Data Andamento</label>
-					<div class="controls">
-						<input id="dataAndamento" name="dataAndamento" type="text" onKeyPress="DataHoraAndamento(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAndamento.time}" />">
-						<i class="fa fa-calendar" aria-hidden="true"></i>
-					</div>
+			<div class="control-group">
+				<label class="control-label">Data Andamento</label>
+				<div class="controls">
+					<input id="dataAndamento" name="dataAndamento" type="text" onKeyPress="DataHoraAndamento(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAndamento.time}" />">
+					<i class="fa fa-calendar" aria-hidden="true"></i>
 				</div>
-			</c:if>
-			<c:if test="${empty solicitacao.dataAndamento.time}">
-				<div class="control-group">
-					<label class="control-label">Data Andamento</label>
-					<div class="controls">
-						<input id="dataAndamento" name="dataAndamento" type="hidden" onKeyPress="DataHoraAndamento(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAndamento.time}" />">
-						<i class="fa fa-calendar" aria-hidden="true"></i>
-					</div>
-				</div>
-			</c:if>
+			</div>
 			
 			<div class="control-group">
 				<label class="control-label">Data Fechamento</label>
@@ -152,7 +141,14 @@
 						<option></option>
 					</select>
 				</div>
-			</div> 
+			</div>
+			<div class="control-group">
+				<label class="control-label">Solicitante</label>
+				<div class="controls">
+					<input id="solicitante" name="solicitante" type="text"
+						value="${solicitacao.solicitante}" class="input-xlarge">
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Usuario Afetado</label>
 				<div class="controls">

@@ -15,24 +15,7 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
-		<div class="container">
-			<legend align="center">Resumo de solicitações</legend>
-			<div class="row">
-				<div class="col-md-7"><div id="grafico"></div></div>
-				<div class="col-md-5">
-					<div id="botoesRelatorio">
-						<br/><br/>
-						<p><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a></p>
-						<p><a class="btn btn-primary" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
-						<p><a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a></p>
-						<p><a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a></p>
-						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações <i class="fa fa-search"></i></a></p>
-						<p><a class="btn btn-info" href="relatorioOp" role="button">Relatórios <i class="fa fa-database"></i></a></p>
-					</div>
-				</div>
-			</div>
-			<legend id="grafico"></legend>
-		</div>
+		
 		
 		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
@@ -62,7 +45,7 @@
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="solicitante" data-sortable="true">Solicitante</th>
 				<th data-field="usuario" data-sortable="true">Usuário Afetado</th>
-				<th data-field="descricaoProblema">Problema Relatado</th>
+				<th data-field="descricaoProblema">Descrição da Solicitação</th>
 				<th data-field="dataEncerramento">Data / Hora Encerramento</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
@@ -119,8 +102,11 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+						<c:if test="${solicitacao.funcionario.nome eq tecnicoLogado.nome}">
+							<td>
+								<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>  
+							</td>
+						</c:if>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Finalizado'}">
@@ -174,8 +160,11 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+						<c:if test="${solicitacao.funcionario.nome eq tecnicoLogado.nome}">
+							<td>
+								<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>  
+							</td>
+						</c:if>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Agendado'}">
@@ -230,8 +219,11 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>		
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+						<c:if test="${solicitacao.funcionario.nome eq tecnicoLogado.nome}">
+							<td>
+								<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>  
+							</td>
+						</c:if>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Em andamento'}">
@@ -284,8 +276,12 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+						
+						<c:if test="${solicitacao.funcionario.nome eq tecnicoLogado.nome}">
+							<td>
+								<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>  
+							</td>
+						</c:if>
 					</tr>
 				</c:if>
 				
@@ -338,17 +334,16 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+						
+						<c:if test="${solicitacao.funcionario.nome eq tecnicoLogado.nome}">
+							<td>
+								<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>  
+							</td>
+						</c:if>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</table>
-		
-		<input type="hidden" name="abertas" id="aberto" value="${qtdAberto}">
-		<input type="hidden" name="agendadas" id="agendado" value="${qtdAgendado}"> 
-		<input type="hidden" name="abertas" id="andamento" value="${qtdAndamento}"> 
-		<input type="hidden" name="aguardando" id="aguardando" value="${qtdAguardando}"> 
 		
 	<br /><br />
 	<legend></legend>
@@ -360,8 +355,6 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script type="text/javascript" src="https://google.com/jsapi"></script>
-	<script src="assets/js/grafico.js"></script>
 	<script>
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");

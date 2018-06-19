@@ -56,7 +56,8 @@
 				<th data-field="dataAbertura">Data / Hora Abertura</th>
 				<th>Site</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
-				<th>Usuário</th>
+				<th>Solicitante</th>
+				<th>Usuário Afetado</th>
 				<th>Problema Relatado</th>
 				<th>Email de Abertura</th>
 				<th>Status</th>
@@ -102,6 +103,7 @@
 							</span>
 						</a>
 					</td>
+					<td>${solicitacao.solicitante}</td>
 					<td>${solicitacao.usuario}</td>
 					<td>
 						<a class="dcontexto" href="#janela1" onclick="mostraJanela('${solicitacao.descricaoProblema}','${solicitacao.obs}','${solicitacao.prioridade}')" rel="modal"> ${solicitacao.descricaoProblema}

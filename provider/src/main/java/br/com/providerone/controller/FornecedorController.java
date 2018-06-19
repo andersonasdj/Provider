@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.providerone.dao.Fornecedor;
 import br.com.providerone.dao.FornecedorDao;
+import br.com.providerone.modelo.Fornecedor;
 
 @Controller
 public class FornecedorController {

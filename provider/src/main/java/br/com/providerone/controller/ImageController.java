@@ -66,7 +66,7 @@ public class ImageController {
 						
 						g.setFont(fnt);
 						g.setColor(Color.RED);
-						g.drawString("ProviderOne", 20, 70);
+						g.drawString("ProviderOne", 20, 70); //remover posteriormente essa linha
 						
 						File out = new File(caminhoReal+file.getOriginalFilename());
 						ImageIO.write(bimg, "jpeg", out);
@@ -102,7 +102,7 @@ public class ImageController {
 						
 						g.setFont(fnt);
 						g.setColor(Color.RED);
-						g.drawString("ProviderOne", 20, 70);
+						g.drawString("ProviderOne", 20, 70); //remover posteriormente essa linha
 						
 						File out = new File(caminhoReal+file.getOriginalFilename());
 						ImageIO.write(bimg, "jpeg", out);

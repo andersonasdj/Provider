@@ -1,6 +1,6 @@
 <footer>
 	<p class="pull-right">
-		<a href="#">Versão: 1.1</a>
+		<a href="#">Versão: 1.2</a>
 	</p>
 	<p class="pull-left">
 		<a href="#"><i class="fa fa-hand-o-up"> </i> Back to top</a>
