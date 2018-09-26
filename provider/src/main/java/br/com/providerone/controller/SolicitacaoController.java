@@ -91,7 +91,7 @@ public class SolicitacaoController {
 			return "redirect:solicitacoesAbertas";
 		} if (session.getAttribute("tecnicoLogado") != null) {
 			GravaSolicTecAdmin(solicitacao, nomeDoCliente, nomeDoFuncionario);
-			return "redirect:solicitacoesTecnico";
+			return "redirect:solicitacoesAbertas";
 		} if (session.getAttribute("clienteLogado") != null) { //EM OBS
 			SolicitacaoDao dao = new SolicitacaoDao();
 			solicitacao.setStatus("Aberto");
@@ -100,6 +100,7 @@ public class SolicitacaoController {
 			solicitacao.setAbriuChamado(cliente.getNome());
 			solicitacao.setFormaAbertura("Aberto pelo cliente");
 			String log = solicitacao.geraLogSolicitacao(null, cliente);
+			solicitacao.setSenha(solicitacao.geraSenha());
 			solicitacao.setAndamentoDoChamado(log);
 			solicitacao.setClassificacao("Solicitação");
 			dao.salvaSolicitcao(solicitacao);
@@ -472,7 +473,20 @@ public class SolicitacaoController {
 			Solicitacao solicitacaoEditada = new Solicitacao();
 			solicitacaoEditada = dao.buscaSolicitacaoId(id);
 			model.addAttribute("solicitacao", solicitacaoEditada);
-			return "funcionario/solicitacao-backup-edit";
+			return "funcionario/solicitacao-edit";
+		} else {
+			return "redirect:login";
+		}
+	}
+	@RequestMapping("/solicitacaoEditFuncionarioFull")
+	public String solicitacaoEditFuncionarioFull(Long id, HttpSession session,
+			Model model) {
+		if (session.getAttribute("tecnicoLogado") != null) {
+			SolicitacaoDao dao = new SolicitacaoDao();
+			Solicitacao solicitacaoEditada = new Solicitacao();
+			solicitacaoEditada = dao.buscaSolicitacaoId(id);
+			model.addAttribute("solicitacao", solicitacaoEditada);
+			return "funcionario/solicitacao-edit-full";
 		} else {
 			return "redirect:login";
 		}
@@ -553,25 +567,29 @@ public class SolicitacaoController {
 			
 			if (solicitacao.getStatus().equals("Finalizar")) {
 				dao.finalizaSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAbertas";
+			}
+			if (solicitacao.getStatus().equals("Finalizado")) { //TESTE
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Aberto")) {
 				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Em andamento")) {
 				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAndamentoTecnico";
 			}
 			if (solicitacao.getStatus().equals("Agendado")) {
 				dao.solicitacaoAgendado(solicitacao, funcionarioASalvar, funcionarioLogado);
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAgendadosTecnico";
 			}
 			if (solicitacao.getStatus().equals("Aguardando usuario")) {
 				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAguardandoTecnico";
 			} else {
-				return "redirect:solicitacoesTecnico";
+				return "redirect:solicitacoesAbertas";
 			}
 		} else {
 			return "redirect:login";
@@ -805,6 +823,15 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorDataFinalizacao(hoje));
 			return "admin/funcionario-relatorio";
+		}if (session.getAttribute("tecnicoLogado") != null) {
+			Funcionario funcionario = (Funcionario) session.getAttribute("tecnicoLogado");
+			Calendar hoje = Calendar.getInstance();
+			hoje.set(Calendar.HOUR_OF_DAY, 0);
+			hoje.set(Calendar.MINUTE, 0);
+			hoje.set(Calendar.SECOND, 0);
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorDataFinalizacaoFuncionario(hoje, funcionario.getNome()));
+			return "funcionario/funcionario-relatorio";
 		} else {
 			return "redirect:login";
 		}
@@ -1149,31 +1176,46 @@ public class SolicitacaoController {
 	@RequestMapping("/atualizarSolicitacaoCompleta")
 	public String atualizarSolicitacaoCompleta(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, String dataAbertura, String dataAndamento, String dataFechamento, String nomeDoCliente, HttpSession session) throws ParseException {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			SolicitacaoDao dao = new SolicitacaoDao();
-			FuncionarioDao daoFun = new FuncionarioDao();
-			Funcionario funcionarioASalvar = daoFun.buscaNomeFuncionario(nomeDoFuncionario);
-			
-			SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-			
-			Calendar dtAb = Calendar.getInstance();
-			Date dt1 = df.parse(dataAbertura);
-			dtAb.setTime(dt1);
-			solicitacao.setDataAbertura(dtAb);
-			
-			Calendar dtAn = Calendar.getInstance();
-			Date dt2 = df.parse(dataAndamento);
-			dtAn.setTime(dt2);
-			solicitacao.setDataAndamento(dtAn);
-			
-			Calendar dtFe = Calendar.getInstance();
-			Date dt3 = df.parse(dataFechamento);
-			dtFe.setTime(dt3);
-			solicitacao.setDataFechamento(dtFe);
-			
-			dao.atualizarSolicitacaoCompleta(solicitacao, funcionarioASalvar, funcionarioLogado);
+			atualizacaoCompleta(solicitacao, nomeDoFuncionario,
+					funcionarioLogado, dataAbertura, dataAndamento,
+					dataFechamento);
 			return "redirect:relatorioPorCliente"+"?nomeDoCliente="+nomeDoCliente;
-		} else {
+		}if (session.getAttribute("tecnicoLogado") != null) {
+			atualizacaoCompleta(solicitacao, nomeDoFuncionario,
+					funcionarioLogado, dataAbertura, dataAndamento,
+					dataFechamento);
+			return "redirect:finalizadoHoje";
+		}
+		
+		else {
 			return "redirect:login";
 		}
+	}
+	private void atualizacaoCompleta(Solicitacao solicitacao,
+			String nomeDoFuncionario, String funcionarioLogado,
+			String dataAbertura, String dataAndamento, String dataFechamento)
+			throws ParseException {
+		SolicitacaoDao dao = new SolicitacaoDao();
+		FuncionarioDao daoFun = new FuncionarioDao();
+		Funcionario funcionarioASalvar = daoFun.buscaNomeFuncionario(nomeDoFuncionario);
+		
+		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		
+		Calendar dtAb = Calendar.getInstance();
+		Date dt1 = df.parse(dataAbertura);
+		dtAb.setTime(dt1);
+		solicitacao.setDataAbertura(dtAb);
+		
+		Calendar dtAn = Calendar.getInstance();
+		Date dt2 = df.parse(dataAndamento);
+		dtAn.setTime(dt2);
+		solicitacao.setDataAndamento(dtAn);
+		
+		Calendar dtFe = Calendar.getInstance();
+		Date dt3 = df.parse(dataFechamento);
+		dtFe.setTime(dt3);
+		solicitacao.setDataFechamento(dtFe);
+		
+		dao.atualizarSolicitacaoCompleta(solicitacao, funcionarioASalvar, funcionarioLogado);
 	}
 }

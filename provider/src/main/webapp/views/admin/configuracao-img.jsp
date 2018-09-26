@@ -20,6 +20,7 @@
 				<label class="control-label">Caminho raiz</label>
 				<div class="controls">
 					<input id="caminho" name="caminho" type="text" placeholder="Caminho raiz" class="input-xlarge" required>
+					<small>EX: C:\Users\Sisgold\Documents\Projetos\SisGold\Sisgold\src\main\webapp\assets\img\perfil\</small>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>

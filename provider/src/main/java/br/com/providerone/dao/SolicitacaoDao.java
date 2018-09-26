@@ -925,6 +925,31 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesPorDataFinalizacaoFuncionario(Calendar dataAbertura, String funcionario) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.funcionario.nome = :pFuncionario and s.status=:pStatus and s.dataFechamento > :pData");
+			
+			query.setParameter("pFuncionario", funcionario);
+			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
 	//##########################################################################################
 	
 	@SuppressWarnings("unchecked")

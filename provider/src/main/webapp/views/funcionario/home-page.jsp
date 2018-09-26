@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ProviderOne | Home Page</title>
+	<title>ProviderOne | Início</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
@@ -13,7 +13,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/>
-	<section class="">	
+	<div class="container">
 		<aside class="">
 			<a href="upload" >
 				<c:if test="${empty tecnicoLogado.caminhoFoto}">
@@ -31,14 +31,15 @@
 				<p class="asid-linha">Bem vindo, ${tecnicoLogado.nome}</p>
 			</div>
 		</aside>
-	</section>
+	
 	<br/><br/>
-	<div class="container" id="imagem">
-		<p>
-		<font size="2" face="Verdana">
-		<a href="upload" > Alterar imagem </a>
-		</font>
-		</p>
+		<div class="container" id="imagem">
+			<p>
+			<font size="2" face="Verdana">
+			<a href="upload" > Alterar imagem </a>
+			</font>
+			</p>
+		</div>
 	</div>
 	<br/><br/><br/><br/>
 	<div class="container">

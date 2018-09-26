@@ -13,9 +13,9 @@
 	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
 </head>
 <body>
-	<c:import url="barra-menus.jsp"></c:import>
+	<c:import url="barra-menus.jsp"></c:import>atualizarSolicitacaoCompleta
 	<br/><br/>
-	<form action="atualizarSolicitacaoFuncionario" method="post"
+	<form action="atualizarSolicitacaoCompleta" method="post"
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Edição de Solicitação</legend>

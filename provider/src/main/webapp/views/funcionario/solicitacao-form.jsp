@@ -51,16 +51,26 @@
 					<input id="dataAbertura" name="dataAbertura" type="hidden" value="<%= Calendar.getInstance()%>" class="input-xlarge" disabled="disabled">
 				</div>
 			</div>
+			<!--
 			<div class="control-group">
 				<div class="controls">
-					<!--  <input id="cliente.id" name="cliente.id" type="hidden" value="${clienteLogado.id}" class="input-xlarge"> -->
-					<!--  <input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden" value="${tecnicoLogado.nome}" class="input-xlarge"> -->
+					  <input id="cliente.id" name="cliente.id" type="hidden" value="${clienteLogado.id}" class="input-xlarge">
+					  <input id="nomeDoFuncionario" name="nomeDoFuncionario" type="hidden" value="${tecnicoLogado.nome}" class="input-xlarge"
 				</div>
 			</div>
+			 -->
+			<div class="control-group">
+				<label class="control-label">Solicitante</label>
+				<div class="controls">
+					<input id="solicitante" name="solicitante" type="text" placeholder="Quem solicitou" class="input-xlarge">
+				</div>
+			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Usuario Afetado</label>
 				<div class="controls">
-					<input id="nome" name="usuario" type="text" placeholder="Usuário" class="input-xlarge" required>
+					<input id="usuario" name="usuario" type="text" placeholder="Usuário" class="input-xlarge" required>
+					<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -229,7 +239,6 @@
 			}
 		} );
 	</script>
-	
     <script type="text/javascript">
 	    function limite_textarea_prob(valor) {
 	        quant = 255;
@@ -254,4 +263,10 @@
 	        }
 	    }
     </script>
+    <script>
+		function copiaSolicitante(){
+			var solicitante = $('#solicitante').val();
+			$('#usuario').val(solicitante);
+		}
+	</script>
 </html>

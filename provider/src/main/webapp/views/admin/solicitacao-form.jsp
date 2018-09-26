@@ -61,7 +61,8 @@
 			<div class="control-group">
 				<label class="control-label">Usuario Afetado</label>
 				<div class="controls">
-					<input id="nome" name="usuario" type="text" placeholder="Usuário" class="input-xlarge" required>
+					<input id="usuario" name="usuario" type="text" placeholder="Usuário" class="input-xlarge" required>
+					<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -266,8 +267,6 @@
 	        }
 	    }
     </script>
-    
-    
     <script>
 		var divEmail = $("#boxEmail");
 		var email = $("#destinatario").val();
@@ -277,5 +276,11 @@
 				document.getElementById('destinatario').style.display = 'block';
 		
 		} );
+	</script>
+	<script>
+		function copiaSolicitante(){
+			var solicitante = $('#solicitante').val();
+			$('#usuario').val(solicitante);
+		}
 	</script>
 </html>

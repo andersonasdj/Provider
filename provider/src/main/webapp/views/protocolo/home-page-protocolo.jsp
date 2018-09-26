@@ -34,7 +34,8 @@
   					<c:if test="${not empty protocoloValido.obs}"><li class="espacamento"><b>Observação: </b> ${protocoloValido.obs}</li></c:if>
   					<c:if test="${not empty protocoloValido.formaAbertura}"><li class="espacamento"><b>Forma de Abertura: </b> ${protocoloValido.formaAbertura}</li></c:if>
   					<c:if test="${not empty protocoloValido.onsiteOffsite}"><li class="espacamento"><b>Local: </b> ${protocoloValido.onsiteOffsite}</li></c:if>
-  					<c:if test="${not empty protocoloValido.nivelDeIncidencia}"><li class="espacamento"><b>Nivel de Incidência: </b> ${protocoloValido.nivelDeIncidencia}</li></c:if>
+  					<c:if test="${not empty protocoloValido.nivelDeIncidencia}"><li class="espacamento"><b>Classificação: </b> ${protocoloValido.nivelDeIncidencia}</li></c:if>
+  					<c:if test="${not empty protocoloValido.funcionario.nome}"><li class="espacamento"><b>Técnico Resposável: </b> ${protocoloValido.funcionario.nome}</li></c:if>
   					
   					<c:if test="${protocoloValido.status == 'Agendado'}"> 
   						<li class="espacamento"><b>Status: </b> <span class="amarelo">  ${protocoloValido.status}</span>
@@ -48,6 +49,7 @@
   					<c:if test="${protocoloValido.status == 'Finalizado'}">
   						<li class="espacamento"><b>Status: </b><span class="verde">  ${protocoloValido.status}</span>
   							<ul>
+  								<li class="espacamento"><b>Resolução: </b> ${protocoloValido.resolucao} </li>
   								<li class="espacamento"><b>Tempo total de Atendimento: </b> ${protocoloValido.tempoDeAndamento} </li>
   							</ul>
   						</li>

@@ -22,6 +22,7 @@
 			                    <li><a href="solicitacoesAguardandoTecnico"><i class="fa fa-thumbs-o-up"> </i> Aguardando usuário</a></li><li role="separator" class="divider"></li>
 			                    <li class="dropdown-header">Relatório Geral</li>
 			                    <li><a href="relatorioTecnico"><i class="fa fa-pie-chart"> </i> Relatório</a></li>
+			                     <li><a href="finalizadoHoje"><i class="fa fa-pie-chart"> </i> Finalizados Hoje</a></li>
 			                  </ul>
 						</li>
 						<li class="dropdown">

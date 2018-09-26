@@ -60,6 +60,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Senha</label>
+				<div class="controls">
+					<input id="senha" name="senha" type="text" value="${solicitacao.senha}" class="input-xlarge" disabled="disabled">
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">Forma de Abertura</label>
 				<div class="controls">
 					<select class="selectpicker" id="formaAbertura"
@@ -85,6 +91,7 @@
 				<div class="controls">
 					<input id="usuario" name="usuario" type="text"
 						value="${solicitacao.usuario}" class="input-xlarge" required>
+						<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -299,4 +306,10 @@
 	<script src="assets/js/calendario.js"></script>
 	<script src="assets/js/controla-calendario-agendamento.js"></script>
 	<script src="assets/js/controla-campos-texto.js"></script>
+	<script>
+		function copiaSolicitante(){
+			var solicitante = $('#solicitante').val();
+			$('#usuario').val(solicitante);
+		}
+	</script>
 </html>

@@ -29,6 +29,7 @@ public class JavaMailApp
 		
 	public void enviaEmail(Cliente cliente, Solicitacao solicitacao, String destinatario){
 		try {
+			String link = "http://techgold.com.br/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLUÇÃO TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		      
@@ -55,9 +56,9 @@ public class JavaMailApp
 		    		  "<html>"
 				      			+ "<head>"
 				    		  		+ "<meta http-equiv='Content-Type' content=\"text/html; charset=utf-8\"/>"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap.css\">"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap.min.css\">"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap-responsive.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap.min.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap-responsive.css\">"
 				    		  		+ "<style type=\"text/css\">"
 				    		  			+ ".fonte-letras {font-size: 20px;} .espacamento {line-height: 2.2;}"
 				    		  			+ ".fundo { background: #E6E6E6; } .base { background: #FFFFFF; }"
@@ -73,18 +74,22 @@ public class JavaMailApp
 						      				+ "<li class=\"espacamento\"><b>Aberto por:  </b>" + solicitacao.getAbriuChamado() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Usuario afetado:  </b>" + solicitacao.getUsuario() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Descrição da solicitação: </b>" + solicitacao.getDescricaoProblema() + "</li>"
-						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getDescricaoProblema() + "</li>"
+						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getOnsiteOffsite() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Prioridade:  </b>" + solicitacao.getPrioridade() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Status:  </b>" + solicitacao.getStatus() + "</li>"
 						      			+ "</ul>"
-				      					+ "<p>######################################################</p>"
-				      					+ "<p><b>Acompanhamento do chamado: <b/>" + email.getLinkDominio() +"/protocolo</p>"
-				      					+ "<p><b>Protocolo: <b/>" + solicitacao.getId() + "</p>"
+				      					+ "<p>#####################################################################################</p>"
+						      			
+										
+				      					
+				      					/*+ "<p><b>Acompanhamento do chamado: <b/>" + email.getLinkDominio() +"/protocolo?id="+solicitacao.getId() +"&senha="+solicitacao.getSenha()+"</p>"*/
+				      					+ "<p><b>Acompanhamento do chamado: <b/> <a href=\"" + link + ">Clique aqui</a> </p>"
+										+ "<p><b>Protocolo: <b/>" + solicitacao.getId() + "</p>"
 				      					+ "<b>Senha: <b/>" + solicitacao.getSenha() + "</p>"
 					      				+ "<br>"
 				      				+ "</div>"
 					      			+ "<div class=\"text-center\">"
-					      				+"<img src=\"" + email.getLinkDominio() + "/assets/img/logo_provider.png\" alt=\"providerone\" class=\"img-rounded\">"
+					      				/*+"<img src=\"" + email.getLinkDominio() + "/assets/img/logo_provider.png\" alt=\"providerone\" class=\"img-rounded\">"*/
 					      				+ "<p>" + email.getNomeAssinatura() + "</p>"
 				      					+ "<p>" + email.getNumeroAssinatura() + "</p>"
 				      					+ "<p>" + email.getEmailAssinatura() + "</p>"
@@ -103,6 +108,7 @@ public class JavaMailApp
 	
 	public void enviaEmailAbertura(String  cliente, Solicitacao solicitacao, String destinatario){
 		try {
+			String link = "http://techgold.com.br/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLUÇÃO TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		
@@ -124,9 +130,9 @@ public class JavaMailApp
 		    		  "<html>"
 				      			+ "<head>"
 				    		  		+ "<meta http-equiv='Content-Type' content=\"text/html; charset=utf-8\"/>"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap.css\">"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap.min.css\">"
-				    		  		+ "<link rel=\"stylesheet\" href=\"http://localhost/provider/assets/css/bootstrap-responsive.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap.min.css\">"
+				    		  		+ "<link rel=\"stylesheet\" href=\"http://techgold.com.br/provider/assets/css/bootstrap-responsive.css\">"
 				    		  		+ "<style type=\"text/css\">"
 				    		  			+ ".fonte-letras {font-size: 20px;} .espacamento {line-height: 2.2;}"
 				    		  			+ ".fundo { background: #E6E6E6; } .base { background: #FFFFFF; }"
@@ -142,18 +148,21 @@ public class JavaMailApp
 						      				+ "<li class=\"espacamento\"><b>Aberto por:  </b>" + solicitacao.getAbriuChamado() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Usuario afetado:  </b>" + solicitacao.getUsuario() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Descrição da solicitação: </b>" + solicitacao.getDescricaoProblema() + "</li>"
-						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getDescricaoProblema() + "</li>"
+						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getOnsiteOffsite() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Prioridade:  </b>" + solicitacao.getPrioridade() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Status:  </b>" + solicitacao.getStatus() + "</li>"
 						      			+ "</ul>"
-				      					+ "<p>######################################################</p>"
-				      					+ "<p><b>Acompanhamento do chamado: <b/>" + email.getLinkDominio() +"/protocolo</p>"
+				      					+ "<p>#####################################################################################</p>"
+				      					
+										
+				      					
+										+ "<p><b>Acompanhamento do chamado: <b/> <a href=\"" + link + ">Clique aqui</a> </p>" //SOLUÇÃO TEMPORARIA
 				      					+ "<p><b>Protocolo: <b/>" + solicitacao.getId() + "</p>"
 				      					+ "<b>Senha: <b/>" + solicitacao.getSenha() + "</p>"
 					      				+ "<br>"
 				      				+ "</div>"
 					      			+ "<div class=\"text-center\">"
-					      				+"<img src=\"" + email.getLinkDominio() + "/assets/img/logo_provider.png\" alt=\"providerone\" class=\"img-rounded\">"
+					      				/*+"<img src=\"" + email.getLinkDominio() + "/assets/img/logo_provider.png\" alt=\"providerone\" class=\"img-rounded\">"*/
 					      				+ "<p>" + email.getNomeAssinatura() + "</p>"
 				      					+ "<p>" + email.getNumeroAssinatura() + "</p>"
 				      					+ "<p>" + email.getEmailAssinatura() + "</p>"

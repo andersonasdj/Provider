@@ -114,9 +114,9 @@
 			</div>
 			
 			<div class="control-group">
-				<label class="control-label">Aberto por</label>
+				<label class="control-label">Senha</label>
 				<div class="controls">
-					<input id="abriuChamado" name="abriuChamado" type="text" value="${solicitacao.abriuChamado}" class="input-xlarge">
+					<input id="senha" name="senha" type="text" value="${solicitacao.senha}" class="input-xlarge">
 				</div>
 			</div>
 			
