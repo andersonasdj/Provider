@@ -68,6 +68,16 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
+				<div class="control-group">
+				<label class="control-label">Celular</label>
+				<div class="controls">
+					<input id="celular" name="celular" type="text"
+						value="${funcionario.celular}" class="input-xlarge">
+						<i class="fa fa-mobile fa-lg" aria-hidden="true"></i>
+				</div>
+			</div>
+			
+			
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">

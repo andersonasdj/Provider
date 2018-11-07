@@ -25,14 +25,12 @@ public class ProjetoTeste {
 		projeto.setId(1l);
 		projeto.setNomeCliente("Biar");
 		projeto.setNomeResponsavel("Anderson Araujo");
-		projeto.setStatus("Aberto");
-		projeto.setTituloProjeto("Levantamento Inicial de TI");
+		projeto.setTituloChecklist("Levantamento Inicial de TI");
 
 		assertEquals(1, projeto.getId(), 0.00001);
 		assertEquals("Biar", projeto.getNomeCliente());
 		assertEquals("Anderson Araujo", projeto.getNomeResponsavel());
-		assertEquals("Aberto", projeto.getStatus());
-		assertEquals("Levantamento Inicial de TI", projeto.getTituloProjeto());
+		assertEquals("Levantamento Inicial de TI", projeto.getTituloChecklist());
 
 	}
 

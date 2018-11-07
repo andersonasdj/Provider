@@ -15,6 +15,12 @@
 	<br /><br /><br />
 	<div class="container">
 		<legend>Lista de Clientes</legend>
+		
+		<a href="clienteForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		
+		<p class="pull-right">
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></a></i>
+		</p>
 		<table id="table"
 				data-toggle="table"
                data-show-columns="true"

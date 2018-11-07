@@ -17,7 +17,13 @@
 	<form action="atualizarSolicitacao" method="post"
 		class="form-horizontal container">
 		<fieldset>
-			<legend>Classificação de solicitação <span class="pull-right"><h6>Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  /></h6> </span>
+			<legend>Classificação de solicitação 
+				<a  onClick="history.go(-1)" ><i class="fa fa-reply-all" aria-hidden="true"></i></a>
+			
+				
+			<span class="pull-right">
+				<h6>Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  /></h6>
+			</span>
 				<c:if test="${solicitacao.status == 'Finalizado'}"> 
 					<a class="btn" href="solicitacaoEditFull?id=${solicitacao.id}" role="button"> Edição Completa</a>
 				</c:if>

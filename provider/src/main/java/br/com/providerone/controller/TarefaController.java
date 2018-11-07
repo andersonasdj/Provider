@@ -22,14 +22,22 @@ public class TarefaController {
 			Checklist checklist = new Checklist();
 			CheckListDao checklistDao = new CheckListDao();
 			FuncionarioDao funcionarioDao = new FuncionarioDao();
-			
 			checklist = checklistDao.buscaPorId(id);
-			
 			model.addAttribute("checklist", checklist);
 			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
-			
 			return "admin/tarefa-form";
-		} else {
+			
+		} else if (session.getAttribute("tecnicoLogado") != null) {  
+			
+			Checklist checklist = new Checklist();
+			CheckListDao checklistDao = new CheckListDao();
+			FuncionarioDao funcionarioDao = new FuncionarioDao();
+			checklist = checklistDao.buscaPorId(id);
+			model.addAttribute("checklist", checklist);
+			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
+			return "funcionario/tarefa-form";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -38,14 +46,15 @@ public class TarefaController {
 	public String salvarTarefa(Tarefa tarefa, Checklist checklist,
 			HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-
-			System.out.println("antes do dao");
 			TarefaDao tarefaDao = new TarefaDao();
 			tarefaDao.salvar(tarefa, checklist);
-			System.out.println("depois do dao");
-
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) { 
+			TarefaDao tarefaDao = new TarefaDao();
+			tarefaDao.salvar(tarefa, checklist);
+			return "redirect:listarCheckLists";
+		}	
+		else {
 			return "redirect:login";
 		}
 	}
@@ -59,7 +68,13 @@ public class TarefaController {
 			model.addAttribute("idChecklist", id);
 			
 			return "admin/tarefas-list";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) { 
+			TarefaDao tarefaDao = new TarefaDao();
+			model.addAttribute("tarefas", tarefaDao.listarTarefasPorId(id));
+			model.addAttribute("idChecklist", id);
+			return "funcionario/tarefas-list";
+		}	
+		else {
 			return "redirect:login";
 		}
 	}
@@ -70,12 +85,17 @@ public class TarefaController {
 			
 			TarefaDao tarefaDao = new TarefaDao();
 			FuncionarioDao funcionarioDao = new FuncionarioDao();
-			
 			model.addAttribute("tarefa", tarefaDao.buscaPorId(id));
 			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
-
 			return "admin/tarefa-edit";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {  
+			TarefaDao tarefaDao = new TarefaDao();
+			FuncionarioDao funcionarioDao = new FuncionarioDao();
+			model.addAttribute("tarefa", tarefaDao.buscaPorId(id));
+			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
+			return "funcionario/tarefa-edit";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -92,7 +112,17 @@ public class TarefaController {
 			tarefaDaoAtualizar.atualizar(tarefa, checklist);
 
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {  
+			Checklist checklist = new Checklist();
+			CheckListDao checklistDao = new CheckListDao();
+			checklist = checklistDao.buscaPorId(tarefa.getChecklist().getId());
+			
+			TarefaDao tarefaDaoAtualizar = new TarefaDao();
+			tarefaDaoAtualizar.atualizar(tarefa, checklist);
+
+			return "redirect:listarCheckLists";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -103,7 +133,12 @@ public class TarefaController {
 			TarefaDao dao = new TarefaDao();
 			dao.excluirTarefa(id);
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) { 
+			TarefaDao dao = new TarefaDao();
+			dao.excluirTarefa(id);
+			return "redirect:listarCheckLists";
+		}
+		else {
 			return "redirect:login";
 		}
 	}

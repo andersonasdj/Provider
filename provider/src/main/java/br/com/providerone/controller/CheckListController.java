@@ -22,7 +22,14 @@ public class CheckListController {
 			model.addAttribute("clientes",clienteDao.listaCliente());
 			model.addAttribute("funcionarios",funcionarioDao.listaFuncionarioAtivo());
 			return "admin/checklist-form";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			ClienteDao clienteDao = new ClienteDao();
+			FuncionarioDao funcionarioDao = new FuncionarioDao();
+			model.addAttribute("clientes",clienteDao.listaCliente());
+			model.addAttribute("funcionarios",funcionarioDao.listaFuncionarioAtivo());
+			return "funcionario/checklist-form";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -33,7 +40,12 @@ public class CheckListController {
 			CheckListDao checklistDao = new CheckListDao();
 			checklistDao.salvar(checklist);
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) { 
+			CheckListDao checklistDao = new CheckListDao();
+			checklistDao.salvar(checklist);
+			return "redirect:listarCheckLists";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -44,7 +56,12 @@ public class CheckListController {
 			CheckListDao checklistDao = new CheckListDao();
 			model.addAttribute("checklists", checklistDao.listaChecklists());
 			return "admin/checklist-list";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			CheckListDao checklistDao = new CheckListDao();
+			model.addAttribute("checklists", checklistDao.listaChecklists());
+			return "funcionario/checklist-list";
+			
+		}else {
 			return "redirect:login";
 		}
 	}
@@ -57,7 +74,14 @@ public class CheckListController {
 			checklistEditado = dao.buscaPorId(id);
 			model.addAttribute("checklist", checklistEditado);
 			return "admin/checklist-edit";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			CheckListDao dao = new CheckListDao();
+			Checklist checklistEditado = new Checklist();
+			checklistEditado = dao.buscaPorId(id);
+			model.addAttribute("checklist", checklistEditado);
+			return "funcionario/checklist-edit";
+		}
+		else {
 			return "redirect:loginFuncionario";
 		}
 	}
@@ -68,7 +92,12 @@ public class CheckListController {
 			CheckListDao dao = new CheckListDao();
 			dao.atualizar(checkllist);
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			CheckListDao dao = new CheckListDao();
+			dao.atualizar(checkllist);
+			return "redirect:listarCheckLists";
+		}
+		else {
 			return "redirect:login";
 		}
 	}
@@ -79,7 +108,12 @@ public class CheckListController {
 			CheckListDao dao = new CheckListDao();
 			dao.excluirChecklist(id);
 			return "redirect:listarCheckLists";
-		} else {
+		} else if (session.getAttribute("tecnicoLogado") != null) { 
+			CheckListDao dao = new CheckListDao();
+			dao.excluirChecklist(id);
+			return "redirect:listarCheckLists";
+		}	
+		else {
 			return "redirect:login";
 		}
 	}

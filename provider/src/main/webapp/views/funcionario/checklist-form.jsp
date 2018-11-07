@@ -59,7 +59,7 @@
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar</button>
-					<a class="btn btn-primary" href="listarCheckList" role="button">Voltar</a>
+					<a class="btn btn-primary" href="listarCheckLists" role="button">Voltar</a>
 				</div>
 			</div>
 			<legend></legend>

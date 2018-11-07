@@ -7,6 +7,7 @@ public class Funcionario extends Usuario {
 
 	private String funcao;
 	private String caminhoFoto;
+	private String celular;
 
 	public String getFuncao() {
 		return funcao;
@@ -22,6 +23,14 @@ public class Funcionario extends Usuario {
 
 	public void setCaminhoFoto(String caminhoFoto) {
 		this.caminhoFoto = caminhoFoto;
+	}
+
+	public String getCelular() {
+		return celular;
+	}
+
+	public void setCelular(String celular) {
+		this.celular = celular;
 	}
 
 	@Override

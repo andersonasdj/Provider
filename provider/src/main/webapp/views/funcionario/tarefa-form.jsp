@@ -12,23 +12,20 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="atualizarTarefa" method="post" class="form-horizontal container">
+	<form action="salvarTarefa" method="post" class="form-horizontal container">
 		<fieldset>
-			<legend></legend>			
-			<input type="hidden" id="checklist.id" name="checklist.id" value="${tarefa.checklist.id}">
-			<input type="hidden" id="idTarefa" name="idTarefa" value="${tarefa.idTarefa}">
+			<legend>${checklist.nomeCliente}</legend>			
+			<h4 align="right">Nova tarefa - ${checklist.tituloChecklist}</h4>
 			<div class="control-group">
-				<label class="control-label">Número da Tarefa</label>
+				<label class="control-label">Numero da Tarefa</label>
 				<div class="controls">
-					<input id="numero" name="numero" type="text" 
-						value="${tarefa.numero}" placeholder="Numero da Tarefa" class="input-xlarge">
+					<input id="numero" name="numero" type="text" placeholder="Numero Tarefa" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Descrição da Tarefa</label>
 				<div class="controls">
-					<input id="descricaoTarefa" name="descricaoTarefa" type="text" 
-						value="${tarefa.descricaoTarefa}" placeholder="Descrição da Nova Tarefa" class="input-xlarge" required>
+					<input id="descricaoTarefa" name="descricaoTarefa" type="text" placeholder="Descrição da Nova Tarefa" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -37,7 +34,7 @@
 				<div class="controls">
 					<select class="selectpicker" id="responsavelTarefa"
 						name="responsavelTarefa">
-						<option>${tarefa.responsavelTarefa}</option>
+						<option></option>
 						<c:forEach var="funcionario" items="${funcionarios}">
 							<option>${funcionario.nome}</option>
 						</c:forEach>
@@ -47,16 +44,24 @@
 			<div class="control-group">
 				<label class="control-label">Observações da Tarefa</label>
 				<div class="controls">
-					<input class="form-control" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
-						value="${tarefa.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge">
+					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
+						value="${tarefa.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge"></textarea>
 						<span id="contObs">255</span> Restantes <br>
 				</div>
 			</div>
+			
+			<input type="hidden" name="id" id="id" value="${checklist.id}">
+			<!-- 
+			<input type="hidden" name="tituloChecklist" id="tituloChecklist" value="${checklist.tituloChecklist}">
+			<input type="hidden" name="nomeCliente" id="nomeCliente" value="${checklist.nomeCliente}">
+			<input type="hidden" name="nomeResponsavel" id="nomeResponsavel" value="${checklist.nomeResponsavel}">
+			<input type="hidden" name="dataCriacao" id="dataCriacao" value="${checklist.dataCriacao}">
+			 -->
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
-					<a class="btn btn-primary" href="listarTarefas?id=${tarefa.checklist.id}" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a class="btn btn-primary" href="listarTarefas" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>
@@ -65,7 +70,6 @@
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/jquery-ui.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
     <script type="text/javascript">
 	    function limite_textarea_obs(valor) {

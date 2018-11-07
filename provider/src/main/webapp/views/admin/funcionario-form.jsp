@@ -58,6 +58,13 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Celular</label>
+				<div class="controls">
+					<input id="celular" name="celular" type="text" placeholder="Celular do Funcionário"
+						class="input-xlarge" required> <i class="fa fa-mobile fa-lg" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
