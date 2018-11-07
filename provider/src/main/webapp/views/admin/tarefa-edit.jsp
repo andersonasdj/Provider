@@ -15,9 +15,15 @@
 	<form action="atualizarTarefa" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend></legend>			
-			<h4 align="right">Nova tarefa - </h4>
-			<input type="hidden" id="projeto.id" name="projeto.id" value="${tarefa.projeto.id}">
+			<input type="hidden" id="checklist.id" name="checklist.id" value="${tarefa.checklist.id}">
 			<input type="hidden" id="idTarefa" name="idTarefa" value="${tarefa.idTarefa}">
+			<div class="control-group">
+				<label class="control-label">Número da Tarefa</label>
+				<div class="controls">
+					<input id="numero" name="numero" type="text" 
+						value="${tarefa.numero}" placeholder="Numero da Tarefa" class="input-xlarge">
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Descrição da Tarefa</label>
 				<div class="controls">
@@ -47,31 +53,10 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Status</label>
-				<div class="controls">
-					<select class="selectpicker" id="statusTarefa"
-						name="statusTarefa">
-						<option>${tarefa.statusTarefa}</option>
-						<c:if test="${tarefa.statusTarefa == 'Iniciada'}">
-								<option>Finalizada</option>
-								<option>Não iniciada</option>
-						</c:if>
-						<c:if test="${tarefa.statusTarefa == 'Não iniciada'}">
-							<option>Iniciada</option>
-							<option>Finalizada</option>
-						</c:if>
-						<c:if test="${tarefa.statusTarefa == 'Finalizada'}">
-							<option>Iniciada</option>
-							<option>Não iniciada</option>
-						</c:if>
-					</select>
-				</div>
-			</div>
-			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
-					<a class="btn btn-primary" href="listarProjetos" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a class="btn btn-primary" href="listarTarefas" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>

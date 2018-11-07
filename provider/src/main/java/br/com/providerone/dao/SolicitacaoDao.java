@@ -48,7 +48,7 @@ public class SolicitacaoDao {
 //		solicitacao.setDataAbertura(Calendar.getInstance());
 //		solicitacao.setStatus("Aberto");
 		solicitacao.setFuncionario(funcionario);
-		solicitacao.setCliente(cliente);	
+		solicitacao.setCliente(cliente);
 		manager.getTransaction().begin();
 		manager.persist(solicitacao);
 		manager.getTransaction().commit();
@@ -73,6 +73,7 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -95,6 +96,7 @@ public class SolicitacaoDao {
 		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
@@ -138,6 +140,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -156,6 +159,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatus("Agendado");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG	
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -173,6 +177,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -925,6 +930,34 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		}
 	}
 	
+	//#######################################################################
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesAtualizadasHoje(Calendar dataAbertura) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.dataAtualizacao > :pData");
+			
+			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
+	//#######################################################################
+	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorDataFinalizacaoFuncionario(Calendar dataAbertura, String funcionario) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
@@ -1187,6 +1220,7 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
 		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
+		solicitacaoFinalizada.setDataAtualizacao(Calendar.getInstance()); //###
 		
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
@@ -1218,6 +1252,7 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
 		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
 		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
+		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		Data daoData = new Data();
 		if(solicitacao.getDataAndamento()!=null){
 			solicitacao.setTempoDeAndamento(daoData.geraTempoTotal(solicitacao.getDataFechamento(), solicitacao.getDataAndamento()));

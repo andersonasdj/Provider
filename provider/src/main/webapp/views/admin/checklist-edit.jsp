@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-   	<title>ProviderOne | Projeto</title>
+   	<title>ProviderOne | Checklist</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -15,64 +15,50 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/>
-	<form action="atualizarProjeto" method="post" class="form-horizontal container">
+	<form action="atualizarChecklist" method="post" class="form-horizontal container">
 		<fieldset>
-			<legend>Edição de Projeto</legend>
+			<legend>Edição de Checklist</legend>
 			<div>
 				<div>
 					<input id="id" name="id" type="hidden"
-						value="${projeto.id}">
+						value="${checklist.id}">
 				</div>
 			</div>
 			<div>
 				<div>
 					<input id="nomeCliente" name="nomeCliente" type="hidden"
-						value="${projeto.nomeCliente}">
+						value="${checklist.nomeCliente}">
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Data de Criação</label>
 				<div class="controls">
 					<input id="datepicker" name="dataCriacao" type="text" placeholder="Data de Criação" maxlength="10"
-						value="<f:formatDate pattern="dd-MM-yyyy" value="${projeto.dataCriacao.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
+						value="<f:formatDate pattern="dd-MM-yyyy" value="${checklist.dataCriacao.time}" />"  disabled/> <i class="fa fa-calendar fa-lg"> </i>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Título do Projeto</label>
+				<label class="control-label">Número do Checklist</label>
 				<div class="controls">
-					<input type="text" id="tituloProjeto" name="tituloProjeto"
-						value="${projeto.tituloProjeto}" class="input-xlarge">
+					<input type="text" id="numeroChecklist" name="numeroChecklist"
+						value="${checklist.numeroChecklist}" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Responsavel do Projeto</label>
+				<label class="control-label">Título Checklist</label>
+				<div class="controls">
+					<input type="text" id="tituloChecklist" name="tituloChecklist"
+						value="${checklist.tituloChecklist}" class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Responsavel do CheckList</label>
 				<div class="controls">
 					<input type="text" id="nomeResponsavel" name="nomeResponsavel"
-						value="${projeto.nomeResponsavel}" class="input-xlarge">
+						value="${checklist.nomeResponsavel}" class="input-xlarge" disabled>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Status</label>
-				<div class="controls">
-					<select class="selectpicker" id="status"
-						name="status">
-						<option>${projeto.status}</option>
-							<c:if test="${projeto.status == 'Iniciado'}">
-								<option>Finalizado</option>
-								<option>Não iniciado</option>
-							</c:if>
-							<c:if test="${projeto.status == 'Não iniciado'}">
-								<option>Iniciado</option>
-								<option>Finalizado</option>
-							</c:if>
-							<c:if test="${projeto.status == 'Finalizado'}">
-								<option>Iniciado</option>
-								<option>Não iniciado</option>
-							</c:if>
-						<option></option>
-					</select>
-				</div>
-			</div>
+			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -80,6 +66,10 @@
 					<a class="btn btn-primary" onClick="history.go(-1)" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
+			<input type="hidden" id="nomeResponsavel" name="nomeResponsavel"
+						value="${checklist.nomeResponsavel}">
+			<input type="hidden" id="datepicker" name="dataCriacao" type="text"
+						value="<f:formatDate pattern="dd-MM-yyyy" value="${checklist.dataCriacao.time}" />" />
 			<legend></legend>
 		</fieldset>
 	</form>

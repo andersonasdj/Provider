@@ -37,6 +37,9 @@ public class Solicitacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "HH:mm")
 	private Calendar agendadoHora;
+	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	private Calendar dataAtualizacao;
 
 	@OneToOne
 	private Cliente cliente;
@@ -565,5 +568,13 @@ public class Solicitacao {
 	        senha += carct[j];
 	    }
 		return senha;
+	}
+
+	public Calendar getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(Calendar dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
 	}
 }

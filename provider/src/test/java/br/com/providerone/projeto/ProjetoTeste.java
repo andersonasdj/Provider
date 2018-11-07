@@ -7,15 +7,15 @@ import java.util.Calendar;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.com.providerone.modelo.Projeto;
+import br.com.providerone.modelo.Checklist;
 
 public class ProjetoTeste {
 
-	private Projeto projeto;
+	private Checklist projeto;
 
 	@Before
 	public void inicializa() {
-		projeto = new Projeto();
+		projeto = new Checklist();
 	}
 
 	@Test

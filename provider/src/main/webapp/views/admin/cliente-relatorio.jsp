@@ -38,13 +38,17 @@
 			<tr class="" align="center">
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
-				<th data-field="onsiteOffsite" data-sortable="true">Site</th>
+				<th data-field="dataAbertura" data-sortable="true">Data Abertura</th>
+				<th data-field="onsiteOffsite" data-sortable="true">Local</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
 				<th>Problema Relatado</th>
-				<th data-field="dataEncerramento" data-sortable="true">Data Andamento / Encerramento</th>
+				<th data-field="dataAndamento" data-sortable="true">Data Andamento</th>
+				<th data-field="horaAndamento" data-sortable="true">Hora</th>
 				<th data-field="status" data-sortable="true">Status</th>
+				<th data-field="dataEncerramento" data-sortable="true">Data Encerramento</th>
+				<th data-field="horaEncerramento" data-sortable="true">Hora</th>
+				<th data-field="tempoDeAndamento" data-sortable="true">Duração</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
 				<th>Ações</th>
 			</tr>
@@ -65,14 +69,19 @@
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>Não Iniciado</td>
+						<td>Não Iniciado</td>
 						<td>${solicitacao.status}</td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
@@ -96,23 +105,32 @@
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
 						<td>
-							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
-							 - <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>
-								<span>
-									<p>- Data de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
-									<p>- Hora de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
-									<p>- Tempo de atendimento: ${solicitacao.tempoDeAndamento}</p>
-								 </span>
-							</a>	
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>	
 						</td>
 						<td>${solicitacao.status}</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/>	
+						</td>
+						<td>
+							${solicitacao.tempoDeAndamento}
+						</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
@@ -137,13 +155,15 @@
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>Não Iniciado</td>
+						<td>Não Iniciado</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.status}
 								<span>
@@ -152,6 +172,9 @@
 								</span>
 							</a>
 						</td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
@@ -176,14 +199,26 @@
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>	
+						</td>
 						<td>${solicitacao.status}</td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
@@ -208,14 +243,22 @@
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>-</td>
+						<td>-</td>
 						<td>${solicitacao.status}</td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>

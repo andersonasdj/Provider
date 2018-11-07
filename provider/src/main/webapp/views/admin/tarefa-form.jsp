@@ -14,8 +14,14 @@
 	<br/><br/><br/>
 	<form action="salvarTarefa" method="post" class="form-horizontal container">
 		<fieldset>
-			<legend>${projeto.nomeCliente}</legend>			
-			<h4 align="right">Nova tarefa - ${projeto.tituloProjeto}</h4>
+			<legend>${checklist.nomeCliente}</legend>			
+			<h4 align="right">Nova tarefa - ${checklist.tituloChecklist}</h4>
+			<div class="control-group">
+				<label class="control-label">Numero da Tarefa</label>
+				<div class="controls">
+					<input id="numero" name="numero" type="text" placeholder="Numero Tarefa" class="input-xlarge">
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Descrição da Tarefa</label>
 				<div class="controls">
@@ -39,33 +45,23 @@
 				<label class="control-label">Observações da Tarefa</label>
 				<div class="controls">
 					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
-						value="${solicitacao.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge"></textarea>
+						value="${tarefa.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge"></textarea>
 						<span id="contObs">255</span> Restantes <br>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Status</label>
-				<div class="controls">
-					<select class="selectpicker" id="statusTarefa"
-						name="statusTarefa">
-						<option>Não iniciada</option>
-						<option>Iniciada</option>
-						<option>Finalizada</option>
-					</select>
-				</div>
-			</div>
-			<input type="hidden" name="id" id="id" value="${projeto.id}">
-			<input type="hidden" name="tituloProjeto" id="tituloProjeto" value="${projeto.tituloProjeto}">
-			<input type="hidden" name="nomeCliente" id="nomeCliente" value="${projeto.nomeCliente}">
-			<input type="hidden" name="nomeResponsavel" id="nomeResponsavel" value="${projeto.nomeResponsavel}">
-			<input type="hidden" name="status" id="status" value="${projeto.status}">
-			<input type="hidden" name="dataDescricao" id="dataDescricao" value="${projeto.dataCriacao}">
-			<input type="hidden" name="dataConclusao" id="dataConclusao" value="${projeto.dataConclusao}">
+			
+			<input type="hidden" name="id" id="id" value="${checklist.id}">
+			<!-- 
+			<input type="hidden" name="tituloChecklist" id="tituloChecklist" value="${checklist.tituloChecklist}">
+			<input type="hidden" name="nomeCliente" id="nomeCliente" value="${checklist.nomeCliente}">
+			<input type="hidden" name="nomeResponsavel" id="nomeResponsavel" value="${checklist.nomeResponsavel}">
+			<input type="hidden" name="dataCriacao" id="dataCriacao" value="${checklist.dataCriacao}">
+			 -->
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
-					<a class="btn btn-primary" href="listarProjetos" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a class="btn btn-primary" href="listarTarefas" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>

@@ -13,7 +13,7 @@
 		<class>br.com.providerone.modelo.Computador</class>
 		<class>br.com.providerone.modelo.Perifericos</class>
 		<class>br.com.providerone.modelo.Email</class>
-		<class>br.com.providerone.modelo.Projeto</class>
+		<class>br.com.providerone.modelo.Checklist</class>
 		<class>br.com.providerone.modelo.Tarefa</class>
 		<!-- <class>br.com.providerone.modelo.UploadFile</class> -->
 		<properties>

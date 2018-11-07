@@ -7,9 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.FuncionarioDao;
-import br.com.providerone.dao.ProjetoDao;
+import br.com.providerone.dao.CheckListDao;
 import br.com.providerone.dao.TarefaDao;
-import br.com.providerone.modelo.Projeto;
+import br.com.providerone.modelo.Checklist;
 import br.com.providerone.modelo.Tarefa;
 
 @Controller
@@ -19,13 +19,13 @@ public class TarefaController {
 	public String atualizar(Long id, HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			
-			Projeto projeto = new Projeto();
-			ProjetoDao projetoDao = new ProjetoDao();
+			Checklist checklist = new Checklist();
+			CheckListDao checklistDao = new CheckListDao();
 			FuncionarioDao funcionarioDao = new FuncionarioDao();
 			
-			projeto = projetoDao.buscaPorId(id);
+			checklist = checklistDao.buscaPorId(id);
 			
-			model.addAttribute("projeto", projeto);
+			model.addAttribute("checklist", checklist);
 			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
 			
 			return "admin/tarefa-form";
@@ -35,26 +35,28 @@ public class TarefaController {
 	}
 
 	@RequestMapping("/salvarTarefa")
-	public String salvarProjeto(Tarefa tarefa, Projeto projeto,
+	public String salvarTarefa(Tarefa tarefa, Checklist checklist,
 			HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 
+			System.out.println("antes do dao");
 			TarefaDao tarefaDao = new TarefaDao();
-			tarefaDao.salvar(tarefa, projeto);
+			tarefaDao.salvar(tarefa, checklist);
+			System.out.println("depois do dao");
 
-			return "redirect:listarProjetos";
+			return "redirect:listarCheckLists";
 		} else {
 			return "redirect:login";
 		}
 	}
 	
 	@RequestMapping("/listarTarefas")
-	public String listarProjetos(Long id, HttpSession session, Model model){
+	public String listarTarefas(Long id, HttpSession session, Model model){
 		if (session.getAttribute("funcionarioLogado") != null) {
 			
 			TarefaDao tarefaDao = new TarefaDao();
 			model.addAttribute("tarefas", tarefaDao.listarTarefasPorId(id));
-			model.addAttribute("idProjeto", id);
+			model.addAttribute("idChecklist", id);
 			
 			return "admin/tarefas-list";
 		} else {
@@ -79,17 +81,17 @@ public class TarefaController {
 	}
 	
 	@RequestMapping("/atualizarTarefa")
-	public String salvarProjeto(Tarefa tarefa, HttpSession session) {
+	public String atualizarTarefa(Tarefa tarefa, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			
-			Projeto projeto = new Projeto();
-			ProjetoDao projetoDao = new ProjetoDao();
-			projeto = projetoDao.buscaPorId(tarefa.getProjeto().getId());
+			Checklist checklist = new Checklist();
+			CheckListDao checklistDao = new CheckListDao();
+			checklist = checklistDao.buscaPorId(tarefa.getChecklist().getId());
 			
 			TarefaDao tarefaDaoAtualizar = new TarefaDao();
-			tarefaDaoAtualizar.atualizar(tarefa, projeto);
+			tarefaDaoAtualizar.atualizar(tarefa, checklist);
 
-			return "redirect:listarProjetos";
+			return "redirect:listarCheckLists";
 		} else {
 			return "redirect:login";
 		}
@@ -100,7 +102,7 @@ public class TarefaController {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			TarefaDao dao = new TarefaDao();
 			dao.excluirTarefa(id);
-			return "redirect:listarProjetos";
+			return "redirect:listarCheckLists";
 		} else {
 			return "redirect:login";
 		}

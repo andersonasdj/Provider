@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ProviderOne | Formulario de Computador</title>
+	<title>ProviderOne | Formulario de CheList</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -13,11 +13,11 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
-	<form action="salvarProjeto" method="post" class="form-horizontal container">
+	<form action="salvarChecklist" method="post" class="form-horizontal container">
 		<fieldset>
-			<legend>Criação de Projeto</legend>
+			<legend>Criação de CheckList</legend>
 			<div class="control-group">
-				<label class="control-label">Projeto para o Cliente</label>
+				<label class="control-label">CheckList para o Cliente</label>
 				<div class="controls">
 					<select class="selectpicker" id="nomeCliente"
 						name="nomeCliente">
@@ -29,14 +29,21 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Título do Projeto</label>
+				<label class="control-label">Número do CheckList</label>
 				<div class="controls">
-					<input id="tituloProjeto" name="tituloProjeto" type="text" placeholder="Nome do Projeto"
+					<input id="numeroChecklist" name="numeroChecklist" type="text" placeholder="Numero do CheckList"
 						class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Responsável do Projeto</label>
+				<label class="control-label">Título do CheckList</label>
+				<div class="controls">
+					<input id="tituloChecklist" name="tituloChecklist" type="text" placeholder="Nome do CheckList"
+						class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Responsável do CheckList</label>
 				<div class="controls">
 					<select class="selectpicker" id="nomeResponsavel"
 						name="nomeResponsavel">
@@ -51,7 +58,7 @@
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar</button>
-					<a class="btn btn-primary" href="listarProjetos	" role="button">Voltar</a>
+					<a class="btn btn-primary" href="listarCheckList" role="button">Voltar</a>
 				</div>
 			</div>
 			<legend></legend>

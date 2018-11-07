@@ -12,30 +12,22 @@ import javax.persistence.TemporalType;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-public class Projeto {
+public class Checklist {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private String tituloProjeto;
+	private Long numeroChecklist;
+	private String tituloChecklist;
 	private String nomeCliente;
 	private String nomeResponsavel;
-	private String status;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Calendar dataCriacao;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	private Calendar dataConclusao;
-
 	public Long getId() {
 		return id;
-	}
-
-	public String getTituloProjeto() {
-		return tituloProjeto;
 	}
 
 	public String getNomeCliente() {
@@ -46,10 +38,6 @@ public class Projeto {
 		return nomeResponsavel;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
 	public Calendar getDataCriacao() {
 		return dataCriacao;
 	}
@@ -58,20 +46,8 @@ public class Projeto {
 		this.dataCriacao = dataCriacao;
 	}
 
-	public Calendar getDataConclusao() {
-		return dataConclusao;
-	}
-
-	public void setDataConclusao(Calendar dataConclusao) {
-		this.dataConclusao = dataConclusao;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public void setTituloProjeto(String tituloProjeto) {
-		this.tituloProjeto = tituloProjeto;
 	}
 
 	public void setNomeCliente(String nomeCliente) {
@@ -82,7 +58,19 @@ public class Projeto {
 		this.nomeResponsavel = nomeResponsavel;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public Long getNumeroChecklist() {
+		return numeroChecklist;
+	}
+
+	public void setNumeroChecklist(Long numeroChecklist) {
+		this.numeroChecklist = numeroChecklist;
+	}
+
+	public String getTituloChecklist() {
+		return tituloChecklist;
+	}
+
+	public void setTituloChecklist(String tituloChecklist) {
+		this.tituloChecklist = tituloChecklist;
 	}
 }

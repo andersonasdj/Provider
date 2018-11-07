@@ -119,7 +119,8 @@ public class SolicitacaoController {
 		SolicitacaoDao dao = new SolicitacaoDao();
 		solicitacao.setDataAbertura(Calendar.getInstance());
 		String log = solicitacao.geraLogSolicitacao(funcionarioASalvar, clienteASalvar);
-		solicitacao.setAndamentoDoChamado(log); 
+		solicitacao.setAndamentoDoChamado(log);
+		solicitacao.setDataAtualizacao(Calendar.getInstance());
 		solicitacao.setSenha(solicitacao.geraSenha());
 		if(solicitacao.getStatus().equals("Abrir")){
 			solicitacao.setStatus("Aberto");
@@ -142,6 +143,7 @@ public class SolicitacaoController {
 		if (session.getAttribute("clienteLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			solicitacao.setStatus("Finalizado");
+			solicitacao.setDataAtualizacao(Calendar.getInstance());
 			dao.salvaSolicitcao(solicitacao);
 			return "redirect:home";
 		} else {
@@ -550,6 +552,7 @@ public class SolicitacaoController {
 			HttpSession session) {
 		if (session.getAttribute("clienteLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
+			solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 			dao.atualizarSolicitacaoCliente(solicitacao);
 			return "redirect:abertos";
 		} else {
@@ -836,6 +839,35 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
+	
+	//#############################################################################
+	
+	@RequestMapping("/atualizadoHoje")
+	public String atualizadoHoje(HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			Calendar hoje = Calendar.getInstance();
+			hoje.set(Calendar.HOUR_OF_DAY, 0);
+			hoje.set(Calendar.MINUTE, 0);
+			hoje.set(Calendar.SECOND, 0);
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesAtualizadasHoje(hoje));
+			return "admin/funcionario-relatorio";
+		}if (session.getAttribute("tecnicoLogado") != null) {
+			Funcionario funcionario = (Funcionario) session.getAttribute("tecnicoLogado");
+			Calendar hoje = Calendar.getInstance();
+			hoje.set(Calendar.HOUR_OF_DAY, 0);
+			hoje.set(Calendar.MINUTE, 0);
+			hoje.set(Calendar.SECOND, 0);
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesPorDataFinalizacaoFuncionario(hoje, funcionario.getNome()));
+			return "funcionario/funcionario-relatorio";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	
+	//#############################################################################
 	
 	@RequestMapping("gerarRelatorioPalavra")
 	public String gerarRelatorioPalavra(String assunto, HttpSession session, Model model) {

@@ -14,8 +14,14 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
 	<div class="container">
-		<legend>Lista de Tarefas</legend>
-		<a href="addTarefa?id=${idProjeto}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		<legend>Tarefas da CheckList
+		
+			<c:if test="${not empty tarefas}">
+				 - ${tarefas.get(0).checklist.nomeCliente}
+			</c:if>
+				
+		</legend>
+		<a href="addTarefa?id=${idChecklist}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
 		
 		<table id="table"
 				data-toggle="table"
@@ -27,32 +33,20 @@
                data-key-events="true">
             <thead>   
 				<tr>
-					<th>Id</th>
+					<th>Numero</th>
 					<th>Descrição da Tarefa</th>
 					<th>Observações</th>
 					<th>Responsável da Tarefa</th>
-					<th>Status da Tarefa</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
 			<c:forEach var="tarefa" items="${tarefas}">
 				<tr>
-					<td>${tarefa.idTarefa}</td>
+					<td>${tarefa.numero}</td>
 					<td>${tarefa.descricaoTarefa}</td>
 					<td>${tarefa.obs}</td>
 					<td>${tarefa.responsavelTarefa}</td>
 					
-					<c:if test="${tarefa.statusTarefa == 'Não iniciada'}">
-						<td><img class="ico_status" src="assets/img/ico_red.png"> ${tarefa.statusTarefa}</td>
-					</c:if>
-					
-					<c:if test="${tarefa.statusTarefa == 'Iniciada'}">
-						<td><img class="ico_status" src="assets/img/ico_yellow.png"> ${tarefa.statusTarefa}</td>
-					</c:if>
-					
-					<c:if test="${tarefa.statusTarefa == 'Finalizada'}">
-						<td><img class="ico_status" src="assets/img/ico_green.png"> ${tarefa.statusTarefa}</td>
-					</c:if>
 					
 					<td><a href="tarefaEdit?id=${tarefa.idTarefa}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
 						href="excluirTarefa?id=${tarefa.idTarefa}"><i class="fa fa-trash-o"></i></a></td>

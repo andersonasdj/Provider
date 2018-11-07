@@ -8,14 +8,14 @@
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
-	<title>ProviderOne | Projetos</title>
+	<title>ProviderOne | Checklist</title>
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
 	<div class="container">
-		<legend>Lista de Projetos</legend>
-		<a href="projetoForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		<legend>Checklists</legend>
+		<a href="checklistForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
 		<table id="table"
 				data-toggle="table"
                data-show-columns="true"
@@ -26,39 +26,27 @@
                data-key-events="true">
             <thead>   
 				<tr>
-					<th>Id</th>
+					<th>Numero</th>
 					<th>Nome do Cliente</th>
-					<th>Título do Projeto</th>
+					<th>Título Checklist</th>
 					<th>Data de Criação</th>
-					<th>Responsável do Projeto</th>
-					<th>Status</th>
+					<th>Responsável do CheckList</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
-			<c:forEach var="projeto" items="${projetos}">
+			<c:forEach var="checklist" items="${checklists}">
 				<tr>
-					<td>${projeto.id}</td>
-					<td>${projeto.nomeCliente}</td>
-					<td>${projeto.tituloProjeto}</td>
-					<td><f:formatDate value="${projeto.dataCriacao.time}"
+					<td>${checklist.numeroChecklist}</td>
+					<td>${checklist.nomeCliente}</td>
+					<td>${checklist.tituloChecklist}</td>
+					<td><f:formatDate value="${checklist.dataCriacao.time}"
 							pattern="dd/MM/yyyy" /></td>
-					<td>${projeto.nomeResponsavel}</td>
+					<td>${checklist.nomeResponsavel}</td>
 					
-					<c:if test="${projeto.status == 'Não iniciado'}">
-						<td><img class="ico_status" src="assets/img/ico_red.png"> ${projeto.status}</td>
-					</c:if>
 					
-					<c:if test="${projeto.status == 'Iniciado'}">
-						<td><img class="ico_status" src="assets/img/ico_yellow.png"> ${projeto.status}</td>
-					</c:if>
-					
-					<c:if test="${projeto.status == 'Finalizado'}">
-						<td><img class="ico_status" src="assets/img/ico_green.png"> ${projeto.status}</td>
-					</c:if>
-					
-					<td><a href="projetoEdit?id=${projeto.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
-						href="excluirProjeto?id=${projeto.id}"><i class="fa fa-trash-o"></i></a> |
-						<a href="listarTarefas?id=${projeto.id}"><i class="fa fa-tasks" aria-hidden="true"></i></a>
+					<td><a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
+						href="excluirChecklist?id=${checklist.id}"><i class="fa fa-trash-o"></i></a> |
+						<a href="listarTarefas?id=${checklist.id}"><i class="fa fa-tasks" aria-hidden="true"></i></a>
 					</td>
 				</tr>
 			</c:forEach>

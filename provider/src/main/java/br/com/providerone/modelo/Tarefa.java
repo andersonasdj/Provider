@@ -12,13 +12,13 @@ public class Tarefa {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idTarefa;
+	private Long numero;
 	private String descricaoTarefa;
 	private String obs;
-	private String statusTarefa;
 	private String responsavelTarefa;
 
 	@OneToOne
-	private Projeto projeto;
+	private Checklist checklist;
 	
 	public void setIdTarefa(Long idTarefa) {
 		this.idTarefa = idTarefa;
@@ -28,12 +28,12 @@ public class Tarefa {
 		return idTarefa;
 	}
 
-	public Projeto getProjeto() {
-		return projeto;
+	public Checklist getChecklist() {
+		return checklist;
 	}
 
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
+	public void setChecklist(Checklist checklist) {
+		this.checklist = checklist;
 	}
 
 	public String getDescricaoTarefa() {
@@ -42,10 +42,6 @@ public class Tarefa {
 
 	public String getObs() {
 		return obs;
-	}
-
-	public String getStatusTarefa() {
-		return statusTarefa;
 	}
 
 	public String getResponsavelTarefa() {
@@ -60,12 +56,16 @@ public class Tarefa {
 		this.obs = obs;
 	}
 
-	public void setStatusTarefa(String statusTarefa) {
-		this.statusTarefa = statusTarefa;
-	}
-
 	public void setResponsavelTarefa(String responsavelTarefa) {
 		this.responsavelTarefa = responsavelTarefa;
+	}
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
 	}
 
 }

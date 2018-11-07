@@ -21,6 +21,7 @@
 						<br/><br/>
 						<p><a class="btn btn-info" href="relatorioHoje" role="button"> Aberto Hoje ${solicitacoes}</a>
 						<a class="btn btn-info" href="finalizadoHoje" role="button"> Finalizados Hoje ${finalizados}</a>
+						<a class="btn btn-info" href="atualizadoHoje" role="button"> Atualizados Hoje </a>
 						<a class="btn btn-info" href="relatorioPeriodoAbertura" role="button"> Por Período Abertura</a>
 						<a class="btn btn-info" href="relatorioPeriodoFechamento" role="button"> Por Período Fechamento</a>
 						<a class="btn btn-info" href="relatorioId" role="button"> Por ID</a></P><br/><br/>

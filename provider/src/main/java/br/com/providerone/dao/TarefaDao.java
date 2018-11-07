@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.providerone.entitymanager.EntityFactory;
-import br.com.providerone.modelo.Projeto;
+import br.com.providerone.modelo.Checklist;
 import br.com.providerone.modelo.Tarefa;
 
 public class TarefaDao {
@@ -18,16 +18,16 @@ public class TarefaDao {
 		manager = EntityFactory.getEntityManager();
 	}
 
-	public void salvar(Tarefa tarefa, Projeto projeto) {
-		tarefa.setProjeto(projeto);
+	public void salvar(Tarefa tarefa, Checklist checklist) {
+		tarefa.setChecklist(checklist);
 		manager.getTransaction().begin();
 		manager.persist(tarefa);
 		manager.getTransaction().commit();
 		manager.close();
 	}
 	
-	public void atualizar(Tarefa tarefa, Projeto projeto) {
-		tarefa.setProjeto(projeto);
+	public void atualizar(Tarefa tarefa, Checklist checklist) {
+		tarefa.setChecklist(checklist);
 		manager.getTransaction().begin();
 		manager.merge(tarefa);
 		manager.getTransaction().commit();
@@ -78,7 +78,7 @@ public class TarefaDao {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
 
 		try {
-			Query query = manager.createQuery("select t from Tarefa t where t.projeto.id=:pId");
+			Query query = manager.createQuery("select t from Tarefa t where t.checklist.id=:pId order by t.numero");
 			query.setParameter("pId", id);
 			tarefas = (List<Tarefa>) query.getResultList();
 

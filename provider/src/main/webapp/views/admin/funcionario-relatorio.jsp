@@ -14,7 +14,7 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
-		<h3>Exportar Relatório</h3>
+		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
 	                <option value="">Export Basic</option>
@@ -22,7 +22,8 @@
 	                <option value="selected">Export Selected</option>
 	            </select>
 	        </div>
-		<table id="table"
+	<div id="corpo" class="conteudo">
+		<table id="table" 
 	               data-toggle="table"
 	               data-show-columns="true"
 	               data-show-toggle="true"
@@ -37,14 +38,18 @@
 			<tr class="" align="center">
 				<th data-field="state" data-checkbox="true"></th>
 				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data / Hora Abertura</th>
-				<th data-field="onsiteOffsite" data-sortable="true">Site</th>
+				<th data-field="dataAbertura" data-sortable="true">Data Abertura</th>
+				<th data-field="onsiteOffsite" data-sortable="true">Local</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="usuario" data-sortable="true">Usuário</th>
 				<th>Problema Relatado</th>
-				<th data-field="dataEncerramento" data-sortable="true">Data Andamento / Encerramento</th>
+				<th data-field="dataAndamento" data-sortable="true">Data Andamento</th>
+				<th data-field="horaAndamento" data-sortable="true">Hora</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
+				<th data-field="dataEncerramento" data-sortable="true">Data Encerramento</th>
+				<th data-field="horaEncerramento" data-sortable="true">Hora</th>
+				<th data-field="tempoDeAndamento" data-sortable="true">Duração</th>
 				<th>Ações</th>
 			</tr>
 			</thead>
@@ -52,31 +57,31 @@
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
-						</td>	
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
-						<td>
-							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
-						</td>				
+						<td>${solicitacao.onsiteOffsite}</td>				
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>Não Iniciado</td>
+						<td>Não Iniciado</td>
 						<td>${solicitacao.status}</td>
+						<td></td>
+						<td></td>
+						<td></td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
@@ -89,38 +94,32 @@
 				<c:if test="${solicitacao.status == 'Finalizado'}">
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
-						</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
-								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
-								- Aberto por: ${solicitacao.abriuChamado}</span></a>
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
 						</td>
-						<td>
-							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
-						</td>
+						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
 						<td>
-							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
-							 - <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>
-								<span>
-									<p>- Data de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
-									<p>- Hora de encerramento: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
-									<p>- Tempo de atendimento: ${solicitacao.tempoDeAndamento}</p>
-								 </span>
-							</a>		
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>	
 						</td>
 						<td>${solicitacao.status}</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
@@ -129,40 +128,49 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
+						<td>
+							<f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/>	
+						</td>
+						<td>
+							${solicitacao.tempoDeAndamento}
+						</td>
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Agendado'}">
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
-						</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>
-							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
-						</td>
+						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>Não Iniciado</td>
+						<td>Não Iniciado</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.status}
-								<span>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
-									Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
+								<span>
+									<p>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+									<p>Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
+								</span>
+							</a>
 						</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
@@ -170,36 +178,43 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>		
+						<td></td>
+						<td></td>
+						<td></td>
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Em andamento'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
-						</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>
-							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
-						</td>
+						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/>
+						</td>
+						<td>
+							<f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/>	
+						</td>
 						<td>${solicitacao.status}</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
@@ -207,36 +222,39 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
+						<td></td>
+						<td></td>
+						<td></td>
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
-						</td>
+						<td><a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a></td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>
 						</td>
-						<td>
-							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
-								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
-						</td>
+						<td>${solicitacao.onsiteOffsite}</td>
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}
 								<span>
-									<p>- Resolução: ${solicitacao.resolucao}</p>
-									<p>- Observação: ${solicitacao.obs}</p>
+									<c:if test="${not empty solicitacao.resolucao}">
+										<p>- Resolução: ${solicitacao.resolucao}</p>
+									</c:if>
+									<c:if test="${not empty solicitacao.obs}">
+										<p>- Observação: ${solicitacao.obs}</p>
+									</c:if>
 									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
-						<td>Aberto</td>
+						<td>-</td>
+						<td>-</td>
 						<td>${solicitacao.status}</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
@@ -244,12 +262,21 @@
 						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
+						<td></td>
+						<td></td>
+						<td></td>
 						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</table>
-	<!--  </div> -->
+	</div>
+	<div class="control-group">
+			<label class="control-label"></label>
+			<div class="controls" align="center">
+				<button id="enviar" name="salvar" class="btn btn-success" onclick="cont();" >Imprimir <i class="fa fa-print fa-lg"></i></button>
+			</div>
+	</div>
 	<br /><br />
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
@@ -260,6 +287,15 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script>
+		function cont(){
+		   var conteudo = document.getElementById('corpo').innerHTML;
+		   tela_impressao = window.open('about:blank');
+		   tela_impressao.document.write(conteudo);
+		   tela_impressao.window.print();
+		   tela_impressao.window.close();
+		}
+	</script>
 	<script type="text/javascript">
         // Este evendo é acionado após o carregamento da página
         jQuery(window).load(function() {
