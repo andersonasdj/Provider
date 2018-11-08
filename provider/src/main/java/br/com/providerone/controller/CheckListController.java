@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import br.com.providerone.dao.CheckListDao;
 import br.com.providerone.dao.ClienteDao;
 import br.com.providerone.dao.FuncionarioDao;
-import br.com.providerone.dao.CheckListDao;
 import br.com.providerone.modelo.Checklist;
 
 @Controller
@@ -114,6 +114,37 @@ public class CheckListController {
 			return "redirect:listarCheckLists";
 		}	
 		else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/checkList")
+	public String checkList(HttpSession session, Model model){
+		if (session.getAttribute("funcionarioLogado") != null) {
+			ClienteDao daoCli = new ClienteDao();
+			model.addAttribute("clientes", daoCli.listaCliente());
+			return "admin/checklist";
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			ClienteDao daoCli = new ClienteDao();
+			model.addAttribute("clientes", daoCli.listaCliente());
+			return "funcionario/checklist";
+			
+		}else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/listarCheckListsCliente")
+	public String listarCheckListCliente(HttpSession session, String nomeDoCliente, Model model){
+		if (session.getAttribute("funcionarioLogado") != null) {
+			CheckListDao checklistDao = new CheckListDao();
+			model.addAttribute("checklists", checklistDao.listaChecklistsCliente(nomeDoCliente));
+			return "admin/checklist-list";
+		} else if (session.getAttribute("tecnicoLogado") != null) {
+			CheckListDao checklistDao = new CheckListDao();
+			model.addAttribute("checklists", checklistDao.listaChecklistsCliente(nomeDoCliente));
+			return "funcionario/checklist-list";
+		}else {
 			return "redirect:login";
 		}
 	}

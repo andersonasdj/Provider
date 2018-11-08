@@ -77,5 +77,25 @@ public class CheckListDao {
 		}
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Checklist> listaChecklistsCliente(String nomeDoCliente) {
+		List<Checklist> checklists = new ArrayList<Checklist>();
+
+		try {
+			Query query = manager.createQuery("select c from Checklist c where c.nomeCliente = :pNomeCliente");
+			query.setParameter("pNomeCliente", nomeDoCliente);
+			checklists = (List<Checklist>) query.getResultList();
+			if (checklists != null) {
+				return checklists;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
+	}
 
 }

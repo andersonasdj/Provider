@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -16,6 +17,9 @@ public class Tarefa {
 	private String descricaoTarefa;
 	private String obs;
 	private String responsavelTarefa;
+	
+	@Lob
+	private String obsComplementares;
 
 	@OneToOne
 	private Checklist checklist;
@@ -66,6 +70,14 @@ public class Tarefa {
 
 	public void setNumero(Long numero) {
 		this.numero = numero;
+	}
+
+	public String getObsComplementares() {
+		return obsComplementares;
+	}
+
+	public void setObsComplementares(String obsComplementares) {
+		this.obsComplementares = obsComplementares;
 	}
 
 }

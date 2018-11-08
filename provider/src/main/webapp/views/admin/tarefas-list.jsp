@@ -55,9 +55,10 @@
 					<td>${tarefa.obs}</td>
 					<td>${tarefa.responsavelTarefa}</td>
 					
-					
-					<td><a href="tarefaEdit?id=${tarefa.idTarefa}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
-						href="excluirTarefa?id=${tarefa.idTarefa}"><i class="fa fa-trash-o"></i></a></td>
+					<td>
+						<a href="tarefaEdit?id=${tarefa.idTarefa}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | 
+						<a href="javascript:func()" onclick="confirmacao('${tarefa.idTarefa}')"><i class="fa fa-trash-o"></i></a>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -70,4 +71,12 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script>
+		function confirmacao(id) {
+		     var resposta = confirm("Deseja remover essa Tarefa ?");
+		     if (resposta == true) {
+		          window.location.href = "excluirTarefa?id="+id;
+		     }
+		}
+	</script>
 </html>

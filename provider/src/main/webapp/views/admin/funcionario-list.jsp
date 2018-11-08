@@ -34,14 +34,14 @@
             <thead>   
 				<tr>
 					<th>Foto</th>
-					<th>Nome</th>
+					<th data-field="nome" data-sortable="true">Nome</th>
 					<th>Usuario</th>
-					<th>Ultimo Login</th>
+					<th data-field="ultimoLogin" data-sortable="true">Ultimo Login</th>
 					<th>E-mail</th>
-					<th>Função</th>
+					<th data-field="funcao" data-sortable="true">Função</th>
 					<th>Celular</th>
 					<th>Data de Atualização</th>
-					<th>Status</th>
+					<th data-field="status" data-sortable="true">Status</th>
 					<th>Ações</th>
 				</tr>
 			</thead>

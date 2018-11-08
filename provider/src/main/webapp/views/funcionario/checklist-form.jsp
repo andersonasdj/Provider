@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ProviderOne | Formulario de CheList</title>
+	<title>ProviderOne | Formulário de CheList</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -59,7 +59,7 @@
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar</button>
-					<a class="btn btn-primary" href="listarCheckLists" role="button">Voltar</a>
+					<a class="btn btn-primary" href="listarCheckList" role="button">Voltar</a>
 				</div>
 			</div>
 			<legend></legend>

@@ -44,14 +44,27 @@
 					</select>
 				</div>
 			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Observações da Tarefa</label>
 				<div class="controls">
-					<input class="form-control" id="obs" name="obs" type="text" placeholder="Observações da tarefa"
-						value="${tarefa.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge">
+					<textarea class="form-control" rows="6" id="obs" name="obs" type="text" placeholder="Observações da tarefa" 
+						onkeyup="limite_textarea_obs(this.value)" class="input-xlarge">${tarefa.obs}</textarea>
 						<span id="contObs">255</span> Restantes <br>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Observações Complementares</label>
+				<div class="controls">
+					<div class="col-xs-12 col-md-6">
+						<textarea class="form-control" id="obsComplementares" name="obsComplementares" 
+							 rows="20" style="width: 640px; height: 417px;" placeholder="Observações complementares">${tarefa.obsComplementares}</textarea>
+					</div>
+				</div>
+			</div>
+			
+			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

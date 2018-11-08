@@ -15,10 +15,10 @@
 	<br /><br /><br />
 	<div class="container">
 		<legend>Checklists</legend>
-		<a href="checklistForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		<a href="checklistForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
 		
 		<p class="pull-right">
-			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></a></i>
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
 		</p>
 		
 		<table id="table"
@@ -31,9 +31,9 @@
                data-key-events="true">
             <thead>   
 				<tr>
-					<th>Número</th>
-					<th>Nome do Cliente</th>
-					<th>Título Checklist</th>
+					<th data-field="numeroChecklist" data-sortable="true">Número</th>
+					<th data-field="nomeCliente" data-sortable="true">Nome do Cliente</th>
+					<th data-field="tituloChecklist" data-sortable="true">Título Checklist</th>
 					<th>Data de Criação</th>
 					<th>Responsável do CheckList</th>
 					<th>Ações</th>
@@ -49,8 +49,8 @@
 					<td>${checklist.nomeResponsavel}</td>
 					
 					
-					<td><a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | <a
-						href="excluirChecklist?id=${checklist.id}"><i class="fa fa-trash-o fa-lg"></i></a> |
+					<td><a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | 
+						<a href="javascript:func()" onclick="confirmacao('${checklist.id}')"><i class="fa fa-trash-o"></i></a> |
 						<a href="listarTarefas?id=${checklist.id}"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a>
 					</td>
 				</tr>
@@ -64,5 +64,13 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script>
+		function confirmacao(id) {
+		     var resposta = confirm("Deseja remover essa Checklist ?");
+		     if (resposta == true) {
+		          window.location.href = "excluirChecklist?id="+id;
+		     }
+		}
+	</script>
 </body>
 </html>
