@@ -18,7 +18,7 @@ public class FornecedorController {
 	@RequestMapping("/fornecedorForm")
 	public String fornecedorForm(HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			return "admin/fornecedor-form";
+			return "Administrador/fornecedor-form";
 		} else {
 			return "redirect:loginFuncionario";
 		}
@@ -38,7 +38,7 @@ public class FornecedorController {
 			FornecedorDao dao = new FornecedorDao();
 			fornecedores = dao.listaFornecedor();
 			model.addAttribute("fornecedores", fornecedores);
-			return "admin/fornecedor-list";
+			return "Administrador/fornecedor-list";
 		} else {
 			return "redirect:homePage";
 		}
@@ -51,7 +51,7 @@ public class FornecedorController {
 			Fornecedor fornecedorEditado = new Fornecedor();
 			fornecedorEditado = dao.buscarPorId(id);
 			model.addAttribute("fornecedor", fornecedorEditado);
-			return "admin/fornecedor-edit";
+			return "Administrador/fornecedor-edit";
 		} else {
 			return "redirect:loginFuncionario";
 		}

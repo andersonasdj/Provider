@@ -12,7 +12,6 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br /><br />
-	
 	<form action="atualizarCadastroCliente" method="post"
 		class="form-horizontal container">
 		<fieldset>

@@ -30,12 +30,10 @@ public class ImageController {
 	
 	@RequestMapping(value="/upload", method=RequestMethod.GET)
 	public String upload(HttpSession session, Model model){
-		if (session.getAttribute("funcionarioLogado") != null) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
 			model.addAttribute(new ItemForm());
-			return "admin/upload";
-		}if (session.getAttribute("tecnicoLogado") != null) {
-			model.addAttribute(new ItemForm());
-			return "funcionario/upload";
+			return funcionario.getFuncao()+"/upload";
 		}else {
 			return "redirect:loginFuncionario";
 		}
@@ -80,7 +78,7 @@ public class ImageController {
 					}
 				}
 			}
-			return "admin/success";
+			return "Administrador/success";
 			
 		}if (session.getAttribute("tecnicoLogado") != null) {
 			
@@ -116,7 +114,7 @@ public class ImageController {
 					}
 				}
 			}
-			return "admin/success";
+			return "Administrador/success";
 		}
 		return "redirect:loginFuncionario";
 	}

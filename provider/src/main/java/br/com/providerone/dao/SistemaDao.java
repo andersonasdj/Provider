@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import br.com.providerone.entitymanager.EntityFactory;
-import br.com.providerone.modelo.Email;
 import br.com.providerone.modelo.Sistema;
 
 
@@ -26,11 +25,11 @@ public class SistemaDao {
 		manager.close();
 	}
 
-	public void excluir(Sistema sistema) {
+	public void excluir(Long id) {
 		manager.getTransaction().begin();
-		Email emailRemover = new Email();
-		emailRemover = manager.find(Email.class, sistema.getId());
-		manager.remove(emailRemover);
+		Sistema imgRemover = new Sistema();
+		imgRemover = manager.find(Sistema.class, id);
+		manager.remove(imgRemover);
 		manager.getTransaction().commit();
 		manager.close();
 	}

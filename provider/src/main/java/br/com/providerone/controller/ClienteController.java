@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.providerone.dao.ClienteDao;
 import br.com.providerone.dao.SolicitacaoDao;
 import br.com.providerone.modelo.Cliente;
+import br.com.providerone.modelo.Funcionario;
 
 @Controller
 public class ClienteController {
@@ -63,7 +64,7 @@ public class ClienteController {
 	@RequestMapping("/clienteForm")
 	public String clienteForm(HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			return "admin/cliente-form";
+			return "Administrador/cliente-form";
 		} else {
 			return "redirect:loginFuncionario";
 		}
@@ -78,7 +79,6 @@ public class ClienteController {
 		} else {
 			return "redirect:login";
 		}
-		
 	}
 	
 	@RequestMapping("/atualizarCadastro")
@@ -103,18 +103,13 @@ public class ClienteController {
 	
 	@RequestMapping("/clientesList")
 	public String clientesList(HttpSession session, Model model) {
-		if (session.getAttribute("funcionarioLogado") != null) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
 			List<Cliente> clientes = new ArrayList<Cliente>();
 			ClienteDao dao = new ClienteDao();
 			clientes = dao.listaCliente();
 			model.addAttribute("clientes", clientes);
-			return "admin/cliente-list";
-		} if (session.getAttribute("tecnicoLogado") != null) {
-			List<Cliente> clientes = new ArrayList<Cliente>();
-			ClienteDao dao = new ClienteDao();
-			clientes = dao.listaCliente();
-			model.addAttribute("clientes", clientes);
-			return "funcionario/cliente-list";
+			return funcionario.getFuncao()+"/cliente-list";
 		} else {
 			return "redirect:homePage";
 		}
@@ -127,7 +122,7 @@ public class ClienteController {
 			Cliente clienteEditado = new Cliente();
 			clienteEditado = dao.buscarPorId(id);
 			model.addAttribute("cliente", clienteEditado);
-			return "admin/cliente-edit";
+			return "Administrador/cliente-edit";
 		} else {
 			return "redirect:loginFuncionario";
 		}

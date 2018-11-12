@@ -25,10 +25,10 @@ public class EmailDao {
 		manager.close();
 	}
 
-	public void excluir(Email email) {
+	public void excluir(Long id) {
 		manager.getTransaction().begin();
 		Email emailRemover = new Email();
-		emailRemover = manager.find(Email.class, email.getId());
+		emailRemover = manager.find(Email.class, id);
 		manager.remove(emailRemover);
 		manager.getTransaction().commit();
 		manager.close();

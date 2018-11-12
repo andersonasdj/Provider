@@ -15,7 +15,7 @@ public class PerifericosController {
 	@RequestMapping("/perifericosForm")
 	public String perifericosForm(HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			return "admin/perifericos-form";
+			return "Administrador/perifericos-form";
 		} else {
 			return "redirect:loginFuncionario";
 		}
@@ -46,7 +46,7 @@ public class PerifericosController {
 			PerifericosDao dao = new PerifericosDao();
 			perifericos = dao.listaPerifericos();
 			model.addAttribute("perifericos", perifericos);
-			return "admin/perifericos-list";
+			return "Administrador/perifericos-list";
 		} else {
 			return "redirect:homePage";
 		}
@@ -59,7 +59,7 @@ public class PerifericosController {
 			Perifericos perifericoEditado = new Perifericos();
 			perifericoEditado = dao.buscarPorId(id);
 			model.addAttribute("periferico", perifericoEditado);
-			return "admin/periferico-edit";
+			return "Administrador/periferico-edit";
 		} else {
 			return "redirect:loginFuncionario";
 		}

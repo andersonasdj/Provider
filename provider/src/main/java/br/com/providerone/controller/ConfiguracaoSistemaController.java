@@ -19,7 +19,7 @@ public class ConfiguracaoSistemaController {
 	@RequestMapping("/config")
 	public String config(Model model, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-				return "admin/config";
+				return "Administrador/config";
 		} else {
 			return "redirect:login";
 		}
@@ -32,11 +32,11 @@ public class ConfiguracaoSistemaController {
 			List<Email> emails = new ArrayList<Email>();
 			emails = daoEmail.listaEmailConfig();
 			if (emails.size() == 0){
-				return "admin/configuracao-email-form";
+				return "Administrador/configuracao-email-form";
 			} else{
 				EmailDao daoListaConfigEmail = new EmailDao();
 				model.addAttribute("configuracoes", daoListaConfigEmail.listaEmailConfig());
-				return "admin/configuracao-email-list";
+				return "Administrador/configuracao-email-list";
 			}
 		} else {
 			return "redirect:login";
@@ -50,11 +50,11 @@ public class ConfiguracaoSistemaController {
 			List<Sistema> sistema = new ArrayList<Sistema>();
 			sistema	= dao.listaSistemaConfig();
 			if(sistema.size() == 0){
-				return "admin/configuracao-img";
+				return "Administrador/configuracao-img";
 			} else {
 				SistemaDao daoSistemaImg = new SistemaDao();
 				model.addAttribute("sistemas", daoSistemaImg.listaSistemaConfig());
-				return "admin/configuracao-img-list";
+				return "Administrador/configuracao-img-list";
 			}
 		} else {
 			return "redirect:login";
@@ -83,7 +83,7 @@ public class ConfiguracaoSistemaController {
 			SistemaDao sistemalDao = new SistemaDao();
 			Sistema imgConfig = sistemalDao.buscarPorId(id);
 			model.addAttribute("imgConfig", imgConfig);
-			return "admin/configuracao-img-edit";
+			return "Administrador/configuracao-img-edit";
 		} else {
 			return "redirect:login";
 		}
@@ -95,7 +95,7 @@ public class ConfiguracaoSistemaController {
 			EmailDao emailDao = new EmailDao();
 			Email emailConfig = emailDao.buscarPorId(id);
 			model.addAttribute("emailConfig", emailConfig);
-			return "admin/configuracao-email-edit";
+			return "Administrador/configuracao-email-edit";
 		} else {
 			return "redirect:login";
 		}
@@ -115,6 +115,28 @@ public class ConfiguracaoSistemaController {
 			}else {
 				return "redirect:login";
 			}
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/removeConfigEmail")
+	public String removeConfigEmail(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			EmailDao dao = new EmailDao();
+			dao.excluir(id);
+			return "redirect:config";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/removeConfigImg")
+	public String removeConfigImg(Long id, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			SistemaDao dao = new SistemaDao();
+			dao.excluir(id);
+			return "redirect:config";
 		} else {
 			return "redirect:login";
 		}
