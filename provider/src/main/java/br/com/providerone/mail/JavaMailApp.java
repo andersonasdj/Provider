@@ -37,7 +37,6 @@ public class JavaMailApp
 		      if(destinatario == ""){
 		    	  destinatario = cliente.getEmail();
 		      }
-
 		      Address[] toUser = InternetAddress //Destinat·rio(s)
 		                 .parse(destinatario);
 		      
@@ -79,8 +78,6 @@ public class JavaMailApp
 						      				+ "<li class=\"espacamento\"><b>Status:  </b>" + solicitacao.getStatus() + "</li>"
 						      			+ "</ul>"
 				      					+ "<p>#####################################################################################</p>"
-						      			
-										
 				      					
 				      					/*+ "<p><b>Acompanhamento do chamado: <b/>" + email.getLinkDominio() +"/protocolo?id="+solicitacao.getId() +"&senha="+solicitacao.getSenha()+"</p>"*/
 				      					+ "<p><b>Acompanhamento do chamado: <b/> <a href=\"" + link + ">Clique aqui</a> </p>"
@@ -154,8 +151,6 @@ public class JavaMailApp
 						      			+ "</ul>"
 				      					+ "<p>#####################################################################################</p>"
 				      					
-										
-				      					
 										+ "<p><b>Acompanhamento do chamado: <b/> <a href=\"" + link + ">Clique aqui</a> </p>" //SOLU«√O TEMPORARIA
 				      					+ "<p><b>Protocolo: <b/>" + solicitacao.getId() + "</p>"
 				      					+ "<b>Senha: <b/>" + solicitacao.getSenha() + "</p>"
@@ -195,7 +190,7 @@ public class JavaMailApp
 		                       return new PasswordAuthentication(email.getEmail(), email.getSenha());
 		                 }
 		            });
-		/** Ativa Debug para sess√£o */
+		/** Ativa Debug para sess„o */
 		session.setDebug(true);
 		return session;
 	}

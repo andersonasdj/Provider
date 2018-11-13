@@ -55,11 +55,9 @@ public class ImageController {
 				if(file.getSize() > 0){
 					
 					try {
-						
 						BufferedImage bimg = ImageIO.read(file.getInputStream());
 						
 						Graphics g = bimg.getGraphics();
-						
 						Font fnt = new Font("Verdana", Font.PLAIN, 64);
 						
 						g.setFont(fnt);
@@ -72,7 +70,6 @@ public class ImageController {
 						funcionario.setCaminhoFoto(nomeFoto);
 						FuncionarioDao dao = new FuncionarioDao();
 						dao.atualizar(funcionario);
-						
 					} catch (Exception e) {
 						
 					}
@@ -108,7 +105,6 @@ public class ImageController {
 						funcionario.setCaminhoFoto(nomeFoto);
 						FuncionarioDao dao = new FuncionarioDao();
 						dao.atualizar(funcionario);
-						
 					} catch (Exception e) {
 
 					}

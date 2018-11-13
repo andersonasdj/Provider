@@ -14,6 +14,5 @@ public class Criptografia {
 		} catch (Exception e) {
 			return null;
 		}
-		
     }
 }

@@ -27,7 +27,6 @@ public class TarefaController {
 			model.addAttribute("checklist", checklist);
 			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
 			return funcionario.getFuncao()+"/tarefa-form";
-			
 		}else {
 			return "redirect:login";
 		}

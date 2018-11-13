@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.providerone.dao.EmailDao;
 import br.com.providerone.dao.SistemaDao;
 import br.com.providerone.modelo.Email;
+import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.Sistema;
 
 @Controller
@@ -137,6 +138,16 @@ public class ConfiguracaoSistemaController {
 			SistemaDao dao = new SistemaDao();
 			dao.excluir(id);
 			return "redirect:config";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("/versao")
+	public String versao(Model model, HttpSession session) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+				return funcionario.getFuncao()+"/versao";
 		} else {
 			return "redirect:login";
 		}

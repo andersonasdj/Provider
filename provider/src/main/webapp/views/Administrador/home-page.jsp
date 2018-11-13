@@ -42,7 +42,7 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/>
 	<div class="container">
 		<legend></legend>
 		<div class="row">
@@ -99,7 +99,7 @@
 			</div>
 		</div>
 	</div>
-	<br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/>
 	<div class="container">
 	<legend></legend>
 	</div>

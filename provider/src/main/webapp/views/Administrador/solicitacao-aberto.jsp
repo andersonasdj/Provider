@@ -170,8 +170,10 @@
 					<c:if test="${not empty solicitacao.funcionario.nome}">
 						<td>${solicitacao.funcionario.nome}</td>
 					</c:if>
-					<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a></td>
+					<td>
+						<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
+						<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a> |
+						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a>						</td>
 					</tr>
 					<!-- mascara para cobrir o site -->  
 					<div id="mascara"></div>

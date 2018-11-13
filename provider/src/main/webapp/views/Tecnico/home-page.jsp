@@ -73,7 +73,7 @@
 			<h4><i class="fa fa-circle-o-notch fa-spin"> </i> Você tem ${qtdAguardando} solicitações <a href="solicitacoesAguardandoTecnico">Aguardando! <i class="fa fa-thumbs-o-up"></i></a></h4>
 		</c:if>
 	</div>
-	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+	<br/><br/><br/><br/><br/><br/><br/>
 	<div class="container">
 		<legend></legend>
 	</div>

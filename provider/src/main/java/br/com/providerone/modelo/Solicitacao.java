@@ -67,6 +67,15 @@ public class Solicitacao {
 	private String andamentoDoChamado;
 	private Long estrela;
 	private String senha;
+	private boolean excluido;
+
+	public boolean isExcluido() {
+		return excluido;
+	}
+
+	public void setExcluido(boolean excluido) {
+		this.excluido = excluido;
+	}
 
 	public String getFormaAbertura() {
 		return formaAbertura;

@@ -85,7 +85,8 @@
 								Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
 				</td>
 				<td>
-					<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+					<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
+					<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a>
 				</td>
 			</tr>
 		</c:forEach>

@@ -18,7 +18,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login() {
-		return "tela-login-cliente";
+		return "tela-login";
 	}
 	
 	@RequestMapping("protocolo")
@@ -49,7 +49,7 @@ public class LoginController {
 			return "create-form";
 		}
 		else{
-			return "tela-login-cliente";
+			return "tela-login";
 		}
 	}
 	

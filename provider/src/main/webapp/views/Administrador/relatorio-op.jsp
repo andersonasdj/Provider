@@ -32,6 +32,7 @@
 						<a class="btn btn-info" href="relatorioSelectTec" role="button">Por Tecnico </a>
 						<a class="btn btn-info" href="relatorioPalavra" role="button">Por Palavra chave </a>
 						<a class="btn btn-info" href="relatorioGeral" role="button"> Não finalizadas</a>
+						<a class="btn btn-info" href="solicitacoesExcluidas" role="button"> Solicitações Excluídas</a>
 						<a class="btn btn-info" href="relatorioAgendamento" role="button"> Gerar Agendamento</a></p>
 					</div>
 					<br/>

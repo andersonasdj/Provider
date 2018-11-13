@@ -63,7 +63,6 @@ public class CheckListDao {
 	}
 	
 	public void excluirChecklist(Long id) {
-		
 		try {
 			Checklist checklistExcluir = new Checklist();
 			manager.getTransaction().begin();
@@ -75,7 +74,6 @@ public class CheckListDao {
 		} finally {
 			manager.close();
 		}
-		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -97,5 +95,4 @@ public class CheckListDao {
 			manager.close();
 		}
 	}
-
 }

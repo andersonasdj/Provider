@@ -65,7 +65,6 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	
 	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
@@ -120,12 +119,22 @@ public class SolicitacaoDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
-	
+	/*
 	public void excluiSolicitacaoPorId(Long id) {
 		Solicitacao solicitacao = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacao = manager.find(Solicitacao.class, id);
 		manager.remove(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	*/
+	public void excluiSolicitacaoPorId(Long id) {
+		Solicitacao solicitacao = new Solicitacao();
+		manager.getTransaction().begin();
+		solicitacao = manager.find(Solicitacao.class, id);
+		solicitacao.setExcluido(true);
+		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
 	}
@@ -202,9 +211,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -225,9 +235,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -248,9 +259,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Aguardando usuário");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -271,9 +283,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -294,9 +307,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -317,9 +331,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -340,9 +355,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -363,9 +379,10 @@ public class SolicitacaoDao {
 
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -384,10 +401,11 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -402,14 +420,14 @@ public class SolicitacaoDao {
 		}
 	}
 	
-	
 	public Long listaQtdSolicitacoesAbertas() {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
 			query.setParameter("pStatus", "Aberto");
 			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -428,9 +446,10 @@ public class SolicitacaoDao {
 		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
 			query.setParameter("pStatus", "Aguardando usuario");
 			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -445,15 +464,14 @@ public class SolicitacaoDao {
 		}
 	}
 	
-	
 	public Long listaQtdSolicitacoesAgendadasPorIdDoTecnico(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -469,12 +487,12 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAgendadas() {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
 			query.setParameter("pStatus", "Agendado");
 			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -490,13 +508,13 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesEmAndamentoPorIdDoTecnico(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -511,15 +529,14 @@ public class SolicitacaoDao {
 		}
 	}
 	
-	
 	public Long listaQtdSolicitacoesAguardandoPorIdDoTecnico(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId");
+					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -535,12 +552,12 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesEmAndamento() {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
 			query.setParameter("pStatus", "Em andamento");
 			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -558,11 +575,11 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.cliente.id=:pClienteId order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.cliente.id=:pClienteId and s.excluido!=:pExcluido order by s.id desc");
 			query.setParameter("pClienteId", id);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -580,12 +597,12 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> relatorioGeralPorIdCliente(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.cliente.id=:pClienteId and s.status!=:pStatus order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.cliente.id=:pClienteId and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id desc");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -600,15 +617,14 @@ public class SolicitacaoDao {
 		} 
 	}
 	
-	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorIdTec(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.funcionario.id=:pFuncionarioId order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido order by s.id desc");
 			query.setParameter("pFuncionarioId", id);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -627,13 +643,13 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaTodasSolicitacoes() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id desc");
 			
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pExcluido", true);
 			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -654,9 +670,10 @@ public class SolicitacaoDao {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 			try {
 				System.out.println("dao data");
-				Query query = manager.createQuery("select s from Solicitacao s where s.dataAbertura between :inicio and :fim");  
+				Query query = manager.createQuery("select s from Solicitacao s where s.dataAbertura between :inicio and :fim and s.excluido!=:pExcluido");  
 				query.setParameter("inicio", inicio);     
 				query.setParameter("fim", fim);
+				query.setParameter("pExcluido", true);
 				solicitacaos = (List<Solicitacao>) query.getResultList();
 				System.out.println(solicitacaos);
 				return solicitacaos;
@@ -665,18 +682,17 @@ public class SolicitacaoDao {
 				manager.close();
 				return null;
 			}
-		
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaTodasSolicitacoesFinalizadas() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id desc");
 			
 			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pExcluido", true);
 			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -695,11 +711,11 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAbertas() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus order by s.id");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -717,11 +733,11 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAgendadas() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus order by s.id");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -739,11 +755,11 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAndamento() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus order by s.id");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -761,11 +777,11 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAguardando() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.status=:pStatus order by s.id");
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
 			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -781,12 +797,12 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAbertasPorIdDoCliente(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -802,12 +818,12 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAgendadasPorIdDoCliente(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Agendado");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -823,12 +839,12 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAndamentoPorIdDoCliente(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -843,13 +859,13 @@ public class SolicitacaoDao {
 		}
 	}
 	
-public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
-		
+	public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId");
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
 			query.setParameter("pStatus", "Aguardando usuário");
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -865,11 +881,11 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	}
 	
 	public Long listaQtdSolicitacoesPorIdDoCliente(Long id) {
-		
 		try {
 			Query query = manager
-					.createQuery("select count(s) from Solicitacao s where s.cliente.id=:pClienteId");
+					.createQuery("select count(s) from Solicitacao s where s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
+			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
 				manager.close();
@@ -887,12 +903,12 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorData(Calendar dataAbertura) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataAbertura > :pData");
+					.createQuery("select s from Solicitacao s where s.dataAbertura > :pData and s.excluido!=:pExcluido");
 			
 			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -910,12 +926,12 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorDataFinalizacao(Calendar dataAbertura) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataFechamento > :pData");
+					.createQuery("select s from Solicitacao s where s.dataFechamento > :pData and s.excluido!=:pExcluido");
 			
 			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -929,19 +945,16 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 			return null;
 		}
 	}
-	
 	//#######################################################################
-	
 	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAtualizadasHoje(Calendar dataAbertura) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataAtualizacao > :pData");
+					.createQuery("select s from Solicitacao s where s.excluido=:pExcluido");
 			
-			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -955,20 +968,19 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 			return null;
 		}
 	}
-	
 	//#######################################################################
 	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorDataFinalizacaoFuncionario(Calendar dataAbertura, String funcionario) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.funcionario.nome = :pFuncionario and s.status=:pStatus and s.dataFechamento > :pData");
+					.createQuery("select s from Solicitacao s where s.funcionario.nome = :pFuncionario and s.status=:pStatus and s.dataFechamento > :pData and s.excluido!=:pExcluido");
 			
 			query.setParameter("pFuncionario", funcionario);
 			query.setParameter("pStatus", "Finalizado");
 			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -982,18 +994,17 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 			return null;
 		}
 	}
-	
 	//##########################################################################################
 	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorAssunto(String assunto) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.descricaoProblema LIKE :pAssunto or s.resolucao LIKE :pAssunto");
+					.createQuery("select s from Solicitacao s where s.descricaoProblema LIKE :pAssunto or s.resolucao LIKE :pAssunto and s.excluido!=:pExcluido");
 			
 			query.setParameter("pAssunto", "%"+assunto+"%");
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -1011,13 +1022,13 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorPeriodoFechamento(Calendar dataInicio, Calendar dataFim) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim");
+					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim and s.excluido!=:pExcluido");
 			
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
 			if (solicitacaos != null) {
@@ -1036,13 +1047,13 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorPeriodoAbertura(Calendar dataInicio, Calendar dataFim) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim");
+					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim and s.excluido!=:pExcluido");
 			
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
 			if (solicitacaos != null) {
@@ -1061,15 +1072,14 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorAgendamento(Calendar dataInicio) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		String agendado = "Agendado";
-		
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.agendado = :pDataInicio and s.status = :pStatus");
+					.createQuery("select s from Solicitacao s where s.agendado = :pDataInicio and s.status = :pStatus and s.excluido!=:pExcluido");
 			
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pStatus", agendado);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
 			if (solicitacaos != null) {
@@ -1088,11 +1098,11 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorIdSolicitacao(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.id=:pId order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.id=:pId and s.excluido!=:pExcluido order by s.id desc");
 			query.setParameter("pId", id);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();
@@ -1110,15 +1120,14 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorPeriodoAberturaCliente(Calendar dataInicio, Calendar dataFim, String nomeDoCliente) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim and s.cliente.nome = :pNomeDoCliente");
+					.createQuery("select s from Solicitacao s where s.dataAbertura > :pDataInicio and s.dataAbertura < :pDataFim and s.cliente.nome = :pNomeDoCliente and s.excluido!=:pExcluido");
 			
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			query.setParameter("pNomeDoCliente", nomeDoCliente);
-			
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
 			if (solicitacaos != null) {
@@ -1137,14 +1146,14 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorPeriodoFechamentoCliente(Calendar dataInicio, Calendar dataFim, String nomeDoCliente) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim and s.cliente.nome = :pNomeDoCliente");
+					.createQuery("select s from Solicitacao s where s.dataFechamento > :pDataInicio and s.dataFechamento < :pDataFim and s.cliente.nome = :pNomeDoCliente and s.excluido!=:pExcluido");
 			
 			query.setParameter("pDataInicio", dataInicio, TemporalType.DATE);
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			query.setParameter("pNomeDoCliente", nomeDoCliente);
+			query.setParameter("pExcluido", true);
 			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
@@ -1164,15 +1173,15 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorAgendamentoAtrasado(Calendar data) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		String agendado = "Agendado";
 		
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.agendado < :pData and s.status = :pStatus");
+					.createQuery("select s from Solicitacao s where s.agendado < :pData and s.status = :pStatus and s.excluido!=:pExcluido");
 			
 			query.setParameter("pData", data, TemporalType.DATE);
 			query.setParameter("pStatus", agendado);
+			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			
 			if (solicitacaos != null) {
@@ -1270,13 +1279,13 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listarSolicitacoesBackupNaoConcluidas() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.classificacao=:pClassificacao and s.status!=:pStatus order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.classificacao=:pClassificacao and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id desc");
 			
 			query.setParameter("pStatus", "Finalizado");
 			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pExcluido", true);
 			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -1291,6 +1300,4 @@ public Long listaQtdSolicitacoesAguardandoPorIdDoCliente(Long id) {
 			return null;
 		}
 	}
-	//*******************************************************
-
 }

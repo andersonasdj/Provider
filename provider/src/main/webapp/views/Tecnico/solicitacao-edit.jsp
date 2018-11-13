@@ -3,11 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-   	<title>ProviderOne | Funcionario</title>
+   	<title>ProviderOne | Funcionário</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/jquery-ui.css">
 	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
@@ -132,8 +131,6 @@
 						</div>
 					</div>
 			 </div>
-			
-			<!-- ######################################################################## -->	
 			<div class="control-group">
 				<label class="control-label">Categoria
 					<a class="dcontexto"> (?)
@@ -279,8 +276,6 @@
 	<script src="assets/js/calendario.js"></script>
 	<script src="assets/js/controla-calendario-agendamento.js"></script>
 	<script src="assets/js/controla-campos-texto.js"></script>
-	<script src="assets/js/date.js"></script>
-	<script src="assets/js/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript">
 		$(function(){
 			$('#dataAbertura').datetimepicker({

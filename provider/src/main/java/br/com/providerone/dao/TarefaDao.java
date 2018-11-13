@@ -54,7 +54,6 @@ public class TarefaDao {
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> listaTarefas() {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
-
 		try {
 			Query query = manager
 					.createQuery("select t from Tarefa t order by t.id");
@@ -76,7 +75,6 @@ public class TarefaDao {
 	@SuppressWarnings("unchecked")
 	public List<Tarefa> listarTarefasPorId(Long id) {
 		List<Tarefa> tarefas = new ArrayList<Tarefa>();
-
 		try {
 			Query query = manager.createQuery("select t from Tarefa t where t.checklist.id=:pId order by t.numero");
 			query.setParameter("pId", id);
