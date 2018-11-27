@@ -101,7 +101,7 @@
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<script>
 		function ver(id) {
-			window.location.href = "solicitacaoEditCliente?id="+id;
+			window.location.href = "solicitacaoEdit?id="+id;
 		}
 	</script>
 </html>

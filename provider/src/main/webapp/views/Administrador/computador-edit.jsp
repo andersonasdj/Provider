@@ -18,6 +18,11 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Atualização de Computador</legend>
+			<a href="computadorForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+			<p class="pull-right">
+				<a href="computadorList"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+			</p>
+			<br/><br/>
 			<div>
 				<div>
 					<input id="id" name="id" type="hidden"

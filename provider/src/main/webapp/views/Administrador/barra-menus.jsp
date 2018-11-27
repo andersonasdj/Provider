@@ -34,11 +34,6 @@
 			                    <li><a href="clientesList">Clientes</a></li>
 			                    <li><a href="funcionariosList">Funcionarios</a></li>
 			                    <li><a href="fornecedorList">Fornecedores</a></li>
-			                    <li role="separator" class="divider"></li>
-			                  	<li class="dropdown-header">Cadastros</li>
-			                    <li><a href="clienteForm">Cadastro de Cliente</a></li>
-			                    <li><a href="funcionarioForm">Cadastro de Funcionário</a></li>
-			                    <li><a href="fornecedorForm">Cadastro de Fornecedor</a></li>
 			                  </ul>
 						</li>
 						<li class="dropdown">

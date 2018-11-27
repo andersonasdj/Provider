@@ -37,7 +37,14 @@ public class TarefaController {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			TarefaDao tarefaDao = new TarefaDao();
-			tarefaDao.salvar(tarefa, checklist);
+			if(tarefa.getIdTarefa() != null){
+				Checklist checklistEdit = new Checklist();
+				CheckListDao checklistDao = new CheckListDao();
+				checklistEdit = checklistDao.buscaPorId(tarefa.getChecklist().getId());
+				tarefaDao.atualizar(tarefa, checklistEdit);
+			} else {
+				tarefaDao.salvar(tarefa, checklist);
+			}
 			return "redirect:listarCheckLists";
 		}else {
 			return "redirect:login";
@@ -66,21 +73,6 @@ public class TarefaController {
 			model.addAttribute("tarefa", tarefaDao.buscaPorId(id));
 			model.addAttribute("funcionarios", funcionarioDao.listaFuncionarioAtivo());
 			return funcionario.getFuncao()+"/tarefa-edit";
-		}else {
-			return "redirect:login";
-		}
-	}
-	
-	@RequestMapping("/atualizarTarefa")
-	public String atualizarTarefa(Tarefa tarefa, HttpSession session) {
-		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
-		if (funcionario != null) {
-			Checklist checklist = new Checklist();
-			CheckListDao checklistDao = new CheckListDao();
-			checklist = checklistDao.buscaPorId(tarefa.getChecklist().getId());
-			TarefaDao tarefaDaoAtualizar = new TarefaDao();
-			tarefaDaoAtualizar.atualizar(tarefa, checklist);
-			return "redirect:listarCheckLists";
 		}else {
 			return "redirect:login";
 		}

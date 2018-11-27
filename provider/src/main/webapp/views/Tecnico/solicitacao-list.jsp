@@ -60,7 +60,7 @@
 			<tr>
 				<td></td>
 				<td>
-					<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+					<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 				</td>
 				<td>
 					<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -80,12 +80,27 @@
 							Observação: ${solicitacao.obs}</span></a>
 				</td>
 				<td>
-					<a class="dcontexto"> <div id="status-botao">${solicitacao.status}</div>
-						<span>Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/><br/>
-								Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></span></a>
+					<a class="dcontexto"><div id="status-botao"> ${solicitacao.status}</div>
+						<c:if test="${solicitacao.status != 'Aberto'}">
+							<span>
+								<c:if test="${solicitacao.status == 'Em andamento'}">
+									<p>- Data: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/></p>
+								</c:if>
+								<c:if test="${solicitacao.status == 'Agendado'}">
+									<p>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
+								</c:if>
+									<c:if test="${solicitacao.status == 'Excluida'}">
+									<p>- Data: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
+								</c:if>
+							</span>
+						</c:if>
+					</a>
 				</td>
 				<td>
-					<a href="solicitacaoEditFuncionario?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
+					<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
 					<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a>
 				</td>
 			</tr>
@@ -100,4 +115,9 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/botoes-status.js"></script>
+	<script> 
+		function lancarSubmenu(id){ 
+		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
+		} 
+	</script> 
 </html>

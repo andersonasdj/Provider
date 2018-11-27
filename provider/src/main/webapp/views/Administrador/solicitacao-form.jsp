@@ -122,6 +122,7 @@
 						<option>Problema</option>
 						<option>Incidente</option>
 						<option>Solicitação</option>
+						<option>Backup</option>
 					</select>
 				</div>
 			</div> 

@@ -541,7 +541,6 @@ public class Solicitacao {
 				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
 				+ "* Observação: " + this.getObs() + "\n"
-				+ "* Observação 2: " + (this.getObs2()!= null ? this.getObs2() : "") + "\n"
 				+ "* Resolução: " + this.getResolucao() + "\n"
  				+ "* Categoria: " + this.getClassificacao() + "\n"
 				+ "* Classificação " + this.getPrioridade() + "\n"

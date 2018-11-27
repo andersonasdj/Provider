@@ -22,19 +22,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping("protocolo")
-	public String exibirProtocolo(Long id, String senha, HttpSession session,
-			Model model) {
-		
+	public String exibirProtocolo(Long id, String senha, HttpSession session, Model model) {
 		if(id == null && senha == null){
 			return "protocolo-cliente";
-			
 		} else{
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Solicitacao solicitacao = dao.buscaSolicitacaoId(id);
 			
 			if (solicitacao.getId() == id && solicitacao.getSenha().equals(senha)) {
 				session.setAttribute("protocoloValido", solicitacao);
-				return "protocolo/home-page-protocolo";
+				return "protocolo/home-page";
 			}else{
 				return "protocolo-cliente";
 			}
@@ -65,10 +62,7 @@ public class LoginController {
 				senha);
 		
 		if (funcionarioEncontrado != null) {
-			if (funcionarioEncontrado.getFuncao().equals("Supervisor")
-					|| funcionarioEncontrado.getFuncao()
-							.equals("Administrador")) {
-						
+			if (funcionarioEncontrado.getFuncao().equals("Administrador")) {
 				session.setAttribute("funcionarioLogado", funcionarioEncontrado);
 				return salvaDataLoginEAdicionaModel(model, funcionarioEncontrado);
 			} else {
@@ -79,7 +73,6 @@ public class LoginController {
 		if (clienteEncontrado != null) {
 			session.setAttribute("clienteLogado", clienteEncontrado);
 			model.addAttribute("cliente", clienteEncontrado);
-			//System.out.println(clienteEncontrado.getNome());
 			return "redirect:home";
 		}
 		return "redirect:login";

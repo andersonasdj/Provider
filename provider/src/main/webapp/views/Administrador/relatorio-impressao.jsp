@@ -11,53 +11,35 @@
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
 <body>
-	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
-	<br /><br /><br />
-		<h4>Exportar Solicitações</h4>
-	        <div id="toolbar">
-	            <select class="form-control">
-	                <option value="">Export Basic</option>
-	                <option value="all">Export All</option>
-	                <option value="selected">Export Selected</option>
-	            </select>
-	        </div>
+	<br />
+	<h2 align="center"><img src="assets/img/logo_provider.png" ></h2><br />
+	<legend></legend>
 	<div id="corpo" class="conteudo">
-		<table id="table" 
-	               data-toggle="table"
-	               data-show-columns="true"
-	               data-show-toggle="true"
-	               data-pagination="true"
-	               data-show-pagination-switch="true"
-	               data-search="true"
-	               data-key-events="true"
-	               data-show-export="true"
-	               data-click-to-select="true"
-	               data-toolbar="#toolbar">
+		<table class="table">
 			<thead>
-			<tr class="" align="center">
-				<th data-field="state" data-checkbox="true"></th>
-				<th data-field="id" data-sortable="true">ID</th>
-				<th data-field="dataAbertura" data-sortable="true">Data Abertura</th>
-				<th data-field="onsiteOffsite" data-sortable="true">Local</th>
-				<th data-field="cliente" data-sortable="true">Cliente</th>
-				<th data-field="usuario" data-sortable="true">Usuário</th>
+			<tr >
+				<th></th>
+				<th>ID</th>
+				<th>Data Abertura</th>
+				<th>Local</th>
+				<th>Cliente</th>
+				<th>Usuário</th>
 				<th>Problema Relatado</th>
-				<th data-field="dataAndamento" data-sortable="true">Andamento</th>
-				<th data-field="horaAndamento" data-sortable="true">Hora</th>
-				<th data-field="status" data-sortable="true">Status</th>
-				<th data-field="tecnico" data-sortable="true">Técnico</th>
-				<th data-field="dataEncerramento" data-sortable="true">Encerramento</th>
-				<th data-field="horaEncerramento" data-sortable="true">Hora</th>
-				<th data-field="tempoDeAndamento" data-sortable="true">Duração</th>
-				<th>Ações</th>
+				<th>Andamento</th>
+				<th>Hora</th>
+				<th>Status</th>
+				<th>Técnico</th>
+				<th>Encerramento</th>
+				<th>Hora</th>
+				<th>Duração</th>
 			</tr>
 			</thead>
 			<c:forEach var="solicitacao" items="${solicitacoes}">
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a></td>	
+						<td>${solicitacao.id}</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
@@ -67,12 +49,11 @@
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.descricaoProblema}
+							<a class="dcontexto">* ${solicitacao.descricaoProblema}
 								<span>
 									<c:if test="${not empty solicitacao.obs}">
 										<p>- Observação: ${solicitacao.obs}</p>
 									</c:if>
-									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -88,13 +69,12 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Finalizado'}">
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a></td>
+						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></span></a>
@@ -103,7 +83,7 @@
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.descricaoProblema}
+							<a class="dcontexto">* ${solicitacao.descricaoProblema}
 								<span>
 									<c:if test="${not empty solicitacao.resolucao}">
 										<p>- Resolução: ${solicitacao.resolucao}</p>
@@ -111,7 +91,6 @@
 									<c:if test="${not empty solicitacao.obs}">
 										<p>- Observação: ${solicitacao.obs}</p>
 									</c:if>
-									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -137,13 +116,12 @@
 						<td>
 							${solicitacao.tempoDeAndamento}
 						</td>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Agendado'}">
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a></td>
+						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
@@ -153,12 +131,11 @@
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.descricaoProblema}
+							<a class="dcontexto">* ${solicitacao.descricaoProblema}
 								<span>
 									<c:if test="${not empty solicitacao.obs}">
 										<p>- Observação: ${solicitacao.obs}</p>
 									</c:if>
-									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -181,13 +158,12 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Em andamento'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a></td>
+						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
@@ -197,7 +173,7 @@
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.descricaoProblema}
+							<a class="dcontexto">* ${solicitacao.descricaoProblema}
 								<span>
 									<c:if test="${not empty solicitacao.resolucao}">
 										<p>- Resolução: ${solicitacao.resolucao}</p>
@@ -205,7 +181,6 @@
 									<c:if test="${not empty solicitacao.obs}">
 										<p>- Observação: ${solicitacao.obs}</p>
 									</c:if>
-									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -225,13 +200,12 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
-						<td><a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a></td>
+						<td>${solicitacao.id}</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
@@ -241,7 +215,7 @@
 						<td>${solicitacao.cliente.nome}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.descricaoProblema}
+							<a class="dcontexto">* ${solicitacao.descricaoProblema}
 								<span>
 									<c:if test="${not empty solicitacao.resolucao}">
 										<p>- Resolução: ${solicitacao.resolucao}</p>
@@ -249,7 +223,6 @@
 									<c:if test="${not empty solicitacao.obs}">
 										<p>- Observação: ${solicitacao.obs}</p>
 									</c:if>
-									<p>- Categoria: ${solicitacao.classificacao}</p>
 								</span>
 							</a>
 						</td>
@@ -265,17 +238,10 @@
 						<td></td>
 						<td></td>
 						<td></td>
-						<td><a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
 					</tr>
 				</c:if>
 			</c:forEach>
 		</table>
-	</div>
-	<div class="control-group">
-			<label class="control-label"></label>
-			<div class="controls" align="center">
-				<button id="enviar" name="salvar" class="btn btn-success" onclick="cont();" >Imprimir <i class="fa fa-print fa-lg"></i></button>
-			</div>
 	</div>
 	<br /><br />
 	<legend></legend>
@@ -287,16 +253,6 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script> 
-		function lancarSubmenu(id){ 
-		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
-		} 
-	</script>
-	<script> 
-		function imprimirRelatorio(id){ 
-		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
-		} 
-	</script>
 	<script>
 		function cont(){
 		   var conteudo = document.getElementById('corpo').innerHTML;

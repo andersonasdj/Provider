@@ -18,6 +18,10 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Cadastro de Máquina</legend>
+			<p class="pull-right">
+				<a href="computadorList"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+			</p>
+			<br/><br/>
 			<div class="control-group">
 				<label class="control-label">Cliente</label>
 				<div class="controls">

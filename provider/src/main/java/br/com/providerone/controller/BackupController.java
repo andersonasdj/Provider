@@ -18,7 +18,7 @@ public class BackupController {
 		if (funcionario != null) {
 			SolicitacaoDao daoSolicitacao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes",daoSolicitacao.listarSolicitacoesBackupNaoConcluidas());
-			return funcionario.getFuncao()+"/solicitacao-relatorio-backup";
+			return funcionario.getFuncao()+"/relatorio-backup";
 		} else {
 			return "redirect:login";
 		}

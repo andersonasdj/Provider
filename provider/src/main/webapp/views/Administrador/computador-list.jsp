@@ -13,7 +13,14 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br/><br/><br/>
+	<div class="container">
 		<legend>Lista de Computadores</legend>
+		
+		<a href="computadorForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+		<p class="pull-right">
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+		</p>
+		
 		<h4>Exportar Relatório</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
@@ -80,6 +87,7 @@
 		</table>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<legend></legend>
+	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>

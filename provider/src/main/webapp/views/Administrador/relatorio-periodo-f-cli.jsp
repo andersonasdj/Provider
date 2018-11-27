@@ -37,6 +37,7 @@
 					<button id="buscar" class="btn btn-success">
 						Buscar <i class="fa fa-search"></i>
 					</button>
+					<a class="btn btn-primary" href="javascript:func()" onclick="telaImpressao()">Impressão <i class="fa fa-share"></i></a>
 				</div>
 			</div>
 			<legend></legend>
@@ -49,6 +50,14 @@
 <script src="assets/js/jquery.ui.timepiker.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="assets/js/calendario.js"></script>
+<script>
+	function telaImpressao(){
+		var inicio = document.getElementsByName("dataInicio")[0].value;
+		var fim = document.getElementsByName("dataFim")[0].value;
+		var nome = document.getElementsByName("nomeDoCliente")[0].value;
+		window.open("gerarRelatorioPeriodoFechamentoClienteImp?dataInicio="+inicio+"&dataFim="+fim+"&nomeDoCliente="+nome,"janela1","width=800,height=800,scrollbars=YES") 
+	}
+</script>
 <script>
 $(function(){
 

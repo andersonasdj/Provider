@@ -16,8 +16,8 @@ public class EmailTeste {
 		email.setAssunto("Email Teste");
 		email.setAutenticacao(true);
 		email.setPortaSmtp(587);
-		email.setSenha("Fut.t.j.fmeudom");
-		email.setEmail("anderson.araujo@providerone.com.br");
+		email.setSenha("xxxxx");
+		email.setEmail("xxxxx@xxxxx.com.br");
 		email.setSmtp("outlook.office365.com");
 		email.setSslStatus(true);
 		email.setMensagem("Email de abertura");
@@ -34,7 +34,7 @@ public class EmailTeste {
 		JavaMailApp mail = new JavaMailApp(email);
 		
 		//Envia o E-mail
-		mail.enviaEmail(abeam, solicitacao, "andersonasdj@gmail.com");
+		mail.enviaEmail(abeam, solicitacao, "xxxxx@gmail.com");
 		
 		
 	}

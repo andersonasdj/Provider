@@ -36,8 +36,12 @@ public class CheckListController {
 	@RequestMapping("/salvarChecklist")
 	public String salvarChecklist(Checklist checklist, HttpSession session){
 		if (session.getAttribute("funcionarioLogado") != null || session.getAttribute("tecnicoLogado") != null) {
-			CheckListDao checklistDao = new CheckListDao();
-			checklistDao.salvar(checklist);
+			CheckListDao dao = new CheckListDao();
+			if(checklist.getId() != null){
+				dao.atualizar(checklist);
+			} else {
+				dao.salvar(checklist);
+			}
 			return "redirect:listarCheckLists";
 		}else {
 			return "redirect:login";
@@ -69,17 +73,6 @@ public class CheckListController {
 			return funcionario.getFuncao()+"/checklist-edit";
 		}else {
 			return "redirect:loginFuncionario";
-		}
-	}
-	
-	@RequestMapping("/atualizarChecklist")
-	public String atualizar(Checklist checkllist, HttpSession session) {
-		if (session.getAttribute("funcionarioLogado") != null || session.getAttribute("tecnicoLogado") != null) {
-			CheckListDao dao = new CheckListDao();
-			dao.atualizar(checkllist);
-			return "redirect:listarCheckLists";
-		}else {
-			return "redirect:login";
 		}
 	}
 	

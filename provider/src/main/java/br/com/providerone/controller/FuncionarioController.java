@@ -17,6 +17,18 @@ import br.com.providerone.modelo.Funcionario;
 @Controller
 public class FuncionarioController {
 	
+	//para criação do primeiro usuario do sistema
+	@RequestMapping("/gravaAdmin")
+	public String gravaAdmin(Funcionario funcionario) {
+		FuncionarioDao daoTesta = new FuncionarioDao();
+		if(daoTesta.listaFuncionario().size() == 0){
+			FuncionarioDao dao = new FuncionarioDao();
+			dao.salvar(funcionario);
+			return "redirect:login";
+		}
+		return "redirect:login";
+	}
+	
 	@RequestMapping("/homePage")
 	public String homePage(HttpSession session, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
@@ -63,18 +75,6 @@ public class FuncionarioController {
 		return "redirect:funcionarioForm";
 	}
 	
-	//para criação do primeiro usuario do sistema
-	@RequestMapping("/gravaAdmin")
-	public String gravaAdmin(Funcionario funcionario) {
-		FuncionarioDao daoTesta = new FuncionarioDao();
-		if(daoTesta.listaFuncionario().size() == 0){
-			FuncionarioDao dao = new FuncionarioDao();
-			dao.salvar(funcionario);
-			return "redirect:login";
-		}
-		return "redirect:login";
-	}
-
 	@RequestMapping("/atualizarDados")
 	public String atualizarDados(HttpSession session) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
@@ -122,7 +122,6 @@ public class FuncionarioController {
 	public String atualizarMinhaSenha(Funcionario funcionario, String novaSenha, String confirmaSenha, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null || session.getAttribute("tecnicoLogado") != null) {
 			FuncionarioDao dao = new FuncionarioDao();
-		
 			if(novaSenha.equals(confirmaSenha)){
 				funcionario.setSenha(novaSenha);
 				dao.atualizarSenha(funcionario);

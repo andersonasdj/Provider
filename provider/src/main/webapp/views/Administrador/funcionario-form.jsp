@@ -48,7 +48,6 @@
 					<select class="selectpicker" id="nome" name="funcao">
 						<option>Tecnico</option>
 						<option>Administrador</option>
-						<option>Supervisor</option>
 					</select>
 				</div>
 			</div>

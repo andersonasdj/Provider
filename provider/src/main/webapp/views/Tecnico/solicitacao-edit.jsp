@@ -221,9 +221,6 @@
 					<select class="selectpicker" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${solicitacao.funcionario.nome}</option>
-						<c:forEach var="funcionario" items="${funcionario}">
-							<option>${funcionario.nome}</option> 
-						</c:forEach>
 						<option></option>
 					</select>
 				</div>

@@ -53,7 +53,7 @@
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
+							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -90,7 +90,7 @@
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
+							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -136,7 +136,7 @@
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
+							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -177,7 +177,7 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
+							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -214,7 +214,7 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id} </a>
+							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -259,7 +259,12 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script type="text/javascript">
+	<script> 
+		function lancarSubmenu(id){ 
+		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
+		} 
+	</script>
+	<script>
         // Este evendo é acionado após o carregamento da página
         jQuery(window).load(function() {
             //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.

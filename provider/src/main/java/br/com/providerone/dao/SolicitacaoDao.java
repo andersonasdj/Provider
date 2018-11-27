@@ -134,6 +134,9 @@ public class SolicitacaoDao {
 		manager.getTransaction().begin();
 		solicitacao = manager.find(Solicitacao.class, id);
 		solicitacao.setExcluido(true);
+		solicitacao.setDataAndamento(Calendar.getInstance());
+		solicitacao.setDataFechamento(Calendar.getInstance());
+		solicitacao.setStatus("Excluida");
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
@@ -949,6 +952,28 @@ public class SolicitacaoDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAtualizadasHoje(Calendar dataAbertura) {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.dataAtualizacao > :pData");
+			
+			query.setParameter("pData", dataAbertura, TemporalType.DATE);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesExcluidas() {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 		try {
 			Query query = manager

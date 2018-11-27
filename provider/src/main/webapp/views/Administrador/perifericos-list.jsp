@@ -11,7 +11,13 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/><br/>
+	<div class="container">
 		<legend>Lista de Periféricos</legend>
+		<a href="perifericosForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+		<p class="pull-right">
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+		</p>
+		<br/>
 		<table class="table table-condensed">
 			<tr>
 				<th>Modelo de Processador</th>
@@ -42,6 +48,7 @@
 		</table>
 		<br/><br/><br/><br/>
 	<legend></legend>
+	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>

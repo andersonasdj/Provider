@@ -41,10 +41,8 @@ public class ImageController {
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public String upload(HttpSession session, ItemForm itemForm){
-		
-		if (session.getAttribute("funcionarioLogado") != null) {
-			Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogado");
-			
+		Funcionario funcionarioLogado = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionarioLogado != null) {
 			SistemaDao sistemaDao = new SistemaDao();
 			Sistema caminhoSistema = sistemaDao.listaSistemaConfig().get(0);			
 			
@@ -53,7 +51,6 @@ public class ImageController {
 			
 			for(CommonsMultipartFile file:itemForm.getFiles()){
 				if(file.getSize() > 0){
-					
 					try {
 						BufferedImage bimg = ImageIO.read(file.getInputStream());
 						
@@ -67,51 +64,17 @@ public class ImageController {
 						File out = new File(caminhoReal+file.getOriginalFilename());
 						ImageIO.write(bimg, "jpeg", out);
 						String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
-						funcionario.setCaminhoFoto(nomeFoto);
+						funcionarioLogado.setCaminhoFoto(nomeFoto);
 						FuncionarioDao dao = new FuncionarioDao();
-						dao.atualizar(funcionario);
+						dao.atualizar(funcionarioLogado);
 					} catch (Exception e) {
 						
 					}
 				}
 			}
-			return "Administrador/success";
-			
-		}if (session.getAttribute("tecnicoLogado") != null) {
-			
-			Funcionario funcionario = (Funcionario) session.getAttribute("tecnicoLogado");
-			SistemaDao sistemaDao = new SistemaDao();
-			Sistema caminhoSistema = sistemaDao.listaSistemaConfig().get(0);			
-			
-			//String caminhoReal = "/home/techgol/appservers/apache-tomcat-8.0.23/webapps/provider/assets/img/perfil/";
-			String caminhoReal = caminhoSistema.getCaminho();
-			
-			for(CommonsMultipartFile file:itemForm.getFiles()){
-				if(file.getSize() > 0){
-					
-					try {
-						
-						BufferedImage bimg = ImageIO.read(file.getInputStream());
-						Graphics g = bimg.getGraphics();
-						Font fnt = new Font("Verdana", Font.PLAIN, 64);
-						
-						g.setFont(fnt);
-						g.setColor(Color.RED);
-						g.drawString("ProviderOne", 20, 70); //remover posteriormente essa linha
-						
-						File out = new File(caminhoReal+file.getOriginalFilename());
-						ImageIO.write(bimg, "jpeg", out);
-						String nomeFoto ="assets/img/perfil/"+file.getOriginalFilename();
-						funcionario.setCaminhoFoto(nomeFoto);
-						FuncionarioDao dao = new FuncionarioDao();
-						dao.atualizar(funcionario);
-					} catch (Exception e) {
-
-					}
-				}
-			}
-			return "Administrador/success";
+			return funcionarioLogado.getFuncao()+"/success";
+		} else {
+			return "redirect:loginFuncionario";
 		}
-		return "redirect:loginFuncionario";
 	}
 }

@@ -12,7 +12,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>		
 	<br/><br/><br/>
-	<form action="atualizarTarefa" method="post" class="form-horizontal container">
+	<form action="salvarTarefa" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend></legend>			
 			<input type="hidden" id="checklist.id" name="checklist.id" value="${tarefa.checklist.id}">

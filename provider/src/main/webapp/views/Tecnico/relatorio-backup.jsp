@@ -15,24 +15,7 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
-		<div class="container">
-			<legend align="center">Resumo de solicitações</legend>
-			<div class="row">
-				<div class="col-md-7"><div id="grafico"></div></div>
-				<div class="col-md-5">
-					<div id="botoesRelatorio">
-						<br/><br/>
-						<p><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a></p>
-						<p><a class="btn btn-primary" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a></p>
-						<p><a class="btn btn-warning" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a></p>
-						<p><a class="btn btn-success" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a></p>
-						<p><a class="btn btn-inverse" href="relatorioGeral" role="button">Total de ${qtdTotal} solicitações <i class="fa fa-search"></i></a></p>
-						<p><a class="btn btn-info" href="relatorioOp" role="button">Relatórios <i class="fa fa-database"></i></a></p>
-					</div>
-				</div>
-			</div>
-			<legend id="grafico"></legend>
-		</div>
+		
 		<h4>Exportar Solicitações</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
@@ -61,7 +44,7 @@
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="solicitante" data-sortable="true">Solicitante</th>
 				<th data-field="usuario" data-sortable="true">Usuário Afetado</th>
-				<th data-field="descricaoProblema">Problema Relatado</th>
+				<th data-field="descricaoProblema">Descrição da Solicitação</th>
 				<th data-field="dataEncerramento">Data / Hora Encerramento</th>
 				<th data-field="status" data-sortable="true">Status</th>
 				<th data-field="tecnico" data-sortable="true">Técnico</th>
@@ -73,7 +56,7 @@
 					<tr class="error" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -92,6 +75,7 @@
 								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
 								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
+						
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
@@ -128,7 +112,7 @@
 					<tr class="success" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -186,7 +170,7 @@
 					<tr class="warning" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -245,7 +229,7 @@
 					<tr class="info" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -261,6 +245,7 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>
+								
 								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
 								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
 						</td>
@@ -297,11 +282,12 @@
 						</td>
 					</tr>
 				</c:if>
+				
 				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
 					<tr class="active" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
-							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
+							<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -354,11 +340,7 @@
 					</tr>
 				</c:if>
 			</c:forEach>
-		</table>
-		<input type="hidden" name="abertas" id="aberto" value="${qtdAberto}">
-		<input type="hidden" name="agendadas" id="agendado" value="${qtdAgendado}"> 
-		<input type="hidden" name="abertas" id="andamento" value="${qtdAndamento}"> 
-		<input type="hidden" name="aguardando" id="aguardando" value="${qtdAguardando}"> 
+		</table>	
 	<br /><br />
 	<legend></legend>
 	<c:import url="rodape.jsp"></c:import>
@@ -369,13 +351,6 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
-	<script type="text/javascript" src="https://google.com/jsapi"></script>
-	<script src="assets/js/grafico.js"></script>
-	<script> 
-		function lancarSubmenu(id){ 
-		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
-		} 
-	</script> 
 	<script>
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");

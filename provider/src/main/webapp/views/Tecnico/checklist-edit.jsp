@@ -15,7 +15,7 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/>
-	<form action="atualizarChecklist" method="post" class="form-horizontal container">
+	<form action="salvarChecklist" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Edição de Checklist</legend>
 			<div>

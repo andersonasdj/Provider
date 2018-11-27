@@ -67,7 +67,7 @@
 				<tr>
 					<td></td>
 					<td>
-						<a href="logDeSolicitacao?id=${solicitacao.id}">${solicitacao.id}</a>
+						<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 					</td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
@@ -131,13 +131,22 @@
 							<c:if test="${solicitacao.status == 'Aberto'}">
 								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">E-mail não cadastrado</a></td>
 							</c:if>
+							<c:if test="${solicitacao.status == 'Excluida'}">
+								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">Excluída</a></td>
+							</c:if>
 						</c:if>
 						<c:if test="${not empty solicitacao.cliente.email }">
 							<c:if test="${solicitacao.status == 'Agendado'}">
-								<td>Não enviado na abertura</td>
+								<td>
+									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
+										<span>${solicitacao.cliente.email}</span></a>
+								</td>
 							</c:if>
 							<c:if test="${solicitacao.status == 'Em andamento'}">
-								<td>Não enviado na abertura</td>
+								<td>
+									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
+										<span>${solicitacao.cliente.email}</span></a>
+								</td>
 							</c:if>
 							<c:if test="${solicitacao.status == 'Aberto'}">
 								<td>
@@ -150,7 +159,10 @@
 									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
 										<span>${solicitacao.cliente.email}</span></a>
 								</td>
-							</c:if>						
+							</c:if>	
+							<c:if test="${solicitacao.status == 'Excluida'}">
+								<td>Excluída</td>
+							</c:if>					
 						</c:if>	
 					</c:if>
 					<c:if test="${not empty solicitacao.statusEmail}">
@@ -158,10 +170,22 @@
 					</c:if>
 					<td>
 						<a class="dcontexto"><div id="status-botao"> ${solicitacao.status}</div>
-							<span>
-								<p>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
-								<p>- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
-							</span>
+							<c:if test="${solicitacao.status != 'Aberto'}">
+								<span>
+									<c:if test="${solicitacao.status == 'Em andamento'}">
+										<p>- Data: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/></p>
+										<p>- Hora: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/></p>
+									</c:if>
+									<c:if test="${solicitacao.status == 'Agendado'}">
+										<p>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+										<p>- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p>
+									</c:if>
+										<c:if test="${solicitacao.status == 'Excluida'}">
+										<p>- Data: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="dd/MM/yyyy"/></p>
+										<p>- Hora: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p>
+									</c:if>
+								</span>
+							</c:if>
 						</a>
 					</td>
 					<c:if test="${empty solicitacao.funcionario.nome}">
@@ -172,8 +196,10 @@
 					</c:if>
 					<td>
 						<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
-						<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a> |
-						<a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a>						</td>
+						<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a>
+						<c:if test="${solicitacao.status != 'Excluida'}"> 
+							| <a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a>
+						</c:if>					</td>
 					</tr>
 					<!-- mascara para cobrir o site -->  
 					<div id="mascara"></div>
@@ -198,6 +224,11 @@
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<script src="assets/js/botoes-status.js"></script>
+	<script> 
+		function lancarSubmenu(id){ 
+		   window.open("logDeSolicitacao?id="+id,"janela1","width=700,height=650,scrollbars=YES") 
+		} 
+	</script> 
 	<script>
 		function mostraJanela(descricao, obs, prioridade){
 				$(document).ready(function(){
@@ -248,10 +279,7 @@
 	</script>
 	<script>
 		function confirmacaoEmail(id, cliente) {
-		    //var resposta = confirm("Deseja enviar um email para: " + cliente);
-		    // var resposta = confirm(prompt(cliente));
-			     
-	    	var email=prompt("Destinatário: "+ cliente + "\n\nPara alterar digite no campo abaixo:");
+	    	var email=prompt("Destinatário padrão: "+ cliente + "\n\nUtilize vírgula para enviar para mais de um destinatário\n\nPara envio direto ao usuário, digite no campo abaixo:");
 		     if (email != null) {
 		         setTimeout(function(){ 
 		        	 $('#carrega').hide().fadeIn('slow');

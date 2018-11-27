@@ -9,14 +9,12 @@
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 </head>
 <body>
-	<c:import url="barra-menus.jsp"></c:import>
-	<br/><br/>
 		<div class="container">
 		<fieldset>
 			<legend>Log de solicitação</legend>
 			<div class="container">
 				<div class="col-xs-12 col-md-6">
-					<textarea class="form-control" rows="30" style="width: 640px; height: 557px;">
+					<textarea class="form-control" rows="30" style="width: 640px; height: 500px;">
 						${solicitacao.andamentoDoChamado}
 					</textarea>
 				</div>

@@ -16,6 +16,9 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Criação de Periféricos</legend>
+			<p class="pull-right">
+				<a href="perifericosList"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+			</p><br/><br/>
 			<div class="control-group">
 				<label class="control-label">Modelo de Processador</label>
 				<div class="controls">
