@@ -138,6 +138,14 @@
 					</select>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">SSD</label>
+				<div class="controls">
+			      <input id="ssd" name="ssd" type="checkbox" class="form-check-input">
+				</div>	
+			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Sistema Operacional</label>
 				<div class="controls">

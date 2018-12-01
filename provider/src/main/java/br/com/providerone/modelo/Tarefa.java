@@ -17,7 +17,16 @@ public class Tarefa {
 	private String descricaoTarefa;
 	private String obs;
 	private String responsavelTarefa;
+	private String caminhoAnexo;
 	
+	public String getCaminhoAnexo() {
+		return caminhoAnexo;
+	}
+
+	public void setCaminhoAnexo(String caminhoAnexo) {
+		this.caminhoAnexo = caminhoAnexo;
+	}
+
 	@Lob
 	private String obsComplementares;
 

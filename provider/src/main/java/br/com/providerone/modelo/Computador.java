@@ -45,6 +45,15 @@ public class Computador {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Calendar expiracaoAV;
 	private String status;
+	private boolean ssd;
+
+	public boolean isSsd() {
+		return ssd;
+	}
+
+	public void setSsd(boolean ssd) {
+		this.ssd = ssd;
+	}
 
 	public Long getId() {
 		return id;

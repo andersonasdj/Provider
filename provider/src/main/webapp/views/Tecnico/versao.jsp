@@ -31,6 +31,7 @@
 						<li>Inclusão de checklists padrões.</li>
 						<li>Inclisão de checklists personalizados por cliente.</li>
 						<li>Inclusão de procedimentos separados por tarefas.</li>
+						<li>Versão impressa de checklist.</li>
 					</ul>
 				</li>
 			</ul>

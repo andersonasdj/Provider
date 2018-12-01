@@ -143,6 +143,21 @@
 					</select>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">SSD</label>
+				<div class="controls">
+					<c:if test="${computador.ssd != false}">
+						<input id="ssd" name="ssd" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge" checked="checked">
+					</c:if>
+					<c:if test="${computador.ssd != true}">
+						<input id="ssd" name="ssd" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge">
+					</c:if>
+				</div>
+			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Sistema Operacional</label>
 				<div class="controls">

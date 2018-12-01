@@ -27,9 +27,9 @@
 				</p>
 			</c:if>
 		</legend>
-		<a href="addTarefa?id=${idChecklist}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		<a href="addTarefa?id=${idChecklist}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
 		<p class="pull-right">
-			<a href="listarCheckLists"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></a></i>
+			<a href="listarCheckLists"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
 		</p>
 		<table id="table"
 				data-toggle="table"
@@ -44,6 +44,7 @@
 					<th>Numero</th>
 					<th>Descrição da Tarefa</th>
 					<th>Observações</th>
+					<th>Anexos</th>
 					<th>Responsável da Tarefa</th>
 					<th>Ações</th>
 				</tr>
@@ -53,6 +54,13 @@
 					<td>${tarefa.numero}</td>
 					<td>${tarefa.descricaoTarefa}</td>
 					<td>${tarefa.obs}</td>
+					<c:if test="${tarefa.caminhoAnexo != null}">
+						<td><a href="download?idTarefa=${tarefa.idTarefa}&idChecklist=${idChecklist}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a></td>
+					</c:if>
+					
+					<c:if test="${tarefa.caminhoAnexo == null}">
+						<td><a href="uploadAnexo?idTarefa=${tarefa.idTarefa}&idChecklist=${idChecklist}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+					</c:if>
 					<td>${tarefa.responsavelTarefa}</td>
 					
 					<td>

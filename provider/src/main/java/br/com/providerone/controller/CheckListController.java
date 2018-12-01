@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import br.com.providerone.dao.CheckListDao;
 import br.com.providerone.dao.ClienteDao;
 import br.com.providerone.dao.FuncionarioDao;
+import br.com.providerone.dao.TarefaDao;
 import br.com.providerone.modelo.Checklist;
 import br.com.providerone.modelo.Funcionario;
 
@@ -25,7 +26,20 @@ public class CheckListController {
 			return "redirect:login";
 		}
 	}
-
+	
+	@RequestMapping("/checklistImp")
+	public String checklistImp(Long id, HttpSession session, Model model){
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+			TarefaDao tarefaDao = new TarefaDao();
+			model.addAttribute("tarefas", tarefaDao.listarTarefasPorId(id));
+			model.addAttribute("idChecklist", id);
+			return funcionario.getFuncao()+"/checklist-imp";
+		}else {
+			return "redirect:login";
+		}
+	}
+	
 	private void montaFormCheckList(Model model) {
 		ClienteDao clienteDao = new ClienteDao();
 		FuncionarioDao funcionarioDao = new FuncionarioDao();

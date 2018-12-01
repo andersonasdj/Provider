@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +7,9 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
@@ -17,9 +18,15 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Atualização de Computador</legend>
+			<a href="computadorForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+			<p class="pull-right">
+				<a href="computadorList"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+			</p>
+			<br/><br/>
 			<div>
 				<div>
-					<input id="id" name="id" type="hidden" value="${computador.id}">
+					<input id="id" name="id" type="hidden"
+						value="${computador.id}">
 				</div>
 			</div>
 			<div class="control-group">
@@ -136,6 +143,21 @@
 					</select>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label">SSD</label>
+				<div class="controls">
+					<c:if test="${computador.ssd != false}">
+						<input id="ssd" name="ssd" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge" checked="checked">
+					</c:if>
+					<c:if test="${computador.ssd != true}">
+						<input id="ssd" name="ssd" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge">
+					</c:if>
+				</div>
+			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Sistema Operacional</label>
 				<div class="controls">
@@ -159,17 +181,24 @@
 						</c:forEach>
 					</select>
 				</div>
-			</div>	
+			</div>
 			<div class="control-group">
 				<label class="control-label">Sistema Operacional Licenciado</label>
 				<div class="controls">
 					<select class="selectpicker" id="sistemaOperacionalLicenciado"
 						name="sistemaOperacionalLicenciado">
-						<option>${computador.sistemaOperacionalInstalado}</option>
+						<option>${computador.sistemaOperacionalLicenciado}</option>
 						<c:forEach var="periferico" items="${perifericos}">
 							<option>${periferico.sistemaOperacionalInstalado}</option> 
 						</c:forEach>
 					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Serial Sistema Operacional</label>
+				<div class="controls">
+					<input id="serialWindows" name="serialWindows" type="text" placeholder="Serial do Windows"
+						value="${computador.serialWindows}" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
@@ -185,6 +214,13 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Serial Office</label>
+				<div class="controls">
+					<input id="serialOffice" name="serialOffice" type="text" placeholder="Serial do Office"
+						value="${computador.serialOffice}" class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">Anti Vírus</label>
 				<div class="controls">
 					<select class="selectpicker" id="antiVirus"
@@ -194,6 +230,13 @@
 							<option>${periferico.antiVirus}</option> 
 						</c:forEach>
 					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Data de expiração do Anti Vírus</label>
+				<div class="controls">
+					<input id="datepicker" name="expiracaoAV" type="text" placeholder="Expiração Anti Vírus" maxlength="10"
+						value="<f:formatDate pattern="dd-MM-yyyy" value="${computador.expiracaoAV.time}" />" />
 				</div>
 			</div>
 			<div class="control-group">
@@ -209,12 +252,24 @@
 					<input id="obs" name="obs" type="text" placeholder="Observações"
 						value="${computador.obs}" class="input-xlarge">
 				</div>
+			</div>			
+			<div class="control-group">
+				<label class="control-label">Status</label>
+				<div class="controls">
+					<select class="selectpicker" id="status"
+						name="status">
+						<option>${computador.status}</option>
+						<option>Ativo</option>
+						<option>Vago</option>
+						<option>Defeito</option>
+					</select>
+				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<button id="enviar" name="salvar" class="btn btn-success">Salvar</button>
-					<a class="btn btn-primary" href="computadorList" role="button">Voltar</a>
+					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
+					<a class="btn btn-primary" href="computadorList" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>
@@ -223,5 +278,67 @@
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script>
+        $(function(){
+
+            jQuery('#timepicker').timepicker();
+            jQuery('#datepicker').datepicker();
+
+            (function( factory ) {
+                if ( typeof define === "function" && define.amd ) {
+                    define([ "../datepicker" ], factory );
+                } else {
+                    factory( jQuery.datepicker );
+                }
+            }(function( datepicker ) {
+
+            datepicker.regional['pt-BR'] = {
+            	changeMonth: true,
+                changeYear: true,
+                closeText: 'Fechar',
+                prevText: '&#x3C;Anterior',
+                nextText: 'Próximo&#x3E;',
+                currentText: 'Hoje',
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun',
+                'Jul','Ago','Set','Out','Nov','Dez'],
+                dayNames: ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+                dayNamesMin: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+                weekHeader: 'Sm',
+                dateFormat: 'dd-mm-yy',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: ''};
+            datepicker.setDefaults(datepicker.regional['pt-BR']);
+
+            return datepicker.regional['pt-BR'];
+
+            }));
+            (function ($) {
+                $.timepicker.regional['pt-BR'] = {
+                    timeOnlyTitle: 'Escolha o horÃ¡rio',
+                    timeText: 'HorÃ¡rio',
+                    hourText: 'Hora',
+                    minuteText: 'Minutos',
+                    secondText: 'Segundos',
+                    millisecText: 'Milissegundos',
+                    microsecText: 'Microssegundos',
+                    timezoneText: 'Fuso horÃ¡rio',
+                    currentText: 'Agora',
+                    closeText: 'Fechar',
+                    timeFormat: 'HH:mm',
+                    amNames: ['a.m.', 'AM', 'A'],
+                    pmNames: ['p.m.', 'PM', 'P'],
+                    isRTL: false
+                };
+                $.timepicker.setDefaults($.timepicker.regional['pt-BR']);
+            })(jQuery);
+        });
+    </script>
 </html>

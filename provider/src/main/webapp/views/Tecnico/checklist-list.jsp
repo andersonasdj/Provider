@@ -45,10 +45,11 @@
 					<td><f:formatDate value="${checklist.dataCriacao.time}"
 							pattern="dd/MM/yyyy" /></td>
 					<td>${checklist.nomeResponsavel}</td>
-					<td>
-						<a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | 
-						<a href="listarTarefas?id=${checklist.id}"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a> |
-						<a href="javascript:func()" onclick="confirmacao('${checklist.id}')"><i class="fa fa-trash-o"></i></a>
+					<td><a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
+						<a href="listarTarefas?id=${checklist.id}"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a> | 
+						<a href="javascript:func()" onclick="confirmacao('${checklist.id}')"><i class="fa fa-trash-o"></i></a> |
+						<a href="#" onclick="lancarImp(${checklist.id})"><i class="fa fa-print"></i></a>
+						
 					</td>
 				</tr>
 			</c:forEach>
@@ -69,5 +70,10 @@
 		     }
 		}
 	</script>
+	<script> 
+		function lancarImp(id){ 
+		   window.open("checklistImp?id="+id,"janela1","width=900,height=600,scrollbars=YES") 
+		} 
+	</script> 
 </body>
 </html>

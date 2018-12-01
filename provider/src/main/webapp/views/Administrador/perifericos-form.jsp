@@ -54,13 +54,14 @@
 						class="input-xlarge">
 				</div>
 			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Tamanhos de HD</label>
 				<div class="controls">
-					<input id="qtdHd" name="qtdHd" type="text" placeholder="Tamanhos de HD"
-						class="input-xlarge">
+					<input id="qtdHd" name="qtdHd" type="text" placeholder="Tamanhos de HD" class="input-xlarge">
 				</div>
 			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Sistema Operacional</label>
 				<div class="controls">
