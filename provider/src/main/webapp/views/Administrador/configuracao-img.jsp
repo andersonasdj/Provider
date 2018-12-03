@@ -15,14 +15,28 @@
 	<br/><br/><br/>
 	<form action="salvarConfigImg" method="get" class="form-horizontal container">
 		<fieldset>
-			<legend>Configuração padrão de caminho de imagens</legend>
+			<legend>Configuração Paths do servidor:</legend>
 			<div class="control-group">
-				<label class="control-label">Caminho raiz</label>
+				<label class="control-label">Caminho raiz imagem de perfil:</label>
 				<div class="controls">
 					<input id="caminho" name="caminho" type="text" placeholder="Caminho raiz" class="input-xlarge" required>
 					<small>EX: C:\Users\Sisgold\Documents\Projetos\SisGold\Sisgold\src\main\webapp\assets\img\perfil\</small>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
+			</div>
+				<div class="control-group">
+				<label class="control-label">Caminho raiz base checklist:</label>
+				<div class="controls">
+					<input id="pathGed" name="pathGed" type="text" placeholder="Path GED" class="input-xlarge" required>
+					<small>EX1: Windows - "C:\\Ged\\Checklists\\" --- EX2: Linux - "/Opt/Dados/Ged/Checklists/"</small>
+					<p class="help-block">* Campo Obrigatório</p>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label">Sistema Operacional Linux?</label>
+				<div class="controls">
+			      <input id="servidorLinux" name="servidorLinux" type="checkbox" class="form-check-input">
+				</div>	
 			</div>
 			<div class="control-group">
 				<label class="control-label"></label>

@@ -11,8 +11,25 @@ public class Sistema {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	private String caminho;
+	private String pathGed;
+	private boolean servidorLinux;
+	
+	public boolean isServidorLinux() {
+		return servidorLinux;
+	}
+
+	public void setServidorLinux(boolean servidorLinux) {
+		this.servidorLinux = servidorLinux;
+	}
+
+	public String getPathGed() {
+		return pathGed;
+	}
+
+	public void setPathGed(String pathGed) {
+		this.pathGed = pathGed;
+	}
 
 	public Long getId() {
 		return id;

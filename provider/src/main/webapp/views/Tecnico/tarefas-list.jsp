@@ -41,9 +41,10 @@
                data-key-events="true">
             <thead>   
 				<tr>
-					<th>Número</th>
+					<th>Numero</th>
 					<th>Descrição da Tarefa</th>
 					<th>Observações</th>
+					<th>Anexos</th>
 					<th>Responsável da Tarefa</th>
 					<th>Ações</th>
 				</tr>
@@ -53,7 +54,15 @@
 					<td>${tarefa.numero}</td>
 					<td>${tarefa.descricaoTarefa}</td>
 					<td>${tarefa.obs}</td>
+					<c:if test="${tarefa.caminhoAnexo != null}">
+						<td><a href="download?idTarefa=${tarefa.idTarefa}&idChecklist=${idChecklist}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a></td>
+					</c:if>
+					
+					<c:if test="${tarefa.caminhoAnexo == null}">
+						<td><a href="uploadAnexo?idTarefa=${tarefa.idTarefa}&idChecklist=${idChecklist}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+					</c:if>
 					<td>${tarefa.responsavelTarefa}</td>
+					
 					<td>
 						<a href="tarefaEdit?id=${tarefa.idTarefa}"><i class="fa fa-pencil-square-o fa-lg"></i></a> | 
 						<a href="javascript:func()" onclick="confirmacao('${tarefa.idTarefa}')"><i class="fa fa-trash-o"></i></a>

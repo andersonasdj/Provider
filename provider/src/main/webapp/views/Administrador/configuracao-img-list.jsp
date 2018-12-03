@@ -21,7 +21,8 @@
 	        <thead>
 			<tr>
 				<th>Id</th>
-				<th>Caminho raiz de imagem no servidor</th>
+				<th>Caminho raiz imagem de perfil</th>
+				<th>Caminho raiz base checklist</th>
 				<th>Opções</th>
 			</tr>
 			</thead>
@@ -29,6 +30,7 @@
 				<tr>
 					<td>${sistema.id}</td>
 					<td>${sistema.caminho}</td>
+					<td>${sistema.pathGed}</td>
 					<td>
 						<a href="editConfigImg?id=${sistema.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a>
 						<a href="javascript:func()" onclick="confirmacao('${sistema.id}')"><i class="fa fa-trash-o"></i></a>

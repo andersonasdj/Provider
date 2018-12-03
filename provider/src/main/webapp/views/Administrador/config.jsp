@@ -22,7 +22,7 @@
 					<br/><br/>
 					<p><span>Configuração de envio de E-mail SMTP: </span><a class="btn btn-info" href="configEmail" role="button"> Editar</a></p>
 					<br/>
-					<p><span>Configuração de caminho raiz de imagem: </span><a class="btn btn-info" href="configImg" role="button"> Editar</a></p>
+					<p><span>Paths do servidor: </span><a class="btn btn-info" href="configImg" role="button"> Editar</a></p>
 				<br/>
 				</div>
 			<legend></legend>

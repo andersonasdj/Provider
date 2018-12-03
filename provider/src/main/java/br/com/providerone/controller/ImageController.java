@@ -100,8 +100,17 @@ public class ImageController {
 	public String uploadAnexo(HttpSession session, Long idTarefa, Long idChecklist, ItemForm itemForm, Model model){
 		Funcionario funcionarioLogado = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionarioLogado != null) {
-			String caminhoReal = "C:\\GED\\";
-			String diretorioDoAnexo = idChecklist+"\\"+idTarefa+"\\" ;
+			SistemaDao daoSistema = new SistemaDao();
+			Sistema sistema = new Sistema();
+			sistema = daoSistema.listaSistemaConfig().get(0);
+			String caminhoReal = sistema.getPathGed();
+			String diretorioDoAnexo;
+			if(sistema.isServidorLinux()){
+				diretorioDoAnexo = idChecklist+"/"+idTarefa+"/" ;
+			} else{
+				diretorioDoAnexo = idChecklist+"\\"+idTarefa+"\\" ;
+			}
+			
 			TarefaDao daoTarefa = new TarefaDao();
 			Tarefa tarefa = daoTarefa.buscaPorId(idTarefa);
 			CheckListDao daoChecklist =  new CheckListDao();
@@ -137,12 +146,18 @@ public class ImageController {
 	
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
     public HttpEntity<byte[]> download(Long idTarefa, Long idChecklist) throws IOException {
-    	String caminhoReal = "C:\\GED\\";
-		String diretorioDoAnexo = idChecklist+"\\"+idTarefa+"\\" ;
-    	
+    	SistemaDao daoSistema = new SistemaDao();
+		Sistema sistema = new Sistema();
+		sistema = daoSistema.listaSistemaConfig().get(0);
+		String caminhoReal = sistema.getPathGed();
+		String diretorioDoAnexo;
+		if(sistema.isServidorLinux()){
+			diretorioDoAnexo = idChecklist+"/"+idTarefa+"/" ;
+		} else{
+			diretorioDoAnexo = idChecklist+"\\"+idTarefa+"\\" ;
+		}
     	TarefaDao dao = new TarefaDao();
     	Tarefa tarefa = dao.buscaPorId(idTarefa);
-       
     	byte[] arquivo = Files.readAllBytes( Paths.get(caminhoReal+diretorioDoAnexo+tarefa.getCaminhoAnexo()) );
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Content-Disposition", "attachment;filename=\""+tarefa.getCaminhoAnexo());
