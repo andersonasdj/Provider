@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,14 +6,21 @@
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/style.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
-	<br /><br /><br />
+	<div id="loader"></div>
+	<br/><br/><br/>
+	<div class="container">
 		<legend>Lista de Computadores</legend>
+		
+		<a href="computadorForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+		<p class="pull-right">
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+		</p>
+		
 		<h4>Exportar Relatório</h4>
 	        <div id="toolbar">
 	            <select class="form-control">
@@ -38,6 +44,7 @@
 	        <thead>
 			<tr>
 				<th data-field="state" data-checkbox="true"></th>
+				<th data-field="pontuacao" data-sortable="true">Pontuação</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="funcao" data-sortable="true">Função</th>
 				<th data-field="nomeComputador" data-sortable="true">Nome do Computador</th>
@@ -51,7 +58,8 @@
 			</thead>
 			<c:forEach var="computador" items="${computadores}">
 				<tr>
-					<td data-field="state" data-checkbox="true"></td>
+					<td data-field="state" data-checkbox="true"></td>					
+					<td>${computador.pontos}</td>
 					<td>${computador.cliente.nome}</td>
 					<td>${computador.funcao}</td>
 					<td>${computador.nomeComputador}</td>
@@ -59,7 +67,7 @@
 					<td>
 						<a class="dcontexto"> ${computador.sistemaOperacionalInstalado}
 							<span>Windows Licenciado:  ${computador.sistemaOperacionalLicenciado}<br/><br/>
-								Office Instalado: ${computador.officeInstalado}<br/><br/>
+								Office Instalado: ${computador.officeInstalado} <br/> <br/>
 								Office Licenciado: ${computador.officeLicenciado}</span></a>
 					</td>
 					<td>
@@ -74,13 +82,14 @@
 							</span></a>
 					</td>
 					<td>${computador.qtdMemoria}</td>
-					<td><a href="computadorEdit?id=${computador.id}">Editar</a> <!-- <a
+					<td><a href="computadorEdit?id=${computador.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> <!-- <a
 						href="removeFuncionario?id=${funcionario.id}">Excluir</a> --></td>
 				</tr>
 			</c:forEach>
 		</table>
-		<br /><br /><br /><br /><br /><br /><br />
+		<br/><br/><br/><br/><br/><br/><br/>
 	<legend></legend>
+	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
@@ -89,4 +98,12 @@
 	<script src="assets/js/bootstrap-table-export.js"></script>
 	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
+	<script src="assets/js/ga.js"></script>
+	<script type="text/javascript">
+        // Este evendo é acionado após o carregamento da página
+        jQuery(window).load(function() {
+            //Após a leitura da pagina o evento fadeOut do loader é acionado, esta com delay para ser perceptivo em ambiente fora do servidor.
+            jQuery("#loader").delay(10).fadeOut("slow");
+        });
+    </script>
 </html>

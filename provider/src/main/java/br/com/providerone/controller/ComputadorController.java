@@ -52,6 +52,7 @@ public class ComputadorController {
 		ClienteDao daoCli = new ClienteDao();
 		Cliente clienteASalvar = daoCli.buscaNomeCliente(nomeDoCliente);	
 		ComputadorDao dao = new ComputadorDao();
+		computador.calculaDesempenho();
 		dao.salvaComputador(computador, clienteASalvar);
 		return "redirect:computadorForm";
 	}
@@ -129,6 +130,7 @@ public class ComputadorController {
 		ComputadorDao dao = new ComputadorDao();
 		ClienteDao daoCli = new ClienteDao();
 		Cliente clienteSalvar = daoCli.buscaNomeCliente(nomeCliente);
+		computador.calculaDesempenho();
 		dao.atualizar(computador, clienteSalvar);
 	}
 }

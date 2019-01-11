@@ -49,6 +49,7 @@
 				<th data-field="id" data-sortable="true">ID</th>
 				<th>Data da Solicitação</th>
 				<th>Site</th>
+				<th>Anexo</th>
 				<th>Cliente</th>
 				<th>Usuário Afetado</th>
 				<th>Problema Relatado</th>
@@ -68,6 +69,17 @@
 							- Aberto por: ${solicitacao.abriuChamado}</span></a>
 				</td>
 				<td>${solicitacao.onsiteOffsite}</td>
+				
+				<c:if test="${solicitacao.caminhoAnexo != null}">
+					<td>
+						<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+						| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+					</td>
+				</c:if>
+				<c:if test="${solicitacao.caminhoAnexo == null}">
+					<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+				</c:if>
+				
 				<td>
 					<a class="dcontexto"> ${solicitacao.cliente.nome}
 						<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>

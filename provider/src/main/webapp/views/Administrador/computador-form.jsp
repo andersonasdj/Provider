@@ -65,9 +65,15 @@
 					<select class="selectpicker" id="marca"
 						name="marca">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.marcaComputador}</option> 
-						</c:forEach>
+						<option>Dell</option>
+						<option>Lenovo</option>
+						<option>HP</option>
+						<option>Sony</option>
+						<option>Samsumg</option>
+						<option>Asus</option>
+						<option>Toshiba</option>
+						<option>IBM</option>
+						<option>Generico</option>
 					</select>
 				</div>
 			</div>
@@ -77,9 +83,9 @@
 					<select class="selectpicker" id="modeloProcessador"
 						name="modeloProcessador">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.modeloProcessador}</option> 
-						</c:forEach>
+						<option>Intel</option>
+						<option>AMD</option>
+						<option>Atom</option>
 					</select>
 				</div>
 			</div>
@@ -89,9 +95,14 @@
 					<select class="selectpicker" id="familia"
 						name="familia">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.familia}</option> 
-						</c:forEach>
+						<option>Core</option>
+						<option>Xeon</option>
+						<option>Pentium</option>
+						<option>Semprom</option>
+						<option>Athlon</option>
+						<option>Celeron</option>
+						<option>Phenom ii</option>
+						<option>A8</option>
 					</select>
 				</div>
 			</div>
@@ -101,17 +112,26 @@
 					<select class="selectpicker" id="tipoProcessador"
 						name="tipoProcessador">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.tipoProcessador}</option> 
-						</c:forEach>
+						<option>i3</option>
+						<option>i5</option>
+						<option>i7</option>
+						<option>E5506</option>
+						<option>E3-1220</option>
+						<option>G6950</option>
+						<option>2 Duo</option>
+						<option>2 Quad</option>
+						<option>Dual Core</option>
+						<option>Dual</option>
+						<option>X2</option>
+						<option>N850</option>
+						<option>3500M</option>
 					</select>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Frequencia do Processador</label>
 				<div class="controls">
-					<input id="frequenciaProcessador" name="frequenciaProcessador" type="text" placeholder="Frequencia do Processador"
-						class="input-xlarge">
+					<input id="frequenciaProcessador" name="frequenciaProcessador" placeholder="Frequencia do Processador" type="Text" size="3" onKeyUp="mascaraFrequencia(this, event)" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
@@ -120,9 +140,15 @@
 					<select class="selectpicker" id="qtdMemoria"
 						name="qtdMemoria">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.qtdMemoria}</option> 
-						</c:forEach>
+						<option>1024</option>
+						<option>3072</option>
+						<option>2048</option>
+						<option>4096</option>
+						<option>6144</option>
+						<option>8192</option>
+						<option>12288</option>
+						<option>16388</option>
+						<option>32776</option>
 					</select>
 				</div>
 			</div>
@@ -132,9 +158,17 @@
 					<select class="selectpicker" id="qtdHd"
 						name="qtdHd">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.qtdHd}</option> 
-						</c:forEach>
+						<option>80</option>
+						<option>120</option>
+						<option>240</option>
+						<option>320</option>
+						<option>480</option>
+						<option>500</option>
+						<option>700</option>
+						<option>1000</option>
+						<option>1500</option>
+						<option>2000</option>
+						<option>4000</option>
 					</select>
 				</div>
 			</div>
@@ -152,9 +186,40 @@
 					<select class="selectpicker" id="sistemaOperacionalInstalado"
 						name="sistemaOperacionalInstalado">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.sistemaOperacionalInstalado}</option> 
-						</c:forEach>
+						<option>Windows XP Professional</option>
+						<option>Windows Vista Business</option>
+						<option>Windows Vista Home (x64)</option>
+						<option>Windows 7 Home (x86)</option>
+						<option>Windows 7 Home (x64)</option>
+						<option>Windows 7 Professional (x86)</option>
+						<option>Windows 7 Professional (x64)</option>
+						<option>Windows 7 Ultimate (x64)</option>
+						<option>Windows 8 Home (x86)</option>
+						<option>Windows 8 Home (x64)</option>
+						<option>Windows 8 Professional (x64)</option>
+						<option>Windows 8.1 Home (x86)</option>
+						<option>Windows 8.1 Home (x64)</option>
+						<option>Windows 8.1 Professional (x86)</option>
+						<option>Windows 8.1 Professional (x64)</option>
+						<option>Windows 10 Single Language (x64)</option>
+						<option>Windows 10 Professional (x64)</option>
+						<option>Windows 10 Enterprise (x64)</option>
+						<option>Windows Server 2003 Standard Edition (x64)</option>
+						<option>Windows Server 2008 Essentials (x64)</option>
+						<option>Windows Server 2008 Standard (x64)</option>
+						<option>Windows Server 2008 R2 Standard (x64)</option>
+						<option>Windows Server 2012 Foundation (x64)</option>
+						<option>Windows Server 2012 Essentials (x64)</option>
+						<option>Windows Server 2012 Standard (x64)</option>
+						<option>Windows Server 2012 R2 Standard (x64)</option>
+						<option>Windows Server 2012 Datacenter (x64)</option>
+						<option>Windows Server 2016 Essentials (x64)</option>
+						<option>Windows Server 2016 Standard (x64)</option>
+						<option>Windows Server 2016 R2 Standard (x64)</option>
+						<option>Windows Server 2016 Datacenter (x64)</option>
+						<option>Windows Server 2019 Essentials (x64)</option>
+						<option>Windows Server 2019 Standard (x64)</option>
+						<option>Windows Server 2019 Datacenter (x64)</option>
 					</select>
 				</div>
 			</div>
@@ -164,9 +229,21 @@
 					<select class="selectpicker" id="officeInstalado"
 						name="officeInstalado">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.officeInstalado}</option> 
-						</c:forEach>
+						<option>Microsoft Office 2007 Home and Bussiness</option>
+						<option>Microsoft Office 2007 Enterprise</option>
+						<option>Microsoft Office 2007 Small Business</option>
+						<option>Microsoft Office 2007 ProPlus</option>
+						<option>Microsoft Office 2010 Starter</option>
+						<option>Microsoft Office 2010 Home and Bussiness</option>
+						<option>Microsoft Office 2010 Professional</option>
+						<option>Microsoft Office 2010 ProPlus</option>
+						<option>Microsoft Office 2013 Home and Student</option>
+						<option>Microsoft Office 2013 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2013</option>
+						<option>Microsoft Office 2016 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2016</option>
+						<option>Microsoft Office 2019 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2019</option>
 					</select>
 				</div>
 			</div>
@@ -176,9 +253,40 @@
 					<select class="selectpicker" id="sistemaOperacionalLicenciado"
 						name="sistemaOperacionalLicenciado">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.sistemaOperacionalInstalado}</option> 
-						</c:forEach>
+						<option>Windows XP Professional</option>
+						<option>Windows Vista Business</option>
+						<option>Windows Vista Home (x64)</option>
+						<option>Windows 7 Home (x86)</option>
+						<option>Windows 7 Home (x64)</option>
+						<option>Windows 7 Professional (x86)</option>
+						<option>Windows 7 Professional (x64)</option>
+						<option>Windows 7 Ultimate (x64)</option>
+						<option>Windows 8 Home (x86)</option>
+						<option>Windows 8 Home (x64)</option>
+						<option>Windows 8 Professional (x64)</option>
+						<option>Windows 8.1 Home (x86)</option>
+						<option>Windows 8.1 Home (x64)</option>
+						<option>Windows 8.1 Professional (x86)</option>
+						<option>Windows 8.1 Professional (x64)</option>
+						<option>Windows 10 Single Language (x64)</option>
+						<option>Windows 10 Professional (x64)</option>
+						<option>Windows 10 Enterprise (x64)</option>
+						<option>Windows Server 2003 Standard Edition (x64)</option>
+						<option>Windows Server 2008 Essentials (x64)</option>
+						<option>Windows Server 2008 Standard (x64)</option>
+						<option>Windows Server 2008 R2 Standard (x64)</option>
+						<option>Windows Server 2012 Foundation (x64)</option>
+						<option>Windows Server 2012 Essentials (x64)</option>
+						<option>Windows Server 2012 Standard (x64)</option>
+						<option>Windows Server 2012 R2 Standard (x64)</option>
+						<option>Windows Server 2012 Datacenter (x64)</option>
+						<option>Windows Server 2016 Essentials (x64)</option>
+						<option>Windows Server 2016 Standard (x64)</option>
+						<option>Windows Server 2016 R2 Standard (x64)</option>
+						<option>Windows Server 2016 Datacenter (x64)</option>
+						<option>Windows Server 2019 Essentials (x64)</option>
+						<option>Windows Server 2019 Standard (x64)</option>
+						<option>Windows Server 2019 Datacenter (x64)</option>
 					</select>
 				</div>
 			</div>
@@ -195,9 +303,21 @@
 					<select class="selectpicker" id="officeLicenciado"
 						name="officeLicenciado">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.officeInstalado}</option> 
-						</c:forEach>
+						<option>Microsoft Office 2007 Home and Bussiness</option>
+						<option>Microsoft Office 2007 Enterprise</option>
+						<option>Microsoft Office 2007 Small Business</option>
+						<option>Microsoft Office 2007 ProPlus</option>
+						<option>Microsoft Office 2010 Starter</option>
+						<option>Microsoft Office 2010 Home and Bussiness</option>
+						<option>Microsoft Office 2010 Professional</option>
+						<option>Microsoft Office 2010 ProPlus</option>
+						<option>Microsoft Office 2013 Home and Student</option>
+						<option>Microsoft Office 2013 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2013</option>
+						<option>Microsoft Office 2016 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2016</option>
+						<option>Microsoft Office 2019 Home and Bussiness</option>
+						<option>Microsoft Office 365 Business 2019</option>
 					</select>
 				</div>
 			</div>
@@ -214,9 +334,18 @@
 					<select class="selectpicker" id="antiVirus"
 						name="antiVirus">
 						<option></option>
-						<c:forEach var="periferico" items="${perifericos}">
-							<option>${periferico.antiVirus}</option> 
-						</c:forEach>
+						<option>Panda Security</option>
+						<option>Panda 360</option>
+						<option>Panda Free</option>
+						<option>Trend Micro</option>
+						<option>Macfee</option>
+						<option>Kaspersky</option>
+						<option>Eset</option>
+						<option>Avast</option>
+						<option>Avira</option>
+						<option>AVG</option> 
+						<option>Microsoft Essentials</option>
+						<option>Bit Defender</option>
 					</select>
 				</div>
 			</div>
@@ -328,5 +457,28 @@
                 $.timepicker.setDefaults($.timepicker.regional['pt-BR']);
             })(jQuery);
         });
+    </script>
+    <script>
+    	String.prototype.reverse = function(){
+    	  return this.split('').reverse().join(''); 
+    	};
+    
+	    function mascaraFrequencia(campo,evento){
+	    	  var tecla = (!evento) ? window.event.keyCode : evento.which;
+	    	  var valor  =  campo.value.replace(/[^\d]+/gi,'').reverse();
+	    	  var resultado  = "";
+	    	  var mascara = "#.##".reverse();
+	    	  for (var x=0, y=0; x<mascara.length && y<valor.length;) {
+	    	    if (mascara.charAt(x) != '#') {
+	    	      resultado += mascara.charAt(x);
+	    	      x++;
+	    	    } else {
+	    	      resultado += valor.charAt(y);
+	    	      y++;
+	    	      x++;
+	    	    }
+	    	  }
+	    	  campo.value = resultado.reverse();
+	    }
     </script>
 </html>

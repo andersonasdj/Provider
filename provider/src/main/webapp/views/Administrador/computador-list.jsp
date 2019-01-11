@@ -44,6 +44,7 @@
 	        <thead>
 			<tr>
 				<th data-field="state" data-checkbox="true"></th>
+				<th data-field="pontuacao" data-sortable="true">Pontuação</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="funcao" data-sortable="true">Função</th>
 				<th data-field="nomeComputador" data-sortable="true">Nome do Computador</th>
@@ -57,7 +58,8 @@
 			</thead>
 			<c:forEach var="computador" items="${computadores}">
 				<tr>
-					<td data-field="state" data-checkbox="true"></td>
+					<td data-field="state" data-checkbox="true"></td>					
+					<td>${computador.pontos}</td>
 					<td>${computador.cliente.nome}</td>
 					<td>${computador.funcao}</td>
 					<td>${computador.nomeComputador}</td>

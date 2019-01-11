@@ -29,7 +29,6 @@
                data-key-events="true">
             <thead>   
 				<tr>
-					<th data-field="numeroChecklist" data-sortable="true">Número</th>
 					<th data-field="nomeCliente" data-sortable="true">Nome do Cliente</th>
 					<th data-field="tituloChecklist" data-sortable="true">Título Checklist</th>
 					<th>Data de Criação</th>
@@ -39,13 +38,13 @@
 			</thead>
 			<c:forEach var="checklist" items="${checklists}">
 				<tr>
-					<td>${checklist.numeroChecklist}</td>
 					<td>${checklist.nomeCliente}</td>
 					<td>${checklist.tituloChecklist}</td>
 					<td><f:formatDate value="${checklist.dataCriacao.time}"
 							pattern="dd/MM/yyyy" /></td>
 					<td>${checklist.nomeResponsavel}</td>
-					<td><a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
+					<td>
+						<a href="checklistEdit?id=${checklist.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |
 						<a href="listarTarefas?id=${checklist.id}"><i class="fa fa-tasks fa-lg" aria-hidden="true"></i></a> |
 						<a href="#" onclick="lancarImp(${checklist.id})"><i class="fa fa-print fa-lg"></i></a> | 
 						<a href="javascript:func()" onclick="confirmacao('${checklist.id}')"><i class="fa fa-trash-o"></i></a>

@@ -58,6 +58,7 @@
 				<th data-field="id" data-sortable="true">ID</th>
 				<th data-field="dataAbertura">Data / Hora Abertura</th>
 				<th data-field="onsiteOffsite" data-sortable="true">Site</th>
+				<th>Anexo</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="solicitante" data-sortable="true">Solicitante</th>
 				<th data-field="usuario" data-sortable="true">Usuário Afetado</th>
@@ -96,6 +97,16 @@
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
+						<c:if test="${solicitacao.caminhoAnexo != null}">
+						<td>
+							<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</td>
+						</c:if>
+						<c:if test="${solicitacao.caminhoAnexo == null}">
+							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+						</c:if>
+						
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
@@ -151,6 +162,15 @@
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
+						<c:if test="${solicitacao.caminhoAnexo != null}">
+						<td>
+							<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</td>
+						</c:if>
+						<c:if test="${solicitacao.caminhoAnexo == null}">
+							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
@@ -209,6 +229,16 @@
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
+						
+						<c:if test="${solicitacao.caminhoAnexo != null}">
+						<td>
+							<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</td>
+						</c:if>
+						<c:if test="${solicitacao.caminhoAnexo == null}">
+							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
@@ -268,6 +298,16 @@
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
+						<c:if test="${solicitacao.caminhoAnexo != null}">
+						<td>
+							<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</td>
+						</c:if>
+						
+						<c:if test="${solicitacao.caminhoAnexo == null}">
+							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
@@ -324,6 +364,15 @@
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
 								<span><p>- Nível.: ${solicitacao.prioridade}</p></span></a>
 						</td>
+						<c:if test="${solicitacao.caminhoAnexo != null}">
+						<td>
+							<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
+							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
+						</td>
+						</c:if>
+						<c:if test="${solicitacao.caminhoAnexo == null}">
+							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
+						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>

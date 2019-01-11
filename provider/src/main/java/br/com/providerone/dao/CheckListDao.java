@@ -46,7 +46,7 @@ public class CheckListDao {
 		List<Checklist> checklists = new ArrayList<Checklist>();
 
 		try {
-			Query query = manager.createQuery("select c from Checklist c order by c.numeroChecklist");
+			Query query = manager.createQuery("select c from Checklist c order by c.nomeCliente");
 
 			checklists = (List<Checklist>) query.getResultList();
 

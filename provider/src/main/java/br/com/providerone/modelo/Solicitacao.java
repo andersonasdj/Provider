@@ -68,6 +68,15 @@ public class Solicitacao {
 	private Long estrela;
 	private String senha;
 	private boolean excluido;
+	private String caminhoAnexo;
+
+	public String getCaminhoAnexo() {
+		return caminhoAnexo;
+	}
+
+	public void setCaminhoAnexo(String caminhoAnexo) {
+		this.caminhoAnexo = caminhoAnexo;
+	}
 
 	public boolean isExcluido() {
 		return excluido;

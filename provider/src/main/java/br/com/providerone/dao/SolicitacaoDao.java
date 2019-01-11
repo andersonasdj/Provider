@@ -73,6 +73,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
+		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -96,6 +97,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
+		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
@@ -108,6 +110,13 @@ public class SolicitacaoDao {
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
+		manager.merge(solicitacao);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
+	public void atualizarSolicitacao(Solicitacao solicitacao){
+		manager.getTransaction().begin();
 		manager.merge(solicitacao);
 		manager.getTransaction().commit();
 		manager.close();
@@ -153,6 +162,7 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
+		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -172,6 +182,7 @@ public class SolicitacaoDao {
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
+		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
 		//Atualiza LOG	
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -190,6 +201,7 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
+		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -1255,7 +1267,6 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
 		solicitacaoFinalizada.setDataAtualizacao(Calendar.getInstance()); //###
-		
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
 		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
