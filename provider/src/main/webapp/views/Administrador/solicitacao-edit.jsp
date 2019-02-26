@@ -20,7 +20,11 @@
 			<legend>Classificação de solicitação 
 			<a  onClick="history.go(-1)" ><i class="fa fa-reply-all" aria-hidden="true"></i></a>
 			<span class="pull-right">
-				<h6>Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  /></h6>
+				<h6>
+					<a href="http://localhost/provider/protocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
+						Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  />
+					</a>
+				</h6>
 			</span>
 				<c:if test="${solicitacao.status == 'Finalizado'}"> 
 					<a class="btn" href="solicitacaoEditFull?id=${solicitacao.id}" role="button"> Edição Completa</a>

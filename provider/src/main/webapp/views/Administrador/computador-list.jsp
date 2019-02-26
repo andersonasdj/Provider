@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,6 @@
 	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br/><br/><br/>
-	<div class="container">
 		<legend>Lista de Computadores</legend>
 		
 		<a href="computadorForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
@@ -47,12 +47,17 @@
 				<th data-field="pontuacao" data-sortable="true">Pontuação</th>
 				<th data-field="cliente" data-sortable="true">Cliente</th>
 				<th data-field="funcao" data-sortable="true">Função</th>
-				<th data-field="nomeComputador" data-sortable="true">Nome do Computador</th>
-				<th data-field="nomeUsuario" data-sortable="true">Nome do Usuário</th>
+				<th data-field="nomeComputador" data-sortable="true">Hostname</th>
+				<th data-field="status" data-sortable="true">Status</th>
+				<th data-field="nomeUsuario" data-sortable="true">Usuário</th>
 				<th data-field="software" data-sortable="true">Software</th>
 				<th data-field="marca" data-sortable="true">Marca</th>
+				<th data-field="serviceTag" data-sortable="true">Service Tag</th>
 				<th data-field="processador" data-sortable="true">Processador</th>
 				<th data-field="memoria" data-sortable="true">Memória</th>
+				<th data-field="armazenamento" data-sortable="true">Armazenamento</th>
+				<th data-field="antivirus" data-sortable="true">Antivirus</th>
+				<th data-field="expiracaoAV" data-sortable="true">Expiração</th>
 				<th>Funções</th>
 			</tr>
 			</thead>
@@ -63,6 +68,7 @@
 					<td>${computador.cliente.nome}</td>
 					<td>${computador.funcao}</td>
 					<td>${computador.nomeComputador}</td>
+					<td>${computador.status}</td>
 					<td>${computador.nomeDoUsuario}</td>
 					<td>
 						<a class="dcontexto"> ${computador.sistemaOperacionalInstalado}
@@ -74,6 +80,7 @@
 						<a class="dcontexto"> ${computador.marca}
 							<span>Service Tag: ${computador.serviceTag}</span></a>
 					</td>
+					<td>${computador.serviceTag}</td>
 					<td>
 						<a class="dcontexto">${computador.modeloProcessador}
 							<span>Família: ${computador.familia} <br/>
@@ -82,6 +89,13 @@
 							</span></a>
 					</td>
 					<td>${computador.qtdMemoria}</td>
+					<td>${computador.qtdHd}
+						<c:if test="${computador.ssd}">
+						 - SSD
+						</c:if>
+					</td>
+					<td>${computador.antiVirus}</td>
+					<td><f:formatDate value="${computador.expiracaoAV.time}" pattern="dd/MM/yyyy"/></td>
 					<td><a href="computadorEdit?id=${computador.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> <!-- <a
 						href="removeFuncionario?id=${funcionario.id}">Excluir</a> --></td>
 				</tr>
@@ -89,7 +103,6 @@
 		</table>
 		<br/><br/><br/><br/><br/><br/><br/>
 	<legend></legend>
-	</div>
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>

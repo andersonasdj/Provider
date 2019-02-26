@@ -78,6 +78,7 @@
 						<option>Asus</option>
 						<option>Toshiba</option>
 						<option>IBM</option>
+						<option>VMWare</option>
 						<option>Generico</option>
 						<option></option>
 					</select>
@@ -120,11 +121,13 @@
 					<select class="selectpicker" id="tipoProcessador"
 						name="tipoProcessador">
 						<option>${computador.tipoProcessador}</option>
+						<option>4</option>
 						<option>i3</option>
 						<option>i5</option>
 						<option>i7</option>
 						<option>E5506</option>
 						<option>E3-1220</option>
+						<option>E5-2420</option>
 						<option>G6950</option>
 						<option>2 Duo</option>
 						<option>2 Quad</option>
@@ -151,8 +154,8 @@
 						name="qtdMemoria">
 						<option>${computador.qtdMemoria}</option>
 						<option>1024</option>
-						<option>3072</option>
 						<option>2048</option>
+						<option>3072</option>
 						<option>4096</option>
 						<option>6144</option>
 						<option>8192</option>

@@ -69,6 +69,15 @@ public class Solicitacao {
 	private String senha;
 	private boolean excluido;
 	private String caminhoAnexo;
+	private String comentario;
+
+	public String getComentario() {
+		return comentario;
+	}
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
 
 	public String getCaminhoAnexo() {
 		return caminhoAnexo;

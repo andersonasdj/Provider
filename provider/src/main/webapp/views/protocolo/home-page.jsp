@@ -8,14 +8,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/protocolo.css">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
 	<style type="text/css">
 		.azul {color: #0000FF;}
 		.amarelo {color: #FF8000;}
 		.vermelho {color: #FF0000;}
 		.verde {color: #04B404;}
-	</style>
+		
+		.estrelas input[type=radio] {
+			display: none;
+		}
+		
+		.estrelas label i.fa:before {
+			content: '\f005';
+			color: #FC0;
+		}
+		
+		.estrelas input[type=radio]:checked ~ label i.fa:before {
+			color: #CCC;
+		}
+		
+		#idEstrelaLinha {
+			float: left;
+		}
+		
+			</style>
 </head>
 <body class="fundo">
 	<br/><br/>
@@ -67,6 +86,62 @@
   							</ul>
   						</li>
   					</c:if>
+  					
+  					<c:if test="${protocoloValido.status == 'Finalizado'}">
+  						<br/><br/>
+  						<form action="atualizarSolicitacaoCompleta" method="post" class="form-horizontal container">
+	  						
+	  						<input id="id" name="id" type="hidden" value="${protocoloValido.id}">
+	  						<label class="control-label">Classificação</label>
+								<div class="controls">
+									<div class="estrelas">
+										<input type="radio" id="cm_star-empty" name="estrela" value=""
+											<c:if test="${empty solicitacao.estrela}" >
+												checked="checked"
+											</c:if>/>
+										<label id="idEstrelaLinha" for="cm_star-1"><i class="fa fa-2x"> </i></label>
+										<input type="radio" id="cm_star-1" name="estrela" value="1"
+											<c:if test="${solicitacao.estrela == 1}" >
+												checked="checked"
+											</c:if>/>
+									  	<label id="idEstrelaLinha" for="cm_star-2"><i class="fa fa-2x"> </i></label>
+										<input type="radio" id="cm_star-2" name="estrela" value="2" 
+											<c:if test="${solicitacao.estrela == 2}" >
+												checked="checked"
+											</c:if>/>
+									  	<label id="idEstrelaLinha" for="cm_star-3"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-3" name="estrela" value="3"
+									  		<c:if test="${solicitacao.estrela == 3}" >
+												checked="checked"
+											</c:if>/>
+									  	<label id="idEstrelaLinha" for="cm_star-4"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-4" name="estrela" value="4"
+									  		<c:if test="${solicitacao.estrela == 4}" >
+												checked="checked"
+											</c:if>/>
+									  	<label id="idEstrelaLinha"for="cm_star-5"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-5" name="estrela" value="5"
+									  		<c:if test="${solicitacao.estrela == 5}" >
+												checked="checked"
+											</c:if>/>
+									</div>
+								</div>
+								
+								<br/><br/>
+								<div class="control-group">
+									<label class="control-label">Comentários</label>
+									<div class="controls">
+										<textarea class="form-control" rows="10" cols="" id="comentario" name="comentario" type="text" 
+										placeholder="Comentários" onkeyup="limite_textarea_obs(this.value)"
+											class="input-xlarge">${solicitacao.comentario}</textarea>
+										<span id="contComentario">255</span> Restantes <br>
+									</div>
+								</div>
+								<div class="controls">
+									<button id="enviar" name="enviar" class="btn btn-success">Enviar <i class="fa fa-floppy-o fa-lg"></i></button>
+								</div>
+							</form>
+  					</c:if>
 				</ul>
 			</div>
 
@@ -84,5 +159,17 @@
 	</div>
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script>
+		function limite_textarea_obs(valor) {
+		    quant = 255;
+		    total = valor.length;
+		    if(total <= quant) {
+		        resto = quant - total;
+		        document.getElementById('contComentario').innerHTML = resto;
+		    } else {
+		        document.getElementById('comentario').value = valor.substr(0,quant);
+		    }
+		}
+	</script>
 </body>
 </html>

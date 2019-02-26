@@ -26,6 +26,7 @@ public class Computador {
 	private String familia;
 	private String tipoProcessador;
 	private Double frequenciaProcessador;
+	private Double pontos;
 	private int qtdMemoria;	
 	private String qtdHd;
 	private String sistemaOperacionalInstalado;
@@ -46,7 +47,6 @@ public class Computador {
 	private Calendar expiracaoAV;
 	private String status;
 	private boolean ssd;
-	private Double pontos;
 
 	public Double getPontos() {
 		return pontos;
@@ -279,7 +279,8 @@ public class Computador {
 			val += 1.0;
 		}
 		
-		if(this.tipoProcessador.toLowerCase().contains("e3-1220")){
+		if(this.tipoProcessador.toLowerCase().contains("e3-1220") || 
+				this.tipoProcessador.toLowerCase().contains("e5-2420")){
 			val += 4.0;
 		}else if(this.tipoProcessador.toLowerCase().contains("i7")){
 			val += 3.0;
@@ -294,27 +295,10 @@ public class Computador {
 		} else{
 			val += 0.5;
 		}
-		
-		if(this.frequenciaProcessador < 1.5){
-			val += 0.5;
-		}else if(this.frequenciaProcessador >= 1.5 && this.frequenciaProcessador <= 2.0){
-			val += 1.0;
-		}else if(this.frequenciaProcessador > 2.0){
-			val += 1.5;
-		}
-		
-		if(this.qtdMemoria < 4096){
-			val += 0.5;
-		}else if(this.qtdMemoria == 4096){
-			val += 1.0;
-		}else if(this.qtdMemoria > 4096 && this.qtdMemoria < 6144){
-			val += 1.5;
-		}else if(this.qtdMemoria > 6144 && this.qtdMemoria >= 8192){
-			val += 2.0;
-		}else if(this.qtdMemoria > 8192){
-			val += 3.0;
-		}
-		
+
+		val += this.frequenciaProcessador;
+		val += this.qtdMemoria / 1000;
+
 		if(this.ssd){
 			val += 2.0;
 		}
