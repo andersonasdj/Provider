@@ -13,7 +13,8 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		if (uri.endsWith("login") || uri.endsWith("loginMobile") 
 				|| uri.endsWith("create") || uri.endsWith("gravaAdmin")
 				|| uri.endsWith("logar") || uri.contains("assets") 
-				|| uri.endsWith("exibirProtocolo") || uri.endsWith("protocolo")) {
+				|| uri.endsWith("exibirProtocolo") || uri.endsWith("protocolo")
+				|| uri.endsWith("enviaClassificacao")) {
 			return true;
 		}
 		if (request.getSession().getAttribute("clienteLogado") != null) {

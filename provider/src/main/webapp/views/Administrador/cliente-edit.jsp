@@ -52,6 +52,13 @@
 						value="${cliente.cnpj}" class="input-xlarge">
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<label class="control-label"></label>
+				<div class="controls">
+					<a class="btn btn-primary" href="listarColaboradores?id=${cliente.id}" role="button">Lista de Colaboradores</a>
+				</div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Razão Social</label>
 				<div class="controls">

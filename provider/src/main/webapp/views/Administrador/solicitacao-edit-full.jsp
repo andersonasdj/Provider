@@ -65,6 +65,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Comentário</label>
+				<div class="controls">
+					<input id="comentario" name="comentario" type="text" value="${solicitacao.comentario}" class="input-xlarge">
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">Data Abertura</label>
 				<div class="controls">
 					<input id="dataAbertura" name="dataAbertura" type="text" onKeyPress="DataHoraAbertura(event, this)" value="<f:formatDate pattern="dd-MM-yyyy HH:mm:ss" value="${solicitacao.dataAbertura.time}" />">

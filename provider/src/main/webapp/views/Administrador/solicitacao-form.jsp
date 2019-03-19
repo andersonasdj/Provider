@@ -68,6 +68,16 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
+			
+			<div class="form-group">
+				<label class="control-label">Colaborador:</label>
+	            <div class="controls">
+	                <select class="form-control" name="colaborador" id="colaborador"></select>
+	            </div>
+        	</div>
+			
+			<br/>
+			
 			<div class="control-group">
 				<label class="control-label">Problema Relatado</label>
 				<div class="controls">
@@ -225,6 +235,44 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
+	
+	<script>
+    	$(document).ready(function () {
+    		
+    		var divCliente = $("#nomeDoCliente");
+    		var nomeCliente = $("#nomeDoCliente").value;
+    		divCliente.on("change", function(){
+    		var nomeCliente = $("#nomeDoCliente").val();
+    		var json = { nomeCliente: nomeCliente };
+    	
+	        $.ajax({
+	            type: "POST",
+	           // data: { nomeCliente: nomeCliente }, OK
+	           data: { nomeCliente: nomeCliente },
+	            url: "/provider/listarColaboradoresForm",
+	            success: function (object) {
+	                if (object != null) {
+	                	//alert(nomeCliente);
+	                	//alert(object);
+	                    var data = object.data;
+	                    var selectbox = $('#colaborador');
+	                    selectbox.find('option').remove();
+	                    selectbox.append(new Option(object, object, true, true));
+	                    
+	                    
+	                    $.each(data, function (i, item) {
+	                    	alert(item);
+	                    	//selectbox += "<a class='#colaborador' alt='" + d + "'id='"+i+"'>" + d +"</a><br/>";
+	                        //$('<option>').val(nomeCliente).appendTo(selectbox);
+	                    });
+	                }
+	            }
+	        })
+    	}); 
+    	});
+	</script>
+	
+	
 	<script>
 		var divStatus = $("#status");
 		var status = $("#status").val();

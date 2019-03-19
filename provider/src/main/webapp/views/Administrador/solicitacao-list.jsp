@@ -15,7 +15,7 @@
 	<br/><br/><br/>
 		<div class="container">
 			<legend></legend>
-			<span id="botoes-status""></span>
+			<span id="botoes-status"></span>
 			<div align="center"><a class="btn btn-danger aberto" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
 			 - <a class="btn btn-info andamento" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
 			 - <a class="btn btn-warning agendado" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>

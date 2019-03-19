@@ -45,6 +45,7 @@
 				<br/>
 				<ul>
 					<li class="espacamento"><b>ID: </b> ${protocoloValido.id}</li>
+					<li class="espacamento"><b>Senha: </b> ${protocoloValido.senha}</li>
   					<li class="espacamento"><b>Data de Abertura: </b> ${protocoloValido.dataAbertura.time}</li>
   					<li class="espacamento"><b>Aberto Por: </b> ${protocoloValido.abriuChamado}</li>
   					<c:if test="${not empty protocoloValido.solicitante}"><li class="espacamento"><b>Solicitado Por: </b> ${protocoloValido.solicitante}</li></c:if>
@@ -70,6 +71,49 @@
   							<ul>
   								<li class="espacamento"><b>Resolução: </b> ${protocoloValido.resolucao} </li>
   								<li class="espacamento"><b>Tempo total de Atendimento: </b> ${protocoloValido.tempoDeAndamento} </li>
+  								<br/>
+  									<c:if test="${not empty protocoloValido.comentario}"><div class="text-center"><h4>Sua classificação para o antendimento realizado</h4></div>
+									<br/>
+									<div class="estrelas">
+										<input type="radio" id="cm_star-empty" name="estrela" value=""
+											<c:if test="${empty protocoloValido.estrela}" >
+												checked="checked"
+											</c:if>
+										/>
+										<label id="idEstrelaLinha" for="cm_star-1"><i class="fa fa-2x"> </i></label>
+										<input type="radio" id="cm_star-1" name="estrela" value="1"
+											<c:if test="${protocoloValido.estrela == 1}" >
+												checked="checked"
+											</c:if>
+										/>
+									  	<label id="idEstrelaLinha" for="cm_star-2"><i class="fa fa-2x"> </i></label>
+										<input type="radio" id="cm_star-2" name="estrela" value="2" 
+											<c:if test="${protocoloValido.estrela == 2}" >
+												checked="checked"
+											</c:if>
+										/>
+									  	<label id="idEstrelaLinha" for="cm_star-3"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-3" name="estrela" value="3"
+									  		<c:if test="${protocoloValido.estrela == 3}" >
+												checked="checked"
+											</c:if>
+									  	/>
+									  	<label id="idEstrelaLinha" for="cm_star-4"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-4" name="estrela" value="4"
+									  		<c:if test="${protocoloValido.estrela == 4}" >
+												checked="checked"
+											</c:if>
+									  	/>
+									  	<label id="idEstrelaLinha"for="cm_star-5"><i class="fa fa-2x"> </i></label>
+									  	<input type="radio" id="cm_star-5" name="estrela" value="5"
+									  		<c:if test="${protocoloValido.estrela == 5}" >
+												checked="checked"
+											</c:if>
+									  	/>
+									</div>
+									</c:if>
+  								<br/><br/>
+  								<c:if test="${not empty protocoloValido.comentario}"><li class="espacamento"><b>Seu comentário: </b> ${protocoloValido.comentario}</li></c:if>
   							</ul>
   						</li>
   						
@@ -89,59 +133,69 @@
   					
   					<c:if test="${protocoloValido.status == 'Finalizado'}">
   						<br/><br/>
-  						<form action="atualizarSolicitacaoCompleta" method="post" class="form-horizontal container">
-	  						
-	  						<input id="id" name="id" type="hidden" value="${protocoloValido.id}">
-	  						<label class="control-label">Classificação</label>
-								<div class="controls">
-									<div class="estrelas">
-										<input type="radio" id="cm_star-empty" name="estrela" value=""
-											<c:if test="${empty solicitacao.estrela}" >
-												checked="checked"
-											</c:if>/>
-										<label id="idEstrelaLinha" for="cm_star-1"><i class="fa fa-2x"> </i></label>
-										<input type="radio" id="cm_star-1" name="estrela" value="1"
-											<c:if test="${solicitacao.estrela == 1}" >
-												checked="checked"
-											</c:if>/>
-									  	<label id="idEstrelaLinha" for="cm_star-2"><i class="fa fa-2x"> </i></label>
-										<input type="radio" id="cm_star-2" name="estrela" value="2" 
-											<c:if test="${solicitacao.estrela == 2}" >
-												checked="checked"
-											</c:if>/>
-									  	<label id="idEstrelaLinha" for="cm_star-3"><i class="fa fa-2x"> </i></label>
-									  	<input type="radio" id="cm_star-3" name="estrela" value="3"
-									  		<c:if test="${solicitacao.estrela == 3}" >
-												checked="checked"
-											</c:if>/>
-									  	<label id="idEstrelaLinha" for="cm_star-4"><i class="fa fa-2x"> </i></label>
-									  	<input type="radio" id="cm_star-4" name="estrela" value="4"
-									  		<c:if test="${solicitacao.estrela == 4}" >
-												checked="checked"
-											</c:if>/>
-									  	<label id="idEstrelaLinha"for="cm_star-5"><i class="fa fa-2x"> </i></label>
-									  	<input type="radio" id="cm_star-5" name="estrela" value="5"
-									  		<c:if test="${solicitacao.estrela == 5}" >
-												checked="checked"
-											</c:if>/>
-									</div>
-								</div>
-								
-								<br/><br/>
-								<div class="control-group">
-									<label class="control-label">Comentários</label>
+  						<c:if test="${protocoloValido.comentario == null}">
+	  						<div>
+	  							<b>
+		  						Dê uma nota a esse atendimento, onde uma estrela é muito insatisfeito
+		  						e cinco estrelas é muito satisfeito.
+	  							</b>
+	  						</div>
+	  						<br/>
+	  						<form action="enviaClassificacao" method="post" class="form-horizontal container">
+		  						<input id="id" name="id" type="hidden" value="${protocoloValido.id}">
+		  						<input id="senha" name="senha" type="hidden" value="${protocoloValido.senha}">
+		  						<label class="control-label">Classificação</label>
 									<div class="controls">
-										<textarea class="form-control" rows="10" cols="" id="comentario" name="comentario" type="text" 
-										placeholder="Comentários" onkeyup="limite_textarea_obs(this.value)"
-											class="input-xlarge">${solicitacao.comentario}</textarea>
-										<span id="contComentario">255</span> Restantes <br>
+										<div class="estrelas">
+											<input type="radio" id="cm_star-empty" name="estrela" value=""
+												<c:if test="${empty solicitacao.estrela}" >
+													checked="checked"
+												</c:if>/>
+											<label id="idEstrelaLinha" for="cm_star-1"><i class="fa fa-2x"> </i></label>
+											<input type="radio" id="cm_star-1" name="estrela" value="1"
+												<c:if test="${solicitacao.estrela == 1}" >
+													checked="checked"
+												</c:if>/>
+										  	<label id="idEstrelaLinha" for="cm_star-2"><i class="fa fa-2x"> </i></label>
+											<input type="radio" id="cm_star-2" name="estrela" value="2" 
+												<c:if test="${solicitacao.estrela == 2}" >
+													checked="checked"
+												</c:if>/>
+										  	<label id="idEstrelaLinha" for="cm_star-3"><i class="fa fa-2x"> </i></label>
+										  	<input type="radio" id="cm_star-3" name="estrela" value="3"
+										  		<c:if test="${solicitacao.estrela == 3}" >
+													checked="checked"
+												</c:if>/>
+										  	<label id="idEstrelaLinha" for="cm_star-4"><i class="fa fa-2x"> </i></label>
+										  	<input type="radio" id="cm_star-4" name="estrela" value="4"
+										  		<c:if test="${solicitacao.estrela == 4}" >
+													checked="checked"
+												</c:if>/>
+										  	<label id="idEstrelaLinha"for="cm_star-5"><i class="fa fa-2x"> </i></label>
+										  	<input type="radio" id="cm_star-5" name="estrela" value="5"
+										  		<c:if test="${solicitacao.estrela == 5}" >
+													checked="checked"
+												</c:if>/>
+										</div>
 									</div>
-								</div>
-								<div class="controls">
-									<button id="enviar" name="enviar" class="btn btn-success">Enviar <i class="fa fa-floppy-o fa-lg"></i></button>
-								</div>
-							</form>
+									
+									<br/><br/>
+									<div class="control-group">
+										<label class="control-label">Comentários</label>
+										<div class="controls">
+											<textarea class="form-control" rows="10" cols="" id="comentario" name="comentario" type="text" 
+											placeholder="Comentários" onkeyup="limite_textarea_obs(this.value)"
+												class="input-xlarge">${solicitacao.comentario}</textarea>
+											<span id="contComentario">255</span> Restantes <br>
+										</div>
+									</div>
+									<div class="controls">
+										<button id="enviar" name="enviar" class="btn btn-success">Enviar <i class="fa fa-floppy-o fa-lg"></i></button>
+									</div>
+								</form>
+						</c:if>
   					</c:if>
+  					
 				</ul>
 			</div>
 

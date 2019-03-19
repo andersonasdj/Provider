@@ -29,7 +29,7 @@ public class JavaMailApp
 		
 	public void enviaEmail(Cliente cliente, Solicitacao solicitacao, String destinatario){
 		try {
-			String link = "https://techgold.com.br/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU플O TEMPORARIA
+			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU플O TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		      
@@ -105,7 +105,7 @@ public class JavaMailApp
 	
 	public void enviaEmailAbertura(String  cliente, Solicitacao solicitacao, String destinatario){
 		try {
-			String link = "https://techgold.com.br/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU플O TEMPORARIA
+			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU플O TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		

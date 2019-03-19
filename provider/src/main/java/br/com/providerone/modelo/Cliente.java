@@ -1,6 +1,7 @@
 package br.com.providerone.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Usuario {
@@ -13,6 +14,9 @@ public class Cliente extends Usuario {
 	private String responsavelTecnico;
 	private double latitude;
 	private double longitude;
+	
+	@OneToOne
+	private FuncionarioCliente funcionarioCliente;
 	
 	public double getLatitude() {
 		return latitude;
@@ -138,5 +142,13 @@ public class Cliente extends Usuario {
 		} else if (!telefone2.equals(other.telefone2))
 			return false;
 		return true;
+	}
+
+	public FuncionarioCliente getFuncionarioCliente() {
+		return funcionarioCliente;
+	}
+
+	public void setFuncionarioCliente(FuncionarioCliente funcionarioCliente) {
+		this.funcionarioCliente = funcionarioCliente;
 	}
 }

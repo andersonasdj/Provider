@@ -1216,4 +1216,26 @@ public class SolicitacaoController {
 		solicitacao.setDataFechamento(dtFe);
 		dao.atualizarSolicitacaoCompleta(solicitacao, funcionarioASalvar, funcionarioLogado);
 	}
+	
+	@RequestMapping("/enviaClassificacao")
+	public String enviaClassificacao(Solicitacao solicitacao, HttpSession session, Model model) {
+		Solicitacao solicitacaoClassificao;
+		SolicitacaoDao dao = new SolicitacaoDao();
+		solicitacaoClassificao = dao.buscaSolicitacaoId(solicitacao.getId());
+		if (solicitacaoClassificao != null && solicitacao.getId().equals(solicitacaoClassificao.getId()) && solicitacao.getSenha().equals(solicitacaoClassificao.getSenha())) {
+			
+			SolicitacaoDao daoSalva = new SolicitacaoDao();
+			solicitacaoClassificao.setComentario(solicitacao.getComentario());
+			solicitacaoClassificao.setEstrela(solicitacao.getEstrela());
+			daoSalva.atualizarSolicitacao(solicitacaoClassificao);
+			
+			EmailDao emailDao = new EmailDao();
+			Email email = emailDao.buscarPorId(1l);
+			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacaoClassificao.getId()+"&senha="+solicitacaoClassificao.getSenha();
+			model.addAttribute("link",link);
+			return "protocolo/success-classificacao";
+		} else {
+			return "redirect:protocolo";
+		}
+	}
 }
