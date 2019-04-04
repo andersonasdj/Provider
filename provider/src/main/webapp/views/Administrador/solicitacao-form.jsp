@@ -33,6 +33,8 @@
 							<option>${cliente.nome}</option>
 						</c:forEach>
 					</select>
+					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
+					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -54,6 +56,23 @@
 					<input id="dataAbertura" name="dataAbertura" type="hidden" value="<%= Calendar.getInstance()%>" class="input-xlarge" disabled="disabled">
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label">Solicitante</label> 
+	            <div class="controls">
+	                <select class="form-control solicitante" name="solicitante" id="solicitante"></select>
+	            	<span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	            </div>
+        	</div>
+        	<br/>
+        	<div class="form-group">
+				<label class="control-label">Usuário Afetado</label>
+	            <div class="controls">
+	                <select class="form-control usuario" name="usuario" id="usuario"></select>
+	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	                <p class="help-block">* Campo Obrigatório</p>
+	            </div>
+        	</div>
+			<!-- 
 			<div class="control-group">
 				<label class="control-label">Solicitante</label>
 				<div class="controls">
@@ -75,7 +94,7 @@
 	                <select class="form-control" name="colaborador" id="colaborador"></select>
 	            </div>
         	</div>
-			
+			 -->
 			<br/>
 			
 			<div class="control-group">
@@ -211,10 +230,20 @@
 			      <input id="boxEmail" name="boxEmail" type="checkbox" class="form-check-input">
 			    </label>
 			    
+			    <div class="form-group" id="enviaEmail">
+					<label class="control-label">Destinatario</label>
+		            <div class="controls">
+		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none"></select>
+		            </div>
+        		</div>
+        		<br/>
+			    
+			    <!-- 
 			    <div id="enviaEmail">
 					<input id="destinatario" name="destinatario" type="text" placeholder="E-mail do Cliente" class="input-xlarge" style="display: none">
 					<p class="help-block"></p>
 				</div>
+				-->
 			</div>
 			<br/>
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
@@ -238,40 +267,184 @@
 	
 	<script>
     	$(document).ready(function () {
-    		
     		var divCliente = $("#nomeDoCliente");
     		var nomeCliente = $("#nomeDoCliente").value;
+    		
     		divCliente.on("change", function(){
-    		var nomeCliente = $("#nomeDoCliente").val();
-    		var json = { nomeCliente: nomeCliente };
-    	
-	        $.ajax({
-	            type: "POST",
-	           // data: { nomeCliente: nomeCliente }, OK
-	           data: { nomeCliente: nomeCliente },
-	            url: "/provider/listarColaboradoresForm",
-	            success: function (object) {
-	                if (object != null) {
-	                	//alert(nomeCliente);
-	                	//alert(object);
-	                    var data = object.data;
-	                    var selectbox = $('#colaborador');
-	                    selectbox.find('option').remove();
-	                    selectbox.append(new Option(object, object, true, true));
-	                    
-	                    
-	                    $.each(data, function (i, item) {
-	                    	alert(item);
-	                    	//selectbox += "<a class='#colaborador' alt='" + d + "'id='"+i+"'>" + d +"</a><br/>";
-	                        //$('<option>').val(nomeCliente).appendTo(selectbox);
-	                    });
-	                }
-	            }
-	        })
-    	}); 
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+		        $.ajax({
+		            url: "/provider/listarColaboradoresForm",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('.usuario');
+		                    selectbox.find('option').remove();
+		                    var selectbox = $('.solicitante');
+		                    selectbox.find('option').remove();
+		                    $('.usuario').append('<option value="" slected="selected"></option>');
+		                    $('.solicitante').append('<option value="" slected="selected"></option>');
+		                    document.getElementById("cargoUsuario").innerHTML="";
+		                    document.getElementById("cargoSolicitante").innerHTML="";
+		                    $.each(object, function (i, item) {
+		                    	$('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                    	$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.usuario').append('<option value="Geral" slected="selected">Geral</option>');
+		                    $.each(object, function (i, item) {
+		                    	$('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });	
+		                    	$('.solicitante').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.solicitante').append('<option value="Geral" slected="selected">Geral</option>');
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		var nomeCliente = $("#nomeDoCliente").value;
+    		
+    		divCliente.on("change", function(){
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+	    	
+		        $.ajax({
+		            url: "/provider/listarEmails",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('.destinatario');
+		                    selectbox.find('option').remove();
+		                    $.each(object, function (i, item) {
+		                    	$('.destinatario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
     	});
 	</script>
 	
+		<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		
+    		divCliente.on("change", function(){
+	    		var json = {"nomeCliente" : divCliente.val()};
+	    	
+		        $.ajax({
+		            url: "/provider/getFlag",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("flag").innerHTML=""; 
+		                    $('#flag').append('Red Flag');
+		                    
+		                }else{
+		                	document.getElementById("flag").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		        $.ajax({
+		            url: "/provider/getVip",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("vip").innerHTML=""; 
+		                    $('#vip').append('  Vip');
+		                    
+		                }else{
+		                	document.getElementById("vip").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		var solicitante = $("#solicitante").value;
+    		
+    		divCliente.on("change", function(){
+    			var nomeCliente = $("#nomeDoCliente").val();
+	    		var solicitante = $("#solicitante").val();
+	    		var json = {"solicitante" : solicitante , "nomeCliente" : nomeCliente};
+	    	
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('#cargoSolicitante');
+		                    document.getElementById("cargoSolicitante").innerHTML=""; 
+		                    $('#cargoSolicitante').append(object);
+		                }else{
+		                	document.getElementById("cargoSolicitante").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		var solicitante = $("#usuario").value;
+    		
+    		divCliente.on("change", function(){
+    			var nomeCliente = $("#nomeDoCliente").val();
+	    		var solicitante = $("#usuario").val();
+	    		var json = {"solicitante" : solicitante , "nomeCliente" : nomeCliente};
+	    	
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('#cargoUsuario');
+		                    document.getElementById("cargoUsuario").innerHTML=""; 
+		                    $('#cargoUsuario').append(object);
+		                }else{
+		                	document.getElementById("cargoUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
 	
 	<script>
 		var divStatus = $("#status");
@@ -292,7 +465,7 @@
 		} );
 	</script>
 	
-    <script type="text/javascript">
+    <script>
 	    function limite_textarea_prob(valor) {
 	        quant = 255;
 	        total = valor.length;
@@ -304,7 +477,7 @@
 	        }
 	    }
     </script>
-    <script type="text/javascript">
+    <script>
 	    function limite_textarea_obs(valor) {
 	        quant = 255;
 	        total = valor.length;
@@ -323,7 +496,6 @@
 			var email = $("#destinatario").val();
 				$("#destinatario").stop().slideToggle(500);
 				document.getElementById('destinatario').style.display = 'block';
-		
 		} );
 	</script>
 	<script>

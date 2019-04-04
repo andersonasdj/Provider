@@ -1264,8 +1264,10 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setStatus("Finalizado");
 		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
-		solicitacaoFinalizada.setObs2(solicitacao.getObs2());
+		//solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
+		solicitacaoFinalizada.setSolicitante(solicitacao.getSolicitante()); //###
+		solicitacaoFinalizada.setUsuario(solicitacao.getUsuario()); //###
 		solicitacaoFinalizada.setDataAtualizacao(Calendar.getInstance()); //###
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());

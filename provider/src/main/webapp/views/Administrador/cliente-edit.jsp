@@ -38,6 +38,33 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Red Flag</label>
+				<div class="controls">
+					<c:if test="${cliente.redFlag != false}">
+						<input id="redFlag" name="redFlag" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge" checked="checked">
+					</c:if>
+					<c:if test="${cliente.redFlag != true}">
+						<input id="redFlag" name="redFlag" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge">
+					</c:if>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label">Vip</label>
+				<div class="controls">
+					<c:if test="${cliente.vip != false}">
+						<input id="vip" name="vip" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge" checked="checked">
+					</c:if>
+					<c:if test="${cliente.vip != true}">
+						<input id="vip" name="vip" type="checkbox" class="form-check-input"
+							value="true" class="input-xlarge">
+					</c:if>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">Senha de Acesso ao Sistema</label>
 				<div class="controls">
 					<input id="nome" name="senha" type="password" placeholder="Senha de Acesso"

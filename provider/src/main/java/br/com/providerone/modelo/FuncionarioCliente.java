@@ -15,6 +15,14 @@ public class FuncionarioCliente {
 	
 	private String nome;
 	private String email;
+	private String cargo;
+	
+	public String getCargo() {
+		return cargo;
+	}
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
 	@OneToOne
 	private Cliente cliente;
 	

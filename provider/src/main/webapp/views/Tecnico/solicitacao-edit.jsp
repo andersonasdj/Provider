@@ -14,10 +14,17 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/>
-	<form action="atualizarSolicitacaoFuncionario" method="post"
-		class="form-horizontal container">
+	<form action="atualizarSolicitacaoFuncionario" method="post" class="form-horizontal container">
 		<fieldset>
 			<legend>Edição de Solicitação</legend>
+			<a  onClick="history.go(-1)" ><i class="fa fa-reply-all" aria-hidden="true"></i></a>
+			<span class="pull-right">
+				<h6>
+					<a href="${email}/provider/protocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
+						Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  />
+					</a>
+				</h6>
+			</span>
 			<div class="control-group">
 				<label class="control-label">Data Abertura</label>
 				<div class="controls">
@@ -68,22 +75,28 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label">Solicitante</label>
-				<div class="controls">
-					<input id="solicitante" name="solicitante" type="text"
-						value="${solicitacao.solicitante}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Usuario Afetado</label>
-				<div class="controls">
-					<input id="usuario" name="usuario" type="text"
-						value="${solicitacao.usuario}" class="input-xlarge" required>
-					<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
-					<p class="help-block">* Campo Obrigatório</p>
-				</div>
-			</div>
+	            <div class="controls">
+	                <select class="form-control solicitante" name="solicitante" id="solicitante">
+	                	<option>
+	                		${solicitacao.solicitante}
+	                	</option>
+	                </select>
+	            </div>
+        	</div>
+        	<br/><br/>
+        	<div class="form-group">
+				<label class="control-label">Usuário Afetado</label>
+	            <div class="controls">
+	                <select class="form-control usuario" name="usuario" id="usuario">
+	                	<option>
+	                		${solicitacao.usuario}
+	                	</option>
+	                </select>
+	                <p class="help-block">* Campo Obrigatório</p>
+	            </div>
+        	</div>
 			<div class="control-group">
 				<label class="control-label">Descrição do problema</label>
 				<div class="controls">
@@ -273,7 +286,43 @@
 	<script src="assets/js/calendario.js"></script>
 	<script src="assets/js/controla-calendario-agendamento.js"></script>
 	<script src="assets/js/controla-campos-texto.js"></script>
-	<script type="text/javascript">
+	<script>
+		window.onload = function() {
+    		var divCliente = $("#nomeDoCliente");
+    		var nomeCliente = $("#nomeDoCliente").value;
+    		
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+	    	
+		        $.ajax({
+		            url: "/provider/listarColaboradoresForm",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('.usuario');
+		                    var selectbox = $('.solicitante');
+		                    $.each(object, function (i, item) {
+		                    	 $('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+			                    ;$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.usuario').append('<option value="Geral" slected="selected">Geral</option>');
+		                    $.each(object, function (i, item) {
+		                    	 $('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+			                    $('.solicitante').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.solicitante').append('<option value="Geral" slected="selected">Geral</option>');
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		 
+    	};
+	</script>
+	<script>
 		$(function(){
 			$('#dataAbertura').datetimepicker({
 				showSecond: true,

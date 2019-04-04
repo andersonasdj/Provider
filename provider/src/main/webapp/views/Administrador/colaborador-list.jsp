@@ -15,33 +15,34 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br /><br /><br />
-	<form action="gerarRelatorioPalavra" method="get"
+	<form action="editarColaborador" method="post"
 		class="form-horizontal container">
 		<fieldset></fieldset>
 			<legend>Lista de Colaboradores - ${clienteId}</legend>
 			
-			<a href="colaboradorForm?id=${clienteId}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
-			<p class="pull-right">
-				<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
-			</p>
-			
-			<div class="control-group">
-				<label class="control-label">Colaboradores</label>
-				<div class="controls">
-					<select class="selectpicker" id="funcionarioCliente"
-						name="funcionarioCliente">
-						<option>${cliente.funcionarioCliente.nome}</option>
-						<c:forEach var="funcionarioCliente" items="${funcionariosCliente}">
-							<option>${funcionarioCliente.nome}</option>
-						</c:forEach>
-					</select>
+				<a href="colaboradorForm?id=${clienteId}"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
+				<p class="pull-right">
+					<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+				</p>
+				
+				<div class="control-group">
+					<label class="control-label">Colaboradores</label>
+					<div class="controls">
+						<select class="selectpicker" id="funcionarioCliente"
+							name="funcionarioCliente">
+							<option>${cliente.funcionarioCliente.nome}</option>
+							<c:forEach var="funcionarioCliente" items="${funcionariosCliente}">
+								<option>${funcionarioCliente.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
 				</div>
-			</div>
-			
-			<div class="control-group">
+				
+				<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
-					<a class="btn btn-primary" href="homePage" role="button">Editar <i class="fa fa-reply-all fa-lg"></i></a>
+					<button id="enviar" name="salvar" class="btn btn-success">Editar <i class="fa fa-floppy-o fa-lg"></i></button>
+					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>

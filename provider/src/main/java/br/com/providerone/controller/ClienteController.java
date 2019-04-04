@@ -44,7 +44,7 @@ public class ClienteController {
 			
 			model.addAttribute("qtdTotal", ab + age + and + agua);
 
-			return "cliente/home";
+			return "Cliente/home";
 		} else {
 			return "redirect:login";
 		}
@@ -84,7 +84,7 @@ public class ClienteController {
 	@RequestMapping("/atualizarCadastro")
 	public String atualizarDados(HttpSession session) {
 		if (session.getAttribute("clienteLogado") != null) {
-			return "cliente/atualiza-dados";
+			return "Cliente/atualiza-dados";
 		} else {
 			return "redirect:login";
 		}

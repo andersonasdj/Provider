@@ -48,6 +48,28 @@ public class ClienteDao {
 		manager.close();
 		return cliente;
 	}
+	
+	public Cliente buscaIdFuncionario(Long id) {
+		Cliente clienteEncontrado = new Cliente();
+
+		try {
+			Query query = manager
+					.createQuery("select c from Cliente c where c.funcionarioCliente.idFuncionario=:pId");
+			query.setParameter("pId", id);
+			clienteEncontrado = (Cliente) query.getSingleResult();
+			manager.close(); // ultima modificação
+			
+			if (clienteEncontrado != null) {
+				return clienteEncontrado;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		} 
+	}
+
 
 	public void atualizar(Cliente cliente) {
 		cliente.setDataAtualizacao(Calendar.getInstance());

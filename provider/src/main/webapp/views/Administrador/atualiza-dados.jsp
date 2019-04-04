@@ -3,13 +3,13 @@
 <html>
 <head>
 	<title>ProviderOne | Dados</title>
-	<link rel="shortcut icon" href="assets/img/ico.png" >
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="assets/css/bootstrap.css">
-	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+	<link rel="shortcut icon" href="../assets/img/ico.png" >
+	<meta name="viewport" content="../width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../assets/css/bootstrap.css">
+	<link rel="stylesheet" href="../assets/css/bootstrap-responsive.css">
 </head>
 <body>
-	<c:import url="barra-menus.jsp"></c:import>
+	<c:import url="../barra-menus.jsp"></c:import>
 	<br /><br /><br /><br />
 	<form action="atualizar" method="post"
 		class="form-horizontal container">
@@ -20,7 +20,7 @@
 			        <div class="col-md-8">
 			        	<a href="upload" >
 							<c:if test="${empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="assets/img/perfil.png" class="img-polaroid">
+								<img id="imagem" src="../assets/img/perfil.png" class="img-polaroid">
 							</c:if>
 							<c:if test="${not empty funcionarioLogado.caminhoFoto}">
 								<img id="imagem" src='${funcionarioLogado.caminhoFoto}' class="img-polaroid">
@@ -106,8 +106,8 @@
 			</div>
 		</fieldset>
 	</form>	
-	<c:import url="rodape.jsp"></c:import>
+	<c:import url="../rodape.jsp"></c:import>
 </body>
-	<script src="assets/js/jquery.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="../assets/js/jquery.js"></script>
+	<script src="../assets/js/bootstrap.min.js"></script>
 </html>

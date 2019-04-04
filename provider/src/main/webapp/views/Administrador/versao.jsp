@@ -35,6 +35,14 @@
 					</ul>
 				</li>
 			</ul>
+			<legend>Versão 1.6</legend>
+			<ul>
+				<li>Auto preenchimento ao solicitante e usuário afetado ao selecionar o cliente.</li>
+				<li>Auto preenchimento de email de destinatário ao selecionar o cliente.</li>
+				<li>Criação, edição e exclusão de colaboraderes para os clientes.</li>
+				<li>Classificação de solicitação pelo cliente após finalização</li>
+				<li>Link de acompanhamento de protocolo na pagina de edição de chamado.</li>
+			</ul>
 			<legend></legend>
 		</div>
 		<br />

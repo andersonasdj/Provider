@@ -14,7 +14,25 @@ public class Cliente extends Usuario {
 	private String responsavelTecnico;
 	private double latitude;
 	private double longitude;
+	private boolean redFlag;
+	private boolean vip;
 	
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}
+
+	public boolean isRedFlag() {
+		return redFlag;
+	}
+
+	public void setRedFlag(boolean redFlag) {
+		this.redFlag = redFlag;
+	}
+
 	@OneToOne
 	private FuncionarioCliente funcionarioCliente;
 	

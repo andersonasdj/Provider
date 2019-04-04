@@ -21,7 +21,7 @@
 			<a  onClick="history.go(-1)" ><i class="fa fa-reply-all" aria-hidden="true"></i></a>
 			<span class="pull-right">
 				<h6>
-					<a href="http://localhost/provider/protocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
+					<a href="${email}/provider/protocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
 						Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  />
 					</a>
 				</h6>
@@ -52,7 +52,7 @@
 			<div class="control-group">
 				<label class="control-label">Nome do Cliente</label>
 				<div class="controls">
-					<input type="text"
+					<input type="text" id="nomeDoCliente"
 						value="${solicitacao.cliente.nome}" class="input-xlarge" disabled="disabled">
 				</div>
 			</div>
@@ -76,6 +76,29 @@
 					</select>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="control-label">Solicitante</label>
+	            <div class="controls">
+	                <select class="form-control solicitante" name="solicitante" id="solicitante">
+	                	<option>
+	                		${solicitacao.solicitante}
+	                	</option>
+	                </select>
+	            </div>
+        	</div>
+        	<br/>
+        	<div class="form-group">
+				<label class="control-label">Usuário Afetado</label>
+	            <div class="controls">
+	                <select class="form-control usuario" name="usuario" id="usuario">
+	                	<option>
+	                		${solicitacao.usuario}
+	                	</option>
+	                </select>
+	            </div>
+        	</div>
+			<br/>
+			<!--
 			<div class="control-group">
 				<label class="control-label">Solicitante</label>
 				<div class="controls">
@@ -92,6 +115,7 @@
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
+			-->
 			<div class="control-group">
 				<label class="control-label">Descrição do problema</label>
 				<div class="controls">
@@ -270,5 +294,38 @@
 			var solicitante = $('#solicitante').val();
 			$('#usuario').val(solicitante);
 		}
+	</script>
+	<script>
+	window.onload = function() {
+    		var divCliente = $("#nomeDoCliente");
+    		var nomeCliente = $("#nomeDoCliente").value;
+    		
+    		
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+	    	
+		        $.ajax({
+		            url: "/provider/listarColaboradoresForm",
+		            type: "GET",
+		            data: json,
+		            
+		            success: function (object) {
+		                if (object != null) {
+		                    var data = object.data;
+		                    var selectbox = $('.usuario');
+		                    var selectbox = $('.solicitante');
+		                    $.each(object, function (i, item) {
+		                    	 $('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                    $.each(object, function (i, item) {
+		                    	 $('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		 
+    	};
 	</script>
 </html>

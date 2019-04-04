@@ -399,6 +399,8 @@ public class SolicitacaoController {
 			FuncionarioDao daoFun = new FuncionarioDao();
 			Solicitacao solicitacaoEditada = new Solicitacao();
 			solicitacaoEditada = dao.buscaSolicitacaoId(id);
+			EmailDao daoEmail = new EmailDao();													//###
+			model.addAttribute("email", daoEmail.listaEmailConfig().get(0).getLinkDominio());	//###
 			model.addAttribute("solicitacao", solicitacaoEditada);
 			model.addAttribute("funcionario", daoFun.listaFuncionarioAtivo());
 			return funcionario.getFuncao()+"/solicitacao-edit";
@@ -481,6 +483,8 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Solicitacao solicitacaoEditada = new Solicitacao();
 			solicitacaoEditada = dao.buscaSolicitacaoId(id);
+			EmailDao daoEmail = new EmailDao();													//###
+			model.addAttribute("email", daoEmail.listaEmailConfig().get(0).getLinkDominio());	//###
 			model.addAttribute("solicitacao", solicitacaoEditada);
 			return "Tecnico/solicitacao-edit-full";
 		} else {

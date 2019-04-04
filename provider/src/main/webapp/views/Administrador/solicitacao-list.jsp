@@ -212,7 +212,8 @@
 						<a href="solicitacaoCopy?id=${solicitacao.id}"><i class="fa fa-copy fa-lg"></i></a>
 						<c:if test="${solicitacao.status != 'Excluida'}"> 
 							| <a href="javascript:func()" onclick="confirmacao('${solicitacao.id}')"><i class="fa fa-trash-o"></i></a>
-						</c:if>					</td>
+						</c:if>					
+					</td>
 					</tr>
 					<!-- mascara para cobrir o site -->  
 					<div id="mascara"></div>

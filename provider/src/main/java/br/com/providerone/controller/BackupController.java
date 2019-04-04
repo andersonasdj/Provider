@@ -10,7 +10,6 @@ import br.com.providerone.dao.SolicitacaoDao;
 import br.com.providerone.modelo.Funcionario;
 
 @Controller
-@RequestMapping("/Backup")
 public class BackupController {
 
 	@RequestMapping("/backupDiario")
@@ -19,7 +18,7 @@ public class BackupController {
 		if (funcionario != null) {
 			SolicitacaoDao daoSolicitacao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes",daoSolicitacao.listarSolicitacoesBackupNaoConcluidas());
-			return funcionario.getFuncao()+"/Backup/relatorio-backup";
+			return funcionario.getFuncao()+"/relatorio-backup";
 		} else {
 			return "redirect:login";
 		}

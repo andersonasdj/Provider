@@ -43,6 +43,18 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Red Flag</label>
+				<div class="controls">
+			      <input id="redFlag" name="redFlag" type="checkbox" class="form-check-input">
+				</div>	
+			</div>
+				<div class="control-group">
+				<label class="control-label">Vip</label>
+				<div class="controls">
+			      <input id="vip" name="vip" type="checkbox" class="form-check-input">
+				</div>	
+			</div>
+			<div class="control-group">
 				<label class="control-label">CNPJ</label>
 				<div class="controls">
 					<input id="cnpj" name="cnpj" type="text" placeholder="Cnpj"

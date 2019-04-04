@@ -11,35 +11,33 @@
 <body>
 	<c:import url="barra-menus.jsp"></c:import>
 	<br/><br/><br/>
-	<form action="gravaColaborador" method="post"
+	<form action="atualizaColaborador" method="post"
 		class="form-horizontal container">
 		<fieldset>
-			<legend>Criação de Colaborador  - ${clienteId}</legend>
-			<p class="pull-right">
-				<a href="funcionariosList"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
-			</p>
+			<legend>Edição de Colaborador</legend>
+		
+			<input id="idFuncionario" name="idFuncionario" type="hidden" value="${funcionario.idFuncionario}">
+			<input id="cliente.id" name="cliente.id" type="hidden" value="${funcionario.cliente.id}">
+			
 			<div class="control-group">
 				<label class="control-label">Nome</label>
 				<div class="controls">
-					<input id="nome" name="nome" type="text" placeholder="Nome do Colaborador"
-						class="input-xlarge" required>
+					<input id="nome" name="nome" type="text" value="${funcionario.nome}" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label">Cargo</label>
 				<div class="controls">
-					<input id="cargo" name="cargo" type="text" placeholder="Cargo do Colaborador"
-						class="input-xlarge" required>
+					<input id="cargo" name="cargo" type="text" value="${funcionario.cargo}" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
-			<input type="hidden" name="clienteId" id="clienteId" value="${clienteId}"> 
-			<div class="control-group">
+			 
+				<div class="control-group">
 				<label class="control-label">E-mail</label>
 				<div class="controls">
-					<input id="nome" name="email" type="text" placeholder="E-mail do Colaborador"
-						class="input-xlarge" required> <i class="fa fa-at fa-lg"> </i>
+					<input id="email" name="email" type="text" value="${funcionario.email}" class="input-xlarge" required>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
@@ -48,6 +46,7 @@
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
 					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a href="javascript:func()" onclick="confirmacao('${funcionario.idFuncionario}')" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>
 			<legend></legend>
@@ -57,4 +56,12 @@
 </body>
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
+	<script>
+		function confirmacao(id) {
+		     var resposta = confirm("Deseja remover esse Colaborador: " + id + " ?");
+		     if (resposta == true) {
+		          window.location.href = "removeFuncionarioCliente?id="+id;
+		     }
+		}
+	</script>
 </html>
