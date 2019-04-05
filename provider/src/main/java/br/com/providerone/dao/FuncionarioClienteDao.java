@@ -86,6 +86,25 @@ public class FuncionarioClienteDao {
 		}
 	}
 	
+	public FuncionarioCliente listaFuncionarioClienteId(Long id) {
+		FuncionarioCliente colaborador = new FuncionarioCliente();
+		try {
+			Query query = manager.createQuery("select f from FuncionarioCliente f where f.idFuncionario= :pId");
+			query.setParameter("pId", id);
+			colaborador = (FuncionarioCliente) query.getSingleResult();
+			
+			if (colaborador != null) {
+				return  colaborador;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<FuncionarioCliente> listaFuncionariosClientePorNome(String nomeCliente) {
 		List<FuncionarioCliente> funcionarioCliente = new ArrayList<FuncionarioCliente>();

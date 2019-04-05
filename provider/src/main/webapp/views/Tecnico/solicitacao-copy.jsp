@@ -26,10 +26,13 @@
 				<div class="controls">
 					<select class="selectpicker" id="nomeDoCliente"
 						name="nomeDoCliente">
+						<option></option>
 						<c:forEach var="cliente" items="${clientes}">
 							<option>${cliente.nome}</option>
 						</c:forEach>
 					</select>
+					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
+					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -46,42 +49,45 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
+			<div class="form-group">
 				<label class="control-label">Solicitante</label>
-				<div class="controls">
-					<input id="solicitante" name="solicitante" type="text"
-						value="${solicitacao.solicitante}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Usuario Afetado</label>
-				<div class="controls">
-					<input id="usuario" name="usuario" type="text"
-						value="${solicitacao.usuario}" class="input-xlarge" required>
-						<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
-					<p class="help-block">* Campo Obrigatório</p>
-				</div>
-			</div>
+	            <div class="controls">
+	                <select class="form-control solicitante" name="solicitante" id="solicitante">
+	                	<option></option>
+	                	<option>
+	                		${solicitacao.solicitante}
+	                	</option>
+	                </select>
+	                <span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	            </div>
+        	</div>
+        	<br/>
+        	<div class="form-group">
+				<label class="control-label">Usuário Afetado</label>
+	            <div class="controls">
+	                <select class="form-control usuario" name="usuario" id="usuario">
+	                	<option></option>
+	                	<option>
+	                		${solicitacao.usuario}
+	                	</option>
+	                </select>
+	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	           		<p class="help-block">* Campo Obrigatório</p>
+	            </div>
+        	</div>
+			<br/>
 			
 			<div class="control-group">
-				<label class="control-label">Descrição do problema</label>
+				<label class="control-label">Problema Relatado</label>
 				<div class="controls">
 					<textarea class="form-control" rows="4" id="descricaoProblema" name="descricaoProblema" type="text" 
 					placeholder="Descrição do Problema" onkeyup="limite_textarea_prob(this.value)"
 						class="input-xlarge">${solicitacao.descricaoProblema}</textarea>
 					<span id="contProb">255</span> Restantes <br>
+					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Resolução do problema</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="resolucao" name="resolucao" type="text" 
-					placeholder="Resolução do Problema" onkeyup="limite_textarea_resolu(this.value)"
-						class="input-xlarge">${solicitacao.resolucao}</textarea>
-					<span id="contResolu">255</span> Restantes <br>
-				</div>
-			</div>
-			 <div class="control-group">
 				<label class="control-label">Observações</label>
 				<div class="controls">
 					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" 
@@ -212,6 +218,28 @@
 					</select>
 				</div>
 			</div>
+			<div class="form-check">
+			    <label class="form-check-label">
+			    	Enviar E-mail na abertura
+			      <input id="boxEmail" name="boxEmail" type="checkbox" class="form-check-input">
+			    </label>
+			    
+			    <div class="form-group" id="enviaEmail">
+					<label class="control-label">Destinatario</label>
+		            <div class="controls">
+		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none"></select>
+		            </div>
+        		</div>
+        		<br/>
+			    
+			    <!-- 
+			    <div id="enviaEmail">
+					<input id="destinatario" name="destinatario" type="text" placeholder="E-mail do Cliente" class="input-xlarge" style="display: none">
+					<p class="help-block"></p>
+				</div>
+				-->
+			</div>
+			<br/>
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
 			<input type="hidden" id="funcionarioLogado" name="funcionarioLogado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
@@ -232,6 +260,154 @@
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
 	<script src="assets/js/controla-campos-texto.js"></script>
+	
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		divCliente.on("change", function(){
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+		        $.ajax({
+		            url: "/provider/listarColaboradoresForm",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    var selectbox = $('.usuario');
+		                    selectbox.find('option').remove();
+		                    var selectbox = $('.solicitante');
+		                    selectbox.find('option').remove();
+		                    $('.usuario').append('<option value="" slected="selected"></option>');
+		                    $('.solicitante').append('<option value="" slected="selected"></option>');
+		                    document.getElementById("cargoUsuario").innerHTML="";
+		                    document.getElementById("cargoSolicitante").innerHTML="";
+		                    $.each(object, function (i, item) {
+		                    	$('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                    	$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.usuario').append('<option value="Geral" slected="selected">Geral</option>');
+		                    $.each(object, function (i, item) {
+		                    	$('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });	
+		                    	$('.solicitante').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    	$('.solicitante').append('<option value="Geral" slected="selected">Geral</option>');
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		divCliente.on("change", function(){
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+		        $.ajax({
+		            url: "/provider/listarEmails",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    var selectbox = $('.destinatario');
+		                    selectbox.find('option').remove();
+		                    $.each(object, function (i, item) {
+		                    	$('.destinatario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		divCliente.on("change", function(){
+	    		var json = {"nomeCliente" : divCliente.val()};
+		        $.ajax({
+		            url: "/provider/getFlag",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("flag").innerHTML=""; 
+		                    $('#flag').append('Red Flag');
+		                }else{
+		                	document.getElementById("flag").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		        $.ajax({
+		            url: "/provider/getVip",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("vip").innerHTML=""; 
+		                    $('#vip').append('  Vip');
+		                }else{
+		                	document.getElementById("vip").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("cargoSolicitante").innerHTML=""; 
+		                    $('#cargoSolicitante').append(object);
+		                }else{
+		                	document.getElementById("cargoSolicitante").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("cargoUsuario").innerHTML=""; 
+		                    $('#cargoUsuario').append(object);
+		                }else{
+		                	document.getElementById("cargoUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
 	<script>
 		function copiaSolicitante(){
 			var solicitante = $('#solicitante').val();
@@ -254,6 +430,15 @@
 				//document.getElementById('agendamentos').style.display = 'block';
 				$("#agendamentos").stop().slideUp(1000);
 			}
+		} );
+	</script>
+	    <script>
+		var divEmail = $("#boxEmail");
+		var email = $("#destinatario").val();
+		divEmail.on("change", function(){
+			var email = $("#destinatario").val();
+				$("#destinatario").stop().slideToggle(500);
+				document.getElementById('destinatario').style.display = 'block';
 		} );
 	</script>
 </html>

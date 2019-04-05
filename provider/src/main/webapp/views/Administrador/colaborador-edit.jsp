@@ -15,9 +15,14 @@
 		class="form-horizontal container">
 		<fieldset>
 			<legend>Edição de Colaborador</legend>
+			
+			<p class="pull-right">
+				<a href="#" onClick="history.go(-1)"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+			</p>
 		
 			<input id="idFuncionario" name="idFuncionario" type="hidden" value="${funcionario.idFuncionario}">
 			<input id="cliente.id" name="cliente.id" type="hidden" value="${funcionario.cliente.id}">
+			<input id="clienteId" name="clienteId" type="hidden" value="${funcionario.cliente.id}">
 			
 			<div class="control-group">
 				<label class="control-label">Nome</label>
@@ -30,7 +35,6 @@
 				<label class="control-label">Cargo</label>
 				<div class="controls">
 					<input id="cargo" name="cargo" type="text" value="${funcionario.cargo}" class="input-xlarge" required>
-					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			 
@@ -38,14 +42,13 @@
 				<label class="control-label">E-mail</label>
 				<div class="controls">
 					<input id="email" name="email" type="text" value="${funcionario.email}" class="input-xlarge" required>
-					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
-					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a class="btn btn-primary" href="#" onClick="history.go(-1)" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 					<a href="javascript:func()" onclick="confirmacao('${funcionario.idFuncionario}')" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
 				</div>
 			</div>

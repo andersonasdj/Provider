@@ -31,7 +31,6 @@
 				<div class="controls">
 					<input id="cargo" name="cargo" type="text" placeholder="Cargo do Colaborador"
 						class="input-xlarge" required>
-					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<input type="hidden" name="clienteId" id="clienteId" value="${clienteId}"> 
@@ -40,14 +39,13 @@
 				<div class="controls">
 					<input id="nome" name="email" type="text" placeholder="E-mail do Colaborador"
 						class="input-xlarge" required> <i class="fa fa-at fa-lg"> </i>
-					<p class="help-block">* Campo Obrigatório</p>
 				</div>
 			</div>
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
 					<button id="enviar" name="salvar" class="btn btn-success">Salvar <i class="fa fa-floppy-o fa-lg"></i></button>
-					<a class="btn btn-primary" href="homePage" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
+					<a class="btn btn-primary" href="#" onClick="history.go(-1)" role="button">Voltar <i class="fa fa-reply-all fa-lg"></i></a>
 				</div>
 			</div>
 			<legend></legend>

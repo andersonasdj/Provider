@@ -264,12 +264,9 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
-	
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");
-    		var nomeCliente = $("#nomeDoCliente").value;
-    		
     		divCliente.on("change", function(){
 	    		var nomeCliente = $("#nomeDoCliente").val();
 	    		var json = {"nomeCliente" : nomeCliente};
@@ -277,10 +274,8 @@
 		            url: "/provider/listarColaboradoresForm",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
 		                    var selectbox = $('.usuario');
 		                    selectbox.find('option').remove();
 		                    var selectbox = $('.solicitante');
@@ -310,20 +305,15 @@
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");
-    		var nomeCliente = $("#nomeDoCliente").value;
-    		
     		divCliente.on("change", function(){
 	    		var nomeCliente = $("#nomeDoCliente").val();
 	    		var json = {"nomeCliente" : nomeCliente};
-	    	
 		        $.ajax({
 		            url: "/provider/listarEmails",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
 		                    var selectbox = $('.destinatario');
 		                    selectbox.find('option').remove();
 		                    $.each(object, function (i, item) {
@@ -337,24 +327,19 @@
     		}); 
     	});
 	</script>
-	
-		<script>
+	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");
-    		
     		divCliente.on("change", function(){
 	    		var json = {"nomeCliente" : divCliente.val()};
-	    	
 		        $.ajax({
 		            url: "/provider/getFlag",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object) {
 		                    document.getElementById("flag").innerHTML=""; 
 		                    $('#flag').append('Red Flag');
-		                    
 		                }else{
 		                	document.getElementById("flag").innerHTML="";
 		                }
@@ -366,12 +351,10 @@
 		            url: "/provider/getVip",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object) {
 		                    document.getElementById("vip").innerHTML=""; 
 		                    $('#vip').append('  Vip');
-		                    
 		                }else{
 		                	document.getElementById("vip").innerHTML="";
 		                }
@@ -382,26 +365,17 @@
     		}); 
     	});
 	</script>
-	
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#solicitante");
-    		var solicitante = $("#solicitante").value;
-    		
     		divCliente.on("change", function(){
-    			var nomeCliente = $("#nomeDoCliente").val();
-	    		var solicitante = $("#solicitante").val();
-	    		var json = {"solicitante" : solicitante , "nomeCliente" : nomeCliente};
-	    	
+	    		var json = {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()};
 		        $.ajax({
 		            url: "/provider/getCargo",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
-		                    var selectbox = $('#cargoSolicitante');
 		                    document.getElementById("cargoSolicitante").innerHTML=""; 
 		                    $('#cargoSolicitante').append(object);
 		                }else{
@@ -417,22 +391,14 @@
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#usuario");
-    		var solicitante = $("#usuario").value;
-    		
     		divCliente.on("change", function(){
-    			var nomeCliente = $("#nomeDoCliente").val();
-	    		var solicitante = $("#usuario").val();
-	    		var json = {"solicitante" : solicitante , "nomeCliente" : nomeCliente};
-	    	
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
 		        $.ajax({
 		            url: "/provider/getCargo",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
-		                    var selectbox = $('#cargoUsuario');
 		                    document.getElementById("cargoUsuario").innerHTML=""; 
 		                    $('#cargoUsuario').append(object);
 		                }else{
@@ -445,26 +411,20 @@
     		}); 
     	});
 	</script>
-	
 	<script>
 		var divStatus = $("#status");
 		var status = $("#status").val();
 		divStatus.on("change", function(){
 			var status = $("#status").val();
 			if(status === 'Abrir'){
-				//document.getElementById('agendamentos').style.display = 'none';
-				//$("#agendamentos").stop().slideToggle(1000);
 				document.getElementById('agendamentos').style.display = 'none';
 			}else if(status === 'Em andamento'){
 				document.getElementById('agendamentos').style.display = 'none';
-				//document.getElementById('agendamentos').style.display = 'none';
 			}else {
-				//document.getElementById('agendamentos').style.display = 'block';
 				$("#agendamentos").stop().slideToggle(1000);
 			}
 		} );
 	</script>
-	
     <script>
 	    function limite_textarea_prob(valor) {
 	        quant = 255;

@@ -47,6 +47,18 @@ public class FuncionarioClienteController {
 		}
 	}
 	
+	@RequestMapping("/editarColaboradorId")
+	public String editarColaboradoresId(HttpSession session, Long id, Model model) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+			FuncionarioClienteDao daoFuncCliente = new FuncionarioClienteDao();
+			model.addAttribute("funcionario",daoFuncCliente.listaFuncionarioClienteId(id));
+			return funcionario.getFuncao()+"/colaborador-edit";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
 	@RequestMapping("/colaboradorForm")
 	public String colaboradorForm(HttpSession session, Long id, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
@@ -59,12 +71,13 @@ public class FuncionarioClienteController {
 	}
 	
 	@RequestMapping("/gravaColaborador")
-	public String gravaColaborador(HttpSession session, Long clienteId, String nome, String email, Model model) {
+	public String gravaColaborador(HttpSession session, Long clienteId, String nome, String email, String cargo, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			FuncionarioCliente funcionarioCliente = new FuncionarioCliente();
 			funcionarioCliente.setNome(nome);
 			funcionarioCliente.setEmail(email);
+			funcionarioCliente.setCargo(cargo);
 			ClienteDao clienteDao = new ClienteDao();
 			Cliente cliente = clienteDao.buscarPorId(clienteId);
 			funcionarioCliente.setCliente(cliente);
@@ -73,7 +86,8 @@ public class FuncionarioClienteController {
 			cliente.setFuncionarioCliente(funcionarioCliente);
 			ClienteDao salvaClienteDao = new ClienteDao();
 			salvaClienteDao.atualizar(cliente);
-			return "redirect:clientesList";
+			
+			return "redirect:listarColaboradores?id="+clienteId;
 		} else {
 			return "redirect:login";
 		}
@@ -85,7 +99,7 @@ public class FuncionarioClienteController {
 		if (funcionario != null) {
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
 			dao.atualizar(funcionarioCliente);
-			return "redirect:clientesList";
+			return "redirect:listarColaboradores?id="+clienteId;
 		} else {
 			return "redirect:login";
 		}
@@ -96,20 +110,17 @@ public class FuncionarioClienteController {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
 			FuncionarioCliente exclui = dao.buscaPorId(id);
+			Long idCliente = exclui.getCliente().getId();
 			FuncionarioClienteDao daoExclui = new FuncionarioClienteDao();
-			
 			boolean result = daoExclui.excluirFuncionarioCliente(exclui.getIdFuncionario());
-				if(result){
-//					System.out.println("OK");
-				} else {
-//					System.out.println("falhou");
-					FuncionarioClienteDao dao2 = new FuncionarioClienteDao();
-					FuncionarioCliente exclui2 = dao2.buscaPorId(id);
-					FuncionarioClienteDao daoExclui2 = new FuncionarioClienteDao();
-					daoExclui2.excluirFuncionarioCliente(exclui2.getIdFuncionario());
-				}
-			
-			return "redirect:clientesList";
+			if(result){
+			} else {
+				FuncionarioClienteDao dao2 = new FuncionarioClienteDao();
+				FuncionarioCliente exclui2 = dao2.buscaPorId(id);
+				FuncionarioClienteDao daoExclui2 = new FuncionarioClienteDao();
+				daoExclui2.excluirFuncionarioCliente(exclui2.getIdFuncionario());
+			}
+			return "redirect:listarColaboradores?id="+idCliente;
 		} else {
 			return "redirect:login";
 		}
@@ -119,21 +130,31 @@ public class FuncionarioClienteController {
 	public @ResponseBody String listarColaboradoresForm(HttpSession session, String nomeCliente) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
-//			System.out.println(nomeCliente);
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
-//			System.out.println(dao.listaFuncionariosCLiente().get(0).getNome());
 			List<String> funcionarios = new ArrayList<String>();
 			List<FuncionarioCliente> funcionariosList = new ArrayList<FuncionarioCliente>();
 			funcionariosList = dao.listaFuncionariosClientePorNome(nomeCliente);
-//			System.out.println("qtd fun list dao:" + funcionariosList.size());
 			for (int i=0 ;funcionariosList.size()>i; i++){
-//				System.out.println(funcionariosList.get(i).getNome());
 				funcionarios.add(funcionariosList.get(i).getNome());
 			}
 			Gson gson = new Gson();
-			String json = gson.toJson(funcionarios);
-//			System.out.println("qtd fun list:" + funcionarios.size());
-			return json;
+			return gson.toJson(funcionarios);
+			/*
+			GsonBuilder builder = new GsonBuilder();
+			builder.excludeFieldsWithModifiers(Modifier.TRANSIENT);
+			builder.setPrettyPrinting();
+			builder.disableHtmlEscaping();
+			builder.serializeNulls();
+			builder.serializeSpecialFloatingPointValues();
+			Gson gson = builder.create();
+			
+			String gsonString = gson.toJson(funcionarios);
+			byte[] gsonBytes = gsonString.getBytes("UTF8");
+					
+			System.out.println(new String(gsonBytes, "UTF8") );
+			return new String(gsonBytes, "UTF8"); 
+			*/
+			
 		} else {
 			return null;
 		}
@@ -151,8 +172,7 @@ public class FuncionarioClienteController {
 				funcionarios.add(funcionariosList.get(i).getEmail());
 			}
 			Gson gson = new Gson();
-			String json = gson.toJson(funcionarios);
-			return json;
+			return gson.toJson(funcionarios);
 		} else {
 			return null;
 		}
@@ -165,8 +185,7 @@ public class FuncionarioClienteController {
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
 			String cargo = dao.listaFuncionarioClientePorNome(solicitante, nomeCliente);
 			Gson gson = new Gson();
-			String json = gson.toJson(cargo);
-			return json;
+			return gson.toJson(cargo);
 		} else {
 			return null;
 		}
@@ -179,8 +198,7 @@ public class FuncionarioClienteController {
 			ClienteDao dao = new ClienteDao();
 			Cliente cliente =  dao.buscaNomeCliente(nomeCliente);
 			Gson gson = new Gson();
-			String json = gson.toJson(cliente.isRedFlag());
-			return json;
+			return gson.toJson(cliente.isRedFlag());
 		} else {
 			return null;
 		}
@@ -193,26 +211,10 @@ public class FuncionarioClienteController {
 			ClienteDao dao = new ClienteDao();
 			Cliente cliente =  dao.buscaNomeCliente(nomeCliente);
 			Gson gson = new Gson();
-			String json = gson.toJson(cliente.isVip());
-			return json;
+			return gson.toJson(cliente.isVip());
 		} else {
 			return null;
 		}
 	}
 	
-	/*
-	@RequestMapping(value = "/listarColaboradoresForm")
-	@ResponseBody
-	public String listarColaboradoresForm(HttpSession session, String nomeCliente, Model model) {
-		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
-		if (funcionario != null) {
-			System.out.println(nomeCliente);
-			FuncionarioClienteDao dao = new FuncionarioClienteDao();
-			//System.out.println(dao.listaFuncionariosCLiente().get(0).getNome());
-			return dao.listaFuncionariosClientePorNome(nomeCliente).get(0).getNome();
-		} else {
-			return null;
-		}
-	}
-	 */
 }

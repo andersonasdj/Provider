@@ -14,6 +14,24 @@
 	<br />
 		<fieldset></fieldset>
 		<div class="container">
+			<legend>Versão 1.6</legend>
+			<ul>
+				<li>Auto preenchimento ao solicitante e usuário afetado ao selecionar o cliente.
+					<ul>
+						<li>Exibição do cargo do solicitante.</li>
+						<li>Exibição do cargo do usuário afetado.</li>
+					</ul>
+				</li>
+				<li>Auto preenchimento da lista de e-mails dos destinatários ao selecionar o cliente.
+					<ul>
+						<li>Cadastro do cargo do funcionário.</li>
+					</ul>
+				</li>
+				<li>Opção de informar Red Flag e cliente Vip na edição do cliente</li>
+				<li>Criação, edição e exclusão de colaboraderes para os clientes.</li>
+				<li>Classificação de solicitação pelo cliente após finalização</li>
+				<li>Link de acompanhamento de protocolo na pagina de edição de chamado.</li>
+			</ul>
 			<legend>Versão 1.5</legend>
 			<ul>
 				<li>Nova opção para copiar uma solicitação.</li>

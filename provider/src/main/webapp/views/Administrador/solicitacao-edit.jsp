@@ -54,6 +54,8 @@
 				<div class="controls">
 					<input type="text" id="nomeDoCliente"
 						value="${solicitacao.cliente.nome}" class="input-xlarge" disabled="disabled">
+					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
+					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -84,6 +86,7 @@
 	                		${solicitacao.solicitante}
 	                	</option>
 	                </select>
+	                <span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 	            </div>
         	</div>
         	<br/>
@@ -95,6 +98,7 @@
 	                		${solicitacao.usuario}
 	                	</option>
 	                </select>
+	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 	            </div>
         	</div>
 			<br/>
@@ -296,36 +300,136 @@
 		}
 	</script>
 	<script>
-	window.onload = function() {
+		window.onload = function() {
     		var divCliente = $("#nomeDoCliente");
-    		var nomeCliente = $("#nomeDoCliente").value;
-    		
-    		
-	    		var nomeCliente = $("#nomeDoCliente").val();
-	    		var json = {"nomeCliente" : nomeCliente};
-	    	
+    		var json = {"nomeCliente" : $("#nomeDoCliente").val()};
+	        $.ajax({
+	            url: "/provider/listarColaboradoresForm",
+	            type: "GET",
+	            data: json,
+	            success: function (object) {
+	                if (object != null) {
+	                    $.each(object, function (i, item) {
+	                    	 $('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+	                    });
+		                    ;$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+	                    	$('.usuario').append('<option value="Geral" slected="selected">Geral</option>');
+	                    $.each(object, function (i, item) {
+	                    	 $('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+	                    });
+		                    $('.solicitante').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+	                    	$('.solicitante').append('<option value="Geral" slected="selected">Geral</option>');
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        $.ajax({
+	            url: "/provider/getCargo",
+	            type: "GET",
+	            data: {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+	            success: function (object) {
+	                if (object != null) {
+	                    document.getElementById("cargoSolicitante").innerHTML=""; 
+	                    $('#cargoSolicitante').append(object);
+	                }else{
+	                	document.getElementById("cargoSolicitante").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        $.ajax({
+	            url: "/provider/getCargo",
+	            type: "GET",
+	            data: {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+	            success: function (object) {
+	                if (object != null) {
+	                    document.getElementById("cargoUsuario").innerHTML=""; 
+	                    $('#cargoUsuario').append(object);
+	                }else{
+	                	document.getElementById("cargoUsuario").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        $.ajax({
+	            url: "/provider/getFlag",
+	            type: "GET",
+	            data: {"nomeCliente" : divCliente.val()},
+	            success: function (object) {
+	                if (object) {
+	                    document.getElementById("flag").innerHTML=""; 
+	                    $('#flag').append('Red Flag');
+	                }else{
+	                	document.getElementById("flag").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        $.ajax({
+	            url: "/provider/getVip",
+	            type: "GET",
+	            data: {"nomeCliente" : divCliente.val()},
+	            success: function (object) {
+	                if (object) {
+	                    document.getElementById("vip").innerHTML=""; 
+	                    $('#vip').append('  Vip');
+	                }else{
+	                	document.getElementById("vip").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+    	};
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()};
 		        $.ajax({
-		            url: "/provider/listarColaboradoresForm",
+		            url: "/provider/getCargo",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
-		                    var selectbox = $('.usuario');
-		                    var selectbox = $('.solicitante');
-		                    $.each(object, function (i, item) {
-		                    	 $('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
-		                    });
-		                    $.each(object, function (i, item) {
-		                    	 $('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
-		                    });
+		                    document.getElementById("cargoSolicitante").innerHTML=""; 
+		                    $('#cargoSolicitante').append(object);
+		                }else{
+		                	document.getElementById("cargoSolicitante").innerHTML="";
 		                }
 		            },
 			        erro : function(request, status, error) {},
 			        complete : function(data) {}
 		        })
-    		 
-    	};
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("cargoUsuario").innerHTML=""; 
+		                    $('#cargoUsuario').append(object);
+		                }else{
+		                	document.getElementById("cargoUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
 	</script>
 </html>

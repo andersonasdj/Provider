@@ -31,6 +31,8 @@
 							<option>${cliente.nome}</option>
 						</c:forEach>
 					</select>
+					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
+					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
 				</div>
 			</div>
 			<div class="control-group">
@@ -51,6 +53,7 @@
 				<label class="control-label">Solicitante</label>
 	            <div class="controls">
 	                <select class="form-control solicitante" name="solicitante" id="solicitante"></select>
+	            	<span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 	            </div>
         	</div>
         	<br/>
@@ -58,9 +61,10 @@
 				<label class="control-label">Usuário Afetado</label>
 	            <div class="controls">
 	                <select class="form-control usuario" name="usuario" id="usuario"></select>
+	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 	                <p class="help-block">* Campo Obrigatório</p>
 	            </div>
-        	</div>
+        	</div> <br/>
 			<div class="control-group">
 				<label class="control-label">Problema Relatado</label>
 				<div class="controls">
@@ -68,7 +72,6 @@
 						onkeyup="limite_textarea_prob(this.value)" class="input-xlarge" required></textarea>
 					<span id="contProb">255</span> Restantes <br>
 					<p class="help-block">* Campo Obrigatório</p>
-					
 				</div>
 			</div>
 			<div class="control-group">
@@ -206,28 +209,26 @@
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");
-    		var nomeCliente = $("#nomeDoCliente").value;
-    		
     		divCliente.on("change", function(){
-	    		var nomeCliente = $("#nomeDoCliente").val();
-	    		var json = {"nomeCliente" : nomeCliente};
-	    	
+	    		var json = {"nomeCliente" : $("#nomeDoCliente").val()};
 		        $.ajax({
 		            url: "/provider/listarColaboradoresForm",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
-		                    var data = object.data;
 		                    var selectbox = $('.usuario');
 		                    selectbox.find('option').remove();
 		                    var selectbox = $('.solicitante');
 		                    selectbox.find('option').remove();
+		                    $('.usuario').append('<option value="" slected="selected"></option>');
+		                    $('.solicitante').append('<option value="" slected="selected"></option>');
+		                    document.getElementById("cargoUsuario").innerHTML="";
+		                    document.getElementById("cargoSolicitante").innerHTML="";
 		                    $.each(object, function (i, item) {
 		                    	$('.usuario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
-		                    })	
-		                    	;$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
+		                    });
+		                    	$('.usuario').append('<option value="ProviderOne" slected="selected">ProviderOne</option>');
 		                    	$('.usuario').append('<option value="Geral" slected="selected">Geral</option>');
 		                    $.each(object, function (i, item) {
 		                    	$('.solicitante').append('<option value="' + item + '" slected="selected">' + item + '</option>');
@@ -243,24 +244,128 @@
     	});
 	</script>
 	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		divCliente.on("change", function(){
+	    		var nomeCliente = $("#nomeDoCliente").val();
+	    		var json = {"nomeCliente" : nomeCliente};
+		        $.ajax({
+		            url: "/provider/listarEmails",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    var selectbox = $('.destinatario');
+		                    selectbox.find('option').remove();
+		                    $.each(object, function (i, item) {
+		                    	$('.destinatario').append('<option value="' + item + '" slected="selected">' + item + '</option>');
+		                    });
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#nomeDoCliente");
+    		divCliente.on("change", function(){
+	    		var json = {"nomeCliente" : divCliente.val()};
+		        $.ajax({
+		            url: "/provider/getFlag",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("flag").innerHTML=""; 
+		                    $('#flag').append('Red Flag');
+		                }else{
+		                	document.getElementById("flag").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		        $.ajax({
+		            url: "/provider/getVip",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object) {
+		                    document.getElementById("vip").innerHTML=""; 
+		                    $('#vip').append('  Vip');
+		                }else{
+		                	document.getElementById("vip").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("cargoSolicitante").innerHTML=""; 
+		                    $('#cargoSolicitante').append(object);
+		                }else{
+		                	document.getElementById("cargoSolicitante").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+		        $.ajax({
+		            url: "/provider/getCargo",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("cargoUsuario").innerHTML=""; 
+		                    $('#cargoUsuario').append(object);
+		                }else{
+		                	document.getElementById("cargoUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	<script>
 		var divStatus = $("#status");
-		var status = $("#status").val();
 		divStatus.on("change", function(){
 			var status = $("#status").val();
 			if(status === 'Abrir'){
-				//document.getElementById('agendamentos').style.display = 'none';
-				//$("#agendamentos").stop().slideToggle(1000);
 				document.getElementById('agendamentos').style.display = 'none';
 			}else if(status === 'Em andamento'){
 				document.getElementById('agendamentos').style.display = 'none';
-				//document.getElementById('agendamentos').style.display = 'none';
 			}else {
-				//document.getElementById('agendamentos').style.display = 'block';
 				$("#agendamentos").stop().slideToggle(1000);
 			}
 		} );
 	</script>
-    <script type="text/javascript">
+    <script>
 	    function limite_textarea_prob(valor) {
 	        quant = 255;
 	        total = valor.length;
