@@ -35,7 +35,7 @@ public class SolicitacaoController {
 	public String solicitacaoForm(HttpSession session, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (session.getAttribute("clienteLogado") != null) {
-			return "cliente/solicitacao-form";
+			return "Cliente/solicitacao-form";
 		} 
 		if (funcionario != null) {
 			FuncionarioDao daoFun = new FuncionarioDao();
@@ -158,7 +158,7 @@ public class SolicitacaoController {
 		model.addAttribute("qtdAguardando", agua);
 		
 		model.addAttribute("qtdTotal", ab + age + and + agua);	
-		return "cliente/solicitacao-list";
+		return "Cliente/solicitacao-list";
 	}
 	@RequestMapping("/solicitacoesAbertas")
 	public String solicitacoesAbertas(HttpSession session, Model model) {
@@ -288,7 +288,7 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 			model.addAttribute("solicitacoes",dao.listaSolicitacoesPorId(cliente.getId()));
-			return "cliente/solicitacao-relatorio";
+			return "Cliente/solicitacao-relatorio";
 		} else {
 			return "redirect:login";
 		}
@@ -300,7 +300,7 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Cliente cliente = (Cliente) session.getAttribute("clienteLogado");
 			model.addAttribute("solicitacoes",dao.relatorioGeralPorIdCliente(cliente.getId()));
-			return "cliente/solicitacao-relatorio";
+			return "Cliente/solicitacao-relatorio";
 		} else {
 			return "redirect:login";
 		}
@@ -411,7 +411,7 @@ public class SolicitacaoController {
 			Cliente cliente =  (Cliente) session.getAttribute("clienteLogado");
 			if(solicitacaoEditada.getCliente().getNome().equals(cliente.getNome())){
 				model.addAttribute("solicitacao", solicitacaoEditada);
-				return "cliente/solicitacao-edit";
+				return "Cliente/solicitacao-edit";
 			}
 			return "redirect:abertos";
 		} else {
@@ -432,10 +432,9 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
-	
+	*/
 	@RequestMapping("/solicitacaoEditCliente")
-	public String funcionarioEditCliente(Long id, HttpSession session,
-			Model model) {
+	public String funcionarioEditCliente(Long id, HttpSession session, Model model) {
 		if (session.getAttribute("clienteLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Solicitacao solicitacaoEditada = new Solicitacao();
@@ -443,14 +442,13 @@ public class SolicitacaoController {
 			Cliente cliente =  (Cliente) session.getAttribute("clienteLogado");
 			if(solicitacaoEditada.getCliente().getNome().equals(cliente.getNome())){
 				model.addAttribute("solicitacao", solicitacaoEditada);
-				return "cliente/solicitacao-edit";
+				return "Cliente/solicitacao-edit";
 			}
 			return "redirect:abertos";
 		} else {
 			return "redirect:login";
 		}
 	}
-	*/
 	
 	@RequestMapping("/solicitacaoCopy")
 	public String funcionarioCopy(Long id, HttpSession session, Model model) {
@@ -463,6 +461,7 @@ public class SolicitacaoController {
 			solicitacaoEditada = dao.buscaSolicitacaoId(id);
 			solicitacaoEditada.setId(null);
 			solicitacaoEditada.setStatus("Abrir");
+			solicitacaoEditada.setIdChamadoLigacao(id);
 			
 			ClienteDao daoCli = new ClienteDao();
 			model.addAttribute("clientes", daoCli.listaCliente());
@@ -544,10 +543,11 @@ public class SolicitacaoController {
 				return "redirect:solicitacoesAbertas";
 			} 
 			if (solicitacao.getStatus().equals("Em andamento")) {
+				System.out.println(solicitacao.isPlay());
 				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAbertas";
 			}
-			if (solicitacao.getStatus().equals("Aguardando usuario")) {
+			if (solicitacao.getStatus().equals("Aguardando")) {
 				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAbertas";
 			}else {
@@ -586,7 +586,7 @@ public class SolicitacaoController {
 				dao.solicitacaoAgendado(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAgendadosTecnico";
 			}
-			if (solicitacao.getStatus().equals("Aguardando usuario")) {
+			if (solicitacao.getStatus().equals("Aguardando")) {
 				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAguardandoTecnico";
 			} else {
@@ -740,7 +740,7 @@ public class SolicitacaoController {
 			Solicitacao solicitacaoExibida = daoSolicitacao.buscaSolicitacaoId(id);
 			if(solicitacaoExibida.getCliente().getNome().equals(cliente.getNome())){
 				model.addAttribute("solicitacao", solicitacaoExibida );
-				return "cliente/solicitacao-log";				
+				return "Cliente/solicitacao-log";				
 			}
 			else {
 				return "redirect:abertos";

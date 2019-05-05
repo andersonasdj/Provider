@@ -241,11 +241,12 @@
 			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
-					<span>Alta - 2 Horas <br> Média - 24 Horas <br> Baixa - 72 Horas <br> Planejada - Evento Plavejado</span>
+					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
 				</a></label> 
 				<div class="controls">
 					<select class="selectpicker" id="prioridade" name="prioridade">
 						<option>${solicitacao.prioridade}</option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -312,8 +313,8 @@
 						<c:if test="${solicitacao.status != 'Em andamento'}">
 							<option>Em andamento</option>
 						</c:if>
-						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
-							<option>Aguardando usuario</option>
+						<c:if test="${solicitacao.status != 'Aguardando'}">
+							<option>Aguardando</option>
 						</c:if>
 						<c:if test="${solicitacao.status != 'Aberto'}">
 							<option>Finalizar</option>

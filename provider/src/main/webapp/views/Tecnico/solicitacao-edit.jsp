@@ -190,11 +190,12 @@
 			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
-					<span>Alta - 2 Horas <br> Média - 24 Horas <br> Baixa - 72 Horas <br> Planejada - Evento Plavejado</span>
+					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
 				</a></label> 
 				<div class="controls">
 					<select class="selectpicker" id="prioridade" name="prioridade">
 						<option>${solicitacao.prioridade}</option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -223,8 +224,8 @@
 						<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
 							value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
 					</div>
-				</div>	
-				<div class="control-group">
+				</div>
+				<div class="control-group" id="opAgendamentoHora">
 					<label class="control-label">Hora de Agendamento</label>
 					<div class="controls">
 						<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
@@ -233,9 +234,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
+				<label class="control-label">Técino Responsável</label>
 				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
+					<select class="selectpicker alertaFuncionario" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${solicitacao.funcionario.nome}</option>
 						<option></option>
@@ -245,7 +246,7 @@
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select class="selectpicker" id="status"
+					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
 						
@@ -258,8 +259,8 @@
 						<c:if test="${solicitacao.status != 'Em andamento'}">
 							<option>Em andamento</option>
 						</c:if>
-						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
-							<option>Aguardando usuario</option>
+						<c:if test="${solicitacao.status != 'Aguardando'}">
+							<option>Aguardando</option>
 						</c:if>
 						<c:if test="${solicitacao.status != 'Aberto'}">
 							<option>Finalizar</option>
@@ -292,6 +293,28 @@
 	<script src="assets/js/controla-campos-texto.js"></script>
 	<script src="assets/js/date.js"></script>
 	<script src="assets/js/jquery-ui-timepicker-addon.js"></script>
+	<script>
+   		var divCliente = $(".alertaFuncionario");
+   		divCliente.on("change", function(){
+   			var funcionario = $("#nomeDoFuncionario").val();
+   			var status = $("#status").val();
+   			if(funcionario == "" && status == 'Agendado'){
+   				alert("Você não pode agendar um chamado sem um técino!");
+   				$('#enviar').attr('disabled','disabled');
+   			}else if(funcionario == "" && status == 'Em andamento'){
+   				alert("Você não pode iniciar um chamado sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			}else if(funcionario == "" && status == 'Aguardando'){
+   				alert("Você não pode deixar um chamado aguardano sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else if(funcionario == "" && status == 'Aberto'){
+   				alert("Você não pode deixar um chamado aberto sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else{
+   				$('#enviar').attr('disabled',false);
+   			}
+   		}); 
+	</script>
 	<script>
 		window.onload = function() {
     		var divCliente = $("#nomeDoCliente");

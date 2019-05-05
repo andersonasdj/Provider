@@ -218,7 +218,7 @@
 					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>
-			<c:if test="${solicitacao.status == 'Aguardando usuario'}">
+			<c:if test="${solicitacao.status == 'Aguardando'}">
 				<tr class="active" align="center">
 					<td data-field="state" data-checkbox="true"></td>
 					<td>

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.com.providerone.dao.ClienteDao;
 import br.com.providerone.dao.FuncionarioClienteDao;
+import br.com.providerone.dao.SolicitacaoDao;
 import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.FuncionarioCliente;
+import br.com.providerone.modelo.Solicitacao;
 
 import com.google.gson.Gson;
 
@@ -212,6 +214,33 @@ public class FuncionarioClienteController {
 			Cliente cliente =  dao.buscaNomeCliente(nomeCliente);
 			Gson gson = new Gson();
 			return gson.toJson(cliente.isVip());
+		} else {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/getIdLigacao", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String getIdLigacao(HttpSession session, Long idLigacao) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+			
+			if(idLigacao != null){
+				SolicitacaoDao dao = new SolicitacaoDao();
+				Solicitacao solicitacao = dao.buscaSolicitacaoId(idLigacao);
+				
+				if(solicitacao != null){
+					Gson gson = new Gson();
+					return gson.toJson(solicitacao.getStatus());
+				}else{
+					Gson gson = new Gson();
+					return gson.toJson("ID nao encontrado");
+				}
+				
+			}else{
+				Gson gson = new Gson();
+				return gson.toJson("");
+			}
+			
 		} else {
 			return null;
 		}

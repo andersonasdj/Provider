@@ -70,6 +70,24 @@ public class Solicitacao {
 	private boolean excluido;
 	private String caminhoAnexo;
 	private String comentario;
+	private Long idChamadoLigacao;
+	private boolean play;
+
+	public boolean isPlay() {
+		return play;
+	}
+
+	public void setPlay(boolean play) {
+		this.play = play;
+	}
+
+	public Long getIdChamadoLigacao() {
+		return idChamadoLigacao;
+	}
+
+	public void setIdChamadoLigacao(Long idChamadoLigacao) {
+		this.idChamadoLigacao = idChamadoLigacao;
+	}
 
 	public String getComentario() {
 		return comentario;

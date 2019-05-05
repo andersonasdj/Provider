@@ -102,24 +102,6 @@
 	            </div>
         	</div>
 			<br/>
-			<!--
-			<div class="control-group">
-				<label class="control-label">Solicitante</label>
-				<div class="controls">
-					<input id="solicitante" name="solicitante" type="text"
-						value="${solicitacao.solicitante}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Usuario Afetado</label>
-				<div class="controls">
-					<input id="usuario" name="usuario" type="text"
-						value="${solicitacao.usuario}" class="input-xlarge" required>
-						<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
-					<p class="help-block">* Campo Obrigatório</p>
-				</div>
-			</div>
-			-->
 			<div class="control-group">
 				<label class="control-label">Descrição do problema</label>
 				<div class="controls">
@@ -192,13 +174,14 @@
 			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
-					<span>Alta - 2 Horas <br> Média - 24 Horas <br> Baixa - 72 Horas <br> Planejada - Evento Plavejado</span>
+					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
 				</a></label> 
 				<div class="controls">
 					<select class="selectpicker" id="prioridade"
 						name="prioridade">
 						<option>${solicitacao.prioridade}</option>
 						<option></option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -238,9 +221,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
+				<label class="control-label">Técino Responsável</label>
 				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
+					<select class="selectpicker alertaFuncionario" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${solicitacao.funcionario.nome}</option>
 						<c:forEach var="funcionario" items="${funcionario}">
@@ -253,7 +236,7 @@
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select class="selectpicker" id="status"
+					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
 						<c:if test="${solicitacao.status != 'Agendado'}">
@@ -265,15 +248,56 @@
 						<c:if test="${solicitacao.status != 'Em andamento'}">
 							<option>Em andamento</option>
 						</c:if>
-						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
-							<option>Aguardando usuario</option>
+						<c:if test="${solicitacao.status != 'Aguardando'}">
+							<option>Aguardando</option>
 						</c:if>
 						<c:if test="${solicitacao.status != 'Aberto'}">
 							<option>Finalizar</option>
 						</c:if>
 					</select>
+				<!--  <button id="bntPlay" name="bntPlay" class="btn btn-dark"> <i class="fa fa-play" aria-hidden="true"></i></button> -->
+				
+				<span id="divPlay">
+					<a href="javascript:func()" id="bntPlay"><i class="fa fa-play fa-lg" aria-hidden="true"></i></a>
+				</span>
+				<span id="divPause">
+					<a href="javascript:func()" id="bntPause"><i class="fa fa-pause fa-lg" aria-hidden="true"></i></a>
+				</span>
+				
 				</div>
 			</div>
+			
+			<input type="hidden" name="play" id="play" value="">
+			
+			<c:if test="${solicitacao.idChamadoLigacao != null}">
+				<div class="form-group">
+					<label class="control-label">Associado ao Id: ${solicitacao.idChamadoLigacao} </label>
+		            <div class="controls">
+		            	<input type="hidden" id="buscaId" value="${solicitacao.idChamadoLigacao}">
+						<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+		            </div>
+	        	</div>
+        	</c:if>
+        	<c:if test="${solicitacao.idChamadoLigacao == null}">
+	        	<div class="form-check">
+				    <label class="form-check-label">
+				    	Associar chamado a
+				      <input id="boxIdChamado" name="boxIdChamado" type="checkbox" class="form-check-input">
+				    </label>
+				    <div class="form-group" id="enviaEmail">
+						<label class="control-label">ID do Chamado</label>
+			            <div class="controls">
+			            	<div id="idChamado" style="display: none">
+			             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" />
+			                	<a href="javascript:func()" id="buscaId"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+			                	<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+			                </div>
+			            </div>
+	        		</div>
+	        		<br/>
+				</div>
+        	</c:if>
+        	<br/><br/>
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">
@@ -294,11 +318,81 @@
 	<script src="assets/js/controla-calendario-agendamento.js"></script>
 	<script src="assets/js/controla-campos-texto.js"></script>
 	<script>
-		function copiaSolicitante(){
-			var solicitante = $('#solicitante').val();
-			$('#usuario').val(solicitante);
-		}
+   		var divCliente = $(".alertaFuncionario");
+   		divCliente.on("change", function(){
+   			var funcionario = $("#nomeDoFuncionario").val();
+   			var status = $("#status").val();
+   			if(funcionario == "" && status == 'Agendado'){
+   				if(confirm("Deseja agendar sem selecionar um tecnico?")){
+   					$('#enviar').attr('disabled',false);
+   				} else{
+	   				$('#enviar').attr('disabled','disabled');
+   				}
+   			}else if(funcionario == "" && status == 'Em andamento'){
+   				alert("Você não pode iniciar um chamado sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			}else if(funcionario == "" && status == 'Aguardando'){
+   				alert("Você não pode deixar um chamado aguardano sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else{
+   				$('#enviar').attr('disabled',false);
+   			}
+   		}); 
 	</script>
+	<script>
+		var divEmail = $("#boxIdChamado");
+		var email = $("#idChamadoLigacao").val();
+		divEmail.on("change", function(){
+			var email = $("#idChamadoLigacao").val();
+				$("#idChamado").stop().slideToggle(500);
+				document.getElementById('idChamado').style.display = 'block';
+		} );
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#buscaId");
+    		divCliente.on("click", function(){
+    			
+	    		var idLigacao = $("#idChamadoLigacao").val();
+	    		var json = {"idLigacao" : idLigacao};
+		        $.ajax({
+		            url: "/provider/getIdLigacao",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		            	if (object) {
+		                    document.getElementById("statusId").innerHTML=""; 
+		                    $('#statusId').append(object);
+		                }else{
+		                	document.getElementById("statusId").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
+	
+	<script>
+    	$(document).ready(function () {
+    		var divPause = $("#bntPause");
+    		divPause.on("click", function(){
+	    		alert("pausado");
+	    		var btPlay = $("#play").val();
+				$('#divPlay').show();
+				$('#divPause').hide();
+    		}); 
+    		var divPlay = $("#bntPlay");
+    		divPlay.on("click", function(){
+	    		alert("retomado");
+	    		var btPlay = $("#play").val();
+				$('#divPlay').hide();
+				$('#divPause').show();
+    		}); 
+    	});
+	</script>
+	
 	<script>
 		window.onload = function() {
     		var divCliente = $("#nomeDoCliente");
@@ -384,6 +478,51 @@
 		        erro : function(request, status, error) {},
 		        complete : function(data) {}
 	        })
+	        var idLigacao = $("#buscaId").val();
+	    	var jsonId = {"idLigacao" : idLigacao};
+	    	var link = "<a href='solicitacaoEdit?id="+idLigacao+"'><i class='fa fa-pencil-square-o fa-lg'></i></a>";
+	        $.ajax({
+		            url: "/provider/getIdLigacao",
+		            type: "GET",
+		            data: jsonId,
+		            success: function (object) {
+		            	if (object) {
+		                    document.getElementById("statusId").innerHTML=""; 
+		                    $('#statusId').append(object+ "  " +link);
+		                    if(object != "Finalizado"){
+		                    	$('#enviar').attr('disabled','disabled');
+		                    }
+		                }else{
+		                	$('#idLigacao').attr('disabled',false);
+		                	document.getElementById("statusId").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+			})
+			
+			var divStatus = $("#status").val();
+			if(divStatus == 'Aberto'){
+				$('#play').attr('value', false);
+				$('#divPause').hide();
+				$('#divPlay').hide();
+			} 
+			else if(divStatus == 'Agendado'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			} 
+			else if(divStatus == 'Aguardando'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			}
+			
+			else if(divStatus == 'Em andamento'){
+				$('#divPlay').hide();
+				$('#play').attr('value', true);
+			}
+			var btPlay = $("#play").val();
     	};
 	</script>
 	<script>

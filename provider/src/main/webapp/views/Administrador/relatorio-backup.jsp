@@ -4,15 +4,15 @@
 <html>
 <head>
 	<title>ProviderOne | Relatórios</title>
-	<link rel="shortcut icon" href="../assets/img/ico.png" >
+	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../assets/css/bootstrap.css">
-	<link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/css/bootstrap-responsive.css">
-	<link rel="stylesheet" href="../assets/css/bootstrap-table.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.css">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-responsive.css">
+	<link rel="stylesheet" href="assets/css/bootstrap-table.css">
 </head>
 <body>
-	<c:import url="../barra-menus.jsp"></c:import>
+	<c:import url="barra-menus.jsp"></c:import>
 	<div id="loader"></div>
 	<br /><br /><br />
 		
@@ -117,16 +117,16 @@
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 							<c:if test="${solicitacao.prioridade == 'Alta'}">
-								<img class="ico_status" src="../assets/img/alta.png">
+								<img class="ico_status" src="assets/img/alta.png">
 							</c:if>
 							<c:if test="${solicitacao.prioridade == 'Media'}">
-								<img class="ico_status" src="../assets/img/media.png">
+								<img class="ico_status" src="assets/img/media.png">
 							</c:if>
 							<c:if test="${solicitacao.prioridade == 'Baixa'}">
-								<img class="ico_status" src="../assets/img/baixa.png">
+								<img class="ico_status" src="assets/img/baixa.png">
 							</c:if>
 							<c:if test="${solicitacao.prioridade == 'Planejada'}">
-								<img class="ico_status" src="../assets/img/planejada.png">
+								<img class="ico_status" src="assets/img/planejada.png">
 							</c:if>	
 								<span><p>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
 								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
@@ -175,16 +175,16 @@
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
-									<img class="ico_status" src="../assets/img/alta.png">
+									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Media'}">
-									<img class="ico_status" src="../assets/img/media.png">
+									<img class="ico_status" src="assets/img/media.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Baixa'}">
-									<img class="ico_status" src="../assets/img/baixa.png">
+									<img class="ico_status" src="assets/img/baixa.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
-									<img class="ico_status" src="../assets/img/planejada.png">
+									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
 								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
 								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
@@ -234,16 +234,16 @@
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
-									<img class="ico_status" src="../assets/img/alta.png">
+									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Media'}">
-									<img class="ico_status" src="../assets/img/media.png">
+									<img class="ico_status" src="assets/img/media.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Baixa'}">
-									<img class="ico_status" src="../assets/img/baixa.png">
+									<img class="ico_status" src="assets/img/baixa.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
-									<img class="ico_status" src="../assets/img/planejada.png">
+									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>
 								
 								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
@@ -292,16 +292,16 @@
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
-									<img class="ico_status" src="../assets/img/alta.png">
+									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Media'}">
-									<img class="ico_status" src="../assets/img/media.png">
+									<img class="ico_status" src="assets/img/media.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Baixa'}">
-									<img class="ico_status" src="../assets/img/baixa.png">
+									<img class="ico_status" src="assets/img/baixa.png">
 								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
-									<img class="ico_status" src="../assets/img/planejada.png">
+									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
 								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
 								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
@@ -343,14 +343,14 @@
 		</table>	
 	<br /><br />
 	<legend></legend>
-	<c:import url="../rodape.jsp"></c:import>
+	<c:import url="rodape.jsp"></c:import>
 </body>
-	<script src="../assets/js/jquery.js"></script>
-	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/bootstrap-table.js"></script>
-	<script src="../assets/js/bootstrap-table-export.js"></script>
-	<script src="../assets/js/tableExport.js"></script>
-	<script src="../assets/js/bootstrap-table-key-events.js"></script>
+	<script src="assets/js/jquery.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
+	<script src="assets/js/bootstrap-table-key-events.js"></script>
 	<script>
 		function confirmacao(id) {
 		     var resposta = confirm("Deseja remover esse Chamado de id: " + id + " ?");

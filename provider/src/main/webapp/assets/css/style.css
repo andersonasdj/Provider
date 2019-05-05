@@ -13,6 +13,12 @@ body{
    border: white;
 }
 
+.ico_vip {
+   width: 15px; 
+   height: 15px;
+   border: white;
+}
+
 a.dcontexto {
 	position: relative;
 	font: 14px arial, verdana, helvetica, sans-serif;

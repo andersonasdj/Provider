@@ -396,7 +396,7 @@ public class SolicitacaoDao {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
-			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pStatus", "Aguardando");
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -462,7 +462,7 @@ public class SolicitacaoDao {
 		try {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
-			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pStatus", "Aguardando");
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
@@ -550,7 +550,7 @@ public class SolicitacaoDao {
 					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
-			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pStatus", "Aguardando");
 			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -795,7 +795,7 @@ public class SolicitacaoDao {
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
-			query.setParameter("pStatus", "Aguardando usuario");
+			query.setParameter("pStatus", "Aguardando");
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {

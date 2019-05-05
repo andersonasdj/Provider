@@ -65,11 +65,25 @@
 				</td>
 				<td>
 					<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Crítico'}">
+									<img class="ico_status" src="assets/img/critico.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Alta'}">
+									<img class="ico_status" src="assets/img/alta.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Media'}">
+									<img class="ico_status" src="assets/img/media.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Baixa'}">
+									<img class="ico_status" src="assets/img/baixa.png">
+								</c:if>
+								<c:if test="${solicitacao.prioridade == 'Planejada'}">
+									<img class="ico_status" src="assets/img/planejada.png">
+								</c:if>	
 						<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/> <br/>
 							- Aberto por: ${solicitacao.abriuChamado}</span></a>
 				</td>
 				<td>${solicitacao.onsiteOffsite}</td>
-				
 				<c:if test="${solicitacao.caminhoAnexo != null}">
 					<td>
 						<a href="downloadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-paperclip fa-lg" aria-hidden="true"></i></a>
@@ -79,11 +93,17 @@
 				<c:if test="${solicitacao.caminhoAnexo == null}">
 					<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 				</c:if>
-				
 				<td>
 					<a class="dcontexto"> ${solicitacao.cliente.nome}
-						<span>- Tel.: ${solicitacao.cliente.telefone1} <br/><br/>
-							- Endereço: ${solicitacao.cliente.endereco}</span></a>
+							<c:if test="${solicitacao.cliente.vip == true}">
+								<img class="ico_vip" src="assets/img/vip.png">
+							</c:if>
+							<c:if test="${solicitacao.cliente.redFlag == true}">
+								<img class="ico_vip" src="assets/img/flag.png">
+							</c:if>
+						<span>- Tel.: ${solicitacao.cliente.telefone1} <br/>
+							- Endereço: ${solicitacao.cliente.endereco}<br/>
+							- CNPJ: ${solicitacao.cliente.cnpj}</span></a>
 				</td>
 				<td>${solicitacao.usuario}</td>
 				<td>

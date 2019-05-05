@@ -72,6 +72,9 @@
 					</td>
 					<td>
 						<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+							<c:if test="${solicitacao.prioridade == 'Crítico'}">
+								<img class="ico_status" src="assets/img/critico.png">
+							</c:if>
 							<c:if test="${solicitacao.prioridade == 'Alta'}">
 								<img class="ico_status" src="assets/img/alta.png">
 							</c:if>
@@ -108,9 +111,16 @@
 					
 					<td>
 						<a class="dcontexto"> ${solicitacao.cliente.nome}
+							<c:if test="${solicitacao.cliente.vip == true}">
+								<img class="ico_vip" src="assets/img/vip.png">
+							</c:if>
+							<c:if test="${solicitacao.cliente.redFlag == true}">
+								<img class="ico_vip" src="assets/img/flag.png">
+							</c:if>
 							<span>
 								<p>- Tel.: ${solicitacao.cliente.telefone1} </p>
 								<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+								<p>- CNPJ: ${solicitacao.cliente.cnpj}</p>
 							</span>
 						</a>
 					</td>
@@ -135,7 +145,7 @@
 									<td>Não enviado na abertura</td>
 								</c:if>
 							</c:if>
-							<c:if test="${solicitacao.status == 'Aguardando usuario'}">
+							<c:if test="${solicitacao.status == 'Aguardando'}">
 								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">E-mail não cadastrado</a></td>
 							</c:if>
 							<c:if test="${solicitacao.status == 'Em andamento'}">
@@ -167,7 +177,7 @@
 										<span>${solicitacao.cliente.email}</span></a>
 								</td>
 							</c:if>
-							<c:if test="${solicitacao.status == 'Aguardando usuario'}">
+							<c:if test="${solicitacao.status == 'Aguardando'}">
 								<td>
 									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
 										<span>${solicitacao.cliente.email}</span></a>

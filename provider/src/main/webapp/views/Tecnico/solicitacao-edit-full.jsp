@@ -198,6 +198,7 @@
 				<div class="controls">
 					<select class="selectpicker" id="prioridade" name="prioridade">
 						<option>${solicitacao.prioridade}</option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -236,9 +237,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
+				<label class="control-label">Técino Responsável</label>
 				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
+					<select class="selectpicker alertaFuncionario" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${solicitacao.funcionario.nome}</option>
 						<c:forEach var="funcionario" items="${funcionario}">
@@ -251,24 +252,12 @@
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select class="selectpicker" id="status"
+					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
 						
-						<c:if test="${solicitacao.status != 'Agendado'}">
-							<option>Agendado</option>
-						</c:if>
 						<c:if test="${solicitacao.status != 'Aberto'}">
 							<option>Aberto</option>
-						</c:if>
-						<c:if test="${solicitacao.status != 'Em andamento'}">
-							<option>Em andamento</option>
-						</c:if>
-						<c:if test="${solicitacao.status != 'Aguardando usuario'}">
-							<option>Aguardando usuario</option>
-						</c:if>
-						<c:if test="${solicitacao.status != 'Aberto'}">
-							<option>Finalizar</option>
 						</c:if>
 					</select>
 				</div>
@@ -299,18 +288,31 @@
 	<script src="assets/js/date.js"></script>
 	<script src="assets/js/jquery-ui-timepicker-addon.js"></script>
 	<script>
+   		var divCliente = $(".alertaFuncionario");
+   		divCliente.on("change", function(){
+   			var funcionario = $("#nomeDoFuncionario").val();
+   			var status = $("#status").val();
+   			if(funcionario == "" && status == 'Aberto'){
+   				alert("Você não pode reabrir um chamado sem um técino!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else if(funcionario == "" && status == 'Finalizado'){
+   				alert("Você não pode remover o técnico associado a esse chamado!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else{
+   				$('#enviar').attr('disabled',false);
+   			}
+   		}); 
+	</script>
+	<script>
 		window.onload = function() {
     		var divCliente = $("#nomeDoCliente");
     		var nomeCliente = $("#nomeDoCliente").value;
-    		
 	    		var nomeCliente = $("#nomeDoCliente").val();
 	    		var json = {"nomeCliente" : nomeCliente};
-	    	
 		        $.ajax({
 		            url: "/provider/listarColaboradoresForm",
 		            type: "GET",
 		            data: json,
-		            
 		            success: function (object) {
 		                if (object != null) {
 		                    var data = object.data;
@@ -331,7 +333,6 @@
 			        erro : function(request, status, error) {},
 			        complete : function(data) {}
 		        })
-    		 
     	};
 	</script>
 	<script>

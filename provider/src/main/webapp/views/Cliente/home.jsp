@@ -47,7 +47,7 @@
 </body>
 	<script>
 		function ver(id) {
-			window.location.href = "solicitacaoEditCliente?id="+id;
+			window.location.href = "solicitacaoEdit?id="+id;
 		}
 	</script>
 	<script src="assets/js/jquery.js"></script>

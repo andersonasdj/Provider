@@ -125,12 +125,13 @@
 			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
-					<span>Alta - 2 Horas. <br> Média - 24 Horas. <br> Baixa - 72 Horas. <br> Planejada - Evento Planejado.</span>
+					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
 				</a></label>
 				<div class="controls">
 					<select class="selectpicker" id="prioridade"
 						name="prioridade">
 						<option></option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -155,7 +156,7 @@
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select class="selectpicker" id="status"
+					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>Abrir</option>
 						<option>Em andamento</option>
@@ -180,9 +181,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
+				<label class="control-label">Técino Responsável</label>
 				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
+					<select class="selectpicker alertaFuncionario" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${tecnicoLogado.nome}</option>
 						<option></option> 
@@ -206,6 +207,25 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
+	<script>
+   		var divCliente = $(".alertaFuncionario");
+   		divCliente.on("change", function(){
+   			var funcionario = $("#nomeDoFuncionario").val();
+   			var status = $("#status").val();
+   			if(funcionario == "" && status == 'Abrir'){
+   				alert("Você não pode agendar um chamado sem um técino!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else if(funcionario == "" && status == 'Em andamento'){
+   				alert("Você não pode iniciar um chamado sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else if(funcionario == "" && status == 'Agendar'){
+   				alert("Você não pode deixar um chamado aguardano sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else{
+   				$('#enviar').attr('disabled',false);
+   			}
+   		}); 
+	</script>
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");
@@ -377,7 +397,7 @@
 	        }
 	    }
     </script>
-    <script type="text/javascript">
+    <script>
 	    function limite_textarea_obs(valor) {
 	        quant = 255;
 	        total = valor.length;

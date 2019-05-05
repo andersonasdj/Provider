@@ -78,6 +78,9 @@
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Crítico'}">
+									<img class="ico_status" src="assets/img/critico.png">
+								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
 									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
@@ -108,9 +111,16 @@
 						</c:if>
 						
 						<td>
-							<a class="dcontexto"> ${solicitacao.cliente.nome}
+							<a class="dcontexto"> ${solicitacao.cliente.nome}	
+								<c:if test="${solicitacao.cliente.vip == true}">
+									<img class="ico_vip" src="assets/img/vip.png">
+								</c:if>
+								<c:if test="${solicitacao.cliente.redFlag == true}">
+									<img class="ico_vip" src="assets/img/flag.png">
+								</c:if>
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
-									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+									<p>- CNPJ: ${solicitacao.cliente.cnpj}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -143,6 +153,9 @@
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+							<c:if test="${solicitacao.prioridade == 'Crítico'}">
+								<img class="ico_status" src="assets/img/critico.png">
+							</c:if>
 							<c:if test="${solicitacao.prioridade == 'Alta'}">
 								<img class="ico_status" src="assets/img/alta.png">
 							</c:if>
@@ -173,8 +186,15 @@
 						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
+									<img class="ico_vip" src="assets/img/vip.png">
+								</c:if>
+								<c:if test="${solicitacao.cliente.redFlag == true}">
+									<img class="ico_vip" src="assets/img/flag.png">
+								</c:if>
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
-									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+									<p>- CNPJ: ${solicitacao.cliente.cnpj}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -210,6 +230,9 @@
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Crítico'}">
+									<img class="ico_status" src="assets/img/critico.png">
+								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
 									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
@@ -241,8 +264,15 @@
 						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
+									<img class="ico_vip" src="assets/img/vip.png">
+								</c:if>
+								<c:if test="${solicitacao.cliente.redFlag == true}">
+									<img class="ico_vip" src="assets/img/flag.png">
+								</c:if>
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
-									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+									<p>- CNPJ: ${solicitacao.cliente.cnpj}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -279,6 +309,9 @@
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Crítico'}">
+									<img class="ico_status" src="assets/img/critico.png">
+								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
 									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
@@ -310,8 +343,15 @@
 						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
+									<img class="ico_vip" src="assets/img/vip.png">
+								</c:if>
+								<c:if test="${solicitacao.cliente.redFlag == true}">
+									<img class="ico_vip" src="assets/img/flag.png">
+								</c:if>
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
-									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+									<p>- CNPJ: ${solicitacao.cliente.cnpj}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -337,7 +377,7 @@
 						</td>
 					</tr>
 				</c:if>
-				<c:if test="${solicitacao.status == 'Aguardando usuario'}">
+				<c:if test="${solicitacao.status == 'Aguardando'}">
 					<tr class="active" align="center">
 						<td data-field="state" data-checkbox="true"></td>
 						<td>
@@ -345,6 +385,9 @@
 						</td>	
 						<td>
 							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
+								<c:if test="${solicitacao.prioridade == 'Crítico'}">
+									<img class="ico_status" src="assets/img/critico.png">
+								</c:if>
 								<c:if test="${solicitacao.prioridade == 'Alta'}">
 									<img class="ico_status" src="assets/img/alta.png">
 								</c:if>
@@ -375,8 +418,15 @@
 						</c:if>
 						<td>
 							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
+									<img class="ico_vip" src="assets/img/vip.png">
+								</c:if>
+								<c:if test="${solicitacao.cliente.redFlag == true}">
+									<img class="ico_vip" src="assets/img/flag.png">
+								</c:if>
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
-									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p>
+									<p>- CNPJ: ${solicitacao.cliente.cnpj}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>

@@ -72,31 +72,7 @@
 	                <p class="help-block">* Campo Obrigatório</p>
 	            </div>
         	</div>
-			<!-- 
-			<div class="control-group">
-				<label class="control-label">Solicitante</label>
-				<div class="controls">
-					<input id="solicitante" name="solicitante" type="text" placeholder="Quem solicitou" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Usuario Afetado</label>
-				<div class="controls">
-					<input id="usuario" name="usuario" type="text" placeholder="Usuário" class="input-xlarge" required>
-					<a href="javascript:func()" id="copy" onclick="copiaSolicitante()"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a>
-					<p class="help-block">* Campo Obrigatório</p>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="control-label">Colaborador:</label>
-	            <div class="controls">
-	                <select class="form-control" name="colaborador" id="colaborador"></select>
-	            </div>
-        	</div>
-			 -->
 			<br/>
-			
 			<div class="control-group">
 				<label class="control-label">Problema Relatado</label>
 				<div class="controls">
@@ -158,12 +134,13 @@
 			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
-					<span>Alta - 2 Horas. <br> Média - 24 Horas. <br> Baixa - 72 Horas. <br> Planejada - Evento Planejado.</span>
+					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
 				</a></label>
 				<div class="controls">
 					<select class="selectpicker" id="prioridade"
 						name="prioridade">
 						<option></option>
+						<option>Crítico</option>
 						<option>Alta</option>
 						<option>Media</option>
 						<option>Baixa</option>
@@ -186,9 +163,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Funcionário Responsável</label>
+				<label class="control-label">Técnico Responsável</label>
 				<div class="controls">
-					<select class="selectpicker" id="nomeDoFuncionario"
+					<select class="selectpicker alertaFuncionario" id="nomeDoFuncionario"
 						name="nomeDoFuncionario">
 						<option>${solicitacao.funcionario.id}</option>
 						<c:forEach var="funcionario" items="${funcionarios}">
@@ -200,7 +177,7 @@
 			<div class="control-group">
 				<label class="control-label">Status</label>
 				<div class="controls">
-					<select class="selectpicker" id="status"
+					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>Abrir</option>
 						<option>Em andamento</option>
@@ -229,21 +206,31 @@
 			    	Enviar E-mail na abertura
 			      <input id="boxEmail" name="boxEmail" type="checkbox" class="form-check-input">
 			    </label>
-			    
 			    <div class="form-group" id="enviaEmail">
 					<label class="control-label">Destinatario</label>
 		            <div class="controls">
 		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none"></select>
 		            </div>
+	       		</div>
+	       		<br/>
+			</div>
+			<br/><br/>
+			<div class="form-check">
+			    <label class="form-check-label">
+			    	Associar chamado a
+			      <input id="boxIdChamado" name="boxIdChamado" type="checkbox" class="form-check-input">
+			    </label>
+			    <div class="form-group" id="enviaEmail">
+					<label class="control-label">ID do Chamado</label>
+		            <div class="controls">
+		            	<div id="idChamado" style="display: none">
+		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" />
+		                	<a href="javascript:func()" id="buscaId"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+		                	<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+		                </div>
+		            </div>
         		</div>
         		<br/>
-			    
-			    <!-- 
-			    <div id="enviaEmail">
-					<input id="destinatario" name="destinatario" type="text" placeholder="E-mail do Cliente" class="input-xlarge" style="display: none">
-					<p class="help-block"></p>
-				</div>
-				-->
 			</div>
 			<br/>
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
@@ -264,6 +251,58 @@
 	<script src="assets/js/jquery.ui.timepiker.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/calendario.js"></script>
+	<script>
+   		var divCliente = $(".alertaFuncionario");
+   		divCliente.on("change", function(){
+   			var funcionario = $("#nomeDoFuncionario").val();
+   			var status = $("#status").val();
+   			if(funcionario == "" && status == 'Agendar'){
+   				if(confirm("Deseja agendar sem selecionar um tecnico?")){
+   					$('#enviar').attr('disabled',false);
+   				} else{
+	   				$('#enviar').attr('disabled','disabled');
+   				}
+   			} else if(funcionario == "" && status == 'Em andamento'){
+   				alert("Você não pode iniciar um chamado sem um técnico!");
+   				$('#enviar').attr('disabled','disabled');
+   			} else{
+   				$('#enviar').attr('disabled',false);
+   			}
+   		}); 
+	</script>
+	<script>
+		var divEmail = $("#boxIdChamado");
+		var email = $("#idChamadoLigacao").val();
+		divEmail.on("change", function(){
+			var email = $("#idChamadoLigacao").val();
+				$("#idChamado").stop().slideToggle(500);
+				document.getElementById('idChamado').style.display = 'block';
+		} );
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#buscaId");
+    		divCliente.on("click", function(){
+	    		var idLigacao = $("#idChamadoLigacao").val();
+	    		var json = {"idLigacao" : idLigacao};
+		        $.ajax({
+		            url: "/provider/getIdLigacao",
+		            type: "GET",
+		            data: json,
+		            success: function (object) {
+		            	if (object) {
+		                    document.getElementById("statusId").innerHTML=""; 
+		                    $('#statusId').append(object);
+		                }else{
+		                	document.getElementById("statusId").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+    		}); 
+    	});
+	</script>
 	<script>
     	$(document).ready(function () {
     		var divCliente = $("#nomeDoCliente");

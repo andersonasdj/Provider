@@ -14,6 +14,28 @@
 	<br />
 		<fieldset></fieldset>
 		<div class="container">
+			<legend>Versão 1.7</legend>
+			<ul>
+				<li>Associação de chamado.
+					<ul>
+						<li>Um chamado associado outro chamado, somente poderár ser iniciado ao finalizar o anterior.</li>
+					</ul>
+				</li>
+				<li>Status de "Aguardando usuário" foi alterado para "Aguardando."</li>
+				<li>Inserido nível de prioridade "Crítico" para abertura de chamado.</li>
+				<li>Limitações de alterações de status e técino responsável.
+					<ul>
+						<li>O chamado somente poderá ficar sem técino no status "Aberto" e "Agendado"</li>
+					</ul>
+				</li>
+				<li>Novos ícones na listagem dos chamados.
+					<ul>
+						<li>Inserido ícone de criticidade na listagem dos chamados.</li>
+						<li>Inserido ícone de cliente vip na listagem dos chamados.</li>
+						<li>Inserido ícone de RedFlag na listagem dos chamados.</li>
+					</ul>
+				</li>
+			</ul><br/>
 			<legend>Versão 1.6</legend>
 			<ul>
 				<li>Auto preenchimento ao solicitante e usuário afetado ao selecionar o cliente.
