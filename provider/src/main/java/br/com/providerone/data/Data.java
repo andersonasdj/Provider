@@ -35,16 +35,6 @@ public class Data {
 		Long segundos, segundo, minutos, minuto, hora;
 		String tempo ;
 		
-		/*
-		 * 	PARA DEBUG DAS DATAS...
-			System.out.println("Dia da Abertura: " + dataIni.get(Calendar.DATE));
-			System.out.println("Dia do Fechamento: " + dataFin.get(Calendar.DATE));
-			System.out.println("Dia da semana: " + dataFin.get(Calendar.DAY_OF_WEEK));
-			int dSemana = dataFin.get(Calendar.DAY_OF_WEEK);
-			DateFormatSymbols symbols = new DateFormatSymbols();
-			String[] nomeDia = symbols.getWeekdays();
-			System.out.println(nomeDia[dSemana]);
-		*/
 		if(dataIni.get(Calendar.DATE) != dataFin.get(Calendar.DATE)){
 				int diferenca = (dataFin.get(Calendar.DATE))- (dataIni.get(Calendar.DATE));
 				
@@ -77,5 +67,32 @@ public class Data {
 			tempo = String.format("%02d:%02d:%02d", hora, minuto, segundo);
 		}
 		return tempo;
+	}
+	
+	public Long geraTempoParcial(Calendar dataFin, Calendar dataIni){
+		Long minutos;
+		
+		if(dataIni.get(Calendar.DATE) != dataFin.get(Calendar.DATE)){
+				int diferenca = (dataFin.get(Calendar.DATE))- (dataIni.get(Calendar.DATE));
+				minutos =  difMin(dataFin, dataIni);
+				if (diferenca == 1){
+					minutos = minutos - 900;
+				}else if (diferenca == 2){
+					minutos = minutos - 1800;
+				}else if (diferenca == 3){
+					minutos = minutos - 2700;
+				}else if (diferenca == 4){
+					minutos = minutos - 3600;
+				}else if (diferenca == 5){
+					minutos = minutos - 4500;
+				}else{
+					minutos = minutos - 4500;
+				}
+				System.out.println("minuto em data: " + minutos);
+		} else {
+			minutos =  difMin(dataFin, dataIni);
+			System.out.println("minuto em data: " + minutos);
+		}
+		return minutos;
 	}
 }

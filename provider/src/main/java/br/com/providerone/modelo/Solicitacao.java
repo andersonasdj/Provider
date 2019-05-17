@@ -53,7 +53,6 @@ public class Solicitacao {
 	private String resolucao;
 	private String status;
 	private String obs;
-	private String obs2;
 	private String nivelDeIncidencia;
 	private String onsiteOffsite;
 	private String classificacao;
@@ -71,6 +70,16 @@ public class Solicitacao {
 	private String caminhoAnexo;
 	private String comentario;
 	private Long idChamadoLigacao;
+	private Long minutos;
+	
+	public Long getMinutos() {
+		return minutos;
+	}
+
+	public void setMinutos(Long minutos) {
+		this.minutos = minutos;
+	}
+
 	private boolean play;
 
 	public boolean isPlay() {
@@ -241,14 +250,6 @@ public class Solicitacao {
 		this.obs = obs;
 	}
 
-	public String getObs2() {
-		return obs2;
-	}
-
-	public void setObs2(String obs2) {
-		this.obs2 = obs2;
-	}
-
 	public String getNivelDeIncidencia() {
 		return nivelDeIncidencia;
 	}
@@ -329,6 +330,100 @@ public class Solicitacao {
 		this.tempoDeAndamento = tempoDeAndamento;
 	}
 
+
+
+	public String geraLogSolicitacao(Funcionario funcionario, Cliente cliente){
+		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Date hora = new Date();
+		hora = this.getDataAbertura().getTime();
+		Date horaAgendado = new Date();
+		if(this.getAgendadoHora() != null){
+			horaAgendado = this.getAgendadoHora().getTime();
+		}
+			
+		return "* Aberto por: " + this.getAbriuChamado() + "\n\n"
+				+ "* Data: " + df.format(this.getDataAbertura().getTime()) + "\n"
+				+ "* Hora: " + sdf.format(hora) + "\n"
+				+ "* Cliente: " + cliente.getNome() + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
+				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observação: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
+				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "Não Classificado") + "\n"
+				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
+				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
+				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
+				+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				+ (this.getStatus().equals("Agendar") ? "* Data de agendamento: " + (this.getAgendado() != null ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
+				+ (this.getAgendadoHora() != null ? "* Hora: " + sdf.format(horaAgendado)	: "") + "\n" :"") 
+				+ "=========================================================================\n\n";
+	}
+	
+	public String atualizaLogSolicitacao(Funcionario funcionario, String funcionarioLogado){
+		Date data = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		SimpleDateFormat sdfAgendado = new SimpleDateFormat("HH:mm:ss");
+		data = Calendar.getInstance().getTime();
+		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
+		Date horaAgendado = new Date();
+		if(getAgendadoHora() != null){
+			horaAgendado = this.getAgendadoHora().getTime();
+		}
+		
+		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
+				
+				+ "* Alterações realizadas por: " + funcionarioLogado + "\n"
+				+ "* Data de Alteração: " + sdf.format(data) + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
+				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observação: " + this.getObs() + "\n"
+				+ "* Resolução: " + this.getResolucao() + "\n"
+ 				+ "* Categoria: " + this.getClassificacao() + "\n"
+				+ "* Classificação " + this.getPrioridade() + "\n"
+				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
+				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
+				+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
+				+ (this.getAgendadoHora() != null ? "* Hora: " + sdfAgendado.format(horaAgendado)	: "") + "\n" :"") 
+				+ "=========================================================================\n\n";
+	}
+
+	public Long getEstrela() {
+		return estrela;
+	}
+
+	public void setEstrela(Long estrela) {
+		this.estrela = estrela;
+	}
+	
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
+	public String geraSenha(){
+		String[] carct ={"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
+	    String senha="";
+	    for (int x=0; x<10; x++){
+	        int j = (int) (Math.random()*carct.length);
+	        senha += carct[j];
+	    }
+		return senha;
+	}
+
+	public Calendar getDataAtualizacao() {
+		return dataAtualizacao;
+	}
+
+	public void setDataAtualizacao(Calendar dataAtualizacao) {
+		this.dataAtualizacao = dataAtualizacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -344,12 +439,18 @@ public class Solicitacao {
 				+ ((andamentoDoChamado == null) ? 0 : andamentoDoChamado
 						.hashCode());
 		result = prime * result
+				+ ((caminhoAnexo == null) ? 0 : caminhoAnexo.hashCode());
+		result = prime * result
 				+ ((classificacao == null) ? 0 : classificacao.hashCode());
 		result = prime * result + ((cliente == null) ? 0 : cliente.hashCode());
+		result = prime * result
+				+ ((comentario == null) ? 0 : comentario.hashCode());
 		result = prime * result
 				+ ((dataAbertura == null) ? 0 : dataAbertura.hashCode());
 		result = prime * result
 				+ ((dataAndamento == null) ? 0 : dataAndamento.hashCode());
+		result = prime * result
+				+ ((dataAtualizacao == null) ? 0 : dataAtualizacao.hashCode());
 		result = prime * result
 				+ ((dataFechamento == null) ? 0 : dataFechamento.hashCode());
 		result = prime
@@ -357,6 +458,8 @@ public class Solicitacao {
 				+ ((descricaoProblema == null) ? 0 : descricaoProblema
 						.hashCode());
 		result = prime * result + ((diasDur == null) ? 0 : diasDur.hashCode());
+		result = prime * result + ((estrela == null) ? 0 : estrela.hashCode());
+		result = prime * result + (excluido ? 1231 : 1237);
 		result = prime * result
 				+ ((formaAbertura == null) ? 0 : formaAbertura.hashCode());
 		result = prime * result
@@ -364,6 +467,10 @@ public class Solicitacao {
 		result = prime * result
 				+ ((horasDur == null) ? 0 : horasDur.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime
+				* result
+				+ ((idChamadoLigacao == null) ? 0 : idChamadoLigacao.hashCode());
+		result = prime * result + ((minutos == null) ? 0 : minutos.hashCode());
 		result = prime * result
 				+ ((minutosDur == null) ? 0 : minutosDur.hashCode());
 		result = prime
@@ -371,13 +478,16 @@ public class Solicitacao {
 				+ ((nivelDeIncidencia == null) ? 0 : nivelDeIncidencia
 						.hashCode());
 		result = prime * result + ((obs == null) ? 0 : obs.hashCode());
-		result = prime * result + ((obs2 == null) ? 0 : obs2.hashCode());
 		result = prime * result
 				+ ((onsiteOffsite == null) ? 0 : onsiteOffsite.hashCode());
+		result = prime * result + (play ? 1231 : 1237);
 		result = prime * result
 				+ ((prioridade == null) ? 0 : prioridade.hashCode());
 		result = prime * result
 				+ ((resolucao == null) ? 0 : resolucao.hashCode());
+		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
+		result = prime * result
+				+ ((solicitante == null) ? 0 : solicitante.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((statusEmail == null) ? 0 : statusEmail.hashCode());
@@ -417,6 +527,11 @@ public class Solicitacao {
 				return false;
 		} else if (!andamentoDoChamado.equals(other.andamentoDoChamado))
 			return false;
+		if (caminhoAnexo == null) {
+			if (other.caminhoAnexo != null)
+				return false;
+		} else if (!caminhoAnexo.equals(other.caminhoAnexo))
+			return false;
 		if (classificacao == null) {
 			if (other.classificacao != null)
 				return false;
@@ -427,6 +542,11 @@ public class Solicitacao {
 				return false;
 		} else if (!cliente.equals(other.cliente))
 			return false;
+		if (comentario == null) {
+			if (other.comentario != null)
+				return false;
+		} else if (!comentario.equals(other.comentario))
+			return false;
 		if (dataAbertura == null) {
 			if (other.dataAbertura != null)
 				return false;
@@ -436,6 +556,11 @@ public class Solicitacao {
 			if (other.dataAndamento != null)
 				return false;
 		} else if (!dataAndamento.equals(other.dataAndamento))
+			return false;
+		if (dataAtualizacao == null) {
+			if (other.dataAtualizacao != null)
+				return false;
+		} else if (!dataAtualizacao.equals(other.dataAtualizacao))
 			return false;
 		if (dataFechamento == null) {
 			if (other.dataFechamento != null)
@@ -451,6 +576,13 @@ public class Solicitacao {
 			if (other.diasDur != null)
 				return false;
 		} else if (!diasDur.equals(other.diasDur))
+			return false;
+		if (estrela == null) {
+			if (other.estrela != null)
+				return false;
+		} else if (!estrela.equals(other.estrela))
+			return false;
+		if (excluido != other.excluido)
 			return false;
 		if (formaAbertura == null) {
 			if (other.formaAbertura != null)
@@ -472,6 +604,16 @@ public class Solicitacao {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (idChamadoLigacao == null) {
+			if (other.idChamadoLigacao != null)
+				return false;
+		} else if (!idChamadoLigacao.equals(other.idChamadoLigacao))
+			return false;
+		if (minutos == null) {
+			if (other.minutos != null)
+				return false;
+		} else if (!minutos.equals(other.minutos))
+			return false;
 		if (minutosDur == null) {
 			if (other.minutosDur != null)
 				return false;
@@ -487,15 +629,12 @@ public class Solicitacao {
 				return false;
 		} else if (!obs.equals(other.obs))
 			return false;
-		if (obs2 == null) {
-			if (other.obs2 != null)
-				return false;
-		} else if (!obs2.equals(other.obs2))
-			return false;
 		if (onsiteOffsite == null) {
 			if (other.onsiteOffsite != null)
 				return false;
 		} else if (!onsiteOffsite.equals(other.onsiteOffsite))
+			return false;
+		if (play != other.play)
 			return false;
 		if (prioridade == null) {
 			if (other.prioridade != null)
@@ -506,6 +645,16 @@ public class Solicitacao {
 			if (other.resolucao != null)
 				return false;
 		} else if (!resolucao.equals(other.resolucao))
+			return false;
+		if (senha == null) {
+			if (other.senha != null)
+				return false;
+		} else if (!senha.equals(other.senha))
+			return false;
+		if (solicitante == null) {
+			if (other.solicitante != null)
+				return false;
+		} else if (!solicitante.equals(other.solicitante))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -529,96 +678,5 @@ public class Solicitacao {
 			return false;
 		return true;
 	}
-
-	public String geraLogSolicitacao(Funcionario funcionario, Cliente cliente){
-		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		Date hora = new Date();
-		hora = this.getDataAbertura().getTime();
-		Date horaAgendado = new Date();
-		if(this.getAgendadoHora() != null){
-			horaAgendado = this.getAgendadoHora().getTime();
-		}
-			
-		return "* Aberto por: " + this.getAbriuChamado() + "\n\n"
-				+ "* Data: " + df.format(this.getDataAbertura().getTime()) + "\n"
-				+ "* Hora: " + sdf.format(hora) + "\n"
-				+ "* Cliente: " + cliente.getNome() + "\n"
-				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
-				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
-				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
-				+ "* Observação: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
-				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "Não Classificado") + "\n"
-				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
-				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
-				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
-				+ "* Status: " + this.getStatus() + "\n"
-				+ (this.getStatus().equals("Agendar") ? "* Data de agendamento: " + (this.getAgendado() != null ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
-				+ (this.getAgendadoHora() != null ? "* Hora: " + sdf.format(horaAgendado)	: "") + "\n" :"") 
-				+ "=========================================================================\n\n";
-	}
 	
-	public String atualizaLogSolicitacao(Funcionario funcionario, String funcionarioLogado){
-		Date data = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		SimpleDateFormat sdfAgendado = new SimpleDateFormat("HH:mm:ss");
-		data = Calendar.getInstance().getTime();
-		DateFormat df = DateFormat.getDateInstance(DateFormat.FULL);
-		Date horaAgendado = new Date();
-		if(getAgendadoHora() != null){
-			horaAgendado = this.getAgendadoHora().getTime();
-		}
-		
-		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
-				
-				+ "* Alterações realizadas por: " + funcionarioLogado + "\n"
-				+ "* Data de Alteração: " + sdf.format(data) + "\n"
-				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
-				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
-				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
-				+ "* Observação: " + this.getObs() + "\n"
-				+ "* Resolução: " + this.getResolucao() + "\n"
- 				+ "* Categoria: " + this.getClassificacao() + "\n"
-				+ "* Classificação " + this.getPrioridade() + "\n"
-				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
-				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
-				+ "* Status: " + this.getStatus() + "\n"
-				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
-				+ (this.getAgendadoHora() != null ? "* Hora: " + sdfAgendado.format(horaAgendado)	: "") + "\n" :"") 
-				+ "=========================================================================\n\n";
-	}
-
-	public Long getEstrela() {
-		return estrela;
-	}
-
-	public void setEstrela(Long estrela) {
-		this.estrela = estrela;
-	}
-	
-	public String getSenha() {
-		return senha;
-	}
-
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	public String geraSenha(){
-		String[] carct ={"0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
-	    String senha="";
-	    for (int x=0; x<10; x++){
-	        int j = (int) (Math.random()*carct.length);
-	        senha += carct[j];
-	    }
-		return senha;
-	}
-
-	public Calendar getDataAtualizacao() {
-		return dataAtualizacao;
-	}
-
-	public void setDataAtualizacao(Calendar dataAtualizacao) {
-		this.dataAtualizacao = dataAtualizacao;
-	}
 }

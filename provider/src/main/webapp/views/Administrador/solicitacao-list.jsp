@@ -192,7 +192,11 @@
 						<td>E-mail enviado</td>
 					</c:if>
 					<td>
-						<a class="dcontexto"><div id="status-botao"> ${solicitacao.status}</div>
+						<a class="dcontexto"><div id="status-botao"> ${solicitacao.status} 
+							<c:if test="${solicitacao.play == 'false'}">
+								 (Pausado)
+							</c:if>
+						</div>
 							<c:if test="${solicitacao.status != 'Aberto'}">
 								<span>
 									<c:if test="${solicitacao.status == 'Em andamento'}">

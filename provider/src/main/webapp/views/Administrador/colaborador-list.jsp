@@ -21,17 +21,27 @@
 					<a href="#" onClick="history.go(-1)"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
 				</p>
 
+		<div id="toolbar">
+	            <select class="form-control">
+	               	<option value="">Exportação básica</option>
+	                <option value="all">Exportar todos</option>
+	                <option value="selected">Exportar Selecionados</option>
+	            </select>
+	    </div>
 		<table id="table"
 				data-toggle="table"
-               data-show-columns="true"
-               data-show-toggle="true"
-               data-show-pagination-switch="true"
-               data-show-refresh="true"
-               data-search="true"
-               data-pagination="true"
-               data-key-events="true">
+	               data-show-columns="true"
+	               data-show-toggle="true"
+	               data-pagination="true"
+	               data-show-pagination-switch="true"
+	               data-search="true"
+	               data-key-events="true"
+	               data-show-export="true"
+	               data-click-to-select="true"
+	               data-toolbar="#toolbar">
             <thead>   
 				<tr>
+					<th data-field="state" data-checkbox="true"></th>
 					<th>Nome</th>
 					<th>Cargo</th>
 					<th>E-mail</th>
@@ -40,6 +50,7 @@
 			</thead>
 			<c:forEach var="funcionarioCliente" items="${funcionariosCliente}">
 				<tr class="clientesTr">
+					<td></td>
 					<td>${funcionarioCliente.nome}</td>
 					<td>${funcionarioCliente.cargo}</td>
 					<td>${funcionarioCliente.email}</td>
@@ -62,6 +73,8 @@
 	<script src="assets/js/mapas.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
+	<script src="assets/js/bootstrap-table-export.js"></script>
+	<script src="assets/js/tableExport.js"></script>
 	<script src="assets/js/bootstrap-table-key-events.js"></script>
 		<script>
 		function confirmacao(id) {

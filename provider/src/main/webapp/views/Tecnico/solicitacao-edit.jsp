@@ -266,9 +266,20 @@
 							<option>Finalizar</option>
 						</c:if>
 					</select>
+					
+					<!--  <button id="bntPlay" name="bntPlay" class="btn btn-dark"> <i class="fa fa-play" aria-hidden="true"></i></button> -->
+					
+					<span id="divPlay">
+						<a href="javascript:func()" id="bntPlay"> <i class="fa fa-play fa-lg" aria-hidden="true"> </i></a>
+					</span>
+					<span id="divPause">
+						<a href="javascript:func()" id="bntPause"> <i class="fa fa-pause fa-lg" aria-hidden="true"> </i></a>
+					</span>
+					
 				</div>
 			</div>
-			<input type="hidden" id="funcionarioLogado" name="funcionarioLogado" value="${tecnicoLogado.nome}">
+			<input type="hidden" name="play" id="play" value="${solicitacao.play}">
+			<input type="hidden" id="abriuChamado" name="abriuChamado" value="${tecnicoLogado.nome}">
 			<input type="hidden" id="nomeDoCliente" name="nomeDoCliente" value="${solicitacao.cliente.nome}">
 			<input id="solicitacao" name="id" type="hidden" value="${solicitacao.id}">
 			<input id="cliente" name="cliente.id" type="hidden" value="${solicitacao.cliente.id}">
@@ -293,6 +304,51 @@
 	<script src="assets/js/controla-campos-texto.js"></script>
 	<script src="assets/js/date.js"></script>
 	<script src="assets/js/jquery-ui-timepicker-addon.js"></script>
+	<script>
+		var divStatus = $("#status");
+		var status = $("#status").val();
+		divStatus.on("change", function(){
+			var status =$("#status").val();
+			if(status != 'Em andamento'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			}else{
+				var play = $("#play").val();
+				if(play == 'true'){
+					$('#divPause').hide();
+					$('#divPlay').show();
+					
+				} else{
+					
+					$('#divPlay').hide();
+					$('#divPause').show();
+					$('#play').attr('value', true);
+					
+				}
+			}
+		} );
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divPause = $("#bntPause");
+    		var divPlay = $("#bntPlay");
+    		divPause.on("click", function(){
+	    		alert("Seu atendimento será pausado!");
+	    		$('#play').attr('value', false);
+				$('#divPlay').show();
+				$('#divPause').hide();
+				//$('#enviar').attr('disabled','disabled');
+    		}); 
+    		divPlay.on("click", function(){
+	    		alert("Seu atendimento será retomado!");
+	    		$('#play').attr('value', true);
+				$('#divPlay').hide();
+				$('#divPause').show();
+				$('#enviar').attr('disabled',false);
+    		}); 
+    	});
+	</script>
 	<script>
    		var divCliente = $(".alertaFuncionario");
    		divCliente.on("change", function(){
@@ -400,6 +456,35 @@
 		        erro : function(request, status, error) {},
 		        complete : function(data) {}
 	        })
+	        var divStatus = $("#status").val();
+			if(divStatus == 'Aberto'){
+				$('#play').attr('value', false);
+				$('#divPause').hide();
+				$('#divPlay').hide();
+			} 
+			else if(divStatus == 'Agendado'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			} 
+			else if(divStatus == 'Aguardando'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			}
+			else if(divStatus == 'Em andamento'){
+				var btPlay = $("#play").val();
+				if(btPlay == 'true'){
+					$('#play').attr('value', true);
+					$('#divPause').show();
+					$('#divPlay').hide();
+				}else{
+					$('#play').attr('value', false);
+					$('#divPlay').show();
+					$('#divPause').hide();
+					$('#enviar').attr('disabled','disabled');
+				}
+			}
     	};
 	</script>
 	<script>

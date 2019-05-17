@@ -108,6 +108,7 @@ public class SolicitacaoController {
 		}
 		if(solicitacao.getStatus().equals("Em andamento")){
 			solicitacao.setStatus("Em andamento"); //Em revisão
+			solicitacao.setPlay(true);
 			solicitacao.setDataAndamento(Calendar.getInstance());
 			dao.salvaSolicitacaoAdmin(solicitacao, funcionarioASalvar, clienteASalvar);
 		}
@@ -544,6 +545,7 @@ public class SolicitacaoController {
 			} 
 			if (solicitacao.getStatus().equals("Em andamento")) {
 				System.out.println(solicitacao.isPlay());
+				System.out.println("em andamento");
 				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAbertas";
 			}

@@ -26,7 +26,6 @@ public class TestaAndamento {
 		System.out.println("Resolucao: " + solicitacao.getResolucao());
 		System.out.println("Status: " + solicitacao.getStatus());
 		System.out.println("OBS: " + solicitacao.getObs());
-		System.out.println("OBS2: " + solicitacao.getObs2());
 		System.out.println("NIvelDeIncidencia: " + solicitacao.getNivelDeIncidencia());
 		System.out.println("OnsiteOffsite: " + solicitacao.getOnsiteOffsite());
 		System.out.println("Classificacao: " + solicitacao.getClassificacao());

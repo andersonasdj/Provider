@@ -258,16 +258,16 @@
 				<!--  <button id="bntPlay" name="bntPlay" class="btn btn-dark"> <i class="fa fa-play" aria-hidden="true"></i></button> -->
 				
 				<span id="divPlay">
-					<a href="javascript:func()" id="bntPlay"><i class="fa fa-play fa-lg" aria-hidden="true"></i></a>
+					<a href="javascript:func()" id="bntPlay"> <i class="fa fa-play fa-lg" aria-hidden="true"> </i></a>
 				</span>
 				<span id="divPause">
-					<a href="javascript:func()" id="bntPause"><i class="fa fa-pause fa-lg" aria-hidden="true"></i></a>
+					<a href="javascript:func()" id="bntPause"> <i class="fa fa-pause fa-lg" aria-hidden="true"> </i></a>
 				</span>
 				
 				</div>
 			</div>
 			
-			<input type="hidden" name="play" id="play" value="">
+			<input type="hidden" name="play" id="play" value="${solicitacao.play}">
 			
 			<c:if test="${solicitacao.idChamadoLigacao != null}">
 				<div class="form-group">
@@ -349,10 +349,34 @@
 		} );
 	</script>
 	<script>
+		var divStatus = $("#status");
+		var status = $("#status").val();
+		divStatus.on("change", function(){
+			var status =$("#status").val();
+			if(status != 'Em andamento'){
+				$('#divPause').hide();
+				$('#divPlay').hide();
+				$('#play').attr('value', false);
+			}else{
+				var play = $("#play").val();
+				if(play == 'true'){
+					$('#divPause').hide();
+					$('#divPlay').show();
+					
+				} else{
+					
+					$('#divPlay').hide();
+					$('#divPause').show();
+					$('#play').attr('value', true);
+					
+				}
+			}
+		} );
+	</script>
+	<script>
     	$(document).ready(function () {
     		var divCliente = $("#buscaId");
     		divCliente.on("click", function(){
-    			
 	    		var idLigacao = $("#idChamadoLigacao").val();
 	    		var json = {"idLigacao" : idLigacao};
 		        $.ajax({
@@ -373,22 +397,23 @@
     		}); 
     	});
 	</script>
-	
 	<script>
     	$(document).ready(function () {
     		var divPause = $("#bntPause");
+    		var divPlay = $("#bntPlay");
     		divPause.on("click", function(){
-	    		alert("pausado");
-	    		var btPlay = $("#play").val();
+	    		alert("Seu atendimento será pausado!");
+	    		$('#play').attr('value', false);
 				$('#divPlay').show();
 				$('#divPause').hide();
+				//$('#enviar').attr('disabled','disabled');
     		}); 
-    		var divPlay = $("#bntPlay");
     		divPlay.on("click", function(){
-	    		alert("retomado");
-	    		var btPlay = $("#play").val();
+	    		alert("Seu atendimento será retomado!");
+	    		$('#play').attr('value', true);
 				$('#divPlay').hide();
 				$('#divPause').show();
+				$('#enviar').attr('disabled',false);
     		}); 
     	});
 	</script>
@@ -517,12 +542,19 @@
 				$('#divPlay').hide();
 				$('#play').attr('value', false);
 			}
-			
 			else if(divStatus == 'Em andamento'){
-				$('#divPlay').hide();
-				$('#play').attr('value', true);
+				var btPlay = $("#play").val();
+				if(btPlay == 'true'){
+					$('#play').attr('value', true);
+					$('#divPause').show();
+					$('#divPlay').hide();
+				}else{
+					$('#play').attr('value', false);
+					$('#divPlay').show();
+					$('#divPause').hide();
+					$('#enviar').attr('disabled','disabled');
+				}
 			}
-			var btPlay = $("#play").val();
     	};
 	</script>
 	<script>

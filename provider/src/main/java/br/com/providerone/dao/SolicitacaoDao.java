@@ -69,6 +69,21 @@ public class SolicitacaoDao {
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
+		
+		System.out.println("Pause!!");
+		Data data = new Data();
+		Long minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
+		
+		if(solicitacaoEncontrada.getMinutos() == null){
+			solicitacao.setMinutos(minutos);
+			System.out.println("minutos = null");
+		}else{
+			System.out.println("minutos != de null");
+			Long minutosAtuais = solicitacaoEncontrada.getMinutos();
+			System.out.println(minutosAtuais);
+			solicitacao.setMinutos(minutosAtuais + minutos);
+		}
+		
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
@@ -128,16 +143,7 @@ public class SolicitacaoDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
-	/*
-	public void excluiSolicitacaoPorId(Long id) {
-		Solicitacao solicitacao = new Solicitacao();
-		manager.getTransaction().begin();
-		solicitacao = manager.find(Solicitacao.class, id);
-		manager.remove(solicitacao);
-		manager.getTransaction().commit();
-		manager.close();
-	}
-	*/
+	
 	public void excluiSolicitacaoPorId(Long id) {
 		Solicitacao solicitacao = new Solicitacao();
 		manager.getTransaction().begin();
@@ -155,7 +161,38 @@ public class SolicitacaoDao {
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
-		solicitacao.setDataAndamento(Calendar.getInstance());
+		//Não muda data de Andamento
+		if(solicitacao.getStatus().equals(solicitacaoEncontrada.getStatus())){
+			solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
+			if(solicitacao.isPlay() == solicitacaoEncontrada.isPlay()){
+				
+			}else{
+				if(solicitacao.isPlay()){ 
+					//Solicitação tirada de pause
+					solicitacao.setDataAndamento(Calendar.getInstance());
+					solicitacao.setMinutos(solicitacaoEncontrada.getMinutos());
+				}else {
+					//Solicitação pausada
+					Data data = new Data();
+					Long minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
+					if(solicitacaoEncontrada.getMinutos() == null){
+						solicitacao.setMinutos(minutos);
+					}else{
+						//Minutos já contabilizados são somados aos novos minutos utilizados.
+						Long minutosAtuais = solicitacaoEncontrada.getMinutos();
+						solicitacao.setMinutos(minutosAtuais + minutos);
+					}
+				}
+			}
+		}else{
+			if(solicitacaoEncontrada.getStatus().equals("Aguardando")){
+				//ALterado de Aguardando para Andamento.
+				solicitacao.setDataAndamento(Calendar.getInstance());
+				solicitacao.setMinutos(solicitacaoEncontrada.getMinutos());
+			} else{
+				solicitacao.setDataAndamento(Calendar.getInstance());
+			}
+		}
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		solicitacao.setStatus("Em andamento");
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
@@ -223,7 +260,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAbertasPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
@@ -247,7 +283,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAgendadasPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
@@ -271,7 +306,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAguardandoPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
@@ -295,7 +329,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAndamentoPorId(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
@@ -319,7 +352,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAbertasPorIdDoTecnico(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
@@ -343,7 +375,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAgendadasPorIdDoTecnico(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
@@ -367,7 +398,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAndamentoPorIdDoTecnico(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
@@ -391,7 +421,6 @@ public class SolicitacaoDao {
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesAguardandoPorIdDoTecnico(Long id) {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
-
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
@@ -413,7 +442,6 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAbertasPorIdDoTecnico(Long id) {
-		
 		try {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.classificacao!=:pClassificacao and s.status=:pStatus and s.funcionario.id=:pFuncionarioId and s.excluido!=:pExcluido");
@@ -436,7 +464,6 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAbertas() {
-		
 		try {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
@@ -458,7 +485,6 @@ public class SolicitacaoDao {
 	}
 	
 	public Long listaQtdSolicitacoesAguardando() {
-		
 		try {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus  and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
@@ -1092,7 +1118,6 @@ public class SolicitacaoDao {
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
 			if (solicitacaos != null) {
 				manager.close();
 				return solicitacaos;
@@ -1118,7 +1143,6 @@ public class SolicitacaoDao {
 			query.setParameter("pStatus", agendado);
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
 			if (solicitacaos != null) {
 				manager.close();
 				return solicitacaos;
@@ -1166,7 +1190,6 @@ public class SolicitacaoDao {
 			query.setParameter("pNomeDoCliente", nomeDoCliente);
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
 			if (solicitacaos != null) {
 				manager.close();
 				return solicitacaos;
@@ -1191,9 +1214,7 @@ public class SolicitacaoDao {
 			query.setParameter("pDataFim", dataFim, TemporalType.DATE);
 			query.setParameter("pNomeDoCliente", nomeDoCliente);
 			query.setParameter("pExcluido", true);
-			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
 			if (solicitacaos != null) {
 				manager.close();
 				return solicitacaos;
@@ -1220,7 +1241,6 @@ public class SolicitacaoDao {
 			query.setParameter("pStatus", agendado);
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
-			
 			if (solicitacaos != null) {
 				manager.close();
 				return solicitacaos;
@@ -1273,7 +1293,14 @@ public class SolicitacaoDao {
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
 		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
+		
+		//Tempo Total
 		Data daoData = new Data();
+		Long tempoTotal = daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAndamento());
+		tempoTotal = tempoTotal + solicitacaoFinalizada.getMinutos();
+		solicitacaoFinalizada.setMinutos(tempoTotal);
+		//Tempo Total
+		
 		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
@@ -1324,7 +1351,6 @@ public class SolicitacaoDao {
 			query.setParameter("pStatus", "Finalizado");
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pExcluido", true);
-			
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
 				manager.close();

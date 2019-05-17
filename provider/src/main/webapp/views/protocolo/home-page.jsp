@@ -116,7 +116,6 @@
   								<c:if test="${not empty protocoloValido.comentario}"><li class="espacamento"><b>Seu comentário: </b> ${protocoloValido.comentario}</li></c:if>
   							</ul>
   						</li>
-  						
   					</c:if>
   					
   					<c:if test="${protocoloValido.status == 'Aberto'}">
@@ -124,9 +123,17 @@
   					</c:if>
   					
   					<c:if test="${protocoloValido.status == 'Em andamento'}">
-  						<li class="espacamento"><b>Status: </b><span class="azul">${protocoloValido.status}</span>
+  						<li class="espacamento"><b>Status: </b><span class="azul">${protocoloValido.status}</span> -
+  							<c:if test="${protocoloValido.play == 'false'}">
+								<span class="vermelho"> (Pausado)</span>
+							</c:if>
   							<ul>
   								<li class="espacamento"><b>Inicio do atendimento: </b><f:formatDate value="${protocoloValido.dataAndamento.time}" pattern="dd/MM/yyyy HH:mm:ss"/></li>
+  								<c:if test="${protocoloValido.play == 'false'}">
+  									<c:if test="${protocoloValido.play != null}">
+  										<li class="espacamento"><b>Tempo de atendimento: </b>${protocoloValido.minutos} Minutos</li>
+  									</c:if>
+  								</c:if>
   							</ul>
   						</li>
   					</c:if>
@@ -195,7 +202,6 @@
 								</form>
 						</c:if>
   					</c:if>
-  					
 				</ul>
 			</div>
 

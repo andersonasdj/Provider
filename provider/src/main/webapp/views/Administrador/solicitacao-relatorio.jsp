@@ -363,7 +363,11 @@
 								</span></a>
 						</td>
 						<td>Aberto</td>
-						<td>${solicitacao.status}</td>
+						<td>${solicitacao.status}
+							<c:if test="${solicitacao.play == 'false'}">
+								 (Pausado)
+							</c:if>
+						</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>

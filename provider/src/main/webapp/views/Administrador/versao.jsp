@@ -14,6 +14,16 @@
 	<br />
 		<fieldset></fieldset>
 		<div class="container">
+			<legend>Versão 1.8</legend>
+			<ul>
+				<li>Controle de pause e play em solicitações em andamento.
+					<ul>
+						<li>A solicitação em andamento pode ser pausada, deixando de contabilizar tempo de atendimento.</li>
+						<li>Uma solicitação em estado "Aguardando" somente contabiliza ao voltar para "Em andamento", será somado com o tempo gasto antes do "Aguardando".</li>
+					</ul>
+				</li>
+				<li>Opção de exportação de lista de colaboradores de clientes.</li>
+			</ul><br/>
 			<legend>Versão 1.7</legend>
 			<ul>
 				<li>Associação de chamado.
