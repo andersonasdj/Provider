@@ -364,8 +364,10 @@
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}
-							<c:if test="${solicitacao.play == 'false'}">
-								 (Pausado)
+							<c:if test="${solicitacao.status == 'Em andamento'}">
+								<c:if test="${solicitacao.play == 'false'}">
+									 (Pausado)
+								</c:if>
 							</c:if>
 						</td>
 						<c:if test="${empty solicitacao.funcionario.nome}">

@@ -38,6 +38,28 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping("verProtocolo")
+	public String verProtocolo(Long id, String senha, HttpSession session, Model model) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+			if(id == null && senha == null){
+				return "redirect:login";
+			} else{
+				SolicitacaoDao dao = new SolicitacaoDao();
+				Solicitacao solicitacao = dao.buscaSolicitacaoId(id);
+				
+				if (solicitacao.getId() == id && solicitacao.getSenha().equals(senha)) {
+					session.setAttribute("protocoloValido", solicitacao);
+					return funcionario.getFuncao()+"/protocolo";
+				}else{
+					return "redirect:login";
+				}
+			}
+		}else {
+			return "redirect:login";
+		}
+	}
+	
 	//para criação do primeiro usuario do sistema
 	@RequestMapping("/create")
 	public String create() {

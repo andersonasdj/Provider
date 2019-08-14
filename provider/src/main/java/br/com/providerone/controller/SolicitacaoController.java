@@ -544,8 +544,8 @@ public class SolicitacaoController {
 				return "redirect:solicitacoesAbertas";
 			} 
 			if (solicitacao.getStatus().equals("Em andamento")) {
-				System.out.println(solicitacao.isPlay());
-				System.out.println("em andamento");
+				//System.out.println(solicitacao.isPlay());
+				//System.out.println("em andamento");
 				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
 				return "redirect:solicitacoesAbertas";
 			}

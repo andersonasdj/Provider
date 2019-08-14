@@ -30,9 +30,9 @@ public class TestaAndamento {
 		System.out.println("OnsiteOffsite: " + solicitacao.getOnsiteOffsite());
 		System.out.println("Classificacao: " + solicitacao.getClassificacao());
 		System.out.println("StatusEmail: " + solicitacao.getStatusEmail());
-		System.out.println("DiasDur: " + solicitacao.getDiasDur());
-		System.out.println("HorasDur: " + solicitacao.getHorasDur());
-		System.out.println("MinutosDur: " + solicitacao.getMinutosDur());
+		//System.out.println("DiasDur: " + solicitacao.getDiasDur());
+		//System.out.println("HorasDur: " + solicitacao.getHorasDur());
+		//System.out.println("MinutosDur: " + solicitacao.getMinutosDur());
 		System.out.println("AbriuChamado: " + solicitacao.getAbriuChamado());
 		System.out.println("TempoDeAndamento: " + solicitacao.getTempoDeAndamento());
 		

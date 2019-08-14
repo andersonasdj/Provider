@@ -21,7 +21,7 @@
 			<a  onClick="history.go(-1)" ><i class="fa fa-reply-all" aria-hidden="true"></i></a>
 			<span class="pull-right">
 				<h6>
-					<a href="${email}/provider/protocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
+					<a href="${email}/provider/verProtocolo?id=${solicitacao.id}&senha=${solicitacao.senha}">
 						Modificado em: <f:formatDate pattern="dd-MM-yyyy HH:mm" value="${solicitacao.dataAtualizacao.time}"  />
 					</a>
 				</h6>

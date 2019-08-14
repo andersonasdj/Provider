@@ -70,17 +70,22 @@ public class SolicitacaoDao {
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		
-		System.out.println("Pause!!");
+		//System.out.println("Pause!!");
 		Data data = new Data();
-		Long minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
+		Long minutos;
+		if(solicitacaoEncontrada.getStatus().equals("Aberto")){
+			minutos = 0l;
+		}else{
+			minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
+		}
 		
 		if(solicitacaoEncontrada.getMinutos() == null){
 			solicitacao.setMinutos(minutos);
-			System.out.println("minutos = null");
+			//System.out.println("minutos = null");
 		}else{
-			System.out.println("minutos != de null");
+			//System.out.println("minutos != de null");
 			Long minutosAtuais = solicitacaoEncontrada.getMinutos();
-			System.out.println(minutosAtuais);
+			//System.out.println(minutosAtuais);
 			solicitacao.setMinutos(minutosAtuais + minutos);
 		}
 		
@@ -105,9 +110,9 @@ public class SolicitacaoDao {
 		solicitacao.setFuncionario(funcionario);
 		solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
 		solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
-		solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
-		solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
-		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
+		//solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
+		//solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
+		//solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
 		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
 		solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
@@ -1284,7 +1289,6 @@ public class SolicitacaoDao {
 		solicitacaoFinalizada.setStatus("Finalizado");
 		solicitacaoFinalizada.setResolucao(solicitacao.getResolucao());
 		solicitacaoFinalizada.setObs(solicitacao.getObs());
-		//solicitacaoFinalizada.setObs2(solicitacao.getObs2());
 		solicitacaoFinalizada.setFuncionario(funcionario);
 		solicitacaoFinalizada.setSolicitante(solicitacao.getSolicitante()); //###
 		solicitacaoFinalizada.setUsuario(solicitacao.getUsuario()); //###
@@ -1293,21 +1297,23 @@ public class SolicitacaoDao {
 		solicitacao.setAndamentoDoChamado(solicitacaoFinalizada.getAndamentoDoChamado());
 		solicitacaoFinalizada.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
-		
 		//Tempo Total
 		Data daoData = new Data();
 		Long tempoTotal = daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAndamento());
-		tempoTotal = tempoTotal + solicitacaoFinalizada.getMinutos();
+		if(solicitacaoFinalizada.getMinutos() != null){
+			tempoTotal = tempoTotal + solicitacaoFinalizada.getMinutos();
+			solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempo(tempoTotal));
+		} else{
+			if(solicitacaoFinalizada.getDataAndamento()!=null){
+				solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempoTotal(solicitacaoFinalizada.getDataFechamento(), solicitacaoFinalizada.getDataAndamento()));
+			}
+		}
 		solicitacaoFinalizada.setMinutos(tempoTotal);
 		//Tempo Total
-		
-		solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
-		solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
-		solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		//solicitacaoFinalizada.setDiasDur(daoData.difDias(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		//solicitacaoFinalizada.setHorasDur(daoData.difHoras(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
+		//solicitacaoFinalizada.setMinutosDur(daoData.difMin(Calendar.getInstance(), solicitacaoFinalizada.getDataAbertura()));
 		//Refatorar para remover esse if abaixo
-		if(solicitacaoFinalizada.getDataAndamento()!=null){
-			solicitacaoFinalizada.setTempoDeAndamento(daoData.geraTempoTotal(solicitacaoFinalizada.getDataFechamento(), solicitacaoFinalizada.getDataAndamento()));
-		}
 		manager.persist(solicitacaoFinalizada);
 		manager.getTransaction().commit();
 		manager.close();
@@ -1318,20 +1324,18 @@ public class SolicitacaoDao {
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		//solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		solicitacao.setFuncionario(funcionario);
-		
 		//System.out.println("Abriu chamado em DAO: " + solicitacao.getAbriuChamado());
 		//solicitacao.setDataFechamento(solicitacaoEncontrada.getDataFechamento());
 		//solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
-		solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
-		solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
-		solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
+		//solicitacao.setDiasDur(solicitacaoEncontrada.getDiasDur());
+		//solicitacao.setHorasDur(solicitacaoEncontrada.getHorasDur());
+		//solicitacao.setMinutosDur(solicitacaoEncontrada.getMinutosDur());
 		solicitacao.setTempoDeAndamento(solicitacaoEncontrada.getTempoDeAndamento());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		Data daoData = new Data();
 		if(solicitacao.getDataAndamento()!=null){
 			solicitacao.setTempoDeAndamento(daoData.geraTempoTotal(solicitacao.getDataFechamento(), solicitacao.getDataAndamento()));
 		}
-		
 		//solicitacao.setStatusEmail(solicitacaoEncontrada.getStatusEmail());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));

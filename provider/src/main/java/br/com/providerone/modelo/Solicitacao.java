@@ -57,9 +57,9 @@ public class Solicitacao {
 	private String onsiteOffsite;
 	private String classificacao;
 	private String statusEmail;
-	private Long diasDur;
-	private Long horasDur;
-	private Long minutosDur;
+	//private Long diasDur;
+	//private Long horasDur;
+	//private Long minutosDur;
 	private String abriuChamado;
 	private String tempoDeAndamento;
 	@Lob
@@ -282,30 +282,6 @@ public class Solicitacao {
 		this.statusEmail = statusEmail;
 	}
 
-	public Long getDiasDur() {
-		return diasDur;
-	}
-
-	public Long getHorasDur() {
-		return horasDur;
-	}
-
-	public void setDiasDur(Long diasDur) {
-		this.diasDur = diasDur;
-	}
-
-	public void setHorasDur(Long horasDur) {
-		this.horasDur = horasDur;
-	}
-
-	public Long getMinutosDur() {
-		return minutosDur;
-	}
-
-	public void setMinutosDur(Long minutosDur) {
-		this.minutosDur = minutosDur;
-	}
-
 	public String getAbriuChamado() {
 		return abriuChamado;
 	}
@@ -457,22 +433,17 @@ public class Solicitacao {
 				* result
 				+ ((descricaoProblema == null) ? 0 : descricaoProblema
 						.hashCode());
-		result = prime * result + ((diasDur == null) ? 0 : diasDur.hashCode());
 		result = prime * result + ((estrela == null) ? 0 : estrela.hashCode());
 		result = prime * result + (excluido ? 1231 : 1237);
 		result = prime * result
 				+ ((formaAbertura == null) ? 0 : formaAbertura.hashCode());
 		result = prime * result
 				+ ((funcionario == null) ? 0 : funcionario.hashCode());
-		result = prime * result
-				+ ((horasDur == null) ? 0 : horasDur.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime
 				* result
 				+ ((idChamadoLigacao == null) ? 0 : idChamadoLigacao.hashCode());
 		result = prime * result + ((minutos == null) ? 0 : minutos.hashCode());
-		result = prime * result
-				+ ((minutosDur == null) ? 0 : minutosDur.hashCode());
 		result = prime
 				* result
 				+ ((nivelDeIncidencia == null) ? 0 : nivelDeIncidencia
@@ -572,11 +543,6 @@ public class Solicitacao {
 				return false;
 		} else if (!descricaoProblema.equals(other.descricaoProblema))
 			return false;
-		if (diasDur == null) {
-			if (other.diasDur != null)
-				return false;
-		} else if (!diasDur.equals(other.diasDur))
-			return false;
 		if (estrela == null) {
 			if (other.estrela != null)
 				return false;
@@ -594,11 +560,6 @@ public class Solicitacao {
 				return false;
 		} else if (!funcionario.equals(other.funcionario))
 			return false;
-		if (horasDur == null) {
-			if (other.horasDur != null)
-				return false;
-		} else if (!horasDur.equals(other.horasDur))
-			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -613,11 +574,6 @@ public class Solicitacao {
 			if (other.minutos != null)
 				return false;
 		} else if (!minutos.equals(other.minutos))
-			return false;
-		if (minutosDur == null) {
-			if (other.minutosDur != null)
-				return false;
-		} else if (!minutosDur.equals(other.minutosDur))
 			return false;
 		if (nivelDeIncidencia == null) {
 			if (other.nivelDeIncidencia != null)
@@ -678,5 +634,5 @@ public class Solicitacao {
 			return false;
 		return true;
 	}
-	
+
 }

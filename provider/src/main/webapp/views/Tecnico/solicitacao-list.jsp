@@ -113,6 +113,13 @@
 				</td>
 				<td>
 					<a class="dcontexto"><div id="status-botao"> ${solicitacao.status}</div>
+					
+						<c:if test="${solicitacao.status == 'Em andamento'}">
+							<c:if test="${solicitacao.play == 'false'}">
+								 (Pausado)
+							</c:if>
+						</c:if>
+					
 						<c:if test="${solicitacao.status != 'Aberto'}">
 							<span>
 								<c:if test="${solicitacao.status == 'Em andamento'}">
