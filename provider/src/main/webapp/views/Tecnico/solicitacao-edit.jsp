@@ -228,8 +228,8 @@
 				<div class="control-group" id="opAgendamentoHora">
 					<label class="control-label">Hora de Agendamento</label>
 					<div class="controls">
-						<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
-							value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
+						<input id="agendadoHora" name="agendadoHora" type="text" onKeyPress="DataHoraAgendamento(event, this)" value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />">
+							<i class="fa fa-clock-o fa-lg"> </i>
 					</div>
 				</div>
 			</div>
@@ -552,6 +552,13 @@
 				timeFormat: 'hh:mm:ss'
 			});
 		 });
+		$(function(){
+			$('#dataAgendamento').timepicker({
+				showSecond: true,
+				timeFormat: 'hh:mm:ss'
+			});
+		 });
+		
 	</script>
 	<script>
 		/*-----------------------------------------------------------------------
@@ -661,6 +668,30 @@
 				else if (campo.value.length == conjunto4)
 				campo.value = campo.value + separacao3;
 				else if (campo.value.length == conjunto5)
+				campo.value = campo.value + separacao3;
+			}
+			else
+				event.returnValue = false;
+		}
+	</script>
+	<script>
+		/*-----------------------------------------------------------------------
+		Máscara para o campo data dd/mm/aaaa hh:mm:ss
+		Exemplo: <input maxlength="16" name="datahora" onKeyPress="DataHora(event, this)">
+		-----------------------------------------------------------------------*/
+		function DataHoraAgendamento(evento, objeto){
+			var keypress=(window.event)?event.keyCode:evento.which;
+			campo = eval (objeto);
+			if (campo.value == '00:00')
+			{
+				campo.value=""
+			}
+			caracteres = '0123456789';
+			separacao3 = ':';
+			conjunto1 = 2;
+			if ((caracteres.search(String.fromCharCode (keypress))!=-1) && campo.value.length < (5))
+			{
+				if (campo.value.length == conjunto1 )
 				campo.value = campo.value + separacao3;
 			}
 			else

@@ -5,17 +5,18 @@
 
 	<persistence-unit name="techgol_provider">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>br.com.providerone.modelo.Funcionario</class>
-		<class>br.com.providerone.modelo.Cliente</class>
-		<class>br.com.providerone.modelo.Solicitacao</class>
-		<class>br.com.providerone.modelo.Usuario</class>
-		<class>br.com.providerone.modelo.Fornecedor</class>
-		<class>br.com.providerone.modelo.Computador</class>
-		<class>br.com.providerone.modelo.Perifericos</class>
-		<class>br.com.providerone.modelo.Email</class>
 		<class>br.com.providerone.modelo.Checklist</class>
-		<class>br.com.providerone.modelo.Tarefa</class>
+		<class>br.com.providerone.modelo.Cliente</class>
+		<class>br.com.providerone.modelo.Computador</class>
+		<class>br.com.providerone.modelo.Email</class>
+		<class>br.com.providerone.modelo.Fornecedor</class>
+		<class>br.com.providerone.modelo.Funcionario</class>
 		<class>br.com.providerone.modelo.FuncionarioCliente</class>
+		<class>br.com.providerone.modelo.Perifericos</class>
+		<class>br.com.providerone.modelo.Sistema</class>
+		<class>br.com.providerone.modelo.Solicitacao</class>
+		<class>br.com.providerone.modelo.Tarefa</class>
+		<class>br.com.providerone.modelo.Usuario</class>
 		<!-- <class>br.com.providerone.modelo.UploadFile</class> -->
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
