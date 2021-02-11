@@ -14,7 +14,13 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 				|| uri.endsWith("create") || uri.endsWith("gravaAdmin")
 				|| uri.endsWith("logar") || uri.contains("assets") 
 				|| uri.endsWith("exibirProtocolo") || uri.endsWith("protocolo")
-				|| uri.endsWith("enviaClassificacao")) {
+				|| uri.endsWith("enviaClassificacao")
+				|| uri.endsWith("nova")
+				|| uri.endsWith("auto")
+				|| uri.endsWith("avancarAuto")
+				|| uri.endsWith("avancarSuporte")
+				|| uri.endsWith("salvarSuporte")
+				|| uri.endsWith("logarAuto")) { 
 			return true;
 		}
 		if (request.getSession().getAttribute("clienteLogado") != null) {

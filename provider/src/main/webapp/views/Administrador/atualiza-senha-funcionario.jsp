@@ -38,7 +38,7 @@
 			<input type="hidden" id="funcao" name="funcao" value="${funcionario.funcao}">
 			<input type="hidden" id="email" name="email" value="${funcionario.email}">
 			<input type="hidden" id="status" name="status" value="${funcionario.status}">
-			<input type="hidden" id="caminhoFoto" name="caminhoFoto" value="${funcionarioLogado.caminhoFoto}">
+			<input type="hidden" id="caminhoFoto" name="caminhoFoto" value="${funcionario.caminhoFoto}">
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

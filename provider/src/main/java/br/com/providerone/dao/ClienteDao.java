@@ -159,7 +159,27 @@ public class ClienteDao {
 
 		try {
 			Query query = manager.createQuery("select c from Cliente c order by c.nome");
+			
+			clientes = (List<Cliente>) query.getResultList();
 
+			if (clientes != null) {
+				return clientes;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
+	}
+	@SuppressWarnings("unchecked")
+	public List<Cliente> listaClienteAtivo() {
+		List<Cliente> clientes = new ArrayList<Cliente>();
+
+		try {
+			Query query = manager.createQuery("select c from Cliente c where c.status=:pStatus order by c.nome");
+			query.setParameter("pStatus", "Ativo");
 			clientes = (List<Cliente>) query.getResultList();
 
 			if (clientes != null) {

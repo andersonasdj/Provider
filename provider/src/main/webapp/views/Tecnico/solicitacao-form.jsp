@@ -53,16 +53,18 @@
 				<label class="control-label">Solicitante</label>
 	            <div class="controls">
 	                <select class="form-control solicitante" name="solicitante" id="solicitante"></select>
-	            	<span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	            	<span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold">  </span>
+	                <span id="celularSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold">  </span>
 	            </div>
         	</div>
         	<br/>
         	<div class="form-group">
 				<label class="control-label">Usuário Afetado</label>
 	            <div class="controls">
-	                <select class="form-control usuario" name="usuario" id="usuario"></select>
-	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
-	                <p class="help-block">* Campo Obrigatório</p>
+	               <select class="form-control usuario" name="usuario" id="usuario"></select>
+	               <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	               <span id="celularUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	               <p class="help-block">* Campo Obrigatório</p>
 	            </div>
         	</div> <br/>
 			<div class="control-group">
@@ -326,7 +328,7 @@
     		}); 
     	});
 	</script>
-	<script>
+<script>
     	$(document).ready(function () {
     		var divCliente = $("#solicitante");
     		divCliente.on("change", function(){
@@ -414,5 +416,53 @@
 			var solicitante = $('#solicitante').val();
 			$('#usuario').val(solicitante);
 		}
+	</script>
+		<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+	    		$.ajax({
+		            url: "/provider/getCel",
+		            type: "GET",
+		            data: {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("celularSolicitante").innerHTML=""; 
+		                    $('#celularSolicitante').append(" - Celular: " + object);
+		                }else{
+		                	document.getElementById("celularSolicitante").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+	    		$.ajax({
+		            url: "/provider/getCel",
+		            type: "GET",
+		            data: {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("celularUsuario").innerHTML=""; 
+		                    $('#celularUsuario').append(" - Celular: " + object);
+		                }else{
+		                	document.getElementById("celularUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		
+    		}); 
+    	});
 	</script>
 </html>

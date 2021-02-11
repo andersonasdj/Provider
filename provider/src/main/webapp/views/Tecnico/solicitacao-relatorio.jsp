@@ -88,7 +88,7 @@
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td>Não Atribuido</td>
 					</c:if>
-					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="solicitacaoEdit?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>			
 			<c:if test="${solicitacao.status == 'Finalizado'}">
@@ -131,7 +131,7 @@
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td>Não Atribuido</td>
 					</c:if>
-					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="solicitacaoEdit?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>
 			<c:if test="${solicitacao.status == 'Agendado'}">
@@ -175,7 +175,7 @@
 					<c:if test="${empty solicitacao.funcionario.nome}">
 						<td>Não Atribuido</td>
 					</c:if>
-					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="solicitacaoEdit?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>
 			<c:if test="${solicitacao.status == 'Em andamento'}">
@@ -215,7 +215,7 @@
 					<c:if test="${not empty solicitacao.funcionario.nome}">
 						<td>${solicitacao.funcionario.nome}</td>
 					</c:if>
-					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="solicitacaoEdit?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>
 			<c:if test="${solicitacao.status == 'Aguardando'}">
@@ -255,7 +255,7 @@
 					<c:if test="${not empty solicitacao.funcionario.nome}">
 						<td>${solicitacao.funcionario.nome}</td>
 					</c:if>
-					<td><a href="visualizaSolicitacao?id=${solicitacao.id}">Ver</a></td>
+					<td><a href="solicitacaoEdit?id=${solicitacao.id}">Ver</a></td>
 				</tr>
 			</c:if>
 		</c:forEach>

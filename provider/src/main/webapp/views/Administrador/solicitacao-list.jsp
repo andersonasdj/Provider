@@ -15,8 +15,9 @@
 	<br/><br/><br/>
 		<div class="container">
 			<legend></legend>
-			<span id="botoes-status"></span>
-			<div align="center"><a class="btn btn-danger aberto" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
+			<span id="botoes-status"></span> </br></br>
+			<div align="center"><a class="btn aberto" href="solicitacoesNaoClassificado" role="button"> ${qtdNaoClas} Não Classificado <i class="fa fa-question-circle"></i></a>
+			 - <a class="btn btn-danger aberto" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
 			 - <a class="btn btn-info andamento" href="solicitacoesAndamento" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
 			 - <a class="btn btn-warning agendado" href="solicitacoesAgendadas" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
 			 - <a class="btn btn-success aguardando" href="solicitacoesAguardando" role="button"> ${qtdAguardando} Aguardando <i class="fa fa-thumbs-o-up"></i></a>
@@ -104,11 +105,9 @@
 							| <a href="deleteAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 						</td>
 					</c:if>
-					
 					<c:if test="${solicitacao.caminhoAnexo == null}">
 						<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 					</c:if>
-					
 					<td>
 						<a class="dcontexto"> ${solicitacao.cliente.nome}
 							<c:if test="${solicitacao.cliente.vip == true}">
@@ -120,7 +119,6 @@
 							<span>
 								<p>- Tel.: ${solicitacao.cliente.telefone1} </p>
 								<p>- Endereço: ${solicitacao.cliente.endereco}</p>
-								<p>- CNPJ: ${solicitacao.cliente.cnpj}</p>
 							</span>
 						</a>
 					</td>
@@ -157,6 +155,9 @@
 							<c:if test="${solicitacao.status == 'Excluida'}">
 								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">Excluída</a></td>
 							</c:if>
+							<c:if test="${solicitacao.status == 'Não Classificado'}">
+								<td><a href="clienteEdit?id=${solicitacao.cliente.id}">Não Classificado</a></td>
+							</c:if>
 						</c:if>
 						<c:if test="${not empty solicitacao.cliente.email }">
 							<c:if test="${solicitacao.status == 'Agendado'}">
@@ -183,6 +184,12 @@
 										<span>${solicitacao.cliente.email}</span></a>
 								</td>
 							</c:if>	
+							<c:if test="${solicitacao.status == 'Não Classificado'}">
+								<td>
+									<a href="javascript:func()" onclick="confirmacaoEmail('${solicitacao.id}','${solicitacao.cliente.email}')" class="dcontexto">Enviar E-mail ao cliente
+										<span>${solicitacao.cliente.email}</span></a>
+								</td>
+							</c:if>	
 							<c:if test="${solicitacao.status == 'Excluida'}">
 								<td>Excluída</td>
 							</c:if>					
@@ -198,7 +205,6 @@
 									 (Pausado)
 								</c:if>
 							</c:if>
-						
 							<c:if test="${solicitacao.status != 'Aberto'}">
 								<span>
 									<c:if test="${solicitacao.status == 'Em andamento'}">

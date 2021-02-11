@@ -4,11 +4,37 @@
 	<title>ProviderOne | Login</title>
 	<link rel="shortcut icon" href="assets/img/ico.png">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<style>
+		#fundo-externo {
+   			overflow: hidden; /* para que não tenha rolagem se a imagem de fundo for maior que a tela */
+    		width: 100%;
+    		height: 100%;
+    		position: relative; /* criamos um contexto para posicionamento */
+    	}
+    	#fundo {
+		    position: fixed; /* posição fixa para que a possível rolagem da tela não revele espaços em branco */
+		    width: 100%;
+		    height: 100%;
+		}
+		#fundo img {
+    		width: 100%;
+    		height: 100%; /* com isso imagem ocupará toda a largura da tela. Se colocarmos height: 100% também, a imagem irá distorcer */
+    		position: absolute;
+		}
+		#logo {
+    		position: relative;
+		}
+	</style>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+	<div id="fundo-externo">
+		<div id="fundo">
+		 	<img src="assets/img/P1-embassado.jpg" alt="" />
+		 </div>
+  	</div>
 	<br/><br/><br/><br/><br/>
-	<h2 align="center"><img src="assets/img/logo_provider.png" ></h2>
+	<h2 align="center"><img id="logo"src="assets/img/logo_provider.png" ></h2>
 	<div class="container">	
 	  <div class="row">
 	    <div class="Absolute-Center is-Responsive">

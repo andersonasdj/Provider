@@ -81,13 +81,6 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Observações 2</label>
-				<div class="controls">
-					<input id="obs2" name="obs2" type="text"
-						value="${solicitacao.obs2}" class="input-xlarge" disabled="disabled">
-				</div>
-			</div>
-			<div class="control-group">
 				<label class="control-label">Categoria
 					<a class="dcontexto"> (?)
 					<span>Hardware - Problema físico no equipamento. <br><br> 

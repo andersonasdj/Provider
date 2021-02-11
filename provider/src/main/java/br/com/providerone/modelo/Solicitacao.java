@@ -72,6 +72,38 @@ public class Solicitacao {
 	private Long idChamadoLigacao;
 	private Long minutos;
 	
+	public Solicitacao(){
+		
+	}
+	
+	// CONTRUTOR PARA O CAST NO HQL (DAO)
+	public Solicitacao(Long id, Calendar dataAbertura, String prioridade, String abriuChamado, String onsiteOffsite, 
+			String caminhoAnexo, Cliente cliente, String solicitante, String usuario, String descricaoProblema, String resolucao,
+			String obs, String classificacao, String status, Calendar dataFechamento, Calendar dataAndamento,
+			Calendar agendado, Calendar agendadoHora, boolean play, Funcionario funcionario) {
+		this.id = id;
+		this.dataAbertura = dataAbertura;
+		this.prioridade = prioridade;
+		this.abriuChamado = abriuChamado;
+		this.onsiteOffsite = onsiteOffsite;
+		this.caminhoAnexo = caminhoAnexo;
+		this.cliente = cliente;
+		this.solicitante = solicitante;
+		this.usuario = usuario;
+		this.descricaoProblema = descricaoProblema;
+		this.resolucao = resolucao;
+		this.obs = obs;
+		this.classificacao = classificacao;
+		this.status = status;
+		this.funcionario = funcionario;
+		this.dataFechamento = dataFechamento;
+		this.dataAndamento = dataAndamento;
+		this.agendado = agendado;
+		this.agendadoHora = agendadoHora;
+		this.play = play;
+	}
+	// CONTRUTOR PARA O CAST NO HQL (DAO)
+	
 	public Long getMinutos() {
 		return minutos;
 	}
@@ -330,7 +362,10 @@ public class Solicitacao {
 				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
 				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
 				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
-				+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				//+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				
+				+ "* Status: " + (this.getStatus().equals("Em andamento") ? this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n" : this.getStatus() )+ "\n"
+				
 				+ (this.getStatus().equals("Agendar") ? "* Data de agendamento: " + (this.getAgendado() != null ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
 				+ (this.getAgendadoHora() != null ? "* Hora: " + sdf.format(horaAgendado)	: "") + "\n" :"") 
 				+ "=========================================================================\n\n";
@@ -360,7 +395,8 @@ public class Solicitacao {
 				+ "* Classificação " + this.getPrioridade() + "\n"
 				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
 				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
-				+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				//+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
+				+ "* Status: " + (this.getStatus().equals("Em andamento") ? this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n" : this.getStatus() )+ "\n"
 				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
 				+ (this.getAgendadoHora() != null ? "* Hora: " + sdfAgendado.format(horaAgendado)	: "") + "\n" :"") 
 				+ "=========================================================================\n\n";

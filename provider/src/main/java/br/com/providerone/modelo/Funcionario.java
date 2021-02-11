@@ -8,7 +8,7 @@ public class Funcionario extends Usuario {
 	private String funcao;
 	private String caminhoFoto;
 	private String celular;
-
+	
 	public String getFuncao() {
 		return funcao;
 	}

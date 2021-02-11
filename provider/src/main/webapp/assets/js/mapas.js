@@ -23,23 +23,18 @@ function buscaCoordenadasClientes(){
 				longitude: longitude,
 				nome: nome
 		};
-		
 		clientes.push(cliente);
-		
-		console.log(cliente.nome);
-		console.log(cliente.latitude);
-		console.log(cliente.longitude);
-		console.log("");
-		
+		//console.log(cliente.nome);
+		//console.log(cliente.latitude);
+		//console.log(cliente.longitude);
+		//console.log("");
 	});
-	console.log(clientes.length);
-	
+	//console.log(clientes.length);
 	var dados = {
 		clientes: clientes	
 	};
 	return clientes;
 }
-
 function montaMapaClientes() {
 	
 	var data = google.visualization.arrayToDataTable([
@@ -56,8 +51,5 @@ function montaMapaClientes() {
 	};
 
 	var map = new google.visualization.Map(document.getElementById('div_mapa'));
-
 	map.draw(data, opcoes);
-	
-
 };

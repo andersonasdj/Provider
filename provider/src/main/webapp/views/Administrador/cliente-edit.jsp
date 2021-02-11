@@ -38,6 +38,14 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label">Senha de Acesso ao Sistema</label>
+				<div class="controls">
+					<input id="nome" name="senha" type="password" placeholder="Senha de Acesso"
+						value="${cliente.senha}" class="input-xlarge" required>
+					<p class="help-block">* Campo Obrigatório</p>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label">Red Flag</label>
 				<div class="controls">
 					<c:if test="${cliente.redFlag != false}">
@@ -64,12 +72,23 @@
 					</c:if>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Senha de Acesso ao Sistema</label>
+				<div class="control-group">
+				<label class="control-label">Status</label>
 				<div class="controls">
-					<input id="nome" name="senha" type="password" placeholder="Senha de Acesso"
-						value="${cliente.senha}" class="input-xlarge" required>
-					<p class="help-block">* Campo Obrigatório</p>
+					<select class="selectpicker" id="status" name="status">
+						<option>${cliente.status}</option>
+						
+						<c:if test="${cliente.status == 'Ativo'}">
+							<option>Inativo</option>
+						</c:if>
+						<c:if test="${cliente.status == 'Inativo'}">
+							<option>Ativo</option>
+						</c:if>
+						<c:if test="${cliente.status == null}">
+							<option>Ativo</option>
+							<option>Inativo</option>
+						</c:if>			
+					</select>
 				</div>
 			</div>
 			<div class="control-group">

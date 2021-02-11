@@ -7,10 +7,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.ClienteDao;
+import br.com.providerone.dao.FuncionarioClienteDao;
 import br.com.providerone.dao.FuncionarioDao;
 import br.com.providerone.dao.SolicitacaoDao;
 import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Funcionario;
+import br.com.providerone.modelo.FuncionarioCliente;
 import br.com.providerone.modelo.Solicitacao;
 
 @Controller
@@ -98,6 +100,18 @@ public class LoginController {
 			return "redirect:home";
 		}
 		return "redirect:login";
+	}
+	
+	@RequestMapping("logarAuto")
+	public String logarAuto(String email, String celular, HttpSession session, Model model) {
+		FuncionarioClienteDao daoFun = new FuncionarioClienteDao();
+		FuncionarioCliente funcionarioEncontrado = daoFun.listaFuncionarioClientePorCeleEmail(celular, email);
+		if (funcionarioEncontrado != null) {
+				session.setAttribute("funcionarioLogado", funcionarioEncontrado);
+				model.addAttribute("funcionarioLogado", funcionarioEncontrado);
+				return "redirect:avancarAuto";
+		}else
+			return "redirect:auto";
 	}
 
 	private String salvaDataLoginEAdicionaModel(Model model, Funcionario funcionarioEncontrado) {

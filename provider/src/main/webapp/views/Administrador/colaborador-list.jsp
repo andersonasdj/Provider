@@ -68,9 +68,6 @@
 	<c:import url="rodape.jsp"></c:import>
 </body>
 	<script src="assets/js/jquery.js"></script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIk8yXYLFzQySXoZoPYVhyNtRwfaJ5a8o"></script>
-	<script type="text/javascript" src="assets/js/loader.js"></script>
-	<script src="assets/js/mapas.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/bootstrap-table.js"></script>
 	<script src="assets/js/bootstrap-table-export.js"></script>

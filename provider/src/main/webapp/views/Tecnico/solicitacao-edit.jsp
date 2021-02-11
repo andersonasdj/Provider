@@ -85,7 +85,8 @@
 	                		${solicitacao.solicitante}
 	                	</option>
 	                </select>
-	                <span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	                <span id="cargoSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold">  </span>
+	                <span id="celularSolicitante" style="font-size: 15px ;color:#0101DF ; font-weight:bold">  </span>
 	            </div>
         	</div>
         	<br/><br/>
@@ -98,6 +99,7 @@
 	                	</option>
 	                </select>
 	                <span id="cargoUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
+	                <span id="celularUsuario" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 	                <p class="help-block">* Campo Obrigatório</p>
 	            </div>
         	</div>
@@ -249,7 +251,6 @@
 					<select class="selectpicker alertaFuncionario" id="status"
 						name="status">
 						<option>${solicitacao.status}</option>
-						
 						<c:if test="${solicitacao.status != 'Agendado'}">
 							<option>Agendado</option>
 						</c:if>
@@ -266,20 +267,18 @@
 							<option>Finalizar</option>
 						</c:if>
 					</select>
-					
 					<!--  <button id="bntPlay" name="bntPlay" class="btn btn-dark"> <i class="fa fa-play" aria-hidden="true"></i></button> -->
-					
 					<span id="divPlay">
 						<a href="javascript:func()" id="bntPlay"> <i class="fa fa-play fa-lg" aria-hidden="true"> </i></a>
 					</span>
 					<span id="divPause">
 						<a href="javascript:func()" id="bntPause"> <i class="fa fa-pause fa-lg" aria-hidden="true"> </i></a>
 					</span>
-					
 				</div>
 			</div>
 			<input type="hidden" name="play" id="play" value="${solicitacao.play}">
-			<input type="hidden" id="abriuChamado" name="abriuChamado" value="${tecnicoLogado.nome}">
+			<!--  <input type="hidden" id="abriuChamado" name="abriuChamado" value="${tecnicoLogado.nome}"> -->
+			<input type="hidden" id="funcionarioLogado" name="funcionarioLogado" value="${tecnicoLogado.nome}">
 			<input type="hidden" id="nomeDoCliente" name="nomeDoCliente" value="${solicitacao.cliente.nome}">
 			<input id="solicitacao" name="id" type="hidden" value="${solicitacao.id}">
 			<input id="cliente" name="cliente.id" type="hidden" value="${solicitacao.cliente.id}">
@@ -426,6 +425,37 @@
 		        erro : function(request, status, error) {},
 		        complete : function(data) {}
 	        })
+	        $.ajax({
+	            url: "/provider/getCel",
+	            type: "GET",
+	            data: {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+	            success: function (object) {
+	                if (object != null) {
+	                    document.getElementById("celularSolicitante").innerHTML=""; 
+	                    $('#celularSolicitante').append(" - Celular: " + object);
+	                }else{
+	                	document.getElementById("celularSolicitante").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        $.ajax({
+	            url: "/provider/getCel",
+	            type: "GET",
+	            data: {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+	            success: function (object) {
+	                if (object != null) {
+	                    document.getElementById("celularUsuario").innerHTML=""; 
+	                    $('#celularUsuario').append(" - Celular: " + object);
+	                }else{
+	                	document.getElementById("celularUsuario").innerHTML="";
+	                }
+	            },
+		        erro : function(request, status, error) {},
+		        complete : function(data) {}
+	        })
+	        
 	        $.ajax({
 	            url: "/provider/getFlag",
 	            type: "GET",
@@ -703,5 +733,53 @@
 			var solicitante = $('#solicitante').val();
 			$('#usuario').val(solicitante);
 		}
+	</script>
+		<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#solicitante");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+	    		$.ajax({
+		            url: "/provider/getCel",
+		            type: "GET",
+		            data: {"solicitante" : $("#solicitante").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("celularSolicitante").innerHTML=""; 
+		                    $('#celularSolicitante').append(" - Celular: " + object);
+		                }else{
+		                	document.getElementById("celularSolicitante").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		
+    		}); 
+    	});
+	</script>
+	<script>
+    	$(document).ready(function () {
+    		var divCliente = $("#usuario");
+    		divCliente.on("change", function(){
+	    		var json = {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()};
+	    		$.ajax({
+		            url: "/provider/getCel",
+		            type: "GET",
+		            data: {"solicitante" : $("#usuario").val() , "nomeCliente" : $("#nomeDoCliente").val()},
+		            success: function (object) {
+		                if (object != null) {
+		                    document.getElementById("celularUsuario").innerHTML=""; 
+		                    $('#celularUsuario').append(" - Celular: " + object);
+		                }else{
+		                	document.getElementById("celularUsuario").innerHTML="";
+		                }
+		            },
+			        erro : function(request, status, error) {},
+			        complete : function(data) {}
+		        })
+		
+    		}); 
+    	});
 	</script>
 </html>

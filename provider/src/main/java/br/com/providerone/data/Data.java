@@ -88,14 +88,16 @@ public class Data {
 				}else {
 					hora = (minutos / 60);
 				}
-				tempo = String.format("%02dh:%02dm", hora, minuto);
+				//tempo = String.format("%02dh:%02dm", hora, minuto);
+				tempo = String.format("%02d:%02d", hora, minuto);
 		} else {
 			//segundo = segundos % 60;
 			segundos = difSeg(dataFin, dataIni);
 			minutos = segundos / 60;
 			minuto = minutos % 60;
 			hora = minutos / 60;
-			tempo = String.format("%02dh:%02dm", hora, minuto);
+			//tempo = String.format("%02dh:%02dm", hora, minuto);
+			tempo = String.format("%02d:%02d", hora, minuto);
 		}
 		return tempo;
 	}
@@ -133,7 +135,8 @@ public class Data {
 		minutos = segundos / 60;
 		minuto = minutos % 60;
 		hora = minutos / 60;
-		tempo = String.format("%02dh:%02dm", hora, minuto);
+		//tempo = String.format("%02dh:%02dm", hora, minuto);
+		tempo = String.format("%02d:%02d", hora, minuto);
 		return tempo;
 	}
 }

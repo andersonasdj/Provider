@@ -65,16 +65,29 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
+	public void atualizarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado, String nomeDoCliente){
 		manager.getTransaction().begin();
 		Solicitacao solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
 		solicitacao.setDataAbertura(solicitacaoEncontrada.getDataAbertura());
 		
+		if(nomeDoCliente != null) {
+			Cliente cliente = new Cliente();
+			ClienteDao clienteDao = new ClienteDao();
+			cliente = clienteDao.buscaNomeCliente(nomeDoCliente);
+			
+			solicitacao.setCliente(cliente);
+		}
+		
 		//System.out.println("Pause!!");
 		Data data = new Data();
 		Long minutos;
-		if(solicitacaoEncontrada.getStatus().equals("Aberto")){
+		if(solicitacaoEncontrada.getStatus().equals("Aberto") || solicitacaoEncontrada.getStatus().equals("Aguardando") || solicitacaoEncontrada.getStatus().equals("Não Classificado")){
 			minutos = 0l;
+		}else if(solicitacaoEncontrada.getStatus().equals("Agendado")){ //EM OBS
+			minutos = 0l;
+			solicitacao.setAgendado(null);
+			solicitacao.setAgendadoHora(null);
+			
 		}else{
 			minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
 		}
@@ -94,6 +107,11 @@ public class SolicitacaoDao {
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
+		//TESTE
+		if(solicitacaoEncontrada.getIdChamadoLigacao() != null) {
+			solicitacao.setIdChamadoLigacao(solicitacaoEncontrada.getIdChamadoLigacao());
+		}
+		//TESTE
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -118,6 +136,7 @@ public class SolicitacaoDao {
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
+		solicitacao.setIdChamadoLigacao(solicitacaoEncontrada.getIdChamadoLigacao());
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.atualizaLogSolicitacao(funcionario, funcionarioLogado));
 		//Atualiza LOG
@@ -162,10 +181,18 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void solicitacaoEmAndamento(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
+	public void solicitacaoEmAndamento(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado, String nomeDoCliente){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
+		if(nomeDoCliente != null) {
+			Cliente cliente = new Cliente();
+			ClienteDao clienteDao = new ClienteDao();
+			cliente = clienteDao.buscaNomeCliente(nomeDoCliente);
+			
+			solicitacao.setCliente(cliente);
+		}
+		
 		//Não muda data de Andamento
 		if(solicitacao.getStatus().equals(solicitacaoEncontrada.getStatus())){
 			solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
@@ -205,6 +232,11 @@ public class SolicitacaoDao {
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
+		//TESTE
+		if(solicitacaoEncontrada.getIdChamadoLigacao() != null) {
+			solicitacao.setIdChamadoLigacao(solicitacaoEncontrada.getIdChamadoLigacao());
+		}
+		//TESTE
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -233,7 +265,7 @@ public class SolicitacaoDao {
 		manager.close();
 	}
 	
-	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado){
+	public void agendarSolicitacao(Solicitacao solicitacao, Funcionario funcionario, String funcionarioLogado, String nomeDoCliente){
 		Solicitacao solicitacaoEncontrada = new Solicitacao();
 		manager.getTransaction().begin();
 		solicitacaoEncontrada = manager.find(Solicitacao.class, solicitacao.getId());
@@ -244,6 +276,21 @@ public class SolicitacaoDao {
 		solicitacao.setSenha(solicitacaoEncontrada.getSenha());
 		solicitacao.setDataAtualizacao(Calendar.getInstance()); //###
 		solicitacao.setCaminhoAnexo(solicitacaoEncontrada.getCaminhoAnexo());
+		
+		if(nomeDoCliente != null) {
+			Cliente cliente = new Cliente();
+			ClienteDao clienteDao = new ClienteDao();
+			cliente = clienteDao.buscaNomeCliente(nomeDoCliente);
+			
+			solicitacao.setCliente(cliente);
+		}
+		
+		//TESTE
+		if(solicitacaoEncontrada.getIdChamadoLigacao() != null) {
+			solicitacao.setIdChamadoLigacao(solicitacaoEncontrada.getIdChamadoLigacao());
+		}
+		//TESTE
+		
 		//Atualiza LOG
 		solicitacao.setAndamentoDoChamado(solicitacaoEncontrada.getAndamentoDoChamado());
 		solicitacao.setAndamentoDoChamado(solicitacao.atualizaLogSolicitacao(funcionario, funcionarioLogado));
@@ -453,6 +500,27 @@ public class SolicitacaoDao {
 			query.setParameter("pFuncionarioId", id);
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Aberto");
+			query.setParameter("pExcluido", true);
+			Long qtd = (Long) query.getSingleResult();
+			if (qtd != 0) {
+				manager.close();
+				return qtd;
+			} else {
+				manager.close();
+				return 0L;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return 0L;
+		}
+	}
+	
+	public Long listaQtdSolicitacoesNaoClass() {
+		try {
+			Query query = manager
+					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
+			query.setParameter("pStatus", "Não Classificado");
+			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {
@@ -691,7 +759,7 @@ public class SolicitacaoDao {
 		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
 		try {
 			Query query = manager
-					.createQuery("select s from Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id desc");
+					.createQuery("select s from Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id desc", Solicitacao.class);
 			
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pStatus", "Finalizado");
@@ -710,6 +778,59 @@ public class SolicitacaoDao {
 			return null;
 		}
 	}
+	
+	//##############################  BUSCA TODAS AS SOLICITACOES COM QUERY OTIMIZADA E RETORNANDO SOMENTE O NECESSARIO ############################## 
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaTodasSolicitacoesFiltro() {
+		try {
+			final String jpql = "SELECT NEW br.com.providerone.modelo.Solicitacao("
+					+ "s.id, "
+					+ "s.dataAbertura,"
+					+ "s.prioridade,"
+					+ "s.abriuChamado,"
+					+ "s.onsiteOffsite,"
+					+ "s.caminhoAnexo,"
+					+ "s.cliente,"			//Tabela Cliente
+					+ "s.solicitante,"
+					+ "s.usuario,"
+					+ "s.descricaoProblema,"
+					+ "s.resolucao,"
+					+ "s.obs,"
+					+ "s.classificacao,"
+					+ "s.status,"
+					+ "s.dataFechamento,"
+					+ "s.dataAndamento,"
+					+ "s.agendado,"
+					+ "s.agendadoHora,"
+					+ "s.play,"
+					//+ "s.funcionario,"		//Tabela Funcionario - Se esse atributo estiver NULL ele ignora a linha (esse pode em algum momento ser Null);
+					+ "case when s.funcionario is null then s.funcionario else s.funcionario.id end as nullOrderer) "
+					+ "FROM Solicitacao s where s.classificacao!=:pClassificacao and s.status!=:pStatus and s.excluido!=:pExcluido order by s.id";
+			
+			Query query = manager.createQuery(jpql, Solicitacao.class);
+			query.setParameter("pClassificacao", "Backup");
+			query.setParameter("pStatus", "Finalizado");
+			query.setParameter("pExcluido", true);
+			
+			System.out.println(jpql);
+			
+			List<Solicitacao> solicitacaos = query.getResultList();
+				
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		}
+	}
+	//##############################  BUSCA TODAS AS SOLICITACOES COM QUERY OTIMIZADA E RETORNANDO SOMENTE O NECESSARIO ############################## 
+	
+	
 	//*******************************************************
 	@SuppressWarnings("unchecked")
 	public List<Solicitacao> listaSolicitacoesPorDataMedia(Date inicio, Date fim) {
@@ -805,6 +926,28 @@ public class SolicitacaoDao {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
 			query.setParameter("pStatus", "Em andamento");
+			query.setParameter("pExcluido", true);
+			solicitacaos = (List<Solicitacao>) query.getResultList();
+			if (solicitacaos != null) {
+				manager.close();
+				return solicitacaos;
+			} else {
+				manager.close();
+				return null;
+			}
+		} catch (Exception e) {
+			manager.close();
+			return null;
+		} 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Solicitacao> listaSolicitacoesNaoClassificado() {
+		List<Solicitacao> solicitacaos = new ArrayList<Solicitacao>();
+		try {
+			Query query = manager
+					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
+			query.setParameter("pStatus", "Não Classificado");
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {

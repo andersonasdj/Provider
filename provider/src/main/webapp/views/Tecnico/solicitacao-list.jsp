@@ -16,7 +16,7 @@
 	<br /><br /><br />
 	<div class="container">
 	<legend></legend>
-		<span id="botoes-status""></span>
+		<span id="botoes-status""></span></br></br>
 		<div align="center"><a class="btn btn-danger" href="solicitacoesAbertas" role="button"> ${qtdAberto} Abertas <i class="fa fa-question-circle"></i></a>
 		 - <a class="btn btn-info" href="solicitacoesAndamentoTecnico" role="button">${qtdAndamento} Andamento <i class="fa fa-share"></i></a>
 		 - <a class="btn btn-warning" href="solicitacoesAgendadosTecnico" role="button">${qtdAgendado} Agendadas <i class="fa fa-clock-o"></i></a>
@@ -102,8 +102,7 @@
 								<img class="ico_vip" src="assets/img/flag.png">
 							</c:if>
 						<span>- Tel.: ${solicitacao.cliente.telefone1} <br/>
-							- Endereço: ${solicitacao.cliente.endereco}<br/>
-							- CNPJ: ${solicitacao.cliente.cnpj}</span></a>
+							- Endereço: ${solicitacao.cliente.endereco}<br/></a>
 				</td>
 				<td>${solicitacao.usuario}</td>
 				<td>

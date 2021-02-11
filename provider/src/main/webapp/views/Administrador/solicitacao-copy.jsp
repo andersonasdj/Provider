@@ -245,7 +245,7 @@
 					<label class="control-label">ID do Chamado</label>
 		            <div class="controls">
 		            	<div id="idChamado" style="display: none">
-		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" value="${solicitacao.idChamadoLigacao}" disabled/>
+		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" value="${solicitacao.idChamadoLigacao}"/>
 		                	<a href="javascript:func()" id="buscaId"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
 		                	<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 		                </div>

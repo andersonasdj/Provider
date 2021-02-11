@@ -41,7 +41,7 @@ public class SolicitacaoController {
 			FuncionarioDao daoFun = new FuncionarioDao();
 			ClienteDao daoCli = new ClienteDao();
 			model.addAttribute("funcionarios", daoFun.listaFuncionarioAtivo());
-			model.addAttribute("clientes", daoCli.listaCliente());
+			model.addAttribute("clientes", daoCli.listaClienteAtivo());
 			return funcionario.getFuncao()+"/solicitacao-form";
 		} 
 		else {
@@ -190,7 +190,11 @@ public class SolicitacaoController {
 	}
 
 	private String qtdSolicitacoesFuncionario(Model model) {
-		Long ab, and, age, agua;
+		Long nclas, ab, and, age, agua;
+		
+		SolicitacaoDao daoNaoClass = new SolicitacaoDao();
+		nclas = daoNaoClass.listaQtdSolicitacoesNaoClass();
+		model.addAttribute("qtdNaoClas",nclas );
 		
 		SolicitacaoDao daoAbertas = new SolicitacaoDao();
 		ab = daoAbertas.listaQtdSolicitacoesAbertas();
@@ -207,7 +211,7 @@ public class SolicitacaoController {
 		SolicitacaoDao daoAguardando = new SolicitacaoDao();
 		agua = daoAguardando.listaQtdSolicitacoesAguardando();
 		model.addAttribute("qtdAguardando", agua);
-		model.addAttribute("qtdTotal", ab + age + and + agua);	
+		model.addAttribute("qtdTotal", nclas + ab + age + and + agua);	
 		return "Administrador/solicitacao-list";
 	}
 	
@@ -311,9 +315,13 @@ public class SolicitacaoController {
 	public String relatorioGeral(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
-			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes());
+			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes()); //ALTERADO!!!
 			
-			Long ab, and, age, agua;
+			Long nclas, ab, and, age, agua;
+			
+			SolicitacaoDao daoNaoClass = new SolicitacaoDao();
+			nclas = daoNaoClass.listaQtdSolicitacoesNaoClass();
+			model.addAttribute("qtdNaoClas",nclas );
 			
 			SolicitacaoDao daoAbertas = new SolicitacaoDao();
 			ab = daoAbertas.listaQtdSolicitacoesAbertas();
@@ -330,7 +338,7 @@ public class SolicitacaoController {
 			SolicitacaoDao daoAguardando = new SolicitacaoDao();
 			agua = daoAguardando.listaQtdSolicitacoesAguardando();
 			model.addAttribute("qtdAguardando", agua);
-			model.addAttribute("qtdTotal", ab + age + and + agua);	
+			model.addAttribute("qtdTotal", nclas + ab + age + and + agua);	
 			return "Administrador/solicitacao-relatorio";
 		} else {
 			return "redirect:login";
@@ -352,7 +360,7 @@ public class SolicitacaoController {
 	public String relatorioTecnico(HttpSession session, Model model) {
 		if (session.getAttribute("tecnicoLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
-			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes());
+			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes()); //ALTERADO!!!!
 			return "Tecnico/solicitacao-relatorio";
 		} else {
 			return "redirect:login";
@@ -375,6 +383,17 @@ public class SolicitacaoController {
 		if (session.getAttribute("funcionarioLogado") != null) {		
 			SolicitacaoDao dao = new SolicitacaoDao();
 			model.addAttribute("solicitacoes", dao.listaSolicitacoesAndamento());
+			return qtdSolicitacoesFuncionario(model);
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@RequestMapping("solicitacoesNaoClassificado")
+	public String solicitacoesNaoClassificado(HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogado") != null) {		
+			SolicitacaoDao dao = new SolicitacaoDao();
+			model.addAttribute("solicitacoes", dao.listaSolicitacoesNaoClassificado());
 			return qtdSolicitacoesFuncionario(model);
 		} else {
 			return "redirect:login";
@@ -404,7 +423,24 @@ public class SolicitacaoController {
 			model.addAttribute("email", daoEmail.listaEmailConfig().get(0).getLinkDominio());	//###
 			model.addAttribute("solicitacao", solicitacaoEditada);
 			model.addAttribute("funcionario", daoFun.listaFuncionarioAtivo());
-			return funcionario.getFuncao()+"/solicitacao-edit";
+			
+			ClienteDao daoCli = new ClienteDao();
+			
+			
+			
+			//Administrador pode editar qualquer solicitação
+			if(funcionario.getFuncao().equals("Administrador")) {
+				model.addAttribute("clientes", daoCli.listaClienteAtivo());
+				return funcionario.getFuncao()+"/solicitacao-edit";
+			}
+			//Funcionario edita somente a direcionada para ele.
+			if(funcionario.getFuncao().equals("Tecnico") && solicitacaoEditada.getFuncionario().getNome().equals(funcionario.getNome())) {
+				return funcionario.getFuncao()+"/solicitacao-edit";
+			}
+			//Somente visualiza as demais solicitações
+			else {
+				return funcionario.getFuncao()+"/solicitacao-ver";
+			}
 		} if (session.getAttribute("clienteLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Solicitacao solicitacaoEditada = new Solicitacao();
@@ -520,7 +556,7 @@ public class SolicitacaoController {
 	}
 
 	@RequestMapping("/atualizarSolicitacao")
-	public String atualizarSolicitacao(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, HttpSession session) {
+	public String atualizarSolicitacao(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, String nomeDoCliente,HttpSession session) {
 		
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
@@ -536,21 +572,25 @@ public class SolicitacaoController {
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Aberto")) {
-				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			}
+			if (solicitacao.getStatus().equals("Não Classificado")) {
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
+				return "redirect:solicitacoesAbertas";
+			}	
 			if (solicitacao.getStatus().equals("Agendado")) {
-				dao.agendarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.agendarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			} 
 			if (solicitacao.getStatus().equals("Em andamento")) {
 				//System.out.println(solicitacao.isPlay());
 				//System.out.println("em andamento");
-				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Aguardando")) {
-				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			}else {
 				return "redirect:solicitacoesAbertas";
@@ -559,9 +599,9 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
-
+	//###############################################    nomeDoCliente ################################################
 	@RequestMapping("/atualizarSolicitacaoFuncionario")
-	public String atualizarSolicitacaoFuncionario(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, HttpSession session) {
+	public String atualizarSolicitacaoFuncionario(Solicitacao solicitacao, String nomeDoFuncionario, String funcionarioLogado, String nomeDoCliente, HttpSession session) {
 		
 		if (session.getAttribute("tecnicoLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
@@ -573,15 +613,15 @@ public class SolicitacaoController {
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Finalizado")) { //TESTE
-				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Aberto")) {
-				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAbertas";
 			}
 			if (solicitacao.getStatus().equals("Em andamento")) {
-				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.solicitacaoEmAndamento(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAndamentoTecnico";
 			}
 			if (solicitacao.getStatus().equals("Agendado")) {
@@ -589,7 +629,7 @@ public class SolicitacaoController {
 				return "redirect:solicitacoesAgendadosTecnico";
 			}
 			if (solicitacao.getStatus().equals("Aguardando")) {
-				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado);
+				dao.atualizarSolicitacao(solicitacao, funcionarioASalvar, funcionarioLogado, nomeDoCliente);
 				return "redirect:solicitacoesAguardandoTecnico";
 			} else {
 				return "redirect:solicitacoesAbertas";
@@ -630,7 +670,7 @@ public class SolicitacaoController {
 	public String solicitacoesResumo(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
-			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes());
+			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes());  // ALTERADO!!!!!!!!!!
 			return "Administrador/solicitacao-relatorio";
 		} else {
 			return "redirect:login";

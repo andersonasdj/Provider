@@ -104,7 +104,9 @@
 					<input id="senha" name="senha" type="text" value="${solicitacao.senha}" class="input-xlarge">
 				</div>
 			</div>
-			<div class="control-group">
+			
+			<c:if test="${solicitacao.cliente.nome != null}">
+				<div class="control-group">
 				<label class="control-label">Nome do Cliente</label>
 				<div class="controls">
 					<input type="text" id="nomeDoCliente"
@@ -112,7 +114,22 @@
 					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
 					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
 				</div>
-			</div>
+				</div>
+			</c:if>
+			<c:if test="${solicitacao.cliente.nome == null}">
+				<div class="control-group">
+				<label class="control-label">Nome do Cliente</label>
+				<div class="controls">
+					<input type="text" id="nomeDoCliente"
+						value="${solicitacao.cliente.nome}" class="input-xlarge">
+					<span id="flag" style="font-size: 20px ;color:red ; font-weight:bold"></span>
+					<span id="vip" style="font-size: 18px ;color:#04B404 ; font-weight:bold"></span>
+				</div>
+				</div>
+			</c:if>
+			
+			
+			
 			<div class="control-group">
 				<label class="control-label">Forma de Abertura</label>
 				<div class="controls">

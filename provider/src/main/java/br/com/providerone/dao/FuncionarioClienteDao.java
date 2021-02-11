@@ -145,6 +145,46 @@ public class FuncionarioClienteDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	public String listaFuncionarioClientePorCel(String solicitante, String nomeCliente) {
+		List<FuncionarioCliente> funcionarioCliente = new ArrayList<FuncionarioCliente>();
+
+		try {
+			Query query = manager.createQuery("select f from FuncionarioCliente f where f.cliente.nome= :pNome and f.nome= :pSolicitante order by f.nome");
+			query.setParameter("pNome", nomeCliente);
+			query.setParameter("pSolicitante", solicitante);
+			funcionarioCliente = (List<FuncionarioCliente>) query.getResultList();
+			if (funcionarioCliente != null) {
+				return funcionarioCliente.get(0).getCelular();
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
+	}
+	
+	public FuncionarioCliente listaFuncionarioClientePorCeleEmail(String celular, String email) {
+		FuncionarioCliente funcionarioEncontrado = new FuncionarioCliente();
+		try {
+			Query query = manager
+					.createQuery("select f from FuncionarioCliente f where f.email=:pEmail and f.celular=:pCelular");
+			query.setParameter("pEmail", email);
+			query.setParameter("pCelular", celular);
+			funcionarioEncontrado = (FuncionarioCliente) query.getSingleResult();
+			if (funcionarioEncontrado != null) {
+				return funcionarioEncontrado;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			return null;
+		} finally {
+			manager.close();
+		}
+	}
 	public boolean excluirFuncionarioCliente(Long id) {
 		try {
 			FuncionarioCliente funcionarioClientetExcluir = new FuncionarioCliente();

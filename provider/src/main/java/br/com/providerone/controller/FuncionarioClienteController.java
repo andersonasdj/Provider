@@ -73,13 +73,14 @@ public class FuncionarioClienteController {
 	}
 	
 	@RequestMapping("/gravaColaborador")
-	public String gravaColaborador(HttpSession session, Long clienteId, String nome, String email, String cargo, Model model) {
+	public String gravaColaborador(HttpSession session, Long clienteId, String nome, String email, String cargo, String celular, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			FuncionarioCliente funcionarioCliente = new FuncionarioCliente();
 			funcionarioCliente.setNome(nome);
 			funcionarioCliente.setEmail(email);
 			funcionarioCliente.setCargo(cargo);
+			funcionarioCliente.setCargo(celular);
 			ClienteDao clienteDao = new ClienteDao();
 			Cliente cliente = clienteDao.buscarPorId(clienteId);
 			funcionarioCliente.setCliente(cliente);
@@ -188,6 +189,19 @@ public class FuncionarioClienteController {
 			String cargo = dao.listaFuncionarioClientePorNome(solicitante, nomeCliente);
 			Gson gson = new Gson();
 			return gson.toJson(cargo);
+		} else {
+			return null;
+		}
+	}
+	
+	@RequestMapping(value = "/getCel", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody String getCel(HttpSession session, String solicitante, String nomeCliente) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+			FuncionarioClienteDao dao = new FuncionarioClienteDao();
+			String cel = dao.listaFuncionarioClientePorCel(solicitante, nomeCliente);
+			Gson gson = new Gson();
+			return gson.toJson(cel);
 		} else {
 			return null;
 		}
