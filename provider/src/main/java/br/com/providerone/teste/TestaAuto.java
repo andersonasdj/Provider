@@ -10,7 +10,7 @@ public class TestaAuto {
 	
 	
 	public static void main(String[] args) {
-		Solicitacao solicitacao = new Solicitacao();
+	//	Solicitacao solicitacao = new Solicitacao();
 		List<Solicitacao> soliList = new ArrayList<Solicitacao>();
 		SolicitacaoDao dao = new SolicitacaoDao();
 		
