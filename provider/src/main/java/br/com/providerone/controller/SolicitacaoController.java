@@ -55,7 +55,7 @@ public class SolicitacaoController {
 				solicitacao.setStatusEmail("E-mail enviado");
 				GravaSolicTecAdmin(solicitacao, nomeDoCliente, nomeDoFuncionario);
 				EmailDao daoEmail = new EmailDao();
-				Email email = daoEmail.listaEmailConfigAbertura();
+				Email email = daoEmail.listaEmailConfigEnvia("Abertura");
 				JavaMailApp javaMailApp = new JavaMailApp(email);
 				javaMailApp.enviaEmailAbertura(nomeDoCliente, solicitacao, destinatario);
 				return "redirect:solicitacoesAbertas";
@@ -657,7 +657,7 @@ public class SolicitacaoController {
 			SolicitacaoDao dao = new SolicitacaoDao();
 			Solicitacao solicitacao = dao.salvaSolicitacaoEmail(id);
 			EmailDao emailDao = new EmailDao();
-			Email emailConfig = emailDao.listaEmailConfigAbertura();
+			Email emailConfig = emailDao.listaEmailConfigEnvia("Abertura");
 			JavaMailApp mail = new JavaMailApp(emailConfig);
 			mail.enviaEmail(solicitacao.getCliente(), solicitacao, destinatario);
 			return "redirect:solicitacoesAbertas";

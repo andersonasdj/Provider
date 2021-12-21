@@ -26,7 +26,22 @@ public class JavaMailApp
 		this.email = email;
 		session = configuraEmail(this.email);
 	}
-		
+	
+	public void enviaMFA(String destinatarioMFA, String mfa){
+		try {						
+			Message message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(email.getEmail()));
+			Address[] toUser = InternetAddress.parse(destinatarioMFA);
+		    message.setRecipients(Message.RecipientType.TO, toUser);
+		    String mensagemEmail = mfa;
+		    message.setSubject(email.getAssunto());//Assunto
+		    message.setContent(mensagemEmail, "text/html;charset=utf-8");	    
+		    Transport.send(message);		    		   			
+		}catch (MessagingException e) {
+		      throw new RuntimeException(e);
+		}			
+	}
+	
 	public void enviaEmail(Cliente cliente, Solicitacao solicitacao, String destinatario){
 		try {
 			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLUÇÃO TEMPORARIA
@@ -40,11 +55,13 @@ public class JavaMailApp
 		      Address[] toUser = InternetAddress //Destinatário(s)
 		                 .parse(destinatario);
 		      
+		      /*
 		      if(email.getCc() != null || email.getCc().equals("")){
 		    	  Address[] toCc = InternetAddress //Destinatáio Com cópia
 		    			  .parse(email.getCc());
 		    	  message.setRecipients(Message.RecipientType.CC, toCc); //Copia
-		      }
+		      }*/
+		      
 		      
 		      Locale locBR = new Locale("pt","BR");
 		      DateFormat df = DateFormat.getDateInstance(DateFormat.FULL,locBR);
@@ -174,14 +191,16 @@ public class JavaMailApp
 		}	
 	}
 	
-	private static Session configuraEmail(final Email email) {
+	private static Session configuraEmail(/*final*/ Email email) {
 		Properties props = new Properties();
 		/** Parâmetros de conexão com servidor Microsoft / Google */
 		props.put("mail.smtp.host", email.getSmtp());
+		//props.put("mail.smtp.ssl.trust", email.getSmtp());
 		props.put("mail.smtp.socketFactory.port", email.getPortaSmtp());
 		props.put("mail.smtp.starttls.enable", email.isSslStatus());
 		props.put("mail.smtp.auth", email.isAutenticacao());
 		props.put("mail.smtp.port", email.getPortaSmtp());
+		
 
 		Session session = Session.getDefaultInstance(props,
 		            new javax.mail.Authenticator() {
@@ -191,7 +210,7 @@ public class JavaMailApp
 		                 }
 		            });
 		/** Ativa Debug para sessão */
-		session.setDebug(true);
+		//session.setDebug(true);
 		return session;
 	}
 }

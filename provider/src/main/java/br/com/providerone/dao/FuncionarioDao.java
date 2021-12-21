@@ -48,11 +48,25 @@ public class FuncionarioDao {
 		return funcionario;
 	}
 	
-	public Funcionario buscarPorIdeSalvaDataLogin(Long id) {
+	/*public Funcionario buscarPorIdeSalvaDataLogin(Long id) {
 		Funcionario funcionario;
 		manager.getTransaction().begin();
 		funcionario = manager.find(Funcionario.class, id);
 		funcionario.setUltimoLogin(Calendar.getInstance());
+		funcionario.setMfa(0);
+		manager.persist(funcionario);
+		manager.getTransaction().commit();
+		manager.close();
+		return funcionario;
+	}*/
+	
+	public Funcionario buscarPorIdeSalvaDataLogin(Long id, String ip) {
+		Funcionario funcionario;
+		manager.getTransaction().begin();
+		funcionario = manager.find(Funcionario.class, id);
+		funcionario.setUltimoLogin(Calendar.getInstance());
+		funcionario.setMfa(0);
+		funcionario.setIp(ip);
 		manager.persist(funcionario);
 		manager.getTransaction().commit();
 		manager.close();
@@ -80,6 +94,16 @@ public class FuncionarioDao {
 		manager.getTransaction().commit();
 		manager.close();
 	}
+	
+	public void atualizarMfa(Funcionario funcionario, int num) {
+		
+		funcionario.setMfa(num);
+		manager.getTransaction().begin();
+		manager.merge(funcionario);
+		manager.getTransaction().commit();
+		manager.close();
+	}
+	
 	
 	public Funcionario existeFuncionario(Funcionario funcionario) {
 		Funcionario funcionarioEncontrado = new Funcionario();

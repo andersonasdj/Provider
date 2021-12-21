@@ -14,6 +14,15 @@
 	<br />
 		<fieldset></fieldset>
 		<div class="container">
+			<legend>Versão 1.9</legend>
+			<ul>
+				<li>Inclusão de Login com MFA
+					<ul>
+						<li>Incluída opção de adição de configuração de email para envio do código MFA.</li>
+						<li>Opção de ativar ou desativar MFA por usuário.</li>
+					</ul>
+				</li>
+			</ul><br/>
 			<legend>Versão 1.8</legend>
 			<ul>
 				<li>Controle de pause e play em solicitações em andamento.

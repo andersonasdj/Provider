@@ -18,6 +18,7 @@ public class Usuario {
 	private String nome;
 	private String usuario;
 	private String senha;
+	private int mfa;
 	private String email;
 	private String status;
 	@Temporal(TemporalType.TIMESTAMP)
@@ -25,6 +26,8 @@ public class Usuario {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar ultimoLogin;
+	private boolean statusMfa;
+	private String ip;
 
 	public Long getId() {
 		return id;
@@ -58,6 +61,14 @@ public class Usuario {
 		this.senha = senha;
 	}
 
+	public int getMfa() {
+		return mfa;
+	}
+
+	public void setMfa(int mfa) {
+		this.mfa = mfa;
+	}
+	
 	public String getEmail() {
 		return email;
 	}
@@ -88,6 +99,22 @@ public class Usuario {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public boolean isStatusMfa() {
+		return statusMfa;
+	}
+
+	public void setStatusMfa(boolean statusMfa) {
+		this.statusMfa = statusMfa;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	@Override

@@ -39,27 +39,14 @@
 	  <div class="row">
 	    <div class="Absolute-Center is-Responsive">
 	      <div class="col-sm-12 col-md-4 col-md-offset-4">
-	        <form action="logar" method="post" id="loginForm"> 
+	        <form action="logarMfa" method="post" id="logarMfa"> 
 	          <div class="form-group input-group">
-	            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-	            <input class="form-control" type="text" name='usuario' placeholder="Usuário" required autofocus/>          
+	            <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+	            <input class="form-control" type="text" name='mfa' placeholder="" required autofocus/>          
 	          </div>
-	          <div class="form-group input-group">
-	            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-	            <input class="form-control" type="password" name='senha' placeholder="Senha" required="required"/>     
-	          </div>
-	          <div class="checkbox">
-	            <label>
-	              <input type="checkbox"> Eu aceito o termo <a href="#">Termos e Condições</a>
-	            </label>
-	          </div>
-	         
+	           <input id="gfg" type="hidden" name="ip"/>
 	          <div class="form-group">
 	            <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
-	          </div>
-	          <div class="form-group text-center">
-	            <a href="mailto:suporte@providerone.com.br">Esqueci a Senha</a>&nbsp;|&nbsp;<a href="mailto:suporte@providerone.com.br">Suporte</a>
-	            &nbsp;|&nbsp;<a href="assets/apk/ProviderOne.apk">APK</a>
 	          </div>
 	        </form>        
 	      </div>  
@@ -68,6 +55,22 @@
 	</div>
 </body>
 	<script type="text/javascript" src="assets/js/jquery.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+  
+    <script>
+        /* Add "https://api.ipify.org?format=json" statement
+           this will communicate with the ipify servers in
+           order to retrieve the IP address $.getJSON will
+           load JSON-encoded data from the server using a
+           GET HTTP request */
+  
+        $.getJSON("https://api.ipify.org?format=json",
+                                          function(data) {
+  
+            // Setting text of element P with id gfg
+            $("#gfg").val(data.ip);
+        })
     </script>
 </html>

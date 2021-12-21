@@ -123,8 +123,7 @@
 					<select class="selectpicker" id="funcaoDoEmail"
 						name="funcaoDoEmail">
 						<option>Abertura</option>
-						<option>Encerramento</option>
-						<option>Agendamento</option>
+						<option>MFA</option>
 					</select>
 				</div>
 			</div>

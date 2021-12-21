@@ -39,6 +39,8 @@
 					<th>Celular</th>
 					<th>Data de Atualização</th>
 					<th data-field="status" data-sortable="true">Status</th>
+					<th data-field="statusMfa" data-sortable="true">MFA</th>
+					<th data-field="ip" data-sortable="true">IP</th>
 					<th>Ações</th>
 				</tr>
 			</thead>
@@ -69,7 +71,8 @@
 						<td><f:formatDate value="${funcionario.dataAtualizacao.time}"
 								pattern="dd/MM/yyyy" /></td>
 						<td>${funcionario.status}</td>
-						
+						<td>${funcionario.statusMfa}</td>
+						<td>${funcionario.ip}</td>
 						<td><a href="funcionarioEdit?id=${funcionario.id}">Editar</a></td>
 					</tr>
 				</c:if>
@@ -101,6 +104,8 @@
 						<td><f:formatDate value="${funcionario.dataAtualizacao.time}"
 								pattern="dd/MM/yyyy" /></td>
 						<td>${funcionario.status}</td>
+						<td>${funcionario.statusMfa}</td>
+						<td>${funcionario.ip}</td>
 						<td><a href="funcionarioEdit?id=${funcionario.id}">Editar</a></td>
 					</tr>
 				</c:if>

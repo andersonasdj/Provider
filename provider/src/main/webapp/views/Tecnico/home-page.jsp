@@ -27,6 +27,7 @@
 				<p class="asid-linha">Usuário : ${tecnicoLogado.usuario} /
 				 Ultimo Login : <f:formatDate value="${tecnicoLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
 				  - <f:formatDate value="${tecnicoLogado.ultimoLogin.time}" pattern="HH:mm"/></p>
+				<p class="asid-linha">IP :<b> ${funcionarioLogado.ip}</b></p>
 				<p class="asid-linha">Email : ${tecnicoLogado.email}</p>
 				<p class="asid-linha">Bem vindo, ${tecnicoLogado.nome}</p>
 			</div>

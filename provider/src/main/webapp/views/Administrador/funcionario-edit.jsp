@@ -93,6 +93,22 @@
 					</select>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label">Status MFA</label>
+				<div class="controls">
+					<select class="selectpicker" id="statusMfa" name="statusMfa">
+						<option>${funcionario.statusMfa}</option>
+						
+						<c:if test="${funcionario.statusMfa == true}">
+							<option>false</option>
+						</c:if>
+						<c:if test="${funcionario.statusMfa == false}">
+							<option>true</option>
+						</c:if>		
+						
+					</select>
+				</div>
+			</div>
 			<input id="caminhoFoto" name="caminhoFoto" type="hidden" value="${funcionario.caminhoFoto}">
 			<div class="control-group">
 				<label class="control-label"></label>

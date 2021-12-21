@@ -1,5 +1,7 @@
 package br.com.providerone.controller;
 
+import java.util.Random;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -7,10 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.ClienteDao;
+import br.com.providerone.dao.EmailDao;
 import br.com.providerone.dao.FuncionarioClienteDao;
 import br.com.providerone.dao.FuncionarioDao;
 import br.com.providerone.dao.SolicitacaoDao;
+import br.com.providerone.mail.JavaMailApp;
 import br.com.providerone.modelo.Cliente;
+import br.com.providerone.modelo.Email;
 import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.FuncionarioCliente;
 import br.com.providerone.modelo.Solicitacao;
@@ -86,13 +91,19 @@ public class LoginController {
 				senha);
 		
 		if (funcionarioEncontrado != null) {
-			if (funcionarioEncontrado.getFuncao().equals("Administrador")) {
-				session.setAttribute("funcionarioLogado", funcionarioEncontrado);
-				return salvaDataLoginEAdicionaModel(model, funcionarioEncontrado);
-			} else {
-				session.setAttribute("tecnicoLogado", funcionarioEncontrado);
-				return salvaDataLoginEAdicionaModel(model, funcionarioEncontrado);
-			}
+			if(funcionarioEncontrado.isStatusMfa()) {
+				enviaEmailMfa(funcionarioEncontrado);
+				session.setAttribute("funcionarioLogadoMFA", funcionarioEncontrado);
+				return "tela-mfa";
+			}else {
+				if(funcionarioEncontrado.getFuncao().equals("Administrador")) {
+					session.setAttribute("funcionarioLogado", funcionarioEncontrado);		
+					return salvaDataLoginEAdicionaModel(model, funcionarioEncontrado);
+				}else {
+					session.setAttribute("tecnicoLogado", funcionarioEncontrado);		
+					return salvaDataLoginEAdicionaModel(model, funcionarioEncontrado);
+				}
+			}		
 		}
 		if (clienteEncontrado != null) {
 			session.setAttribute("clienteLogado", clienteEncontrado);
@@ -100,6 +111,56 @@ public class LoginController {
 			return "redirect:home";
 		}
 		return "redirect:login";
+	}
+
+	private void enviaEmailMfa(Funcionario funcionarioEncontrado) {
+		Random random = new Random();	
+		int num = random.nextInt(90000);
+		if(num < 1000) {
+			num += random.nextInt(9000)*10;
+		}else if(num < 100) {
+			num += random.nextInt(9000)*10;
+		}
+		String mfa = String.valueOf( num );
+		FuncionarioDao daoSalvaMfa = new FuncionarioDao();
+		daoSalvaMfa.atualizarMfa(funcionarioEncontrado, num);
+		
+		EmailDao daoEmail = new EmailDao();
+		Email email = daoEmail.listaEmailConfigEnvia("MFA");
+		/*
+		Email email = new Email();
+		email.setAutenticacao(true);
+		email.setPortaSmtp(587);
+		email.setSenha("Fut.t.j.fmeudomSenha1234");
+		email.setEmail("anderson.araujo@techgold.com.br");
+		email.setSmtp("smtp.office365.com");
+		email.setSslStatus(true);
+		*/
+		JavaMailApp mail = new JavaMailApp(email);
+		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa);
+	}
+	
+	@RequestMapping("logarMfa")
+	public String logarMfa(String mfa, String ip, HttpSession session, Model model) {
+		if (session.getAttribute("funcionarioLogadoMFA") != null) {
+			Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogadoMFA");
+			int numMfa = Integer.parseInt(mfa);
+			funcionario.setIp(ip);
+			if(funcionario.getMfa() == numMfa) {
+				if(funcionario.getFuncao().equals("Administrador")) {
+					session.setAttribute("funcionarioLogado", funcionario);		
+					return salvaDataLoginEAdicionaModel(model, funcionario);
+				}else {
+					session.setAttribute("tecnicoLogado", funcionario);		
+					return salvaDataLoginEAdicionaModel(model, funcionario);
+				}
+	
+			}else {
+				return "redirect: login";
+			}
+		}else {
+			return "redirect: login";
+		}				
 	}
 	
 	@RequestMapping("logarAuto")
@@ -118,7 +179,7 @@ public class LoginController {
 		model.addAttribute("funcionario", funcionarioEncontrado);
 		// Salva da data do ultimo Login
 			FuncionarioDao daoFunLogin = new FuncionarioDao();
-			daoFunLogin.buscarPorIdeSalvaDataLogin(funcionarioEncontrado.getId());
+			daoFunLogin.buscarPorIdeSalvaDataLogin(funcionarioEncontrado.getId(), funcionarioEncontrado.getIp());			
 		// Salva da data do ultimo Login
 		return "redirect:homePage";
 	}

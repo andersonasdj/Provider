@@ -44,6 +44,15 @@ public class ConfiguracaoSistemaController {
 		}
 	}
 	
+	@RequestMapping("/configEmailForm")
+	public String configEmailList(Model model, HttpSession session) {
+		if (session.getAttribute("funcionarioLogado") != null) {
+			return "Administrador/configuracao-email-form";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
 	@RequestMapping("/configImg")
 	public String configImg(Model model, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {

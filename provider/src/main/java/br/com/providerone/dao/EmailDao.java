@@ -71,11 +71,11 @@ public class EmailDao {
 		}
 	}
 	
-	public Email listaEmailConfigAbertura() {
+	public Email listaEmailConfigEnvia(String funcao) {
 		Email emailConfigAbertura = new Email();
 		try {
 			Query query = manager.createQuery("select e from Email e where e.funcaoDoEmail=:pFuncao");
-			query.setParameter("pFuncao", "Abertura");
+			query.setParameter("pFuncao", funcao);
 			
 			emailConfigAbertura = (Email) query.getSingleResult();
 

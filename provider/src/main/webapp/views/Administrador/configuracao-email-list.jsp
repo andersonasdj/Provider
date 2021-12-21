@@ -14,8 +14,13 @@
 	<br/><br/><br/>
 	<div class="container">
 		<legend align="center">Lista configurações de email cadastrados</legend>
+		
 		<p class="pull-left">
 			<a href="config"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+		</p>
+		</br></br>
+		<p>
+			<a href="configEmailForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></i></a>
 		</p>
 		<table id="table"
 	               data-toggle="table"

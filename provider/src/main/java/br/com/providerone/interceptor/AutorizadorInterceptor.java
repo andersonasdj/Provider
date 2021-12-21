@@ -20,7 +20,9 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 				|| uri.endsWith("avancarAuto")
 				|| uri.endsWith("avancarSuporte")
 				|| uri.endsWith("salvarSuporte")
-				|| uri.endsWith("logarAuto")) { 
+				|| uri.endsWith("logarAuto")
+				|| uri.endsWith("mfa")
+				|| uri.endsWith("logarMfa")) { 
 			return true;
 		}
 		if (request.getSession().getAttribute("clienteLogado") != null) {
