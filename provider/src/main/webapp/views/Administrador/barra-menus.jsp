@@ -16,6 +16,9 @@
 			                    <li class="dropdown-header">Solicitações</li>
 			                    <li><a href="solicitacaoForm"><i class="fa fa-plus-square"> </i> Abrir Solicitação</a></li>
 			                    <li role="separator" class="divider"></li>
+			                    <li class="dropdown-header">Modelos Solicitações</li>
+			                    <li><a href="solicitacaoForm"><i class="fa fa-plus-square"> </i> Listar</a></li>
+			                    <li role="separator" class="divider"></li>
 			                    <li class="dropdown-header">Status</li>
 			                    <li><a href="solicitacoesAbertas"><i class="fa fa-question-circle"> </i> Abertas</a></li>
 			                    <li><a href="solicitacoesAgendadas"><i class="fa fa-clock-o"> </i> Agendadas</a></li>

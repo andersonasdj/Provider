@@ -121,6 +121,7 @@
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
 									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
+						
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
 						<td>
@@ -144,9 +145,6 @@
 						</td>
 					</tr>
 				</c:if>
-			
-			
-			
 			
 				<c:if test="${solicitacao.status == 'Aberto'}">
 					<tr class="error" align="center">
@@ -198,7 +196,9 @@
 								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
 									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
+						
 						<td>${solicitacao.solicitante}</td>
+						
 						<td>${solicitacao.usuario}</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.descricaoProblema}

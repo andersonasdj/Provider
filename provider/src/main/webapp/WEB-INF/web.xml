@@ -28,26 +28,24 @@
 		<servlet-name>DispatcherServelt</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<error-page>
 		<error-code>404</error-code>
 		<location>/views/error/404.jsp</location>
 	</error-page>
-	
+
 	<error-page>
 		<error-code>500</error-code>
 		<location>/views/error/500.jsp</location>
 	</error-page>
-	
-	<!-- inicio - forçar a utilização de SSL 
-	<security-constraint>
-	  <web-resource-collection>
-	    <web-resource-name>provider</web-resource-name>
-	    <url-pattern>/*</url-pattern>
-	  </web-resource-collection>
-	  <user-data-constraint>
-	    <transport-guarantee>CONFIDENTIAL</transport-guarantee>
-	  </user-data-constraint>
-	</security-constraint>
-	fim - forçar a utilização de SSL -->
+
+	<session-config>
+		<session-timeout>50</session-timeout>
+	</session-config>
+
+	<!-- inicio - forçar a utilização de SSL <security-constraint> <web-resource-collection> 
+		<web-resource-name>provider</web-resource-name> <url-pattern>/*</url-pattern> 
+		</web-resource-collection> <user-data-constraint> <transport-guarantee>CONFIDENTIAL</transport-guarantee> 
+		</user-data-constraint> </security-constraint> fim - forçar a utilização 
+		de SSL -->
 </web-app>

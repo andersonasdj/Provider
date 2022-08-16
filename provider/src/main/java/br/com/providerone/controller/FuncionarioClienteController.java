@@ -80,7 +80,7 @@ public class FuncionarioClienteController {
 			funcionarioCliente.setNome(nome);
 			funcionarioCliente.setEmail(email);
 			funcionarioCliente.setCargo(cargo);
-			funcionarioCliente.setCargo(celular);
+			funcionarioCliente.setCelular(celular);
 			ClienteDao clienteDao = new ClienteDao();
 			Cliente cliente = clienteDao.buscarPorId(clienteId);
 			funcionarioCliente.setCliente(cliente);

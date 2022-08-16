@@ -127,15 +127,7 @@ public class LoginController {
 		
 		EmailDao daoEmail = new EmailDao();
 		Email email = daoEmail.listaEmailConfigEnvia("MFA");
-		/*
-		Email email = new Email();
-		email.setAutenticacao(true);
-		email.setPortaSmtp(587);
-		email.setSenha("Fut.t.j.fmeudomSenha1234");
-		email.setEmail("anderson.araujo@techgold.com.br");
-		email.setSmtp("smtp.office365.com");
-		email.setSslStatus(true);
-		*/
+	
 		JavaMailApp mail = new JavaMailApp(email);
 		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa);
 	}

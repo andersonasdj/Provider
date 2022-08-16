@@ -43,7 +43,6 @@
 				<div class="controls">
 					<input id="nome" name="email" type="text"
 						placeholder="E-mail do Colaborador" class="input-xlarge" required>
-					<i class="fa fa-at fa-lg"> </i>
 				</div>
 			</div>
 			<div class="control-group">

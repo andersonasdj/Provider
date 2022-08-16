@@ -17,6 +17,7 @@ public class FuncionarioCliente {
 	private String email;
 	private String cargo;
 	private String celular;
+	//private boolean vip;
 
 	public String getCargo() {
 		return cargo;
@@ -69,6 +70,14 @@ public class FuncionarioCliente {
 		this.cliente = cliente;
 	}
 
+	/*public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}*/
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

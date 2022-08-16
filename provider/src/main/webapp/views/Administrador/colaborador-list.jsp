@@ -43,6 +43,7 @@
 				<tr>
 					<th data-field="state" data-checkbox="true"></th>
 					<th>Nome</th>
+					<th>Celular</th>
 					<th>Cargo</th>
 					<th>E-mail</th>
 					<th>Ações</th>
@@ -52,6 +53,7 @@
 				<tr class="clientesTr">
 					<td></td>
 					<td>${funcionarioCliente.nome}</td>
+					<td>${funcionarioCliente.celular}</td>
 					<td>${funcionarioCliente.cargo}</td>
 					<td>${funcionarioCliente.email}</td>
 					<td><a href="editarColaboradorId?id=${funcionarioCliente.idFuncionario}"><i class="fa fa-pencil-square-o fa-lg"></i></a> 
