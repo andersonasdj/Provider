@@ -48,6 +48,24 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
+	
+	@RequestMapping("/solicitacaoModeloForm")
+	public String solicitacaoModeloForm(HttpSession session, Model model) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (session.getAttribute("clienteLogado") != null) {
+			return "Cliente/solicitacao-form";
+		} 
+		if (funcionario != null) {
+			FuncionarioDao daoFun = new FuncionarioDao();
+			ClienteDao daoCli = new ClienteDao();
+			model.addAttribute("funcionarios", daoFun.listaFuncionarioAtivo());
+			model.addAttribute("clientes", daoCli.listaClienteAtivo());
+			return funcionario.getFuncao()+"/solicitacao-modelo-form";
+		} 
+		else {
+			return "redirect:login";
+		}
+	}
 	@RequestMapping("salvarSolicitacao")
 	public String salvarSolicitacaoAdmin(Solicitacao solicitacao, String nomeDoCliente, String nomeDoFuncionario, boolean boxEmail, String destinatario, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
