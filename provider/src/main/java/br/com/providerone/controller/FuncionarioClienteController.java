@@ -1,5 +1,6 @@
 package br.com.providerone.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +131,7 @@ public class FuncionarioClienteController {
 	}
 	
 	@RequestMapping(value = "/listarColaboradoresForm", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody String listarColaboradoresForm(HttpSession session, String nomeCliente) {
+	public @ResponseBody String listarColaboradoresForm(HttpSession session, String nomeCliente) throws UnsupportedEncodingException {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
@@ -141,7 +142,15 @@ public class FuncionarioClienteController {
 				funcionarios.add(funcionariosList.get(i).getNome());
 			}
 			Gson gson = new Gson();
-			return gson.toJson(funcionarios);
+			String gsonString = gson.toJson(funcionarios);
+			try {
+				byte[] gsonBytes = gsonString.getBytes("UTF8");
+				return new String(gsonBytes, "windows-1252");
+			} catch (UnsupportedEncodingException e) {
+				System.out.println(e);
+				return null;
+			}
+			
 			/*
 			GsonBuilder builder = new GsonBuilder();
 			builder.excludeFieldsWithModifiers(Modifier.TRANSIENT);
@@ -188,7 +197,13 @@ public class FuncionarioClienteController {
 			FuncionarioClienteDao dao = new FuncionarioClienteDao();
 			String cargo = dao.listaFuncionarioClientePorNome(solicitante, nomeCliente);
 			Gson gson = new Gson();
-			return gson.toJson(cargo);
+			String gsonString = gson.toJson(cargo);
+			try {
+				byte[] gsonBytes = gsonString.getBytes("UTF8");
+				return new String(gsonBytes, "windows-1252");
+			} catch (UnsupportedEncodingException e) {
+				return null;
+			}
 		} else {
 			return null;
 		}

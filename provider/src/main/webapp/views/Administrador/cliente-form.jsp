@@ -103,6 +103,18 @@
 						class="input-xlarge">
 				</div>
 			</div>
+			
+			</div>
+				<div class="control-group">
+				<label class="control-label">Status</label>
+				<div class="controls">
+					<select class="selectpicker" id="status" name="status">
+						<option>Ativo</option>
+						<option>Inativo</option>		
+					</select>
+				</div>
+			</div>
+			
 			<div class="control-group">
 				<label class="control-label"></label>
 				<div class="controls">

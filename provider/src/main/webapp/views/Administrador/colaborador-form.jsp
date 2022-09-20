@@ -33,7 +33,7 @@
 				<label class="control-label">Cargo</label>
 				<div class="controls">
 					<input id="cargo" name="cargo" type="text"
-						placeholder="Cargo do Colaborador" class="input-xlarge" required>
+						placeholder="Cargo do Colaborador" class="input-xlarge">
 				</div>
 			</div>
 			<input type="hidden" name="clienteId" id="clienteId"
@@ -41,7 +41,7 @@
 			<div class="control-group">
 				<label class="control-label">E-mail</label>
 				<div class="controls">
-					<input id="nome" name="email" type="text"
+					<input id="email" name="email" type="text"
 						placeholder="E-mail do Colaborador" class="input-xlarge" required>
 				</div>
 			</div>
@@ -50,7 +50,7 @@
 				<div class="controls">
 					<input type="text" id="celular" name="celular"
 						placeholder="Celular" onkeypress="mask(this, mphone);"
-						onblur="mask(this, mphone);" class="input-xlarge" required />
+						onblur="mask(this, mphone);" class="input-xlarge"/>
 				</div>
 			</div>
 			<div class="control-group">

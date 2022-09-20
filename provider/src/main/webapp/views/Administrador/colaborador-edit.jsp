@@ -41,7 +41,7 @@
 				<label class="control-label">Cargo</label>
 				<div class="controls">
 					<input id="cargo" name="cargo" type="text"
-						value="${funcionario.cargo}" class="input-xlarge" required>
+						value="${funcionario.cargo}" class="input-xlarge">
 				</div>
 			</div>
 
@@ -57,7 +57,7 @@
 				<div class="controls">
 					<input id="celular" name="celular" type="text"
 						onkeypress="mask(this, mphone);" value="${funcionario.celular}"
-						onblur="mask(this, mphone);" class="input-xlarge" required>
+						onblur="mask(this, mphone);" class="input-xlarge">
 				</div>
 			</div>
 			
