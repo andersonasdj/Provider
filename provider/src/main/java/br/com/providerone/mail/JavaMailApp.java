@@ -35,7 +35,7 @@ public class JavaMailApp
 		    message.setRecipients(Message.RecipientType.TO, toUser);
 		    String mensagemEmail = mfa;
 		    message.setSubject(email.getAssunto());//Assunto
-		    message.setContent(mensagemEmail, "text/html;charset=utf-8");	    
+		    message.setContent(mensagemEmail.trim(), "text/html;charset=utf-8");	    
 		    Transport.send(message);		    		   			
 		}catch (MessagingException e) {
 		      throw new RuntimeException(e);

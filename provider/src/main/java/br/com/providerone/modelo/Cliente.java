@@ -2,8 +2,10 @@ package br.com.providerone.modelo;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Cliente")
 public class Cliente extends Usuario {
 
 	private String endereco;

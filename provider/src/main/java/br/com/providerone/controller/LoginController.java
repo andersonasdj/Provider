@@ -67,7 +67,7 @@ public class LoginController {
 		}
 	}
 	
-	//para criação do primeiro usuario do sistema
+	//para criaï¿½ï¿½o do primeiro usuario do sistema
 	@RequestMapping("/create")
 	public String create() {
 		FuncionarioDao dao = new FuncionarioDao();
@@ -115,11 +115,11 @@ public class LoginController {
 
 	private void enviaEmailMfa(Funcionario funcionarioEncontrado) {
 		Random random = new Random();	
-		int num = random.nextInt(90000);
-		if(num < 1000) {
-			num += random.nextInt(9000)*10;
-		}else if(num < 100) {
-			num += random.nextInt(9000)*10;
+		int num = random.nextInt(9000000);
+		if(num < 1000000) {
+			num += random.nextInt(90000)*10;
+		}else if(num < 1000) {
+			num += random.nextInt(90000)*10;
 		}
 		String mfa = String.valueOf( num );
 		FuncionarioDao daoSalvaMfa = new FuncionarioDao();
@@ -129,7 +129,7 @@ public class LoginController {
 		Email email = daoEmail.listaEmailConfigEnvia("MFA");
 	
 		JavaMailApp mail = new JavaMailApp(email);
-		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa);
+		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa.trim());
 	}
 	
 	@RequestMapping("logarMfa")

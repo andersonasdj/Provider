@@ -1,8 +1,10 @@
 package br.com.providerone.modelo;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Funcionario")
 public class Funcionario extends Usuario {
 
 	private String funcao;

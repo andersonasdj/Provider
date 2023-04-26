@@ -11,12 +11,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
+@Table(name = "Solicitacao")
 public class Solicitacao {
 
 	@Id
@@ -354,14 +356,14 @@ public class Solicitacao {
 				+ "* Data: " + df.format(this.getDataAbertura().getTime()) + "\n"
 				+ "* Hora: " + sdf.format(hora) + "\n"
 				+ "* Cliente: " + cliente.getNome() + "\n"
-				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
-				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "NÃ£o classificado") + "\n"
+				+ "* Usuï¿½rio Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
-				+ "* Observação: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
-				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "Não Classificado") + "\n"
-				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
-				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
-				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuído") + "\n"
+				+ "* ObservaÃ§Ã£oo: " + (this.getObs() != null ? this.getObs() : "Nï¿½o Classificado" ) + "\n"
+				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "NÃ£o Classificado") + "\n"
+				+ "* ClassificaÃ§Ã£o " + (this.getPrioridade() != null ? this.getPrioridade() : "NÃ£o Classificado") + "\n"
+				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "NÃ£o Classificado") + "\n"
+				+ "* FuncionÃ¡rio ResponsÃ¡vel: " + (funcionario != null ? funcionario.getNome() : "NÃ£o atribudo") + "\n"
 				//+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
 				
 				+ "* Status: " + (this.getStatus().equals("Em andamento") ? this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n" : this.getStatus() )+ "\n"
@@ -384,17 +386,17 @@ public class Solicitacao {
 		
 		return (this.getAndamentoDoChamado() != null ? this.getAndamentoDoChamado() : "")
 				
-				+ "* Alterações realizadas por: " + funcionarioLogado + "\n"
-				+ "* Data de Alteração: " + sdf.format(data) + "\n"
-				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
-				+ "* Usuário Afetado: " + this.getUsuario() + "\n"
+				+ "* AlteraÃ§Ãµes realizadas por: " + funcionarioLogado + "\n"
+				+ "* Data de AlteraÃ§Ã£o: " + sdf.format(data) + "\n"
+				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "NÃ£o classificado") + "\n"
+				+ "* UsuÃ¡rio Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
-				+ "* Observação: " + this.getObs() + "\n"
-				+ "* Resolução: " + this.getResolucao() + "\n"
+				+ "* ObservaÃ§Ã£o: " + this.getObs() + "\n"
+				+ "* ResoluÃ§Ã£o: " + this.getResolucao() + "\n"
  				+ "* Categoria: " + this.getClassificacao() + "\n"
-				+ "* Classificação " + this.getPrioridade() + "\n"
+				+ "* ClassificaÃ§Ã£o " + this.getPrioridade() + "\n"
 				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
-				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
+				+ "* Funcionï¿½rio Responsï¿½vel: " + (funcionario != null ? funcionario.getNome() : "NÃ£o atribuÃ­odo") + "\n"
 				//+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
 				+ "* Status: " + (this.getStatus().equals("Em andamento") ? this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n" : this.getStatus() )+ "\n"
 				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"
