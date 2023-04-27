@@ -136,7 +136,7 @@ public class LoginController {
 	public String logarMfa(String mfa, String ip, HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogadoMFA") != null) {
 			Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogadoMFA");
-			int numMfa = Integer.parseInt(mfa);
+			int numMfa = Integer.parseInt(mfa.trim());
 			funcionario.setIp(ip);
 			if(funcionario.getMfa() == numMfa) {
 				if(funcionario.getFuncao().equals("Administrador")) {
