@@ -13,7 +13,7 @@
 	<form action="gravaAdmin" method="post"
 		class="form-horizontal container">
 		<fieldset>
-			<legend>Criação Admin</legend>
+			<legend>Criação Administrador</legend>
 			<div class="control-group">
 				<label class="control-label">Nome</label>
 				<div class="controls">
