@@ -17,6 +17,7 @@ import br.com.providerone.modelo.Funcionario;
 import br.com.providerone.modelo.Solicitacao;
 
 
+
 public class SolicitacaoDao {
 	EntityManager manager;
 
@@ -81,7 +82,7 @@ public class SolicitacaoDao {
 		//System.out.println("Pause!!");
 		Data data = new Data();
 		Long minutos;
-		if(solicitacaoEncontrada.getStatus().equals("Aberto") || solicitacaoEncontrada.getStatus().equals("Aguardando") || solicitacaoEncontrada.getStatus().equals("Não Classificado")){
+		if(solicitacaoEncontrada.getStatus().equals("Aberto") || solicitacaoEncontrada.getStatus().equals("Aguardando") || solicitacaoEncontrada.getStatus().equals("Nï¿½o Classificado")){
 			minutos = 0l;
 		}else if(solicitacaoEncontrada.getStatus().equals("Agendado")){ //EM OBS
 			minutos = 0l;
@@ -193,24 +194,24 @@ public class SolicitacaoDao {
 			solicitacao.setCliente(cliente);
 		}
 		
-		//Não muda data de Andamento
+		//Nï¿½o muda data de Andamento
 		if(solicitacao.getStatus().equals(solicitacaoEncontrada.getStatus())){
 			solicitacao.setDataAndamento(solicitacaoEncontrada.getDataAndamento());
 			if(solicitacao.isPlay() == solicitacaoEncontrada.isPlay()){
 				
 			}else{
 				if(solicitacao.isPlay()){ 
-					//Solicitação tirada de pause
+					//Solicitaï¿½ï¿½o tirada de pause
 					solicitacao.setDataAndamento(Calendar.getInstance());
 					solicitacao.setMinutos(solicitacaoEncontrada.getMinutos());
 				}else {
-					//Solicitação pausada
+					//Solicitaï¿½ï¿½o pausada
 					Data data = new Data();
 					Long minutos = data.difMin(Calendar.getInstance(), solicitacaoEncontrada.getDataAndamento());
 					if(solicitacaoEncontrada.getMinutos() == null){
 						solicitacao.setMinutos(minutos);
 					}else{
-						//Minutos já contabilizados são somados aos novos minutos utilizados.
+						//Minutos jï¿½ contabilizados sï¿½o somados aos novos minutos utilizados.
 						Long minutosAtuais = solicitacaoEncontrada.getMinutos();
 						solicitacao.setMinutos(minutosAtuais + minutos);
 					}
@@ -362,7 +363,7 @@ public class SolicitacaoDao {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
-			query.setParameter("pStatus", "Aguardando usuário");
+			query.setParameter("pStatus", "Aguardando usuï¿½rio");
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -519,7 +520,7 @@ public class SolicitacaoDao {
 		try {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.classificacao!=:pClassificacao and s.excluido!=:pExcluido");
-			query.setParameter("pStatus", "Não Classificado");
+			query.setParameter("pStatus", "Nï¿½o Classificado");
 			query.setParameter("pClassificacao", "Backup");
 			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
@@ -947,7 +948,7 @@ public class SolicitacaoDao {
 		try {
 			Query query = manager
 					.createQuery("select s from Solicitacao s where s.status=:pStatus and s.excluido!=:pExcluido order by s.id");
-			query.setParameter("pStatus", "Não Classificado");
+			query.setParameter("pStatus", "Nï¿½o Classificado");
 			query.setParameter("pExcluido", true);
 			solicitacaos = (List<Solicitacao>) query.getResultList();
 			if (solicitacaos != null) {
@@ -1053,7 +1054,7 @@ public class SolicitacaoDao {
 			Query query = manager
 					.createQuery("select count(s) from Solicitacao s where s.status=:pStatus and s.cliente.id=:pClienteId and s.excluido!=:pExcluido");
 			query.setParameter("pClienteId", id);
-			query.setParameter("pStatus", "Aguardando usuário");
+			query.setParameter("pStatus", "Aguardando usuï¿½rio");
 			query.setParameter("pExcluido", true);
 			Long qtd = (Long) query.getSingleResult();
 			if (qtd != 0) {

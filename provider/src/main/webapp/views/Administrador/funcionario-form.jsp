@@ -29,7 +29,7 @@
 			<div class="control-group">
 				<label class="control-label">Usuário</label>
 				<div class="controls">
-					<input id="nome" name="usuario" type="text" placeholder="Usuario de acesso ao Sistema"
+					<input id="usuario" name="usuario" type="text" placeholder="Usuario de acesso ao Sistema"
 						class="input-xlarge" required> <i class="fa fa-user fa-lg"> </i>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>
@@ -37,7 +37,7 @@
 			<div class="control-group">
 				<label class="control-label">Senha</label>
 				<div class="controls">
-					<input id="nome" name="senha" type="text" placeholder="Senha de acesso ao Sistema"
+					<input id="senha" name="senha" type="text" placeholder="Senha de acesso ao Sistema"
 						class="input-xlarge" required> <i class="fa fa-lock fa-lg"> </i>
 					<p class="help-block">* Campo Obrigatório</p>
 				</div>

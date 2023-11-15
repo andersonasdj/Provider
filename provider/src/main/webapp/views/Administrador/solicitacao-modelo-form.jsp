@@ -26,12 +26,10 @@
 			<div class="control-group">
 				<label class="control-label">Tipo de Solicitação</label>
 				<div class="controls">
-					<select class="selectpicker" id="formaAbertura"
-						name="formaAbertura">
-						<option></option>
+					<select class="selectpicker" id="classificacao"
+						name="classificacao">
 						<option>Entrada de Colaborador</option>
 						<option>Saída de Colaborador</option>
-						<option>
 					</select>
 				</div>
 			</div> 
@@ -85,54 +83,6 @@
 			<br/>
 			
 			<div class="control-group">
-				<label class="control-label">Observações</label>
-				<div class="controls">
-					<textarea class="form-control" rows="4" id="obs" name="obs" type="text" placeholder="Observações da solicitação"
-						value="${solicitacao.obs}" onkeyup="limite_textarea_obs(this.value)" class="input-xlarge"></textarea>
-						<span id="contObs">255</span> Restantes <br>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Categoria
-					<a class="dcontexto"> (?)
-					<span>Hardware - Problema físico no equipamento. <br><br>
-						Software - Problema lógico no equipamento. <br><br>
-						Rede - Problemas de conexão. <br><br>
-						Cabeamento - Serviços de cabeamento estruturado.
-					</span></a>
-				</label>
-				<div class="controls">
-					<select class="selectpicker" id="classificacao"
-						name="classificacao">
-						<option></option>
-						<option>Hardware</option>
-						<option>Software</option>
-						<option>Rede</option>
-						<option>Cabeamento</option>
-						<option>Smartphone</option>
-						<option>Projeto</option>
-						<option>Backup</option>
-						<option>Outros</option>
-					</select>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Classificação
-					<a class="dcontexto"> (?)
-					<span>Problema - Algo que é recorrente. <br> Incidente - Algo não recorrente. <br> Solicitação - Planejado.</span></a>
-				</label>
-				<div class="controls">
-					<select class="selectpicker" id="nivelDeIncidencia"
-						name="nivelDeIncidencia">
-						<option></option>
-						<option>Problema</option>
-						<option>Incidente</option>
-						<option>Solicitação</option>
-						<option>Backup</option>
-					</select>
-				</div>
-			</div> 
-			<div class="control-group">
 				<label class="control-label">Prioridade
 				<a class="dcontexto"> (?)
 					<span>Crítico - 2 Horas. <br> Alta - 4 Horas. <br> Média - 24 Horas. <br> Baixa - 48 Horas. <br> Planejada - Evento Planejado.</span>
@@ -149,20 +99,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Onsite / Offsite
-					<a class="dcontexto"> (?)
-					<span>Onsite - Atendimento no local. <br> Offsite - Atendimento remoto.</span></a>
-				</label>
-				<div class="controls">
-					<select class="selectpicker" id="onsiteOffisite"
-						name="onsiteOffsite">
-						<option></option>
-						<option>Onsite</option>
-						<option>Offsite</option>
-					</select>
-				</div>
-			</div>
+			
 			<div class="control-group">
 				<label class="control-label">Técnico Responsável</label>
 				<div class="controls">
@@ -175,65 +112,7 @@
 					</select>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label">Status</label>
-				<div class="controls">
-					<select class="selectpicker alertaFuncionario" id="status"
-						name="status">
-						<option>Abrir</option>
-						<option>Em andamento</option>
-						<option>Agendar</option>
-					</select>
-				</div>
-			</div>
-			<div id="agendamentos">
-				<div class="control-group" id="opAgendamentoData">
-					<label class="control-label">Data de Agendamento</label>
-					<div class="controls">
-						<input id="datepicker" name="agendado" type="text" placeholder="Data de agendamento" maxlength="10"
-							value="<f:formatDate pattern="dd-MM-yyyy" value="${solicitacao.agendado.time}" />" /> <i class="fa fa-calendar fa-lg"> </i>
-					</div>
-				</div>
-				<div class="control-group" id="opAgendamentoHora">
-					<label class="control-label">Hora de Agendamento</label>
-					<div class="controls">
-						<input id="timepicker" name="agendadoHora" type="text" placeholder="Hora de agendamento" maxlength="10"
-							value="<f:formatDate pattern="HH:mm" value="${solicitacao.agendadoHora.time}" />" /> <i class="fa fa-clock-o fa-lg"> </i>
-					</div>
-				</div>
-			</div>
-			<div class="form-check">
-			    <label class="form-check-label">
-			    	Enviar E-mail na abertura
-			      <input id="boxEmail" name="boxEmail" type="checkbox" class="form-check-input">
-			    </label>
-			    <div class="form-group" id="enviaEmail">
-					<label class="control-label">Destinatario</label>
-		            <div class="controls">
-		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none"></select>
-		            </div>
-	       		</div>
-	       		<br/>
-			</div>
-			<br/><br/>
-			<div class="form-check">
-			    <label class="form-check-label">
-			    	Associar chamado a
-			      <input id="boxIdChamado" name="boxIdChamado" type="checkbox" class="form-check-input">
-			    </label>
-			    <div class="form-group" id="enviaEmail">
-					<label class="control-label">ID do Chamado</label>
-		            <div class="controls">
-		            	<div id="idChamado" style="display: none">
-		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" />
-		                	<a href="javascript:func()" id="buscaId"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
-		                	<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
-		                </div>
-		            </div>
-        		</div>
-        		<br/>
-			</div>
-			<br/>
+			
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>

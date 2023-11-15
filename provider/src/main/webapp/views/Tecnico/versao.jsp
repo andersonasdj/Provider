@@ -14,6 +14,11 @@
 	<br />
 		<fieldset></fieldset>
 		<div class="container">
+			<legend>Versão 1.9.2</legend>
+			<ul>
+				<li>Alterado o tipo de criptografia	</li>
+				<li>Acrescentado 2 dígitos no código MFA </li>
+			</ul>
 			<legend>Versão 1.9.1</legend>
 			<ul>
 				<li>Correção de carregamento de Json com unicode windows-1252

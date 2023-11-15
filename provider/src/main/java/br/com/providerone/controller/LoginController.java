@@ -25,7 +25,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login() {
-		return "tela-login";
+		return "Front/tela-login";
 	}
 	
 	@RequestMapping("protocolo")
@@ -67,7 +67,7 @@ public class LoginController {
 		}
 	}
 	
-	//para criação do primeiro usuario do sistema
+	//para criaï¿½ï¿½o do primeiro usuario do sistema
 	@RequestMapping("/create")
 	public String create() {
 		FuncionarioDao dao = new FuncionarioDao();
@@ -94,7 +94,7 @@ public class LoginController {
 			if(funcionarioEncontrado.isStatusMfa()) {
 				enviaEmailMfa(funcionarioEncontrado);
 				session.setAttribute("funcionarioLogadoMFA", funcionarioEncontrado);
-				return "tela-mfa";
+				return "Front/tela-mfa";
 			}else {
 				if(funcionarioEncontrado.getFuncao().equals("Administrador")) {
 					session.setAttribute("funcionarioLogado", funcionarioEncontrado);		
@@ -115,11 +115,11 @@ public class LoginController {
 
 	private void enviaEmailMfa(Funcionario funcionarioEncontrado) {
 		Random random = new Random();	
-		int num = random.nextInt(90000);
-		if(num < 1000) {
-			num += random.nextInt(9000)*10;
-		}else if(num < 100) {
-			num += random.nextInt(9000)*10;
+		int num = random.nextInt(9000000);
+		if(num < 1000000) {
+			num += random.nextInt(90000)*10;
+		}else if(num < 1000) {
+			num += random.nextInt(90000)*10;
 		}
 		String mfa = String.valueOf( num );
 		FuncionarioDao daoSalvaMfa = new FuncionarioDao();
@@ -129,14 +129,14 @@ public class LoginController {
 		Email email = daoEmail.listaEmailConfigEnvia("MFA");
 	
 		JavaMailApp mail = new JavaMailApp(email);
-		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa);
+		mail.enviaMFA(funcionarioEncontrado.getEmail(), mfa.trim());
 	}
 	
 	@RequestMapping("logarMfa")
 	public String logarMfa(String mfa, String ip, HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogadoMFA") != null) {
 			Funcionario funcionario = (Funcionario) session.getAttribute("funcionarioLogadoMFA");
-			int numMfa = Integer.parseInt(mfa);
+			int numMfa = Integer.parseInt(mfa.trim());
 			funcionario.setIp(ip);
 			if(funcionario.getMfa() == numMfa) {
 				if(funcionario.getFuncao().equals("Administrador")) {

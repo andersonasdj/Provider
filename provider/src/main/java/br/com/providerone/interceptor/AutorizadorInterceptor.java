@@ -2,6 +2,7 @@ package br.com.providerone.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
@@ -12,7 +13,7 @@ public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 		String uri = request.getRequestURI();
 		if (uri.endsWith("login") || uri.endsWith("loginMobile") 
 				|| uri.endsWith("create") || uri.endsWith("gravaAdmin")
-				|| uri.endsWith("logar") || uri.contains("assets") 
+				|| uri.endsWith("logar") || uri.contains("assets")|| uri.contains("asset") 
 				|| uri.endsWith("exibirProtocolo") || uri.endsWith("protocolo")
 				|| uri.endsWith("enviaClassificacao")
 				|| uri.endsWith("nova")
