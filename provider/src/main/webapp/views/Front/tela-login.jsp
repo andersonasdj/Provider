@@ -24,7 +24,11 @@
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
+<<<<<<< HEAD
 				<h3><b>Login - ProviderOne</b></h3>
+=======
+				<h3>Login - ProviderOne</h3>
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 				
 			</div>
 			<div class="card-body">
@@ -53,7 +57,11 @@
 			</div>
 			<div class="card-footer">
 				<div class="d-flex justify-content-center">
+<<<<<<< HEAD
 					<a href="mailto:suporte@providerone.com.br" style="color: white">Esqueceu sua senha?</a>
+=======
+					<a href="mailto:suporte@providerone.com.br">Esqueceu sua senha?</a>
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 				</div>
 			</div>
 		</div>

@@ -355,9 +355,21 @@ public class Solicitacao {
 				+ "* Hora: " + sdf.format(hora) + "\n"
 				+ "* Cliente: " + cliente.getNome() + "\n"
 				+ "* Forma de Abertura: " + (this.getFormaAbertura() != null ? this.getFormaAbertura() : "Não classificado") + "\n"
+<<<<<<< HEAD
 				+ "* Usuario Afetado: " + this.getUsuario() + "\n"
 				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
 				+ "* Observaçãoo: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
+=======
+<<<<<<< HEAD
+				+ "* Usuario Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observaçãoo: " + (this.getObs() != null ? this.getObs() : "Não Classificado" ) + "\n"
+=======
+				+ "* Usu�rio Afetado: " + this.getUsuario() + "\n"
+				+ "* Problema Relatado: " + this.getDescricaoProblema() + "\n"
+				+ "* Observaçãoo: " + (this.getObs() != null ? this.getObs() : "N�o Classificado" ) + "\n"
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 				+ "* Categoria: " + (this.getClassificacao() != null ? this.getClassificacao() : "Não Classificado") + "\n"
 				+ "* Classificação " + (this.getPrioridade() != null ? this.getPrioridade() : "Não Classificado") + "\n"
 				+ "* Onsite / Offsite: " + (this.getOnsiteOffsite() != null ? this.getOnsiteOffsite() : "Não Classificado") + "\n"
@@ -394,7 +406,15 @@ public class Solicitacao {
  				+ "* Categoria: " + this.getClassificacao() + "\n"
 				+ "* Classificação " + this.getPrioridade() + "\n"
 				+ "* Onsite / Offsite: " + this.getOnsiteOffsite() + "\n"
+<<<<<<< HEAD
 				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
+=======
+<<<<<<< HEAD
+				+ "* Funcionário Responsável: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
+=======
+				+ "* Funcion�rio Respons�vel: " + (funcionario != null ? funcionario.getNome() : "Não atribuíodo") + "\n"
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 				//+ "* Status: " + this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n"
 				+ "* Status: " + (this.getStatus().equals("Em andamento") ? this.getStatus() + (this.isPlay() ? "" : " - Pausado") + "\n" : this.getStatus() )+ "\n"
 				+ (this.getStatus().equals("Agendado") ? "* Data de agendamento: " + ((getAgendado()!=null) ? df.format(this.getAgendado().getTime()): "Sem data de agendamento") + "\n"

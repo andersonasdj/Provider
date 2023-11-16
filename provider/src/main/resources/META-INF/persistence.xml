@@ -19,7 +19,11 @@
 		<!-- <class>br.com.providerone.modelo.UploadFile</class> -->
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
+<<<<<<< HEAD
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.222/techgol_provider" />
+=======
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.0.222/techgold_provider" />
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 			<property name="javax.persistence.jdbc.user" value="techgol_root" />
 			<property name="javax.persistence.jdbc.password" value="AG99y>NVGVcL?W6wPZiOW%GFP" />
 			<!-- <property name="javax.persistence.jdbc.password" value="6MK235gs34UA8neoVXDmoAHvh" /> -->

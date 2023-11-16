@@ -43,7 +43,15 @@ public class SolicitacaoController {
 			ClienteDao daoCli = new ClienteDao();
 			model.addAttribute("funcionarios", daoFun.listaFuncionarioAtivo());
 			model.addAttribute("clientes", daoCli.listaClienteAtivo());
+<<<<<<< HEAD
 			return "Front/"+funcionario.getFuncao() + "/solicitacao-form";
+=======
+<<<<<<< HEAD
+			return "Front/"+funcionario.getFuncao() + "/solicitacao-form";
+=======
+			return funcionario.getFuncao() + "/solicitacao-form";
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 		} else {
 			return "redirect:login";
 		}
@@ -484,6 +492,10 @@ public class SolicitacaoController {
 	public String relatorioGeral(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 			
 			//############ INCLUIDO DTO NO RETORNO
 			List<SolicitacaoGeralDTO> dtoList = new ArrayList<SolicitacaoGeralDTO>();
@@ -495,6 +507,13 @@ public class SolicitacaoController {
 			model.addAttribute("solicitacoes", dtoList); // ALTERADO!!!
 			//############ INCLUIDO DTO NO RETORNO
 			
+<<<<<<< HEAD
+=======
+=======
+			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes()); // ALTERADO!!!
+
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 			Long nclas, ab, and, age, agua;
 
 			SolicitacaoDao daoNaoClass = new SolicitacaoDao();

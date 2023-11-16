@@ -28,12 +28,17 @@
         
         
         
+<<<<<<< HEAD
         <property name="context-root" value="provider"/>
                                         
         
         
         
         <property name="java-output-path" value="/provider/target/classes"/>
+=======
+        <property name="java-output-path" value="/provider/target/classes"/>
+        <property name="context-root" value="provider"/>
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
                                     
     
     

@@ -44,20 +44,20 @@ public class JavaMailApp
 	
 	public void enviaEmail(Cliente cliente, Solicitacao solicitacao, String destinatario){
 		try {
-			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU��O TEMPORARIA
+			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLUCAO TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		      
-		      //Caso usu�rio n�o digite nenhum email ser� enviado ao cadastrado no usuario do cliente
+		      //Caso usuario nao digite nenhum email sera enviado ao cadastrado no usuario do cliente
 		      if(destinatario == ""){
 		    	  destinatario = cliente.getEmail();
 		      }
-		      Address[] toUser = InternetAddress //Destinat�rio(s)
+		      Address[] toUser = InternetAddress //Destinatario(s)
 		                 .parse(destinatario);
 		      
 		      /*
 		      if(email.getCc() != null || email.getCc().equals("")){
-		    	  Address[] toCc = InternetAddress //Destinat�io Com c�pia
+		    	  Address[] toCc = InternetAddress //Destinataio Com copia
 		    			  .parse(email.getCc());
 		    	  message.setRecipients(Message.RecipientType.CC, toCc); //Copia
 		      }*/
@@ -82,14 +82,14 @@ public class JavaMailApp
 				      			+ "</head>"
 				    		  	+ "<body>"
 				      			+	"<div class=\"container base\">"
-				    		  		+ "<div class=\"text-center\"><h2>Solicita��o cadastrada com sucesso!</h2></div>"
+				    		  		+ "<div class=\"text-center\"><h2>Solicitação cadastrada com sucesso!</h2></div>"
 				    		  		+ "<div class=\"text-left fonte-letras\">"
 					    		  		+ "<br/>"
 					    		  		+ "<ul>"
 					    		  			+ "<li class=\"espacamento\"><b>Data da abertura: </b>" + df.format(solicitacao.getDataAbertura().getTime()) +"</li>"
 						      				+ "<li class=\"espacamento\"><b>Aberto por:  </b>" + solicitacao.getAbriuChamado() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Usuario afetado:  </b>" + solicitacao.getUsuario() + "</li>"
-						      				+ "<li class=\"espacamento\"><b>Descri��o da solicita��o: </b>" + solicitacao.getDescricaoProblema() + "</li>"
+						      				+ "<li class=\"espacamento\"><b>Descrição da solicitação: </b>" + solicitacao.getDescricaoProblema() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getOnsiteOffsite() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Prioridade:  </b>" + solicitacao.getPrioridade() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Status:  </b>" + solicitacao.getStatus() + "</li>"
@@ -113,7 +113,7 @@ public class JavaMailApp
 				      	+ "</html>";
 		      
 		      message.setContent(mensagemEmail, "text/html;charset=utf-8");
-		      /**M�todo para enviar a mensagem criada*/
+		      /**Metodo para enviar a mensagem criada*/
 		      Transport.send(message);
 		 } catch (MessagingException e) {
 		      throw new RuntimeException(e);
@@ -122,15 +122,15 @@ public class JavaMailApp
 	
 	public void enviaEmailAbertura(String  cliente, Solicitacao solicitacao, String destinatario){
 		try {
-			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLU��O TEMPORARIA
+			String link = email.getLinkDominio()+"/provider/protocolo?id="+solicitacao.getId()+"&senha="+solicitacao.getSenha()+"\""; //SOLUCAO TEMPORARIA
 		      Message message = new MimeMessage(session);
 		      message.setFrom(new InternetAddress(email.getEmail())); //Remetente
 		
-		      Address[] toUser = InternetAddress //Destinat�rio(s)
+		      Address[] toUser = InternetAddress //Destinatario(s)
 		                 .parse(destinatario);
 		      
 		      if(email.getCc() != null || email.getCc().equals("")){
-		    	  Address[] toCc = InternetAddress //Destinat�io Com c�pia
+		    	  Address[] toCc = InternetAddress //Destinataio Com copia
 		    			  .parse(email.getCc());
 		    	  message.setRecipients(Message.RecipientType.CC, toCc); //Copia
 		      }
@@ -154,14 +154,14 @@ public class JavaMailApp
 				      			+ "</head>"
 				    		  	+ "<body>"
 				      			+	"<div class=\"container base\">"
-				    		  		+ "<div class=\"text-center\"><h2>Solicita��o cadastrada com sucesso!</h2></div>"
+				    		  		+ "<div class=\"text-center\"><h2>Solicitação cadastrada com sucesso!</h2></div>"
 				    		  		+ "<div class=\"text-left fonte-letras\">"
 					    		  		+ "<br/>"
 					    		  		+ "<ul>"
 					    		  			+ "<li class=\"espacamento\"><b>Data da abertura: </b>" + df.format(solicitacao.getDataAbertura().getTime()) +"</li>"
 						      				+ "<li class=\"espacamento\"><b>Aberto por:  </b>" + solicitacao.getAbriuChamado() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Usuario afetado:  </b>" + solicitacao.getUsuario() + "</li>"
-						      				+ "<li class=\"espacamento\"><b>Descri��o da solicita��o: </b>" + solicitacao.getDescricaoProblema() + "</li>"
+						      				+ "<li class=\"espacamento\"><b>Descrição da solicitação: </b>" + solicitacao.getDescricaoProblema() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Site:  </b>" + solicitacao.getOnsiteOffsite() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Prioridade:  </b>" + solicitacao.getPrioridade() + "</li>"
 						      				+ "<li class=\"espacamento\"><b>Status:  </b>" + solicitacao.getStatus() + "</li>"
@@ -184,7 +184,7 @@ public class JavaMailApp
 				      	+ "</html>";
 		      
 		      message.setContent(mensagemEmail, "text/html;charset=utf-8");
-		      /**M�todo para enviar a mensagem criada*/
+		      /**Metodo para enviar a mensagem criada*/
 		      Transport.send(message);
 		 } catch (MessagingException e) {
 		      throw new RuntimeException(e);
@@ -193,11 +193,12 @@ public class JavaMailApp
 	
 	private static Session configuraEmail(/*final*/ final Email email) {
 		Properties props = new Properties();
-		/** Par�metros de conex�o com servidor Microsoft / Google */
+		/** Parametros de conexao com servidor Microsoft / Google */
 		props.put("mail.smtp.host", email.getSmtp());
 		//props.put("mail.smtp.ssl.trust", email.getSmtp());
 		props.put("mail.smtp.socketFactory.port", email.getPortaSmtp());
 		props.put("mail.smtp.starttls.enable", email.isSslStatus());
+		props.put("mail.smtp.ssl.protocols", "TLSv1.2");
 		props.put("mail.smtp.auth", email.isAutenticacao());
 		props.put("mail.smtp.port", email.getPortaSmtp());
 		
@@ -209,7 +210,7 @@ public class JavaMailApp
 		                       return new PasswordAuthentication(email.getEmail(), email.getSenha());
 		                 }
 		            });
-		/** Ativa Debug para sess�o */
+		/** Ativa Debug para sessao */
 		//session.setDebug(true);
 		return session;
 	}

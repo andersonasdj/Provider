@@ -111,5 +111,13 @@ org.eclipse.jdt.core.compiler.problem.unusedPrivateMember=warning
 org.eclipse.jdt.core.compiler.problem.unusedTypeParameter=ignore
 org.eclipse.jdt.core.compiler.problem.unusedWarningToken=warning
 org.eclipse.jdt.core.compiler.problem.varargsArgumentNeedCast=warning
+<<<<<<< HEAD
 org.eclipse.jdt.core.compiler.release=disabled
+=======
+<<<<<<< HEAD
+org.eclipse.jdt.core.compiler.release=disabled
+=======
+org.eclipse.jdt.core.compiler.release=enabled
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
+>>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 org.eclipse.jdt.core.compiler.source=11
