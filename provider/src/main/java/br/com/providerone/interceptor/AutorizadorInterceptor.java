@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+@SuppressWarnings("deprecation")
 public class AutorizadorInterceptor extends HandlerInterceptorAdapter {
 
 	@Override

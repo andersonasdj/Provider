@@ -3,11 +3,7 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
 
 html,body{
-<<<<<<< HEAD
 background-image: url('../img/img-login.jpg');
-=======
-background-image: url('../img/login-img.jpg');
->>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 background-size: cover;
 background-repeat: no-repeat;
 height: 100%;
@@ -75,11 +71,7 @@ margin-right: 5px;
 
 .login_btn{
 color: black;
-<<<<<<< HEAD
 background-color: rgb(153, 193, 241);
-=======
-background-color: rgb(249, 240, 107);
->>>>>>> ba5094a700980d190eb956cc1f5af81f35dfa19f
 width: 100px;
 }
 
