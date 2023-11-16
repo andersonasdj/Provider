@@ -5,6 +5,10 @@
   <installed facet="jst.jaxrs" version="1.1"/>
   <installed facet="jpt.jpa" version="2.0"/>
   <installed facet="jst.jsf" version="2.2"/>
+<<<<<<< HEAD
   <installed facet="jst.web" version="3.0"/>
+=======
+  <installed facet="jst.web" version="4.0"/>
+>>>>>>> 5362b0acfcb41df5c47371f1c17a239247552a46
   <installed facet="java" version="11"/>
 </faceted-project>
