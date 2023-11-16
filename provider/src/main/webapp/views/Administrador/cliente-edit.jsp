@@ -127,17 +127,10 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Telefone 1</label>
+				<label class="control-label">Telefone</label>
 				<div class="controls">
-					<input id="telefone1" name="telefone1" type="text" placeholder="Telefone 1"
+					<input id="telefone1" name="telefone1" type="text" placeholder="Telefone"
 						value="${cliente.telefone1}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefone 2</label>
-				<div class="controls">
-					<input id="telefone2" name="telefone2" type="text" placeholder="Telefone 2"
-						value="${cliente.telefone2}" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">
@@ -145,20 +138,6 @@
 				<div class="controls">
 					<input id="nome" name="endereco" type="text"
 						value="${cliente.endereco}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Latitude</label>
-				<div class="controls">
-					<input id="latitude" name="latitude" type="text"
-						value="${cliente.latitude}" class="input-xlarge">
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Longitude</label>
-				<div class="controls">
-					<input id="longitude" name="longitude" type="text"
-						value="${cliente.longitude}" class="input-xlarge">
 				</div>
 			</div>
 			<div class="control-group">

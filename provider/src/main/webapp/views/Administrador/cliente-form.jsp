@@ -83,16 +83,9 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label">Telefone 1</label>
+				<label class="control-label">Telefone</label>
 				<div class="controls">
-					<input id="telefone1" name="telefone1" type="text" placeholder="Telefone 1"
-						class="input-xlarge"> <i class="fa fa-fax fa-lg"> </i>
-				</div>
-			</div>
-			<div class="control-group">
-				<label class="control-label">Telefone 2</label>
-				<div class="controls">
-					<input id="telefone2" name="telefone2" type="text" placeholder="Telefone 2"
+					<input id="telefone1" name="telefone1" type="text" placeholder="Telefone"
 						class="input-xlarge"> <i class="fa fa-fax fa-lg"> </i>
 				</div>
 			</div>

@@ -19,6 +19,7 @@ import br.com.providerone.dao.ComputadorDao;
 import br.com.providerone.dao.EmailDao;
 import br.com.providerone.dao.FuncionarioDao;
 import br.com.providerone.dao.SolicitacaoDao;
+import br.com.providerone.dto.SolicitacaoGeralDTO;
 import br.com.providerone.mail.JavaMailApp;
 import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Email;
@@ -42,7 +43,7 @@ public class SolicitacaoController {
 			ClienteDao daoCli = new ClienteDao();
 			model.addAttribute("funcionarios", daoFun.listaFuncionarioAtivo());
 			model.addAttribute("clientes", daoCli.listaClienteAtivo());
-			return funcionario.getFuncao() + "/solicitacao-form";
+			return "Front/"+funcionario.getFuncao() + "/solicitacao-form";
 		} else {
 			return "redirect:login";
 		}
@@ -483,8 +484,17 @@ public class SolicitacaoController {
 	public String relatorioGeral(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
-			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes()); // ALTERADO!!!
-
+			
+			//############ INCLUIDO DTO NO RETORNO
+			List<SolicitacaoGeralDTO> dtoList = new ArrayList<SolicitacaoGeralDTO>();
+			//for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
+			for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
+				SolicitacaoGeralDTO dto = new SolicitacaoGeralDTO(solicitacao);
+				dtoList.add(dto);
+			}
+			model.addAttribute("solicitacoes", dtoList); // ALTERADO!!!
+			//############ INCLUIDO DTO NO RETORNO
+			
 			Long nclas, ab, and, age, agua;
 
 			SolicitacaoDao daoNaoClass = new SolicitacaoDao();

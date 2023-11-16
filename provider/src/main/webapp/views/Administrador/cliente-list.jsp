@@ -54,9 +54,7 @@
 					<td>
 						<a class="dcontexto"> ${cliente.endereco}
 							<span class="dados"><p>Tel.: ${cliente.telefone1}</p>
-								<p>Tel.: ${cliente.telefone2} </p>
-								<p id="idLatitude" class="ocultar">${cliente.latitude}</p>
-								<p id="idLongitude" class="ocultar">${cliente.longitude}</p>
+								
 							</span>
 						</a>
 					</td>

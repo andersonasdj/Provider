@@ -17,7 +17,7 @@ import br.com.providerone.modelo.Funcionario;
 @Controller
 public class FuncionarioController {
 	
-	//para criação do primeiro usuario do sistema
+	//para criaï¿½ï¿½o do primeiro usuario do sistema
 	@RequestMapping("/gravaAdmin")
 	public String gravaAdmin(Funcionario funcionario) {
 		FuncionarioDao daoTesta = new FuncionarioDao();
@@ -28,18 +28,19 @@ public class FuncionarioController {
 		}
 		return "redirect:login";
 	}
-	
+	//###NOVA VIEW###
 	@RequestMapping("/homePage")
 	public String homePage(HttpSession session, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			homePageAdiconaModel(model, funcionario);
-			return funcionario.getFuncao()+"/home-page";
+			return "Front/"+funcionario.getFuncao()+"/home-page";
 		}else {
 			return "redirect:loginFuncionario";
 		}
 	}
-
+	//###NOVA VIEW###
+	
 	private void homePageAdiconaModel(Model model, Funcionario funcionario) {
 		Calendar hoje = Calendar.getInstance();
 		hoje.set(Calendar.HOUR_OF_DAY, 0);
@@ -62,7 +63,7 @@ public class FuncionarioController {
 	@RequestMapping("/funcionarioForm")
 	public String funcionarioForm(HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			return "Administrador/funcionario-form";
+			return "Front/Administrador/funcionario-form";
 		} else {
 			return "redirect:loginFuncionario";
 		}
@@ -142,7 +143,7 @@ public class FuncionarioController {
 			FuncionarioDao dao = new FuncionarioDao();
 			funcionarios = dao.listaFuncionario();
 			model.addAttribute("funcionarios", funcionarios);
-			return "Administrador/funcionario-list";
+			return "Front/Administrador/funcionario-list";
 		} else {
 			return "redirect:homePage";
 		}
