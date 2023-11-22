@@ -103,7 +103,7 @@
 		<a href="funcionarioForm"><i class="fa fa-plus fa-2x" aria-hidden="true"></i></a>
 		<p class="pull-right">
 		<div class="table-responsive">
-		<table class="table" id="tabela-clientes">
+		<table class="table table-bordered" id="tabela-clientes">
 			<thead>
 				<tr>
 					<th scope="col">Nome</th>
@@ -111,7 +111,6 @@
 					<th scope="col">Ultimo Login</th>
 					<th scope="col">Email</th>
 					<th scope="col">Função</th>
-					<th scope="col">Celular</th>
 					<th scope="col">Data de Atualização</th>
 					<th scope="col">Status</th>
 					<th scope="col">MFA</th>
@@ -135,7 +134,6 @@
 							<td>Não cadastrado</td>
 						</c:if>
 						<td>${funcionario.funcao}</td>
-						<td>${funcionario.celular}</td>
 						<td><f:formatDate value="${funcionario.dataAtualizacao.time}"
 								pattern="dd/MM/yyyy" /></td>
 						<td>${funcionario.status}</td>
@@ -160,7 +158,6 @@
 							<td>Não cadastrado</td>
 						</c:if>
 						<td>${funcionario.funcao}</td>
-						<td>${funcionario.celular}</td>
 						
 						<td><f:formatDate value="${funcionario.dataAtualizacao.time}"
 								pattern="dd/MM/yyyy" /></td>

@@ -17,7 +17,7 @@ import br.com.providerone.modelo.Funcionario;
 @Controller
 public class FuncionarioController {
 	
-	//para cria��o do primeiro usuario do sistema
+	//para criaçãoo do primeiro usuario do sistema
 	@RequestMapping("/gravaAdmin")
 	public String gravaAdmin(Funcionario funcionario) {
 		FuncionarioDao daoTesta = new FuncionarioDao();

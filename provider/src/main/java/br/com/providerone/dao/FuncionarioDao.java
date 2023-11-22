@@ -7,11 +7,15 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Component;
+
 import br.com.providerone.criptografia.Criptografia;
 import br.com.providerone.entitymanager.EntityFactory;
 import br.com.providerone.modelo.Funcionario;
 
+@Component
 public class FuncionarioDao {
+	
 	EntityManager manager;
 
 	public FuncionarioDao() {	

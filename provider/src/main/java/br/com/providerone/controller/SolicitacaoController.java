@@ -62,7 +62,7 @@ public class SolicitacaoController {
 			ClienteDao daoCli = new ClienteDao();
 			model.addAttribute("funcionarios", daoFun.listaFuncionarioAtivo());
 			model.addAttribute("clientes", daoCli.listaClienteAtivo());
-			return funcionario.getFuncao() + "/solicitacao-modelo-form";
+			return "Front/"+funcionario.getFuncao() + "/solicitacao-modelo-form";
 		} else {
 			return "redirect:login";
 		}
