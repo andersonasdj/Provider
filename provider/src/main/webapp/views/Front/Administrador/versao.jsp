@@ -37,6 +37,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="solicitacaoForm">Abrir Solicitação</a></li>
+								<li><a class="dropdown-item" href="solicitacaoModeloForm">Modelos Solicitações</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
@@ -44,11 +45,11 @@
 								<li><a class="dropdown-item" href="solicitacoesAgendadas">Agendadas</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAndamento">Em Andamento</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAguardando">Aguardando usuário</a></li>
-								<li><a class="dropdown-item" href="finalizadoHoje">Finalizados hoje</a></li>
+								<li><a class="dropdown-item" href="relatorioGeral">Resumo Geral</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item" href="relatorioTecnico">Relatório</a></li>
+								<li><a class="dropdown-item" href="relatorioOp">Relatório</a></li>
 							</ul>
 						</li>
 						
@@ -68,7 +69,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -103,91 +104,109 @@
 		<!-- ################### BARRA DE NAVEGAÇÃO  -->
 
 		<hr class="bg-danger border-2 border-top border-danger">
-		<div id="">
-			
-			<div class="container">
-				<div id="containerPerfil">
-					<aside class="">
-						<a href="upload" >
-							<c:if test="${empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="asset/img/login.png" style="width: 180px" class="img-thumbnail" alt="...">
-							</c:if>
-							<c:if test="${not empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="${funcionarioLogado.caminhoFoto}" style="width: 180px" class="img-thumbnail" alt="...">
-								
-							</c:if>
-						</a>
-					
-						<div id="perfil">
-							<p class="asid-linha">Usuário : ${funcionarioLogado.usuario} /
-							 Ultimo Login : <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
-							  - <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="HH:mm"/></p>
-							<p class="asid-linha">IP :<b> ${funcionarioLogado.ip}</b></p>
-							<p class="asid-linha">Email : ${funcionarioLogado.email}</p>
-							<p class="asid-linha">Bem vindo, ${funcionarioLogado.nome}</p>
-						</div>
-					</aside>
-				</div>
-			</div>
-		</div>
-		
-	<br/><br/>
-	<br/><br/>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-7">
-				<c:if test="${qtdAberto == '0'}"></c:if>
-				<c:if test="${qtdAberto == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitação <a href="solicitacoesAbertas">Aberta</a></h6>
-				</c:if>	
-				<c:if test="${qtdAberto > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitações <a href="solicitacoesAbertas">Abertas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdAgendado == '0'}"></c:if>
-				<c:if test="${qtdAgendado == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitação <a href="solicitacoesAgendadas">Agendada</a></h6>
-				</c:if>	
-				<c:if test="${qtdAgendado > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitações <a href="solicitacoesAgendadas">Agendadas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdEmAndamento == '0'}"></c:if>
-				<c:if test="${qtdEmAndamento == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitação <a href="solicitacoesAndamento">Em andamento</a></h6>
-				</c:if>	
-				<c:if test="${qtdEmAndamento > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitações <a href="solicitacoesAndamento">Em andamento</h6>
-				</c:if><br/>
-				
-				<c:if test="${qtdAguardando == '0'}"></c:if>
-				<c:if test="${qtdAguardando == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitação <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-				<c:if test="${qtdAguardando > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitações <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-			</div>
-			<div class="col-md-5">
-				<c:if test="${qtdAgendadoHoje >= '1'}">
-					<p>
-						<h6> <a href="agendamentosHoje">
-							<span style="color: brue">
-							 	<i class="fas fa-exclamation-triangle"></i> Agendamentos para hoje ${qtdAgendadoHoje}
-							 </span></a>
-						</h6>
-					</p><br/>
-				</c:if>
-				<c:if test="${qtdAgendadoAtrasado >= '1'}">
-					<p>
-						<h6><a href="agendamentosAtrasados">
-							<span style="color: red">
-								<i class="fas fa-exclamation-triangle"></i> Agendamentos atrasados ${qtdAgendadoAtrasado}
-							</span></a> 
-						</h6>
-					</p>
-				</c:if>
-			</div>
-		</div>
-	</div>
+	
+
+		<legend>Versão 1.9.2</legend>
+			<ul>
+				<li>Alterado o tipo de criptografia	</li>
+				<li>Acrescentado 2 dígitos no código MFA </li>
+			</ul>
+			<legend>Versão 1.9.1</legend>
+			<ul>
+				<li>Correção de carregamento de Json com unicode windows-1252
+					<ul>
+						<li>Correção do charset para carregamento de solicitante.</li>
+						<li>Correção do charset para carregamento de usuário afetado.</li>
+						<li>Correção do charset para carregamento de cardo de usuário</li>
+					</ul>
+				</li>
+			</ul><br/>
+			<legend>Versão 1.9</legend>
+			<ul>
+				<li>Inclusão de Login com MFA
+					<ul>
+						<li>Incluída opção de adição de configuração de email para envio do código MFA.</li>
+						<li>Opção de ativar ou desativar MFA por usuário.</li>
+					</ul>
+				</li>
+			</ul><br/>
+			<legend>Versão 1.8</legend>
+			<ul>
+				<li>Controle de pause e play em solicitações em andamento.
+					<ul>
+						<li>A solicitação em andamento pode ser pausada, deixando de contabilizar tempo de atendimento.</li>
+						<li>Uma solicitação em estado "Aguardando" somente contabiliza ao voltar para "Em andamento", será somado com o tempo gasto antes do "Aguardando".</li>
+					</ul>
+				</li>
+				<li>Opção de exportação de lista de colaboradores de clientes.</li>
+			</ul><br/>
+			<legend>Versão 1.7</legend>
+			<ul>
+				<li>Associação de chamado.
+					<ul>
+						<li>Um chamado associado outro chamado, somente poderár ser iniciado ao finalizar o anterior.</li>
+					</ul>
+				</li>
+				<li>Status de "Aguardando usuário" foi alterado para "Aguardando."</li>
+				<li>Inserido nível de prioridade "Crítico" para abertura de chamado.</li>
+				<li>Limitações de alterações de status e técino responsável.
+					<ul>
+						<li>O chamado somente poderá ficar sem técino no status "Aberto" e "Agendado"</li>
+					</ul>
+				</li>
+				<li>Novos ícones na listagem dos chamados.
+					<ul>
+						<li>Inserido ícone de criticidade na listagem dos chamados.</li>
+						<li>Inserido ícone de cliente vip na listagem dos chamados.</li>
+						<li>Inserido ícone de RedFlag na listagem dos chamados.</li>
+					</ul>
+				</li>
+			</ul><br/>
+			<legend>Versão 1.6</legend>
+			<ul>
+				<li>Auto preenchimento ao solicitante e usuário afetado ao selecionar o cliente.
+					<ul>
+						<li>Exibição do cargo do solicitante.</li>
+						<li>Exibição do cargo do usuário afetado.</li>
+					</ul>
+				</li>
+				<li>Auto preenchimento da lista de e-mails dos destinatários ao selecionar o cliente.
+					<ul>
+						<li>Cadastro do cargo do funcionário.</li>
+					</ul>
+				</li>
+				<li>Opção de informar Red Flag e cliente Vip na edição do cliente</li>
+				<li>Criação, edição e exclusão de colaboraderes para os clientes.</li>
+				<li>Classificação de solicitação pelo cliente após finalização</li>
+				<li>Link de acompanhamento de protocolo na pagina de edição de chamado.</li>
+			</ul><br/>
+			<legend>Versão 1.5</legend>
+			<ul>
+				<li>Nova opção para copiar uma solicitação.</li>
+				<ul>
+						<li>Uma nova solicitação é criada a partir do modelo de outra solicitação.</li>
+				</ul>
+				<li>Chamados excluidos irão para lista de Excluidos, não são deletados do banco.</li>
+				<li>Lista de chamados excluídos.</li>
+				<li>Lista de chamads atualizados no dia</li>
+				<li>Cópia rápida de solicitante para usuário afetado (Função desabilitada).</li>
+				<li>Exibição da data de modificação da solicitação.</li>
+				<li>Logs de solicitação abrem em nova janela.</li>
+				<li>Novas funcionalidades para inclusão de checklists e procedimentos.
+					<ul>
+						<li>Inclusão de checklists padrões.</li>
+						<li>Inclisão de checklists personalizados por cliente.</li>
+						<li>Inclusão de procedimentos separados por tarefas.</li>
+						<li>Versão impressa de checklist.</li>
+					</ul>
+				</li>
+			</ul>
+
+
+
+
+
+
 
 		<br/><br/>
 		<footer class="text-center text-white">

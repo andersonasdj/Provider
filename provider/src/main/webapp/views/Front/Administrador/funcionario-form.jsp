@@ -52,7 +52,7 @@
 								Clientes
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="clientesList">Listar</a></li>
+								<li><a class="dropdown-item" href="clientes">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -61,7 +61,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">

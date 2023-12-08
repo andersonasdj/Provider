@@ -38,7 +38,7 @@
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-desktop"> </i> Clientes <span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
-			                    <li><a href="clientesList">Listar</a></li>
+			                    <li><a href="clientes">Listar</a></li>
 			                  </ul>
 						</li>
 						<li class="dropdown">

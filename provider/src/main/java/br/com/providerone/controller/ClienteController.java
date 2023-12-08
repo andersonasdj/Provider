@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.ClienteDao;
@@ -101,7 +102,7 @@ public class ClienteController {
 		}
 	}
 	
-	@RequestMapping("/clientesList")
+	@GetMapping("/clientes")
 	public String clientesList(HttpSession session, Model model) {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
@@ -109,7 +110,7 @@ public class ClienteController {
 			ClienteDao dao = new ClienteDao();
 			clientes = dao.listaCliente();
 			model.addAttribute("clientes", clientes);
-			return funcionario.getFuncao()+"/cliente-list";
+			return "Front/"+funcionario.getFuncao()+"/cliente-list";
 		} else {
 			return "redirect:homePage";
 		}

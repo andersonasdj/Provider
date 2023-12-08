@@ -3,6 +3,8 @@
 <html>
 
 <head>
+	<title>ProviderOne - Relatórios</title>
+	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -10,7 +12,6 @@
 	<!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 	<link rel="stylesheet" href="asset/css/stylePersonal.css">
-	<title>ProviderOne - Home</title>
 </head>
 
 <body>
@@ -37,6 +38,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="solicitacaoForm">Abrir Solicitação</a></li>
+								<li><a class="dropdown-item" href="solicitacaoModeloForm">Modelos Solicitações</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
@@ -44,11 +46,11 @@
 								<li><a class="dropdown-item" href="solicitacoesAgendadas">Agendadas</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAndamento">Em Andamento</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAguardando">Aguardando usuário</a></li>
-								<li><a class="dropdown-item" href="finalizadoHoje">Finalizados hoje</a></li>
+								<li><a class="dropdown-item" href="relatorioGeral">Resumo Geral</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item" href="relatorioTecnico">Relatório</a></li>
+								<li><a class="dropdown-item" href="relatorioOp">Relatório</a></li>
 							</ul>
 						</li>
 						
@@ -68,7 +70,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -103,92 +105,60 @@
 		<!-- ################### BARRA DE NAVEGAÇÃO  -->
 
 		<hr class="bg-danger border-2 border-top border-danger">
-		<div id="">
-			
-			<div class="container">
-				<div id="containerPerfil">
-					<aside class="">
-						<a href="upload" >
-							<c:if test="${empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="asset/img/login.png" style="width: 180px" class="img-thumbnail" alt="...">
-							</c:if>
-							<c:if test="${not empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="${funcionarioLogado.caminhoFoto}" style="width: 180px" class="img-thumbnail" alt="...">
-								
-							</c:if>
-						</a>
-					
-						<div id="perfil">
-							<p class="asid-linha">Usuário : ${funcionarioLogado.usuario} /
-							 Ultimo Login : <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
-							  - <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="HH:mm"/></p>
-							<p class="asid-linha">IP :<b> ${funcionarioLogado.ip}</b></p>
-							<p class="asid-linha">Email : ${funcionarioLogado.email}</p>
-							<p class="asid-linha">Bem vindo, ${funcionarioLogado.nome}</p>
-						</div>
-					</aside>
+		<spam class="pull-right">
+				<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></i></a>
+		</spam>
+			<div align="center">
+				<div id="">
+					<br/><br/>
+					<p><a class="btn btn-info" href="relatorioHoje" role="button"> Aberto Hoje ${solicitacoes}</a>
+					<a class="btn btn-info" href="finalizadoHoje" role="button"> Finalizados Hoje ${finalizados}</a>
+					<a class="btn btn-info" href="atualizadoHoje" role="button"> Atualizados Hoje </a>
+					<a class="btn btn-info" href="relatorioPeriodoAbertura" role="button"> Por Período Abertura</a>
+					<a class="btn btn-info" href="relatorioPeriodoFechamento" role="button"> Por Período Fechamento</a>
+					<a class="btn btn-info" href="relatorioId" role="button"> Por ID</a></P><br/>
+					<P><a class="btn btn-info" href="relatorioSelect" role="button">Por Cliente </a>
+					<a class="btn btn-info" href="relatorioSelectTec" role="button">Por Tecnico </a>
+					<a class="btn btn-info" href="relatorioPalavra" role="button">Por Palavra chave </a>
+					<a class="btn btn-info" href="relatorioGeral" role="button"> Não finalizadas</a>
+					<a class="btn btn-info" href="solicitacoesExcluidas" role="button"> Solicitações Excluídas</a>
+					<a class="btn btn-info" href="relatorioAgendamento" role="button"> Gerar Agendamento</a></p>
 				</div>
+				<br/>
 			</div>
-		</div>
-		
-	<br/><br/>
-	<br/><br/>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-7">
-				<c:if test="${qtdAberto == '0'}"></c:if>
-				<c:if test="${qtdAberto == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitação <a href="solicitacoesAbertas">Aberta</a></h6>
-				</c:if>	
-				<c:if test="${qtdAberto > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitações <a href="solicitacoesAbertas">Abertas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdAgendado == '0'}"></c:if>
-				<c:if test="${qtdAgendado == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitação <a href="solicitacoesAgendadas">Agendada</a></h6>
-				</c:if>	
-				<c:if test="${qtdAgendado > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitações <a href="solicitacoesAgendadas">Agendadas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdEmAndamento == '0'}"></c:if>
-				<c:if test="${qtdEmAndamento == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitação <a href="solicitacoesAndamento">Em andamento</a></h6>
-				</c:if>	
-				<c:if test="${qtdEmAndamento > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitações <a href="solicitacoesAndamento">Em andamento</h6>
-				</c:if><br/>
-				
-				<c:if test="${qtdAguardando == '0'}"></c:if>
-				<c:if test="${qtdAguardando == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitação <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-				<c:if test="${qtdAguardando > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitações <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-			</div>
-			<div class="col-md-5">
-				<c:if test="${qtdAgendadoHoje >= '1'}">
-					<p>
-						<h6> <a href="agendamentosHoje">
-							<span style="color: brue">
-							 	<i class="fas fa-exclamation-triangle"></i> Agendamentos para hoje ${qtdAgendadoHoje}
-							 </span></a>
-						</h6>
-					</p><br/>
-				</c:if>
-				<c:if test="${qtdAgendadoAtrasado >= '1'}">
-					<p>
-						<h6><a href="agendamentosAtrasados">
-							<span style="color: red">
-								<i class="fas fa-exclamation-triangle"></i> Agendamentos atrasados ${qtdAgendadoAtrasado}
-							</span></a> 
-						</h6>
-					</p>
-				</c:if>
-			</div>
-		</div>
-	</div>
 
+			<table id="table" class="table table-striped"
+	               data-show-columns="true"
+	               data-show-toggle="true"
+	               data-search="true"
+	               data-key-events="true"
+	               data-show-export="true"
+	               data-click-to-select="true"
+	               data-toolbar="#toolbar">
+				<thead>
+				<tr class="" align="center">
+					<th data-field="nome" data-sortable="true">Nome</th>
+					<th data-field="qtdAberto" data-sortable="true">Quantidade Aberto</th>
+					<th data-field="qtdAndamento" data-sortable="true">Quantidade Andamento</th>
+					<th data-field="qtdAgendado" data-sortable="true">Quantidade Agendado</th>
+					<th data-field="qtdAguardando" data-sortable="true">Quantidade Aguardando</th>
+					<th data-field="qtdTotal" data-sortable="true">Total</th>
+				</tr>
+				</thead>
+					<c:forEach var="relatorio" items="${relatorios}">
+						<tr class="" align="center">
+							<td>${relatorio.nome}</td>
+							<td><strong>${relatorio.qtdAberto}</strong></td>	
+							<td><strong>${relatorio.qtdAndamento}</strong></td>	
+							<td><strong>${relatorio.qtdAgendado}</strong></td>	
+							<td><strong>${relatorio.qtdAguardando}</strong></td>	
+							<td><strong>${relatorio.qtdTotal}</strong></td>							
+						</tr>
+					</c:forEach>
+			</table>			
+		
+		<br/><br/>
+		<br/><br/>
 		<br/><br/>
 		<footer class="text-center text-white">
 			<div class="container ">

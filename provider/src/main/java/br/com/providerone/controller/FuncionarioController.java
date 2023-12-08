@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.FuncionarioDao;
@@ -136,7 +137,7 @@ public class FuncionarioController {
 		}
 	}
 
-	@RequestMapping("/funcionariosList")
+	@GetMapping("/funcionarios")
 	public String funcionariosList(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			List<Funcionario> funcionarios = new ArrayList<Funcionario>();

@@ -37,6 +37,7 @@
 							</a>
 							<ul class="dropdown-menu">
 								<li><a class="dropdown-item" href="solicitacaoForm">Abrir Solicitação</a></li>
+								<li><a class="dropdown-item" href="solicitacaoModeloForm">Modelos Solicitações</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
@@ -44,11 +45,11 @@
 								<li><a class="dropdown-item" href="solicitacoesAgendadas">Agendadas</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAndamento">Em Andamento</a></li>
 								<li><a class="dropdown-item" href="solicitacoesAguardando">Aguardando usuário</a></li>
-								<li><a class="dropdown-item" href="finalizadoHoje">Finalizados hoje</a></li>
+								<li><a class="dropdown-item" href="relatorioGeral">Resumo Geral</a></li>
 								<li>
 									<hr class="dropdown-divider">
 								</li>
-								<li><a class="dropdown-item" href="relatorioTecnico">Relatório</a></li>
+								<li><a class="dropdown-item" href="relatorioOp">Relatório</a></li>
 							</ul>
 						</li>
 						
@@ -68,7 +69,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -103,91 +104,50 @@
 		<!-- ################### BARRA DE NAVEGAÇÃO  -->
 
 		<hr class="bg-danger border-2 border-top border-danger">
-		<div id="">
-			
-			<div class="container">
-				<div id="containerPerfil">
-					<aside class="">
-						<a href="upload" >
-							<c:if test="${empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="asset/img/login.png" style="width: 180px" class="img-thumbnail" alt="...">
-							</c:if>
-							<c:if test="${not empty funcionarioLogado.caminhoFoto}">
-								<img id="imagem" src="${funcionarioLogado.caminhoFoto}" style="width: 180px" class="img-thumbnail" alt="...">
-								
-							</c:if>
-						</a>
+		<a href="clienteForm"><i class="fa fa-plus-square-o fa-2x" aria-hidden="true"></a></i>
+		<p class="pull-right">
+			<a href="homePage"><i class="fa fa-reply-all fa-2x" aria-hidden="true"></a></i>
+		</p>
+
+		<table class="table table-bordered">
+            <thead>   
+				<tr>
+					<th>Id</th>
+					<th>Nome</th>
+					<th>Usuario</th>
+					<th>E-mail</th>
+					<th>Endereco</th>
+					<th>Data de Atualização</th>
+					<th>Ações</th>
+				</tr>
+			</thead>
+			<c:forEach var="cliente" items="${clientes}">
+				<tr class="clientesTr">
+					<td>${cliente.id}</td>
+					<td><a href="relatorioPorCliente?nomeDoCliente=${cliente.nome}"><span id="nome-cliente">${cliente.nome}</span></a></td>
 					
-						<div id="perfil">
-							<p class="asid-linha">Usuário : ${funcionarioLogado.usuario} /
-							 Ultimo Login : <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="dd/MM/yyyy"/>
-							  - <f:formatDate value="${funcionarioLogado.ultimoLogin.time}" pattern="HH:mm"/></p>
-							<p class="asid-linha">IP :<b> ${funcionarioLogado.ip}</b></p>
-							<p class="asid-linha">Email : ${funcionarioLogado.email}</p>
-							<p class="asid-linha">Bem vindo, ${funcionarioLogado.nome}</p>
-						</div>
-					</aside>
-				</div>
-			</div>
-		</div>
-		
-	<br/><br/>
-	<br/><br/>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-7">
-				<c:if test="${qtdAberto == '0'}"></c:if>
-				<c:if test="${qtdAberto == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitação <a href="solicitacoesAbertas">Aberta</a></h6>
-				</c:if>	
-				<c:if test="${qtdAberto > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAberto} solicitações <a href="solicitacoesAbertas">Abertas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdAgendado == '0'}"></c:if>
-				<c:if test="${qtdAgendado == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitação <a href="solicitacoesAgendadas">Agendada</a></h6>
-				</c:if>	
-				<c:if test="${qtdAgendado > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAgendado} solicitações <a href="solicitacoesAgendadas">Agendadas</a></h6>
-				</c:if><br/>
-				<c:if test="${qtdEmAndamento == '0'}"></c:if>
-				<c:if test="${qtdEmAndamento == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitação <a href="solicitacoesAndamento">Em andamento</a></h6>
-				</c:if>	
-				<c:if test="${qtdEmAndamento > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdEmAndamento} solicitações <a href="solicitacoesAndamento">Em andamento</h6>
-				</c:if><br/>
-				
-				<c:if test="${qtdAguardando == '0'}"></c:if>
-				<c:if test="${qtdAguardando == '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitação <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-				<c:if test="${qtdAguardando > '1'}">
-					<h6><i class="fas fa-circle-notch fa-spin"></i> Você tem ${qtdAguardando} solicitações <a href="solicitacoesAguardando">Aguardando!</a></h6>
-				</c:if>
-			</div>
-			<div class="col-md-5">
-				<c:if test="${qtdAgendadoHoje >= '1'}">
-					<p>
-						<h6> <a href="agendamentosHoje">
-							<span style="color: brue">
-							 	<i class="fas fa-exclamation-triangle"></i> Agendamentos para hoje ${qtdAgendadoHoje}
-							 </span></a>
-						</h6>
-					</p><br/>
-				</c:if>
-				<c:if test="${qtdAgendadoAtrasado >= '1'}">
-					<p>
-						<h6><a href="agendamentosAtrasados">
-							<span style="color: red">
-								<i class="fas fa-exclamation-triangle"></i> Agendamentos atrasados ${qtdAgendadoAtrasado}
-							</span></a> 
-						</h6>
-					</p>
-				</c:if>
-			</div>
-		</div>
-	</div>
+					<td>${cliente.usuario}</td>
+					<c:if test="${not empty cliente.email}">
+						<td>${cliente.email}</td>
+					</c:if>
+					<c:if test="${empty cliente.email}">
+						<td>Não cadastrado</td>
+					</c:if>
+					<td>
+						<a class="dcontexto"> ${cliente.endereco}
+							<span class="dados"><p>Tel.: ${cliente.telefone1}</p>
+								
+							</span>
+						</a>
+					</td>
+					<td><f:formatDate value="${cliente.dataAtualizacao.time}"
+							pattern="dd/MM/yyyy" /></td>
+					<td><a href="clienteEdit?id=${cliente.id}">Editar</a> <!--  <a
+						href="removeCliente?id=${cliente.id}">Excluir</a>--></td>
+				</tr>
+			</c:forEach>
+		</table>
+		<br /><br />
 
 		<br/><br/>
 		<footer class="text-center text-white">

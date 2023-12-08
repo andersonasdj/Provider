@@ -3,15 +3,17 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
 		integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 	<link rel="stylesheet" href="asset/css/stylePersonal.css">
 	<!--Fontawesome CDN-->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="assets/css/jquery-ui.css">
+	<link rel="stylesheet" href="assets/css/jquery.ui.timepiker.css">
 	
-	<title>ProviderOne | Funcionario Edit</title>
+	<title>ProviderOne | Solocitação Form</title>
 </head>
 
 <body>
@@ -59,7 +61,7 @@
 								Clientes
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="clientesList">Listar</a></li>
+								<li><a class="dropdown-item" href="clientes">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -68,7 +70,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -294,7 +296,7 @@
 			    <div class="form-group" id="enviaEmail">
 					<label class="control-label">Destinatario</label>
 		            <div class="controls">
-		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none"></select>
+		                <select class="form-control destinatario" name="destinatario" id="destinatario" style="display: none; width: 350px;"></select>
 		            </div>
 	       		</div>
 	       		<br/>
@@ -309,15 +311,14 @@
 					<label class="control-label">ID do Chamado</label>
 		            <div class="controls">
 		            	<div id="idChamado" style="display: none">
-		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" />
-		                	<a href="javascript:func()" id="buscaId"><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a>
+		             	   	<input class="form-control" name="idChamadoLigacao" id="idChamadoLigacao" style="width: 90px;">
+		                	<a href="javascript:func()" id="buscaId">Ver</a>
 		                	<span id="statusId" style="font-size: 15px ;color:#0101DF ; font-weight:bold"></span>
 		                </div>
 		            </div>
         		</div>
         		<br/>
 			</div>
-			<br/>
 			<input type="hidden" name="abriuChamado" id="abriuChamado" value="${funcionarioLogado.nome}">
 			<div class="control-group">
 				<label class="control-label"></label>
@@ -365,7 +366,6 @@
 
 
 	</div>
-	
 
 	
 	<script src="https://code.jquery.com/jquery-3.6.3.js"
@@ -377,9 +377,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
 		integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous">
 		</script>
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-	<script src="asset/js/controle-vip.js"></script>
-	<script src="asset/js/calendario.js"></script>
+	<script src="assets/js/jquery-ui.js"></script>
+	<script src="assets/js/jquery.ui.timepiker.js"></script>
+	<script src="assets/js/calendario.js"></script>
+	<script src="assets/js/controle-vip.js"></script>
 	<script>
 		  $( function() {
 		    $( "#datepicker" ).datepicker();

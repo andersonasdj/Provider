@@ -19,7 +19,6 @@ import br.com.providerone.dao.ComputadorDao;
 import br.com.providerone.dao.EmailDao;
 import br.com.providerone.dao.FuncionarioDao;
 import br.com.providerone.dao.SolicitacaoDao;
-import br.com.providerone.dto.SolicitacaoGeralDTO;
 import br.com.providerone.mail.JavaMailApp;
 import br.com.providerone.modelo.Cliente;
 import br.com.providerone.modelo.Email;
@@ -479,22 +478,15 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
-
+	
+	
+	
 	@RequestMapping("/relatorioGeral")
 	public String relatorioGeral(HttpSession session, Model model) {
 		if (session.getAttribute("funcionarioLogado") != null) {
 			SolicitacaoDao dao = new SolicitacaoDao();
-			
-			//############ INCLUIDO DTO NO RETORNO
-			List<SolicitacaoGeralDTO> dtoList = new ArrayList<SolicitacaoGeralDTO>();
-			//for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
-			for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
-				SolicitacaoGeralDTO dto = new SolicitacaoGeralDTO(solicitacao);
-				dtoList.add(dto);
-			}
-			model.addAttribute("solicitacoes", dtoList); // ALTERADO!!!
-			//############ INCLUIDO DTO NO RETORNO
-			
+			model.addAttribute("solicitacoes", dao.listaTodasSolicitacoes()); // ALTERADO!!!
+
 			Long nclas, ab, and, age, agua;
 
 			SolicitacaoDao daoNaoClass = new SolicitacaoDao();
@@ -522,6 +514,49 @@ public class SolicitacaoController {
 			return "redirect:login";
 		}
 	}
+
+//	@RequestMapping("/relatorioGeral")
+//	public String relatorioGeral(HttpSession session, Model model) {
+//		if (session.getAttribute("funcionarioLogado") != null) {
+//			SolicitacaoDao dao = new SolicitacaoDao();
+//			
+//			//############ INCLUIDO DTO NO RETORNO
+//			List<SolicitacaoGeralDTO> dtoList = new ArrayList<SolicitacaoGeralDTO>();
+//			//for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
+//			for (Solicitacao solicitacao : dao.listaTodasSolicitacoes()) {
+//				SolicitacaoGeralDTO dto = new SolicitacaoGeralDTO(solicitacao);
+//				dtoList.add(dto);
+//			}
+//			model.addAttribute("solicitacoes", dtoList); // ALTERADO!!!
+//			//############ INCLUIDO DTO NO RETORNO
+//			
+//			Long nclas, ab, and, age, agua;
+//
+//			SolicitacaoDao daoNaoClass = new SolicitacaoDao();
+//			nclas = daoNaoClass.listaQtdSolicitacoesNaoClass();
+//			model.addAttribute("qtdNaoClas", nclas);
+//
+//			SolicitacaoDao daoAbertas = new SolicitacaoDao();
+//			ab = daoAbertas.listaQtdSolicitacoesAbertas();
+//			model.addAttribute("qtdAberto", ab);
+//
+//			SolicitacaoDao daoAgendadas = new SolicitacaoDao();
+//			age = daoAgendadas.listaQtdSolicitacoesAgendadas();
+//			model.addAttribute("qtdAgendado", age);
+//
+//			SolicitacaoDao daoAndamento = new SolicitacaoDao();
+//			and = daoAndamento.listaQtdSolicitacoesEmAndamento();
+//			model.addAttribute("qtdAndamento", and);
+//
+//			SolicitacaoDao daoAguardando = new SolicitacaoDao();
+//			agua = daoAguardando.listaQtdSolicitacoesAguardando();
+//			model.addAttribute("qtdAguardando", agua);
+//			model.addAttribute("qtdTotal", nclas + ab + age + and + agua);
+//			return "Administrador/solicitacao-relatorio";
+//		} else {
+//			return "redirect:login";
+//		}
+//	}
 
 	@RequestMapping("/relatorioFinalizadas")
 	public String relatorioFinalizadas(HttpSession session, Model model) {
@@ -1018,7 +1053,7 @@ public class SolicitacaoController {
 			SolicitacaoDao daoFinalizados = new SolicitacaoDao();
 			model.addAttribute("finalizados", daoFinalizados.listaSolicitacoesPorDataFinalizacao(dataHoje).size());
 			model.addAttribute("relatorios", relatorios);
-			return "Administrador/relatorio-op";
+			return "Front/Administrador/relatorio-op";
 		} else {
 			return "redirect:login";
 		}

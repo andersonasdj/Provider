@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import br.com.providerone.dao.EmailDao;
@@ -20,7 +21,7 @@ public class ConfiguracaoSistemaController {
 	@RequestMapping("/config")
 	public String config(Model model, HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-				return "Administrador/config";
+				return "Front/Administrador/config";
 		} else {
 			return "redirect:login";
 		}
@@ -157,6 +158,16 @@ public class ConfiguracaoSistemaController {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 				return funcionario.getFuncao()+"/versao";
+		} else {
+			return "redirect:login";
+		}
+	}
+	
+	@GetMapping("/versoes")
+	public String versoes(Model model, HttpSession session) {
+		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
+		if (funcionario != null) {
+				return "Front/"+funcionario.getFuncao()+"/versao";
 		} else {
 			return "redirect:login";
 		}

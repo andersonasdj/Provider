@@ -34,8 +34,8 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-users"> </i> Usuários <span class="caret"></span></a>
 			                  <ul class="dropdown-menu">
 			                  <li class="dropdown-header">Listar</li>
-			                    <li><a href="clientesList">Clientes</a></li>
-			                    <li><a href="funcionariosList">Funcionarios</a></li>
+			                    <li><a href="clientes">Clientes</a></li>
+			                    <li><a href="funcionarios">Funcionarios</a></li>
 			                    <li><a href="fornecedorList">Fornecedores</a></li>
 			                  </ul>
 						</li>

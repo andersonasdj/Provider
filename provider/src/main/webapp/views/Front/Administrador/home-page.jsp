@@ -59,7 +59,7 @@
 								Clientes
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="clientesList">Listar</a></li>
+								<li><a class="dropdown-item" href="clientes">Listar</a></li>
 							</ul>
 						</li>
 						
@@ -69,7 +69,7 @@
 								Usuários
 							</a>
 							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="funcionariosList">Listar</a></li>
+								<li><a class="dropdown-item" href="funcionarios">Listar</a></li>
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
@@ -91,6 +91,10 @@
 									<hr class="dropdown-divider">
 								</li>
 								<li><a class="dropdown-item" href="atualizarDados">Atualizar Dados</a></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item" href="versoes">Versões</a></li>
 							</ul>
 						</li>
 							<a href="logout">
