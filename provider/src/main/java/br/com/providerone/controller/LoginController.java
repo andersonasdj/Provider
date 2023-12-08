@@ -94,7 +94,7 @@ public class LoginController {
 			if(funcionarioEncontrado.isStatusMfa()) {
 				enviaEmailMfa(funcionarioEncontrado);
 				session.setAttribute("funcionarioLogadoMFA", funcionarioEncontrado);
-				return "Front/tela-mfa";
+				return "tela-mfa";
 			}else {
 				if(funcionarioEncontrado.getFuncao().equals("Administrador")) {
 					session.setAttribute("funcionarioLogado", funcionarioEncontrado);		
