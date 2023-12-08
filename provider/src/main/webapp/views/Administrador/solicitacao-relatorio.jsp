@@ -1,8 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<title>ProviderOne | Relatórios</title>
+	<title>TechGold | Relatórios</title>
 	<link rel="shortcut icon" href="assets/img/ico.png" >
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="assets/css/bootstrap.css">
@@ -77,7 +78,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Crítico'}">
 									<img class="ico_status" src="assets/img/critico.png">
 								</c:if>
@@ -93,7 +94,8 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
-								<span>- Aberto por: ${solicitacao.abriuChamado}</span></a>	
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -109,13 +111,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}	
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}	
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						
 						<td>${solicitacao.solicitante}</td>
@@ -128,11 +132,11 @@
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
-							<td>${solicitacao.funcionario}</td>
+						<c:if test="${not empty solicitacao.funcionario.nome}">
+							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
 						<td>
 							<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
@@ -149,7 +153,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Crítico'}">
 									<img class="ico_status" src="assets/img/critico.png">
 								</c:if>
@@ -165,7 +169,8 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
-								<span>- Aberto por: ${solicitacao.abriuChamado}</span></a>	
+								<span>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/><br/>
+								- Aberto por: ${solicitacao.abriuChamado}</span></a>	
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -181,13 +186,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}	
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}	
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						
 						<td>${solicitacao.solicitante}</td>
@@ -201,11 +208,11 @@
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
-							<td>${solicitacao.funcionario}</td>
+						<c:if test="${not empty solicitacao.funcionario.nome}">
+							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
 						<td>
 							<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
@@ -221,7 +228,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 							<c:if test="${solicitacao.prioridade == 'Crítico'}">
 								<img class="ico_status" src="assets/img/critico.png">
 							</c:if>
@@ -237,7 +244,8 @@
 							<c:if test="${solicitacao.prioridade == 'Planejada'}">
 								<img class="ico_status" src="assets/img/planejada.png">
 							</c:if>	
-								<span><p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
+								<span><p>Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
+								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -253,13 +261,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -274,11 +284,11 @@
 								<span><p>- Hora: <f:formatDate value="${solicitacao.dataFechamento.time}" pattern="HH:mm"/></p></span></a>	
 						</td>
 						<td>${solicitacao.status}</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
-							<td>${solicitacao.funcionario}</td>
+						<c:if test="${not empty solicitacao.funcionario.nome}">
+							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
 						<td>
 							<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
@@ -294,7 +304,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Crítico'}">
 									<img class="ico_status" src="assets/img/critico.png">
 								</c:if>
@@ -310,7 +320,8 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
-								<span><p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
+								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
+								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -327,13 +338,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -346,14 +359,14 @@
 						<td>Aberto</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.status}
-								<span><p>- Data: ${solicitacao.agendado}</p>
-									<p>- Hora: ${solicitacao.agendadoHora}</p></span></a>
+								<span><p>- Data: <f:formatDate value="${solicitacao.agendado.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora: <f:formatDate value="${solicitacao.agendadoHora.time}" pattern="HH:mm"/></p></span></a>
 						</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
-							<td>${solicitacao.funcionario}</td>
+						<c:if test="${not empty solicitacao.funcionario.nome}">
+							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>		
 						<td>
 							<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
@@ -369,7 +382,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Crítico'}">
 									<img class="ico_status" src="assets/img/critico.png">
 								</c:if>
@@ -385,7 +398,8 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>
-								<span><p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
+								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
+								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -402,13 +416,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -425,13 +441,14 @@
 								<c:if test="${solicitacao.play == 'false'}">
 									 (Pausado)
 								</c:if>
-								<span><p>${solicitacao.dataAndamento}</p></span></a>
+								<span><p>- Data: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="dd/MM/yyyy"/></p>
+									<p>- Hora: <f:formatDate value="${solicitacao.dataAndamento.time}" pattern="HH:mm"/></p></span></a>
 						</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
-							<td>${solicitacao.funcionario}</td>
+						<c:if test="${not empty solicitacao.funcionario.nome}">
+							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
 						<td>
 							<a href="solicitacaoEdit?id=${solicitacao.id}"><i class="fa fa-pencil-square-o fa-lg"></i></a> |  
@@ -447,7 +464,7 @@
 							<a href="#" onclick="lancarSubmenu(${solicitacao.id})">${solicitacao.id}</a>
 						</td>	
 						<td>
-							<a class="dcontexto"> ${solicitacao.dataAbertura}
+							<a class="dcontexto"> <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="dd/MM/yyyy"/>
 								<c:if test="${solicitacao.prioridade == 'Crítico'}">
 									<img class="ico_status" src="assets/img/critico.png">
 								</c:if>
@@ -463,7 +480,8 @@
 								<c:if test="${solicitacao.prioridade == 'Planejada'}">
 									<img class="ico_status" src="assets/img/planejada.png">
 								</c:if>	
-								<span><p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
+								<span><p>- Hora: <f:formatDate value="${solicitacao.dataAbertura.time}" pattern="HH:mm"/></p>
+								<p>- Aberto por: ${solicitacao.abriuChamado}</p></span></a>
 						</td>
 						<td>
 							<a class="dcontexto"> ${solicitacao.onsiteOffsite}
@@ -479,13 +497,15 @@
 							<td><a href="uploadAnexoSolicitacao?id=${solicitacao.id}"><i class="fa fa-cloud-upload" aria-hidden="true"></i></a></td>
 						</c:if>
 						<td>
-							${solicitacao.cliente}
-								<c:if test="${solicitacao.vip == true}">
+							<a class="dcontexto"> ${solicitacao.cliente.nome}
+								<c:if test="${solicitacao.cliente.vip == true}">
 									<img class="ico_vip" src="assets/img/vip.png">
 								</c:if>
-								<c:if test="${solicitacao.redFlag == true}">
+								<c:if test="${solicitacao.cliente.redFlag == true}">
 									<img class="ico_vip" src="assets/img/flag.png">
 								</c:if>
+								<span><p>- Tel.: ${solicitacao.cliente.telefone1}</p>
+									<p>- Endereço: ${solicitacao.cliente.endereco}</p></span></a>
 						</td>
 						<td>${solicitacao.solicitante}</td>
 						<td>${solicitacao.usuario}</td>
@@ -498,10 +518,10 @@
 						</td>
 						<td>Aberto</td>
 						<td>${solicitacao.status}</td>
-						<c:if test="${empty solicitacao.funcionario}">
+						<c:if test="${empty solicitacao.funcionario.nome}">
 							<td><a href="solicitacaoEdit?id=${solicitacao.id}">Não Atribuido</a></td>
 						</c:if>
-						<c:if test="${not empty solicitacao.funcionario}">
+						<c:if test="${not empty solicitacao.funcionario.nome}">
 							<td>${solicitacao.funcionario.nome}</td>
 						</c:if>
 						<td>

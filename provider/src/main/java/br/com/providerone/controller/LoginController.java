@@ -25,7 +25,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public String login() {
-		return "Front/tela-login";
+		return "tela-login";
 	}
 	
 	@RequestMapping("protocolo")

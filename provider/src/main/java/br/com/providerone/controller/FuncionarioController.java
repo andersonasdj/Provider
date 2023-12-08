@@ -34,7 +34,7 @@ public class FuncionarioController {
 		Funcionario funcionario = session.getAttribute("funcionarioLogado") != null?(Funcionario) session.getAttribute("funcionarioLogado"):(Funcionario) session.getAttribute("tecnicoLogado");
 		if (funcionario != null) {
 			homePageAdiconaModel(model, funcionario);
-			return "Front/"+funcionario.getFuncao()+"/home-page";
+			return funcionario.getFuncao()+"/home-page";
 		}else {
 			return "redirect:loginFuncionario";
 		}
@@ -63,7 +63,7 @@ public class FuncionarioController {
 	@RequestMapping("/funcionarioForm")
 	public String funcionarioForm(HttpSession session) {
 		if (session.getAttribute("funcionarioLogado") != null) {
-			return "Front/Administrador/funcionario-form";
+			return "Administrador/funcionario-form";
 		} else {
 			return "redirect:loginFuncionario";
 		}
@@ -143,7 +143,7 @@ public class FuncionarioController {
 			FuncionarioDao dao = new FuncionarioDao();
 			funcionarios = dao.listaFuncionario();
 			model.addAttribute("funcionarios", funcionarios);
-			return "Front/Administrador/funcionario-list";
+			return "Administrador/funcionario-list";
 		} else {
 			return "redirect:homePage";
 		}
