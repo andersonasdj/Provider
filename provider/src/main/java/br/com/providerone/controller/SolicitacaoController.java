@@ -1008,7 +1008,7 @@ public class SolicitacaoController {
 			SolicitacaoDao daoFinalizados = new SolicitacaoDao();
 			model.addAttribute("finalizados", daoFinalizados.listaSolicitacoesPorDataFinalizacao(dataHoje).size());
 			model.addAttribute("relatorios", relatorios);
-			return "Administrador/relatorio/relatorio-op";
+			return "Administrador/relatorio-op";
 		} else {
 			return "redirect:login";
 		}
